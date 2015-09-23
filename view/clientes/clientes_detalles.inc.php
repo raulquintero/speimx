@@ -31,7 +31,7 @@ if ($_GET['eed']==2)
 								<p>
 											<img class=grayscale src=fotos/images.jpeg width=150 align=right></img>									
 											
-											<b><?php echo $nombre.' '.$apellidop.' '.$apellidom?></b> &nbsp;&nbsp;											
+											<b><?php echo strtoupper($nombre.' '.$apellidop.' '.$apellidom)?></b> &nbsp;&nbsp;											
 											<br>Direccion: <?php echo $domicilio_casa?>
 											
 											<br>Telefono: <?php echo $telefono_personal?>

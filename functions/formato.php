@@ -10,8 +10,8 @@ function dinero($numero)
 function fechamysqltous($fecha,$letra)
 {
 
-	//$fecha=explode("-",$fecha);
-	$values=preg_split('/(\/|-)/',$fecha);
+	$fecha=explode(" ",$fecha);
+	$values=preg_split('/(\/|-)/',$fecha[0]);
 	
 
 	if ($letra)
