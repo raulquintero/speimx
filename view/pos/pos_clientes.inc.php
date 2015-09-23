@@ -26,7 +26,7 @@
 		echo "<tr><td>&nbsp;</td><td>&nbsp;</td></tr>";
 	}
 
-$query = "SELECT cliente_id,nombre, apellidop, apellidom, saldo,abono,empresa.empresa, empresa.sucursal FROM cliente,empresa where cliente.empresa_id=empresa.empresa_id  ";
+$query = "SELECT cliente_id,nombre, apellidop, apellidom, saldo,abono,empresa.empresa, empresa.sucursal FROM cliente,empresa where cliente.cliente_id>0 AND cliente.empresa_id=empresa.empresa_id  ";
 $results = $database->get_results( $query );
 foreach( $results as $row )
 {

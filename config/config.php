@@ -1,12 +1,13 @@
 <?php
 setlocale(LC_MONETARY, 'es_MX');
 
-require_once( '/var/www/html/classes/class.db.php' );
-require_once( '/var/www/html/classes/class_login.php' );
+require_once( './classes/class.db.php' );
+require_once( './classes/class_login.php' );
 
-require_once('/var/www/html/functions/formato.php');
-require_once('/var/www/html/functions/formas.php');
-require_once('/var/www/html/functions/error.php');
+require_once('./functions/ticket.php');
+require_once('./functions/formato.php');
+require_once('./functions/formas.php');
+require_once('./functions/error.php');
 
 
 

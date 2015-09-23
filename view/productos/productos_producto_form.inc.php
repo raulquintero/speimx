@@ -25,12 +25,10 @@
 	 }
 
 
-
-	 	
+	 		if ($f=="editar")
+			echo "<p><a href=\"/index.php?data=$data&op=inventario&prid=$prid\" ><button class=\"btn btn-small btn-primary\">Editar Inventario</button></a></p>"
 
 ?>
-
-			<p><a href='<?php echo"/index.php?data=$data&op=inventario&prid=$prid"?>' ><button class="btn btn-small btn-primary">Editar Inventario</button></a></p>
 					<?php echo error($_GET['eed']);	?>	
 			<div class="row-fluid">
 				<div class="box  span12">

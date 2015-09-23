@@ -32,14 +32,14 @@ function movimientos($cliente_id,$saldo)
 {
 $database = new DB();
 	
-	$query = "SELECT fecha, cantidad, tipomov.tipomov,tmov, admin.nombre,total_ultimo FROM cliente,movimiento,admin,tipomov 
+	$query = "SELECT factura_id,fecha, cantidad, tipomov.tipomov,tmov, admin.nombre,total_ultimo FROM cliente,movimiento,admin,tipomov 
 		where movimiento.cliente_id=$cliente_id AND movimiento.tipomov_id=tipomov.tipomov_id AND movimiento.cliente_id=cliente.cliente_id 
 		AND movimiento.admin_id=admin.admin_id AND fecha >= '2013-01-01' ORDER BY movimiento.fecha DESC limit 100";
 
 	
 	$results = $database->get_results( $query );
 	
-	
+	echo"sasfaf";
 	$i=0;
 	foreach( $results as $row )
 	{
@@ -47,7 +47,7 @@ $database = new DB();
 		$i+=1;
 		echo "<tr >
 			<td align=right><font >&nbsp;$i&nbsp;</td>
-			<td><font >".fechamysqltous($row['fecha'],1)." </td>";
+			<td><font ><a href=\"/index.php?data=clientes&op=factura&fid=".$row['factura_id']."\">".fechamysqltous($row['fecha'],1)."<a> </td>";
 
 			if (!$row['tmov'])
 					echo "<td align=center>---</td>
