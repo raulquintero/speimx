@@ -12,6 +12,8 @@ if ($_GET['eed']==2)
 							<button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
 							<strong>Registro Agregado!</strong> El Registro $cid esta listo para usarse.
 						</div>";
+
+	$cliente=$nombre.' '.$apellidop.' '.$apellidom;
 ?>						
 
 
@@ -29,6 +31,7 @@ if ($_GET['eed']==2)
 						<div id="myTabContent" class="tab-content">
 							<div class="tab-pane active" id="info">
 								<p>
+											
 											<img class=grayscale src=fotos/images.jpeg width=150 align=right></img>									
 											
 											<b><?php echo strtoupper($nombre.' '.$apellidop.' '.$apellidom)?></b> &nbsp;&nbsp;											
@@ -45,8 +48,10 @@ if ($_GET['eed']==2)
 											if (!$_GET['h'])
 												echo "<a href=\"index.php?data=clientes&op=cliente_form&f=editar&cid=$cliente_id\">
 													<button class=\"btn btn-primary\"><i class=\"halflings-icon white edit\"></i></button></a>
+												
 												<a href=\"index.php?data=clientes&op=subirfoto&cid=$cliente_id\">
-												<button class=\"btn btn-primary\"><i class=\"halflings-icon white camera\"></i></button></a><br>";
+												<button class=\"btn btn-primary\"><i class=\"halflings-icon white camera\"></i></button></a>";
+												echo " <a href=\"/docs/cartainvitacion.php?cliente=$cliente\"><button class=\"btn btn-primary\"><i class=\"halflings-icon white ok\"></i></button></a><br>";
 											?>											
 											<!-- <a href="index.php?data=clientes&op=cliente_form&f=editar&cid=<?=$cliente_id?>"><button 
 													class="btn btn-mini btn-primary">Editar Cliente</button></a> 

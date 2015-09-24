@@ -1,13 +1,13 @@
 <?php
 setlocale(LC_MONETARY, 'es_MX');
+$realpath=getcwd();
+require_once( $realpath.'/classes/class.db.php' );
+require_once( $realpath.'/classes/class_login.php' );
 
-require_once( './classes/class.db.php' );
-require_once( './classes/class_login.php' );
-
-require_once('./functions/ticket.php');
-require_once('./functions/formato.php');
-require_once('./functions/formas.php');
-require_once('./functions/error.php');
+require_once($realpath.'/functions/ticket.php');
+require_once($realpath.'/functions/formato.php');
+require_once($realpath.'/functions/formas.php');
+require_once($realpath.'/functions/error.php');
 
 
 

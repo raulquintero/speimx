@@ -1,6 +1,6 @@
 <?php
 // Including the class
-require_once("/var/www/html/classes/class_login.php");
+require_once("./classes/class_login.php");
 
 // You must establish a connection to the mysql database before using this class
 $database_connection=mysql_connect("localhost", "root", "despachado16");
