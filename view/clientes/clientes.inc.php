@@ -45,7 +45,14 @@ foreach( $results as $row )
 								<td><a href=index.php?data=clientes&op=detalles&cid=<?=$row['cliente_id']?>><?=$row['apellidop'].' '.$row['apellidom'].' '.$row['nombre']?></a></td>
 								<td class="center"><?php echo $row['abono']?></td>
 								<td class="center"><?php echo $row['saldo']?></td>
-								<td class="center"><?php echo ceil($row['saldo']/$row['abono'])?></td>
+								
+								<?php
+								if($row['abono'])
+										$numpagos=ceil($row['saldo']/$row['abono']);
+								 ?>
+								<td class="center"><?php echo $numpagos ?></td>
+
+
 								<td class="center"><?php echo $row['empresa'].' '.$row['sucursal']?></td>
 								<td class="center">
 									<a class="btn btn-success" href="index.php?data=clientes&op=detalles&cid=<?php echo $row['cliente_id']?>">
