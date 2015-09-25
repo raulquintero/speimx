@@ -59,7 +59,6 @@ body{
 </style>	
 </head>
 <body>
-	<?php echo getcwd() ?>
 <div class="fecha">Mexicali a <?php echo date("d-m-Y")?></div>
 <div class="header">
 <img width=300 src="/img/tiendasalberto.png">
@@ -69,7 +68,7 @@ body{
 	<div class="documento">
 		<p>En <strong>Tiendas Alberto</strong> estamos interesados en apoyar la economia de las familias mexicalenses, y para esta ocasion en conjunto 
 		con <strong>Fruteria NENA'S</strong> reconocemos a los mejores empleados, extendiendole esta carta invitacion con la finalidad de que 
-		disponga inmediatamente de un <strong>CREDITO PRE APROBADO</strong> por la cantidad de:    
+		disponga inmediatamente de un <strong>CREDITO PRE APROBADO</strong> por la cantidad de:<br>    
 		<strong>$ 3 000.00 MXN</strong>    para la adquision de productos en Tiendas Alberto.</p>
 
 <div class="beneficios">

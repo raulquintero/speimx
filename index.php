@@ -82,7 +82,7 @@ foreach( $_GET as $key => $value )
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</a>
-				<span class="brand" >SPEI.MX 1.0.0.1</span>
+				<span class="brand" >SPEI.MX 1.0.0.1 [Sucursal Carranza]</span>
 								
 				<!-- start: Header Menu -->
 				<div class="nav-no-collapse header-nav">
@@ -575,5 +575,11 @@ foreach( $_GET as $key => $value )
 		<script src="js/custom.js"></script>
 	<!-- end: JavaScript-->
 	
+<script>
+function mostrar_carta(carta) {
+    window.open(carta);
+}
+</script>
+
 </body>
 </html>

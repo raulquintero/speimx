@@ -106,7 +106,7 @@
 							<div class="control-group">
 							  <label class="control-label" for="date01">Fecha Nacimiento (m/d/A)</label>
 							  <div class="controls">
-								<input type="date" class="input-xlarge datepicker" id="fechanac" name="fechanac" value="02/16/1980">
+								<input type="text" class="input-xlarge datepicker" id="fechanac" name="fechanac" value="02/16/1980">
 							  </div>
 							</div>
 

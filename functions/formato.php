@@ -91,7 +91,7 @@ return $final;
 
 function plandepagos($total,$fecha,$abono,$saldo)
 {
-			$fecha=fechaplusweek($fecha);
+			//$fecha=fechaplusweek($fecha);
 
 	$total_pagos=ceil($total/$abono);
 
@@ -205,7 +205,7 @@ $database = new DB();
 				if ($tipomov_id==3)
 							
 				{
-					$query = "SELECT  facturadet.factura_id,facturadet.producto,facturadet.precio_credito,facturadet.iva_credito,producto.codigo,color,talla FROM facturadet,producto
+					$query = "SELECT  facturadet.producto_id,facturadet.factura_id,facturadet.producto,facturadet.precio_credito,facturadet.iva_credito,producto.codigo,color,talla FROM facturadet,producto
 					WHERE  facturadet.producto_id=producto.producto_id AND facturadet.factura_id=".$fid;
 
 					$results = $database->get_results( $query );
@@ -217,7 +217,7 @@ $database = new DB();
 					foreach( $results as $item )
 					{
 		
-						echo "<tr><td>&nbsp;</td><td>".$item['factura_id']." ".$item['codigo']."<br>
+						echo "<tr><td>&nbsp;</td><td>".$item['producto_id']." ".$item['codigo']."<br>
 							". substr($item['producto'],0,26)."...</a>
 							<br><p class=\"muted\" >"
 							.$item['color']." ".$item['talla']."</p></td> 

@@ -8,10 +8,10 @@
 
 			if($fid)
 				{
-					$query = "SELECT cliente.cliente_id,apellidop, apellidom, nombre, credito, saldo,total_ultimo,fecha_total_ultimo, abono,factura_id,
+					$query = "SELECT cliente.cliente_id,apellidop, apellidom, nombre, credito, saldo,total_ultimo,factura.fecha, abono,factura_id,
 							tipomov_id,fecha,saldo_actual,saldo_total,ticket  FROM cliente,factura 
 						WHERE  factura.cliente_id=cliente.cliente_id AND factura.factura_id=".$fid;
-					list( $cliente_id,$apellidop,$apellidom,$nombre,$credito, $saldo, $total_ultimo, $fecha_total_ultimo,$abono, $factura_id,
+					list( $cliente_id,$apellidop,$apellidom,$nombre,$credito, $saldo, $total_ultimo, $fecha_factura,$abono, $factura_id,
 							 $tipomov_id,$fecha_factura,$saldo_actual,$saldo_total,$ticket  ) = $database->get_row( $query );
 	 					$cliente= $apellidop." ".$apellidom." ".$nombre;
 
@@ -37,7 +37,7 @@
 
 					<br><Br>
 					<center>Consultar este ticket en:<br>
-						 http://tiendaalbertos.com/ticket<br>
+						 http://tiendasalberto.com/ticket<br>
 						 con este numero:<br>
 						 <?php echo $ticket ?><br>
 						</center>
@@ -55,7 +55,7 @@
 			<div class="row-fluid condensed">	
 
 				<div class="box-content span4">
-			<?php if ($tipomov_id==3) plandepagos($saldo_total,$fecha_total_ultimo,$abono,$saldo);?>
+			<?php if ($tipomov_id==3) plandepagos($saldo_total,$fecha_factura,$abono,$saldo);?>
 					</div>
 			</div>
 </div>

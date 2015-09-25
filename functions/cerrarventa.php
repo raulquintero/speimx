@@ -113,8 +113,8 @@ $database = new DB();
 					//fields to update
 					$update = array(
     				'saldo' => $saldo_total,
+    				'abono' => $abono,
     				'fecha_total_inicio' => $fecha_hoy,
-
     				'total_ultimo' => $saldo_total
 					);
 					//print_r($update);

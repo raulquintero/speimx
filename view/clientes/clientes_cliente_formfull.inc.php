@@ -23,14 +23,14 @@
 							  <div class="control-group">
 								<label class="control-label" >Inicio Plazo (m/d/A)</label>
 								<div class="controls">
-								  <input class="input-xlarge datepicker" id="fecha_total-inicio" name="fecha_total_inicio" type="date" value="<?php echo fechamysqltous($fecha_total_inicio,0)?>">
+								  <input class="input-xlarge datepicker" id="fecha_total-inicio" name="fecha_total_inicio" type="text" value="<?php echo fechamysqltous($fecha_total_inicio,0)?>">
 								</div>
 							  </div>
 							  
 							  <div class="control-group">
 								<label class="control-label" >Fin Plazo (m/d/A)</label>
 								<div class="controls">
-								  <input class="input-xlarge datepicker" id="fecha_total_ultimo" name="fecha_total_ultimo" type="date" value="<?php echo fechamysqltous($fecha_total_ultimo,0)?>">
+								  <input class="input-xlarge datepicker" id="fecha_total_ultimo" name="fecha_total_ultimo" type="text" value="<?php echo fechamysqltous($fecha_total_ultimo,0)?>">
 								</div>
 							  </div>
 
