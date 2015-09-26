@@ -34,6 +34,7 @@ $eed=1;
 
 	'activo'=>$_GET['activo'],
 	'producto'=>$_GET['producto'],
+	'codigo'=>$_GET['producto'],
 	'subcategoria_id'=>$_GET['subcategoria_id'],
 	'precio_compra'=>$_GET['precio_comnpra'],
 	'precio_contado'=>$_GET['precio_contado'],
@@ -41,6 +42,7 @@ $eed=1;
 	'precio_promocion'=>$_GET['precio_promocion'],
 	'descuento'=>$_GET['descuento'],
 	'proveedor_id'=>$_GET['proveedor_id'],
+	'stock' => 1,
 	'marca_id'=>$_GET['marca_id'],
 	'talla_id'=>$_GET['talla_id'],
 	'unidad_id'=>$_GET['unidad_id'],
@@ -53,14 +55,34 @@ if ($_GET['producto'])
 	$add_query = $database->insert( 'producto', $registro );
 	$last_id = $database->lastid();
 	$location="Location: /index.php?data=$data&op=detalles&prid=$last_id&eed=2";
+
+	$sku=sku13($last_id);
+
+
+
+
+
+
+
+$update = array(
+
+	'codigo' => $sku
+	);
+
+//Add the WHERE clauses
+$where_clause = array(
+    'producto_id' => $last_id
+);
+
+	$updated = $database->update( 'producto', $update, $where_clause, 1 );
+
+
+
 }
 else
 		$location="Location: /index.php?data=$data&op=producto_form&f=agregar&eed=3";
 
 header($location);
-
-
-
 
 
 
@@ -73,13 +95,7 @@ if ($_GET['func']=="u")
  //foreach ($_GET as $k => $v) { echo "<br>[$k] => $v \n";}
 
 
-
-
-
-
 $update = array(
-
-
 
 	'activo'=>$_GET['activo'],
 	'producto'=>$_GET['producto'],

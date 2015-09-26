@@ -34,7 +34,7 @@
 						<table class="table table-striped table-bordered bootstrap-datatable datatable">
 						  <thead>
 							  <tr>
-								  <th classes="hide">ID</th>
+								  <th classes="hide">SKU</th>
 								  <th>Producto</th>
 								  <!-- <th>Color</th> -->
 								  <th  style="text-align:right">Precio Contado</th>
@@ -50,7 +50,7 @@
 								echo "<tr><td>&nbsp;</td><td></td><td></td><td></td></tr>";
 							}
 
-									$query = "SELECT producto.producto_id,producto,precio_compra,precio_contado,precio_credito,stock,proveedor,subcategoria 
+									$query = "SELECT producto.producto_id,producto,precio_compra,precio_contado,precio_credito,stock,proveedor,codigo, subcategoria 
 										FROM producto,proveedor,subcategoria 
 										where producto.proveedor_id=proveedor.proveedor_id AND producto.subcategoria_id=subcategoria.subcategoria_id 
 											AND producto.stock>0";

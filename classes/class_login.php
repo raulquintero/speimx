@@ -158,6 +158,8 @@ class Login
 // );
                 $item="";
                 $_SESSION['user_id']=$fetch['admin_id'];
+                $_SESSION['store_id']=1;
+                $_SESSION['sucursal']="Carranza";
                 $_SESSION['user_name']=$fetch['username'];
                 $_SESSION['user_active']=$fetch['activo'];
                 $_SESSION['user_login_session']=TRUE;
