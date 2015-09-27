@@ -21,13 +21,14 @@ if ($func=="add_item")
                 'precio_credito'   => $_GET['precio_credito'],
                 'precio_contado'   => $_GET['precio_contado'],
                 'producto'    => $_GET['producto'],
+                'codigo' => $_GET['codigo'],
                 'color'    => $_GET['color'],
                 'talla'    => $_GET['talla']
             );
         
 
 
-    $_SESSION['cart']=$item;
+    ($_SESSION['cart']=$item);
 
 
 }

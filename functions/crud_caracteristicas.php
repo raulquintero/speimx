@@ -33,14 +33,28 @@ if ($_GET['func']=="c")
 
 	
 	'color'=>strtoupper($_GET['color']),
-	'producto_id'=>strtoupper($_GET['prid']),
-	'codigo'=>strtoupper($_GET['codigo'])
-	
+	'producto_id'=>strtoupper($_GET['prid'])
+	);
 
-    	
-		);
 $add_query = $database->insert( 'color', $color );
 $last_id = $database->lastid();
+
+
+$sku=sku13($_GET['color'].$last_id);
+
+
+$update = array(
+
+	'codigo_color' => $sku
+	);
+
+//Add the WHERE clauses
+$where_clause = array(
+    'color_id' => $last_id
+);
+
+	$updated = $database->update( 'color', $update, $where_clause, 1 );
+
 
 //echo "Location: /index.php?data=$data&op=$op&prid=$prid";
 

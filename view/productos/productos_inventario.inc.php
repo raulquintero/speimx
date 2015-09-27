@@ -4,13 +4,14 @@
 	 $prid=(htmlspecialchars($_GET["prid"]));
 	 $f=(htmlspecialchars($_GET["f"]));
 	 if ($f=="editar")
-	 	$title="Editar Producto [$prid]";
+	 	$title="Caracteristicas [$prid]";
 	 		else
-	 	$title="Agregar Producto";
+	 	$title="Caracteristicas";
 
 
 
 	 $checado="checked";
+	 $checado_inv="checked";
 
 	 if ($prid>0)
 	 {
@@ -159,13 +160,13 @@
 							  	<table>
 							  		<tr ><td align=right>Codigo</td><td></td><td>Color</td></tr>
   								<?php
-								$query = "SELECT color_id,color,codigo FROM color WHERE producto_id=$prid ORDER BY color ";
+								$query = "SELECT color_id,color,codigo_color FROM color WHERE producto_id=$prid ORDER BY color ";
 								//list( $colonia_casa ) = $database->get_row( $query );	
 								$results = $database->get_results( $query );
 								foreach( $results as $row )
 								{
 									
-									echo "<tr><td><label class=\"control-label\" >".$row['codigo']."</label></td>
+									echo "<tr><td><label class=\"control-label\" >".$row['codigo_color']."</label></td>
 											  <td>&nbsp;&nbsp;</td><td>".$row['color']."</td></tr>";
 								 //echo " <label class=\"control-label\" >".$row['color']." - ".$row['codigo']."</label>";
 

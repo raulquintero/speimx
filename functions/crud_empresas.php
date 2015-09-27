@@ -4,6 +4,7 @@
 include '../config/config.php';
 $database = new DB();
 
+$data=$_GET['data'];
 
 foreach( $_POST as $key => $value )
 {

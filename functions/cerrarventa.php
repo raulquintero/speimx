@@ -86,7 +86,7 @@ $database = new DB();
     								'admin_id' => $_SESSION['user_id'],
     								'fecha' => $fecha_hoy,
     								'status_id' => 6,
-    								'total' => $total_credito,
+    								'total' => ($total_credito+$total_iva),
     								'iva' => $total_iva_credito,
     								'comision' => 5,
     								'tipomov_id' => 3,
@@ -166,7 +166,7 @@ $database = new DB();
                 						);
 
 
-								//print_r($names);
+								($names);
 
 									$add_query = $database->insert( 'facturadet', $names );
 									//$factura_id = $database->lastid();

@@ -39,8 +39,9 @@ $database = new DB();
 				if ($tipomov_id==3)
 							
 				{
-					$query = "SELECT  facturadet.facturadet_id,facturadet.factura_id,facturadet.producto,facturadet.precio_credito,facturadet.iva_credito,producto.codigo,tipomov_id, color,talla FROM facturadet,producto
-					WHERE  facturadet.producto_id=producto.producto_id AND facturadet.factura_id=".$fid;
+					$query = "SELECT  facturadet.facturadet_id,facturadet.factura_id,facturadet.producto,facturadet.precio_credito,facturadet.iva_credito,producto.codigo,tipomov_id, color,talla 
+					FROM facturadet,producto, factura
+					WHERE  facturadet.producto_id=producto.producto_id AND facturadet.factura_id=factura.factura_id AND facturadet.factura_id=".$fid;
 
 					$results = $database->get_results( $query );
 								
@@ -59,7 +60,7 @@ $database = new DB();
 						if ($tipomov_id==3) echo dinero($item['precio_credito']+($item['precio_credito']*.16)); else echo dinero($item['precio_contado']+($item['precio_contado']*.16));
 					
 						echo "</td>";
-						if ($item['tipomov_id']==2)
+						if ($item['tipomov_id']==2 )
 							echo "<td></td>";
 						else
 							echo "<td style='text-align:right;vertical-align:text-top'><a href=\"#\" class=\"btn btn-info blue btn-setting\">Devolucion</a></td> ";
@@ -180,7 +181,7 @@ $database = new DB();
 
 
 			$query = "SELECT facturadet.producto,facturadet.precio_credito,facturadet.iva_credito,facturadet.precio_contado,facturadet.iva_contado,facturadet.codigo,color,talla,key1 FROM facturadet,producto,movimiento
-				WHERE  facturadet.producto_id=producto.producto_id AND facturadet.factura_id=movimiento.factura_id AND movimiento.tipomov_id=2 AND facturadet.tipomov_id=2 AND facturadet.factura_id=".$fid;
+				WHERE  facturadet.producto_id=producto.producto_id AND facturadet.factura_id=movimiento.factura_id AND movimiento.tipomov_id=2 AND movimiento.tipomov_id=2 AND facturadet.factura_id=".$fid;
 
 			$results = $database->get_results( $query );
 								

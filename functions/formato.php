@@ -288,7 +288,7 @@ $database = new DB();
 							<br><p class=\"muted\" >"
 							.$item['color']." ".$item['talla']."</p></td> 
 							<td style='text-align:right;vertical-align:text-top'>";
-							echo dinero($item['precio_contado']);
+							echo dinero($item['precio_contado']+$item['iva_contado']);
 					
 						echo "</td></tr>";
 										
@@ -305,8 +305,8 @@ $database = new DB();
 								<td></td><td>&nbsp;</td></tr>
 				  			<tr>
 				  				<td></td><td stsyle='text-align:right'>Subtotal</td>
-							<td style='text-align:right'>$". dinero($total_contado)."</td></tr>";
-						echo "<tr><td></td><td style='text-align:right'>IVA(16%)</td>
+							<td style='text-align:right'>$". dinero($total_contado+$total_iva_contado)."</td></tr>";
+						echo "<tr><td></td><td style='text-align:right'>Incluye IVA(16%) por</td>
 							<td style='text-align:right'>$". dinero($total_iva_contado)."</td></tr>";
 						echo "<tr><td></td><td style='text-align:right'>&nbsp;<strong>Total</strong></td>
 							<td style='text-align:right;text-align:right;border-top:2px solid;'><strong>".dinero($total_iva_contado+$total_contado)."</strong></td></tr>";	

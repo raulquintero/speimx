@@ -73,10 +73,7 @@ $database = new DB();
 
 }
 
-function plandepagos($total_ultimo,$fecha_total_ultimo)
-{
 
-}
 
 
 ?>
