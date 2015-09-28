@@ -7,7 +7,6 @@
 	 	$title="Agregar Cliente";
 
 
-
 	 $checado="checked";
 
 	 if ($cid>0)

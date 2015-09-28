@@ -182,7 +182,7 @@ $database = new DB();
 				echo "<table   width=100%>
 						<tr>
 							<td style='text-align:center;border-bottom:1px dotted black' colspan=3>
-								<br><strong>Tienda de Ropa Alberto's</strong>
+								<br><strong>Tiendas Alberto</strong>
 								<br>R.F.C QURC750708PM7
 								<br>Av. Presa Lopez Zamora #1501 <br>Col. Venustiano Carranza<br>
 								<br>";

@@ -56,12 +56,11 @@ if ($_GET['producto'])
 	$last_id = $database->lastid();
 	$location="Location: /index.php?data=$data&op=detalles&prid=$last_id&eed=2";
 
-	$sku=sku13($last_id);
+	//$sku=sku13($last_id);
 
 
-
-
-
+	$sku=sprintf('%05d', $last_id);
+	$sku=$_GET['subcategoria_id'].$sku;
 
 
 $update = array(

@@ -35,6 +35,7 @@ if ($_GET['eed']==2)
 											<br>Marca: <?php echo $marca?>
 											<br>Proveedor: <?php echo $proveedor?>
 											<br>Subcategoria: <?php echo $subcategoria?>											
+											<br>Codigo: <?php echo $codigo?>											
 											
 											<br><br>
 											<a href="index.php?data=productos&op=producto_form&f=editar&prid=<?=$prid?>">

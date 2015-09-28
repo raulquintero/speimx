@@ -2,11 +2,11 @@
 
 $prid=(htmlspecialchars($_GET["prid"]));
 $query = "SELECT producto_id,producto,proveedor,precio_compra,precio_contado,precio_credito,precio_promocion,descuento,
-		marca,talla,unidad,estilo,subcategoria FROM producto,proveedor,marca,talla,unidad,subcategoria 
+		marca,talla,unidad,estilo,subcategoria,codigo FROM producto,proveedor,marca,talla,unidad,subcategoria 
 	WHERE producto.proveedor_id=proveedor.proveedor_id AND producto.marca_id=marca.marca_id AND producto.talla_id=talla.talla_id
 		AND producto.unidad_id=unidad.unidad_id AND producto.subcategoria_id=subcategoria.subcategoria_id AND producto_id=".$prid;
 list( $producto_id,$producto,$proveedor,$precio_compra,$precio_contado,$precio_credito,$precio_promocion,$descuento,
-		$marca,$talla,$unidad,$estilo,$subcategoria  ) = $database->get_row( $query );
+		$marca,$talla,$unidad,$estilo,$subcategoria,$codigo  ) = $database->get_row( $query );
 
 
 

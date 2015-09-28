@@ -50,7 +50,7 @@ if ($_GET['func']=="c")
 	'antiguedad_empleo'=>$_GET['antiguedad_empleo'],
 	'observaciones'=>$_GET['observaciones'],
 
-	'credito'=>$_GET['credito'],
+	'credito'=>3000,
 	'total_ultimo'=>$_GET['total_ultimo'],
 	'fecha_total_inicio'=>fechaustomysql($_GET['fecha_total_inicio']),
 	'fecha_total_ultimo'=>fechaustomysql($_GET['fecha_total_ultimo']),

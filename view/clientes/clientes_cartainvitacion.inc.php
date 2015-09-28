@@ -82,7 +82,9 @@ if($cliente_id)
 		<p>En <strong>Tiendas Alberto</strong> estamos interesados en apoyar la economia de las familias mexicalenses, esta ocasion en convenio 
 		con <strong>Fruteria NENA'S</strong> reconociendo  a sus mas valiosos empleados, les extendiende esta carta invitacion para que 
 		disponga inmediatamente de un <strong>CREDITO PRE APROBADO</strong> por la cantidad de:<br>    
-		<strong>$ 3 000.00 MXN</strong>    para la adquision de productos en Tiendas Alberto.<br><br><Br></p>
+		<center><h1><strong>$ 3 000.00 MXN</strong></h1></center>
+		   <!-- para la adquision de productos en Tiendas Alberto. -->
+		   <br><Br></p>
 
 <div class="beneficios">
 	<h3>Conoce nuestros beneficios:</h3>
