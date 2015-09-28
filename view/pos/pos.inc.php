@@ -18,7 +18,8 @@
 						
 				} 
 				else
-					echo " <a href=/index.php?data=pos&op=clientes><button class=\"btn btn-success\">Seleccionar Cliente</button></a>";
+						echo "<a href=\"/index.php?data=pos&op=clientes\" class=\"btn btn-success blue  hidden-print\">Seleccionar Cliente</a>";
+
 
 		?>				
 				
@@ -26,7 +27,7 @@
 
 			<div class="row-fluid condensed">
 
-					<div class="box-content span8" >
+					<div class="box-content span8 hidden-print" >
 				
 				  		<div class="box-header " data-original-title>
 					  		<h2><i class="halflings-icon calendar"></i><span class="break"></span>Punto de Venta</h2>

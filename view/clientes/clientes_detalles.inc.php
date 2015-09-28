@@ -52,6 +52,9 @@ if ($_GET['eed']==2)
 												<a href=\"index.php?data=clientes&op=subirfoto&cid=$cliente_id\">
 												<button class=\"btn btn-primary\"><i class=\"halflings-icon white camera\"></i></button></a>";
 												
+						echo "<a href=\"/index.php?data=cartainvitacion\" class=\"btn btn-success blue  hidden-print\">Seleccionar Cliente</a>";
+
+												echo " <button hrefonclick=\"mostrar_carta('/docs/cartainvitacion.php?cliente=$cliente','_blank','fullscreen=yes,menubar=no,status=no,toolbar=no')\" class=\"btn btn-primary\"><i class=\"halflings-icon white ok\"></i></button><br>";
 												echo " <button onclick=\"mostrar_carta('/docs/cartainvitacion.php?cliente=$cliente','_blank','fullscreen=yes,menubar=no,status=no,toolbar=no')\" class=\"btn btn-primary\"><i class=\"halflings-icon white ok\"></i></button><br>";
 											?>											
 											<!-- <a href="index.php?data=clientes&op=cliente_form&f=editar&cid=<?=$cliente_id?>"><button 

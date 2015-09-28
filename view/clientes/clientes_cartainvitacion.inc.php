@@ -1,8 +1,7 @@
 
 <?php
 
-$cliente=$_GET['cliente'];
-?>
+$cliente_id = $_SESSION['cliente_id'];?>
 
 <html>
 <head>
@@ -10,11 +9,7 @@ $cliente=$_GET['cliente'];
 
 <style type="text/css">
 
-body{
-	font-family: "courier";
-	font-size;12px;
-	width:800px;
-}
+
 
 .destinatario{
 	height:50px;
@@ -30,7 +25,8 @@ body{
 	text-indent: 20px;
 }
 .documento{
-	width:800px;
+	padding-left:50px;
+	width:650px;
 	text-align:justify;
 	text-indent: 20px;
 }
@@ -39,6 +35,7 @@ body{
 }
 
 .conocenos{
+	width:800px;
 	height: 100px;
 	vertical-align: middle;
 	text-align: center;
@@ -46,6 +43,7 @@ body{
 
 }
 .firma{
+	width:800px;
 	height: 70px;
 	text-align: center;
 	padding: 0px;
@@ -54,11 +52,26 @@ body{
 }
 .fecha{
 	text-align: right;
+	width:700px;
 }
 
 </style>	
 </head>
 <body>
+<?php 
+if($cliente_id)
+	{
+		 $query = "SELECT apellidop, apellidom, nombre  FROM cliente 
+			WHERE  cliente_id=".$cliente_id;
+		list( $apellidop,$apellidom,$nombre ) = $database->get_row( $query );
+			$cliente= $apellidop." ".$apellidom." ".$nombre;
+
+						
+						
+				} 
+ ?>
+
+
 <div class="fecha">Mexicali a <?php echo date("d-m-Y")?></div>
 <div class="header">
 <img width=300 src="/img/tiendasalberto.png">
@@ -66,31 +79,32 @@ body{
 
 	<div class="destinatario">Apreciable <strong><?php echo strtoupper($cliente)?></strong></div>
 	<div class="documento">
-		<p>En <strong>Tiendas Alberto</strong> estamos interesados en apoyar la economia de las familias mexicalenses, y para esta ocasion en conjunto 
-		con <strong>Fruteria NENA'S</strong> reconocemos a los mejores empleados, extendiendole esta carta invitacion con la finalidad de que 
+		<p>En <strong>Tiendas Alberto</strong> estamos interesados en apoyar la economia de las familias mexicalenses, esta ocasion en convenio 
+		con <strong>Fruteria NENA'S</strong> reconociendo  a sus mas valiosos empleados, les extendiende esta carta invitacion para que 
 		disponga inmediatamente de un <strong>CREDITO PRE APROBADO</strong> por la cantidad de:<br>    
-		<strong>$ 3 000.00 MXN</strong>    para la adquision de productos en Tiendas Alberto.</p>
+		<strong>$ 3 000.00 MXN</strong>    para la adquision de productos en Tiendas Alberto.<br><br><Br></p>
 
 <div class="beneficios">
 	<h3>Conoce nuestros beneficios:</h3>
 	<ul>
 		<li>Pagos Fijos</li>
 		<li>Descuento Via Nomina</li>
+		<li>Requisitos Minimos</li>
 		<li>Plazo de 3 a 12 meses para liquidar tu adeudo</li>
 		<li>Puedes incrementar tu credito hasta $7,000 MXN</li>
 		<li>Sin penalizacion por pago anticipado</li>
 	</ul>
 </div>
-	<p>Unicamente presente esta carta invitacion junto con una copia de su identificacion oficial a un representante o personalmente 
+	<p><br><Br><Br>Unicamente presente esta carta invitacion junto con una copia de su identificacion oficial a un representante o personalmente 
 	en nuestra sucursal ubicada en Presa Lopez Zamora #1501, Col. 18 de Marzo, Mxl, B.C..</p>
 
 </div>
 
-<div class="conocenos"><br><br>VEN Y CONOCENOS!</div>
+<div class="conocenos"><br><br><br><br>VEN Y CONOCENOS!</div>
 
 <div class="firma">
-	<div>Atentamente</div> 
-	<div>Tiendas Alberto</div>
+	<!-- <div>Atentamente</div>  -->
+	<!-- <div><h2>Tiendas Alberto</h2></div> -->
 </div>
 
 

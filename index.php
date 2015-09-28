@@ -511,7 +511,7 @@ foreach( $_GET as $key => $value )
 	<footer>
 
 		<p>
-			<span style="text-align:left;float:left">&copy; 2010 <a href="http://tiendaalbertos.com" alt="Tienda de Ropa Alberto">Tienda de Ropa Alberto's</a></span>
+			<span style="text-align:left;float:left">&copy; 2010 Tienda de Ropa Alberto's</span>
 			
 		</p>
 
