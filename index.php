@@ -74,7 +74,7 @@ foreach( $_GET as $key => $value )
 <body>
 	<?php //echo "session:".$_SESSION['user_login_session'];?>
 		<!-- start: Header -->
-	<div class="navbar">
+	<div class="navbar hidden-print">
 		<div class="navbar-inner">
 			<div class="container-fluid">
 				<a class="btn btn-navbar" data-toggle="collapse" data-target=".top-nav.nav-collapse,.sidebar-nav.nav-collapse">
@@ -434,7 +434,7 @@ foreach( $_GET as $key => $value )
 	$lnk=(htmlspecialchars($_GET["data"])).".inc.php";
 ?>
 						
-			<ul class="breadcrumb">
+			<ul class="breadcrumb hidden-print">
 				<li>
 					<i class="icon-home"></i>
 					<a href="index.html">Home</a> 

@@ -39,7 +39,6 @@ $database = new DB();
 	
 	$results = $database->get_results( $query );
 	
-	echo"sasfaf";
 	$i=0;
 	foreach( $results as $row )
 	{
