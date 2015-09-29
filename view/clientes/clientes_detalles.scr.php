@@ -50,15 +50,15 @@ $database = new DB();
 
 			if (!$row['tmov'])
 					echo "<td align=center>---</td>
-					<td align=right> <font >".$row['cantidad']."&nbsp;&nbsp; </td>";
+					<td align=right> <font >$ ".$row['cantidad']."&nbsp;&nbsp; </td>";
 				else
 					echo "
-					<td align=right> <font >".$row['cantidad']."&nbsp;&nbsp; </td>
+					<td align=right> <font >$ ".$row['cantidad']."&nbsp;&nbsp; </td>
 					<td align=center>---</td>";
 				
 
 
-			echo "<td><font ><b>$ $saldo.00</td>
+			echo "<td><font ><b>$ ".dinero($saldo)."</td>
 			<td><font >".$row['tipomov']."</td>
 			<td> <font >".$row['admin_nombre']."</td></tr>";
 

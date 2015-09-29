@@ -68,10 +68,14 @@ foreach( $_GET as $key => $value )
 	
 		
 		
-		
+	<script type="text/javascript">
+	function setFocusToTextBox(){
+		document.getElementById('textcode').focus();
+	}
+	</script>	
 </head>
 
-<body>
+<body onload='setFocusToTextBox()'>
 	<?php //echo "session:".$_SESSION['user_login_session'];?>
 		<!-- start: Header -->
 	<div class="navbar hidden-print">

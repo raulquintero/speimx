@@ -21,10 +21,6 @@ $database = new DB();
 
 
 
-		?>
-
-
-							<?php 
 									$item=$_SESSION['cart'];
 								
 									$n=0;
@@ -39,11 +35,7 @@ $database = new DB();
 
 									}
 								
-							?>
-
-
-
-						<?php	
+						
 
 							if ($total_credito AND $cid)
 							{
@@ -79,14 +71,15 @@ $database = new DB();
 									
 
 									//////////////////////////////////////////////////////////////factura
-									$fecha_hoy=date("Y-m-d H:m:s");
+									$fecha_hoy=date("Y-m-d H:i:s");
 											//The fields and values to insert
 									$names = array(
     								'cliente_id' => $cid,
+    								'store_id' => 1,
     								'admin_id' => $_SESSION['user_id'],
     								'fecha' => $fecha_hoy,
     								'status_id' => 6,
-    								'total' => ($total_credito+$total_iva),
+    								'total' => ($total_credito+$total_iva_credito),
     								'iva' => $total_iva_credito,
     								'comision' => 5,
     								'tipomov_id' => 3,
@@ -125,7 +118,7 @@ $database = new DB();
 					$updated = $database->update( 'cliente', $update, $where_clause, 1 );
 
 
-					$names = array(
+ 					$names = array(
     								'cliente_id' => $cid,
     								'fecha_actual' => $fecha_hoy,
     								'fecha' => $fecha_hoy,
@@ -137,6 +130,7 @@ $database = new DB();
 			);
 									$add_query = $database->insert( 'movimiento', $names );
 
+ 
 
 ////////////////////////////////////////////////////////////////creating details for facturadet////////////////////////////////
 
@@ -166,10 +160,8 @@ $database = new DB();
                 						);
 
 
-								($names);
-
-									$add_query = $database->insert( 'facturadet', $names );
-									//$factura_id = $database->lastid();
+								
+ 									$add_query = $database->insert( 'facturadet', $names );
 
 
 										$total_credito+=$item[$n]['precio_credito'];
@@ -293,8 +285,8 @@ $database = new DB();
 
 
 
- // echo "<br><br><br>array: <br>";
-     // print_r($_SESSION['cart']);
+  //echo "<br><br><br>cart: <br>";
+    //  print_r($_SESSION['cart']);
 unset($_SESSION['cart']);
 unset($_SESSION['cliente_id']);
 

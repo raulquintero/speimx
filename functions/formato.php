@@ -194,7 +194,7 @@ $database = new DB();
 					echo "<br>"; //Tipo de Venta: <span class=\"label label-inverse\">Contado</span><br><br>";
 
 				echo "Folio: $factura_id [$cliente_id]<br>";
-				echo "Fecha y Hora: ".$fecha_factura;    //date("d-m-Y  H:m:s");
+				echo "Fecha y Hora: <br>".$fecha_factura;    //date("d-m-Y  H:m:s");
 				echo "<br>";
 				
 

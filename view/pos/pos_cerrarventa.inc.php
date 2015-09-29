@@ -14,7 +14,7 @@
 					list( $cliente_id,$apellidop,$apellidom,$nombre,$credito, $saldo, $total_ultimo, $fecha_factura,$abono, $factura_id,
 							 $tipomov_id,$fecha_factura,$saldo_actual,$saldo_total,$ticket  ) = $database->get_row( $query );
 	 					$cliente= $apellidop." ".$apellidom." ".$nombre;
-
+	 				$nombre_completo = $apellidop." ".$apellidom." ".$nombre;
 						
 					// echo "<div class=\"alert alert-info\">
 		 		// 	<a href=/functions/cart.php?func=del_cliente&cid=".$row['cliente_id']."><button type=\"button\" class=\"close\" >×</button></a>
@@ -39,7 +39,7 @@
 
 					<center>
 					_______________________<br>
-					Acepto</center>
+					<?php echo strtoupper($nombre_completo)?></center>
 					<!-- <center>Consultar este ticket en:<br>
 						 http://tiendasalberto.com/ticket<br>
 						 con este numero:<br>

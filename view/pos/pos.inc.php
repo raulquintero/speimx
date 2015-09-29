@@ -22,8 +22,8 @@
 					<strong>Credito: </strong>$ ".dinero($credito)."<br><strong> Credito Total Disponible: </strong>$ ".dinero($credito-$saldo)."</div> ";
 						
 				} 
-				else
-						echo "<a href=\"/index.php?data=pos&op=clientes\" class=\"btn btn-success blue  hidden-print\">Seleccionar Cliente</a>";
+				 else
+				 		echo "<a href=\"/index.php?data=pos&op=clientes\" class=\"btn btn-success blue  hidden-print\">Seleccionar Cliente</a>";
 
 
 		?>				
@@ -33,10 +33,34 @@
 			<div class="row-fluid condensed">
 
 					<div class="box-content span8 hidden-print" >
+
+
+			
+			
+
+					<div><BR>
+							<table  width=100%  >
+				 			<tr bgcolor=#dddddd>
+				  			<td style="padding:15px">
+
+					<form action="/index.php" method="get">
+							<input type=hidden name=data value=pos>
+							<input type=hidden name=op value=detalles>
+				  			 &nbsp;&nbsp;Codigo <input classe="input-xlarge focused" id="textcode" name="code" >
+				  		</form>
+				  			</td>
+				  		</tr>
+				  		</table>
+				  	</div>
+			
+		
 				
 				  		<div class="box-header " data-original-title>
 					  		<h2><i class="halflings-icon calendar"></i><span class="break"></span>Punto de Venta</h2>
-				  		</div>
+				  		</div><br>
+				  		<form>
+				  			Codigo: <input type=text size=10>
+				  		</form>
 						<table class="table table-striped table-bordered bootstrap-datatable datatable">
 						  <thead>
 							  <tr>
@@ -45,7 +69,7 @@
 								  <th>Producto</th>
 								  <!-- <th>Color</th> -->
 								  <th  style="text-align:right">Precio</th>
-								  <th style="text-align:right">Stock</th>
+								  <th class="hide" style="text-align:right">Stock</th>
 
 							  </tr>
 						  </thead>   
@@ -80,7 +104,7 @@
 									 else
 										echo "<td class=\"right \" style='text-align:right'>$ ".dinero($precio_contadomasiva)."</td>";
 							?>								
-									<td class="center" style='text-align:right'><?php echo $row['stock']?></td>
+									<td class="center hide" style='text-align:right'><?php echo $row['stock']?></td>
 								
 								</tr>
 
@@ -94,7 +118,9 @@
 					
 					</div>
 
+
 					<div class="box span4" style='border:1px dotted'>
+						
 						<table width=100% >
 							<tr>
 								<td style='text-align:center;border-bottom:1px dotted black' colspan=4>

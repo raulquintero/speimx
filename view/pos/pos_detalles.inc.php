@@ -3,7 +3,16 @@
 <?php
 include 'pos_detalles.scr.php';
 
-
+if (!$producto_id)
+{
+	echo "<div class=\"alert alert-error\">
+							<button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
+							<strong>Producto no Encontrado.
+						</div>";
+	echo "<a href=\"/index.php\" class=\"btn btn-info blue \">Regresar</a>";
+}
+else
+{
 ?>
 
 <?php 
@@ -19,7 +28,7 @@ if ($_GET['eed']==2)
 
 			<form action=/functions/cart.php>
 				<input type=hidden name="func" value="add_item">
-				<input type=hidden name="prid" value="<?php echo $prid?>">
+				<input type=hidden name="prid" value="<?php echo $producto_id?>">
 				<input type=hidden name="producto" value="<?php echo $producto?>">
 				<input type=hidden name="marca" value="<?php echo $marca?>">
 				<input type=hidden name="codigo" value="<?php echo $codigo?>">
@@ -67,7 +76,7 @@ if ($_GET['eed']==2)
 								<div class="controls">
 
 						<?php
-								$query = "SELECT color_id,color FROM  color WHERE producto_id=$prid ORDER BY  color";
+								$query = "SELECT color_id,color FROM  color WHERE producto_id=$producto_id ORDER BY  color";
 								//list( $colonia_casa ) = $database->get_row( $query );	
 								$results = $database->get_results( $query );
 								
@@ -155,3 +164,13 @@ if ($_GET['eed']==2)
 
 	</form>			
 			</div><!--/row-->
+
+
+<?php
+
+
+
+}   // fin del if si no se encontro propducto
+
+
+?>
