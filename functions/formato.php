@@ -304,7 +304,7 @@ $database = new DB();
 						echo "<tr>
 								<td></td><td>&nbsp;</td></tr>
 				  			<tr>
-				  				<td></td><td stsyle='text-align:right'>Subtotal</td>
+				  				<td></td><td style='text-align:right'>Subtotal</td>
 							<td style='text-align:right'>$". dinero($total_contado+$total_iva_contado)."</td></tr>";
 						echo "<tr><td></td><td style='text-align:right'>Incluye IVA(16%) por</td>
 							<td style='text-align:right'>$". dinero($total_iva_contado)."</td></tr>";

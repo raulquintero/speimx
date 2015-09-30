@@ -35,12 +35,18 @@ if ($_GET['eed']==2)
 											<img class=grayscale src=fotos/images.jpeg width=150 align=right></img>									
 											
 											<b><?php echo strtoupper($nombre.' '.$apellidop.' '.$apellidom)?></b> &nbsp;&nbsp;											
-											<br>Direccion: <?php echo $domicilio_casa?>
 											
-											<br>Telefono: <?php echo $telefono_personal?>
-											<br>Trabajo: <?php echo $empresa?>
+											<?php
+											if (!$_GET['h'])
+											echo "<br>Direccion: $domicilio_casa
+											<br>Telefono:  $telefono_personal											
+											<br>Trabajo:  $empresa
+											<br>Grupo Nomina: <a href='index.php?data=cobronomina&op=empresas&nid=$gruponomina_id' >". strtoupper($gruponomina)."</a>";
+											else
+												echo "<br><a href=\"#\" class=\"btn btn-info blue btn-setting\" data-toggle=\"modal\" data-target=\"#abonaracuenta\">Abonar a Cuenta</a>";
 
-											<br>Grupo Nomina: <a href=index.php?data=cobronomina&op=empresas&nid=<?php echo $gruponomina_id?> ><?php echo strtoupper($gruponomina)?></a>
+
+											?>
 
 											
 											<br><br>
@@ -151,3 +157,33 @@ if ($_GET['eed']==2)
 				</div><!--/span-->
 			
 			</div><!--/row-->
+
+
+			<div class="modal hide fade" id="abonaracuenta">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">×</button>
+			<h3>Abonar a Cuenta</h3>
+		</div>
+		<div class="modal-body">
+
+			<form action="./functions/abono.php" >
+				<input type="hidden" name="data" value="clientes">
+				<input type="hidden" name="op" value="abono">
+				<input type="hidden" name="f" value="a">
+
+			<fieldset>
+
+				<div class="control-group">
+								<label class="control-label" for="focusedInput">Cantidad</label>
+								<div class="controls">
+								  $<input class="input-xlarge focused" id="focusedInput" type="cantidad" value="">
+								</div>
+							  </div>
+
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn" data-dismiss="modal">Cancelar</a>
+			<button type="submit" class="btn btn-primary">Abonar</button>
+		</div>
+			</fieldset>
+	</div>

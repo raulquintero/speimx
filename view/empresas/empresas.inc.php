@@ -34,7 +34,7 @@
 
 <?php
 
-$query = "SELECT empresa_id, rfc, empresa, sucursal, contacto, telefono, email FROM empresa  ";
+$query = "SELECT empresa_id, rfc, empresa, sucursal, contacto, telefono, email FROM empresa where empresa_id>0 ";
 $results = $database->get_results( $query );
 foreach( $results as $row )
 {

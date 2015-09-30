@@ -40,11 +40,11 @@
 					<center>
 					_______________________<br>
 					<?php echo strtoupper($nombre_completo)?></center>
-					<!-- <center>Consultar este ticket en:<br>
-						 http://tiendasalberto.com/ticket<br>
-						 con este numero:<br>
+					<center><br><br>
+						 http://tiendasalberto.com<br>
+						 
 						 <?php echo $ticket ?><br>
-						</center> -->
+						</center>
 						<br><Br>
 						
    				

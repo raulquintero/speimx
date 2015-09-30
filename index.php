@@ -390,14 +390,15 @@ foreach( $_GET as $key => $value )
 					<ul class="nav nav-tabs nav-stacked main-menu">
 						<li><a href="index.html"><i class="icon-bar-chart"></i><span class="hidden-tablet"> Dashboard</span></a></li>	
 						<li><a href="index.php?data=mensajes"   ><i class="icon-envelope"></i><span class="hidden-tablet"> Messages</span></a></li>
-						<li><a href="index.php?data=pos"        ><i class="icon-barcode" ></i><span class="hidden-tablet"> PoS</span></a></li>
+						<li><a href="index.php?data=pos"        ><i class="icon-shopping-cart" ></i><span class="hidden-tablet"> PoS</span></a></li>
 
 						<li>
 							<a class="dropmenu" href="#"><i class="icon-chevron-right">   </i><span class="hidden-tablet"> Sistema </span><span class="label label-important"> 2 </span></a>
 							<ul>
 								
+								<li><a href="index.php?data=clientes&op=devoluciones"><i class="icon-book"    ></i><span class="hidden-tablet"> Devoluciones</span></a></li>
 								<li><a href="index.php?data=cobronomina"><i class="icon-book"    ></i><span class="hidden-tablet"> Cobro x Nomina</span></a></li>
-								<li><a href="index.php?data=catalogo"><i class="icon-shopping-cart"></i><span class="hidden-tablet"> Catalogo</span></a></li>
+								<li><a href="index.php?data=catalogo"><i class="icon-barcode"></i><span class="hidden-tablet"> Catalogo</span></a></li>
 							</ul>
 						</li>
 						<li>
@@ -495,7 +496,7 @@ foreach( $_GET as $key => $value )
 			<!-- end: Content -->
 		</div><!--/#content.span10-->
 		</div><!--/fluid-row-->
-		
+<!-- 		
 	<div class="modal hide fade" id="myModal">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal">×</button>
@@ -509,7 +510,7 @@ foreach( $_GET as $key => $value )
 			<a href="#" class="btn btn-primary">Save changes</a>
 		</div>
 	</div>
-	
+	 -->
 	<div class="clearfix"></div>
 	
 	<footer>
