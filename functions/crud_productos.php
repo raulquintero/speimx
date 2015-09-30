@@ -99,7 +99,7 @@ $update = array(
 	'activo'=>$_GET['activo'],
 	'producto'=>$_GET['producto'],
 	'subcategoria_id'=>$_GET['subcategoria_id'],
-	'precio_compra'=>$_GET['precio_comnpra'],
+	'precio_compra'=>$_GET['precio_compra'],
 	'precio_contado'=>$_GET['precio_contado'],
 	'precio_credito'=>$_GET['precio_credito'],
 	'precio_promocion'=>$_GET['precio_promocion'],
@@ -108,6 +108,7 @@ $update = array(
 	'marca_id'=>$_GET['marca_id'],
 	'talla_id'=>$_GET['talla_id'],
 	'unidad_id'=>$_GET['unidad_id'],
+	'inventariable'=>$_GET['inventariable'],
 	'estilo'=>$_GET['estilo']
 
 	

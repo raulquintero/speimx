@@ -55,7 +55,7 @@ if ($_GET['eed']==2)
 											<b><?php echo $producto?> </b> &nbsp;&nbsp;											
 											<br>Marca: <?php echo $marca?>
 											<br>Subcategoria: <?php echo $subcategoria?>
-											<br>Id:<?php echo $producto_id?>	<br><br>
+											<br>sku: <?php echo $codigo?>	<br><br>
 					<div class="box-header">
 						<h2><i class="halflings-icon align-justify"></i><span class="break"></span>Seleccione Color</h2>
 						<div class="box-icon">
@@ -82,7 +82,7 @@ if ($_GET['eed']==2)
 								
 								 if(!$results)
 								 	{	echo "<label class=\"btn btn-info\"  style=\"border:1px solid #336699;color:black\" >
-									<input type=\"radio\" name=\"color\" id=\"color\" value=\"0\" checked=\"\"> SIN COLOR ASIGNADO</label>";
+									<input type=\"radio\" name=\"color\" id=\"color\" value=\"0\" checked=\"\"> S=NO APLICA</label>";
 									}
 									
 								foreach( $results as $row )

@@ -10,6 +10,7 @@
 
 
 	 $checado="checked";
+	 $checado_inv="checked";
 
 	 if ($prid>0)
 	 {
@@ -19,6 +20,7 @@
 		list( $producto_id,$proveedor_id,$producto,$detalle,$talla_id,$precio_credito,$precio_contado,$precio_promocion,$precio_compra,$descuento,
 				$subcategoria_id,$categoria_id,$unidad_id,$marca_id,$estilo,$color_id,$codigo,$stock,$up,$activo,$consultas,$inventariable) = $database->get_row( $query );
 		if (!$activo) $checado="";
+		if (!$inventariable) $checado_inv="";
 
 
 		$queryWhere="";
@@ -70,7 +72,7 @@
 								  </label>
 
 								  <label class="checkbox inline">Inventariable
-									<input type="checkbox" id="inventariable" name="activo"  value="1"  <?php echo $checado_inv?>> 
+									<input type="checkbox" id="inventariable" name="inventariable"  value="1"  <?php echo $checado_inv?>> 
 								  </label>
 								 </div>
 								</div>
@@ -111,22 +113,22 @@
 							  <div class="control-group">
 								<label class="control-label" >Precio Compra</label>
 								<div class="controls">
-								  <input class="input-small" id="precio_compra" name="precio_compra" type="text" value="<?php echo $precio_compra?>">
+								  <input class="input-small" id="precio_compra" name="precio_compra" type="text" value="<?php echo $precio_compra?>"> <?php echo dinero($precio_compra+($precio_compra*.16))?>
 								</div>
 							  </div>
 							  
 
 							<div class="control-group">
-							  <label class="control-label" for="date01">Precio Contado</label>
+							  <label class="control-label" for="precio_contado">Precio Contado</label>
 							  <div class="controls">
-								<input type="text" class="input-xlarge" id="precio_contado" name="precio_contado" value="<?php echo $precio_contado?>">
+								<input type="text" class="input-small" id="precio_contado" name="precio_contado" value="<?php echo $precio_contado?>"> <?php echo dinero($precio_contado+($precio_contado*.16))?>
 							  </div>
 							</div>
 
 							  <div class="control-group">
 								<label class="control-label" >Precio Credito</label>
 								<div class="controls">
-								  <input class="input-small" id="precio_credito" name="precio_credito" type="text" value="<?php echo $precio_credito?>">
+								  <input class="input-small" id="precio_credito" name="precio_credito" type="text" value="<?php echo $precio_credito?>"> <?php echo dinero($precio_credito+($precio_credito*.16))?>
 								</div>
 							  </div>
 							  

@@ -84,13 +84,13 @@ echo "<div class=\"box-header\">
 								  </tr>
 							  </thead>   
 							  <tbody>";
-					$query = "SELECT producto_id,producto,precio_compra,stock  FROM producto where subcategoria_id=$subcat";
+					$query = "SELECT producto_id,codigo,producto,precio_compra,stock  FROM producto where subcategoria_id=$subcat";
 					$subs = $database->get_results( $query );
 	
 					foreach( $subs as $sub )
 						{		
 							echo "<tr>
-							<td>".$sub['producto_id']."</td>
+							<td>".$sub['codigo']."</td>
 							<td>".$sub['producto']."</td>
 							<td style='text-align:right'>".$sub['precio_compra']."</td>
 							<td style='text-align:right'>".$sub['stock']."</td>

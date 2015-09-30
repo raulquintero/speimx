@@ -166,7 +166,7 @@ if ($_GET['eed']==2)
 		</div>
 		<div class="modal-body">
 
-			<form action="./functions/abono.php" >
+			<form class="form-horizontal" action="./functions/abono.php" >
 				<input type="hidden" name="data" value="clientes">
 				<input type="hidden" name="op" value="abono">
 				<input type="hidden" name="f" value="a">
