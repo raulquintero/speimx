@@ -150,27 +150,10 @@
 							  </div>
 
 
+							<?php combobox("colonia",$colonia_casa_id)?>
 
 
-							  <div class="control-group">
-								<label class="control-label" for="colonia_casa_id">Colonia</label>
-								<div class="controls">
-								  <select id="colonia_casa_id" name="colonia_casa_id">
-
-							  <?php
-
-								$query = "SELECT colonia_id,colonia FROM  colonia ORDER BY colonia ";
-								//list( $colonia_casa ) = $database->get_row( $query );	
-								$results = $database->get_results( $query );
-								foreach( $results as $row )
-								{
-									if ($row['colonia_id']==$colonia_casa_id)  $seleccionado="selected='true' "; else $seleccionado="";
-    								echo "<option $seleccionado value='".$row['colonia_id']."' >".$row['colonia']."</option>";
-    							}
-							  ?>
-								  </select>
-								</div>
-							  </div>
+							
 
 							  
 							  <div class="control-group">
@@ -185,27 +168,11 @@
 							<strong>Datos Laborales</strong>
 						</div>
 
-							  <div class="control-group">
-								<label class="control-label" for="empresa_id">Empresa</label>
-								<div class="controls">
-								  <select id="empresa_id" name="empresa_id">
-								<?php
-									$query = "SELECT empresa_id,empresa,sucursal FROM  empresa ORDER BY empresa ";
-									//list( $colonia_casa ) = $database->get_row( $query );	
-									$results = $database->get_results( $query );
-									foreach( $results as $row )
-										{
-										if ($row['empresa_id']==$empresa_id)  $seleccionado="selected='true' "; else $seleccionado="";
-    									echo "<option $seleccionado value='".$row['empresa_id']."' >".$row['empresa'].'  ['.strtolower($row['sucursal'])."]</option>";
-    									}
+							<?php combobox("empresa",$empresa_id)?>
 
-							  ?>
-								
-								  </select>
-								</div>
-							  </div>
 
-							  <div class="control-group">
+
+						  <div class="control-group">
 								<label class="control-label" >Antiguedad Empleo</label>
 								<div class="controls">
 								  <input class="input-xlarge" id="antiguedad_empleo" name="antiguedad_empleo" type="text" value="<?php echo $antiguedad_empleo?>">

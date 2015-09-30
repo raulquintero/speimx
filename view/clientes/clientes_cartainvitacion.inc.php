@@ -61,9 +61,9 @@ $cliente_id = $_SESSION['cliente_id'];?>
 <?php 
 if($cliente_id)
 	{
-		 $query = "SELECT apellidop, apellidom, nombre  FROM cliente 
-			WHERE  cliente_id=".$cliente_id;
-		list( $apellidop,$apellidom,$nombre ) = $database->get_row( $query );
+		 $query = "SELECT apellidop, apellidom, nombre, empresa  FROM cliente,empresa
+			WHERE  cliente.empresa_id=empresa.empresa_id AND cliente_id=".$cliente_id;
+		list( $apellidop,$apellidom,$nombre,$empresa ) = $database->get_row( $query );
 			$cliente= $apellidop." ".$apellidom." ".$nombre;
 
 						
@@ -72,24 +72,27 @@ if($cliente_id)
  ?>
 
 
-<div class="fecha">Mexicali a <?php echo date("d-m-Y")?></div>
 <div class="header">
 <img width=300 src="/img/tiendasalberto.png">
+<div class="fecha">Mexicali a <?php echo date("d-m-Y")?></div>
 </div>
 
 	<div class="destinatario">Apreciable <strong><?php echo strtoupper($cliente)?></strong></div>
 	<div class="documento">
-		<p>En <strong>Tiendas Alberto</strong> estamos interesados en apoyar la economia de las familias mexicalenses, esta ocasion en convenio 
-		con <strong>Fruteria NENA'S</strong> reconociendo  a sus mas valiosos empleados, les extendiende esta carta invitacion para que 
-		disponga inmediatamente de un <strong>CREDITO PRE APROBADO</strong> por la cantidad de:<br>    
-		<center><h1><strong>$ 3 000.00 MXN</strong></h1></center>
+		<p>En <strong>Tiendas Alberto</strong> estamos interesados en apoyar la economia de las familias mexicalenses, en convenio 
+		con <strong><?php echo $empresa?></strong> reconociendo  a sus exelentes empleados, les ofrece este 
+		 <strong>CREDITO PRE APROBADO</strong> por la cantidad de:<br>    
+		<center><h1><br><strong>$ 3 000.00 MXN</strong></h1></center>
 		   <!-- para la adquision de productos en Tiendas Alberto. -->
-		   <br><Br></p>
+		   </p>
 
+	<p><Br><Br>Unicamente presente esta carta  y una identificacion oficial a un representante o personalmente 
+	en nuestra sucursal ubicada en Av. Presa Lopez Zamora #1501, Col. 18 de Marzo, Mxl, B.C..</p>
+
+	<br><br>
 <div class="beneficios">
 	<h3>Conoce nuestros beneficios:</h3>
 	<ul>
-		<li>Pagos Fijos</li>
 		<li>Descuento Via Nomina</li>
 		<li>Requisitos Minimos</li>
 		<li>Plazo de 3 a 12 meses para liquidar tu adeudo</li>
@@ -97,12 +100,10 @@ if($cliente_id)
 		<li>Sin penalizacion por pago anticipado</li>
 	</ul>
 </div>
-	<p><br><Br><Br>Unicamente presente esta carta invitacion junto con una copia de su identificacion oficial a un representante o personalmente 
-	en nuestra sucursal ubicada en Presa Lopez Zamora #1501, Col. 18 de Marzo, Mxl, B.C..</p>
 
 </div>
 
-<div class="conocenos"><br><br><br><br>VEN Y CONOCENOS!</div>
+<div class="conocenos"><br><br><br><br>VEN Y UTILIZA TU CREDITO INMEDIATAMENTE</div>
 
 <div class="firma">
 	<!-- <div>Atentamente</div>  -->
