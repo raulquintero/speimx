@@ -36,7 +36,7 @@ $eed=1;
 	'producto'=>$_GET['producto'],
 	'codigo'=>$_GET['producto'],
 	'subcategoria_id'=>$_GET['subcategoria_id'],
-	'precio_compra'=>$_GET['precio_comnpra'],
+	'precio_compra'=>$_GET['precio_compra'],
 	'precio_contado'=>$_GET['precio_contado'],
 	'precio_credito'=>$_GET['precio_credito'],
 	'precio_promocion'=>$_GET['precio_promocion'],
@@ -50,6 +50,8 @@ $eed=1;
 
     	
 		);
+
+
 if ($_GET['producto'])
 {
 	$add_query = $database->insert( 'producto', $registro );
@@ -57,7 +59,6 @@ if ($_GET['producto'])
 	$location="Location: /index.php?data=$data&op=detalles&prid=$last_id&eed=2";
 
 	//$sku=sku13($last_id);
-
 
 	$sku=sprintf('%04d', $last_id);
 	$sku=$_GET['subcategoria_id'].$sku;

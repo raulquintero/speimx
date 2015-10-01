@@ -82,7 +82,7 @@
 
 
 
-<div class="box span12 hiddeniii-desktop" >
+<div class="box span12 hidden-desktop" >
 					<div class="box-header" data-original-title>
 						<h2><i class="halflings-icon barcode"></i><span class="break"></span>Productos</h2>
 						<div class="box-icon">

@@ -123,7 +123,7 @@ if ($_GET['func']=="ct"){
 
 	}
 
-	header("Location: /index.php?data=productos&op=inventario&prid=1&coid=".$_GET['color_id']);
+	header("Location: /index.php?data=productos&op=inventario&prid=$prid&coid=".$_GET['color_id']);
 }
 
 ?>

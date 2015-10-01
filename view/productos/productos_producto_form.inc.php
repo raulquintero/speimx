@@ -78,6 +78,8 @@
 								</div>
 
 
+							<?php combobox("subcategoria",$subcategoria_id)?>
+
 
 							  <div class="control-group ">
 								<label class="control-label" for="producto">Producto</label>
@@ -86,8 +88,7 @@
 								</div>
 							  </div>
 
-							<?php combobox("subcategoria",$subcategoria_id)?>
-
+						<?php combobox("talla",$talla_id)?>
 
 
 					<div class="box-header">
@@ -183,7 +184,6 @@
 					<div class="box-content">
 						
 						<?php combobox("marca",$marca_id)?>
-						<?php combobox("talla",$talla_id)?>
 						<?php combobox("unidad",$unidad_id)?>
 						
 						 <div class="control-group">
