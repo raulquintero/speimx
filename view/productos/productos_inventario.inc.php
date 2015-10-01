@@ -1,6 +1,7 @@
 <?php 
 	 $data=$_GET['data'];
 	 $op=$_GET['op'];
+	 $color_id=$_GET['cid'];
 	 $prid=(htmlspecialchars($_GET["prid"]));
 	 $f=(htmlspecialchars($_GET["f"]));
 	 if ($f=="editar")
@@ -16,14 +17,14 @@
 	 if ($prid>0)
 	 {
 		$query = "SELECT producto_id,proveedor_id,producto,detalle,talla_id,precio_credito,precio_contado,precio_promocion,precio_compra,descuento,
-				subcategoria_id,categoria_id,unidad_id,marca_id,estilo,color_id,codigo,stock,up,activo,consultas,inventariable
+				subcategoria_id,categoria_id,unidad_id,marca_id,estilo,codigo,stock,up,activo,consultas,inventariable
 			 FROM producto WHERE producto_id=$prid";
 		list( $producto_id,$proveedor_id,$producto,$detalle,$talla_id,$precio_credito,$precio_contado,$precio_promocion,$precio_compra,$descuento,
-				$subcategoria_id,$categoria_id,$unidad_id,$marca_id,$estilo,$color_id,$codigo,$stock,$up,$activo,$consultas,$inventariable) = $database->get_row( $query );
+				$subcategoria_id,$categoria_id,$unidad_id,$marca_id,$estilo,$codigo,$stock,$up,$activo,$consultas,$inventariable) = $database->get_row( $query );
 		if (!$activo) $checado="";
+		if (!$inventariable) $checado_inv="";
 
 
-		$queryWhere="";
 	 }
 
 
@@ -79,14 +80,14 @@
 								  </label>
 
 								  <label class="checkbox inline">Inventariable
-									<input type="checkbox" id="inventariable" name="activo"  value="1"  <?php echo $checado_inv?>> 
+									<input type="checkbox" id="inventariable" name="inventariable"  value="1"  <?php echo $checado_inv?>> 
 								  </label>
 								 </div>
 								</div>
 
 
 
-							    <strong><?php echo strtoupper($producto)?></strong><br><br>
+							    <strong><?php echo strtoupper($producto)?> [<?php echo $codigo?>]</strong><br><br>
 								
 
 
@@ -103,16 +104,22 @@
 						<table>
 
 							  <?php
-								$query = "SELECT talladet_id,talladet FROM talladet WHERE talla_id=$talla_id ORDER BY orden ";
+							  	if (!$color_id) $color_id=0;
+								$query = "SELECT talladet.talladet_id,talladet,cantidad,codigo FROM talladet,inventariodet,color 
+									WHERE talladet.talladet_id=inventariodet.talladet_id AND inventariodet.color_id=color.color_id 
+										AND color.color_id='$color_id'
+									ORDER BY orden ";
 								//list( $colonia_casa ) = $database->get_row( $query );	
 								$results = $database->get_results( $query );
+								if (!$results)
+									echo "Generar Tallas y Codigos";
 								foreach( $results as $row )
 								{
 									if ($row['talladet_id'])
 								 echo " <tr><td><label class=\"control-label\" >".$row['talladet']."</label></td>
 								 		<td>
 								<div class=\"controls\">
-								  <input class=\"input-small\" id=\"apellidopaterno\" name=\"apellidop\" type=\"text\" value=\"$precio_compra\">
+								  <input class=\"input-small\" id=\"cantidad\" name=\"cantidad\" type=\"text\" value=\"".$row['cantidad']."\"> ".$row['codigo']." 
 								</div>
 							  </td></tr> ";
 							  	else
@@ -146,6 +153,7 @@
 		<input type=hidden name=data value=<?php echo $data?> >
 		<input type=hidden name=op value=<?php echo $op?> >
 		<input type=hidden name=prid value=<?php echo $prid?> >
+		<input type="hidden" name="codigo" value="<?php echo $codigo?>"> 
 		<input type=hidden name=func value=c>
 
 
@@ -167,7 +175,7 @@
 								{
 									
 									echo "<tr><td><label class=\"control-label\" >".$row['codigo_color']."</label></td>
-											  <td>&nbsp;&nbsp;</td><td>".$row['color']."</td></tr>";
+											  <td>&nbsp;&nbsp;</td><td><a href=/index.php?data=productos&op=inventario&prid=$prid&cid=".$row['color_id'].">".$row['color']."</a></td></tr>";
 								 //echo " <label class=\"control-label\" >".$row['color']." - ".$row['codigo']."</label>";
 
 

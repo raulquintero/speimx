@@ -20,7 +20,7 @@ foreach( $_GET as $key => $value )
 }
 
 
-if ($_GET['func']=="c")
+if ($_GET['func']=="c" && $_GET['color'])
 {
 	
 
@@ -40,32 +40,51 @@ $add_query = $database->insert( 'color', $color );
 $last_id = $database->lastid();
 
 
-$sku=sku13($_GET['color'].$last_id);
 
 
-$update = array(
 
+	$sku=sprintf('%04d', $last_id);
+	 $sku=$_GET['codigo'].$sku;
+
+
+	$update = array(
 	'codigo_color' => $sku
 	);
 
-//Add the WHERE clauses
-$where_clause = array(
+	//Add the WHERE clauses
+	$where_clause = array(
     'color_id' => $last_id
-);
+	);
 
 	$updated = $database->update( 'color', $update, $where_clause, 1 );
+
+
+
+
+
+// $sku=sku13($_GET['color'].$last_id);
+
+// $update = array(
+// 	'codigo_color' => $sku
+// 	);
+
+// //Add the WHERE clauses
+// $where_clause = array(
+//     'color_id' => $last_id
+// );
+
+// 	$updated = $database->update( 'color', $update, $where_clause, 1 );
 
 
 //echo "Location: /index.php?data=$data&op=$op&prid=$prid";
 
  header("Location: /index.php?data=$data&op=$op&prid=$prid");
 
+}
+else
+ header("Location: /index.php?data=$data&op=$op&prid=$prid");
 
 
-
-
-
-}				
 				
 if ($_GET['func']=="u")
 {

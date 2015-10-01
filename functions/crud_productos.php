@@ -59,7 +59,7 @@ if ($_GET['producto'])
 	//$sku=sku13($last_id);
 
 
-	$sku=sprintf('%05d', $last_id);
+	$sku=sprintf('%04d', $last_id);
 	$sku=$_GET['subcategoria_id'].$sku;
 
 
@@ -86,7 +86,8 @@ header($location);
 
 
 }				
-				
+	
+//************************************************************			
 if ($_GET['func']=="u")
 {
 
@@ -134,6 +135,5 @@ $where_clause = array(
 
 
 }
-
 
 ?>

@@ -38,19 +38,19 @@
 			
 			
 
-					<div><BR>
+					<div>
+					<form action="/index.php" method="get">
 							<table  width=100%  >
 				 			<tr bgcolor=#dddddd>
-				  			<td style="padding:15px">
+				  			<td style="padding:10px">
 
-					<form action="/index.php" method="get">
 							<input type=hidden name=data value=pos>
 							<input type=hidden name=op value=detalles>
 				  			 &nbsp;&nbsp;Codigo <input classe="input-xlarge focused" id="textcode" name="code" >
-				  		</form>
 				  			</td>
 				  		</tr>
 				  		</table>
+				  		</form>
 				  	</div>
 			
 		

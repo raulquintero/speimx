@@ -7,7 +7,7 @@
 						
 </div>
 						
-<div class="box span12">
+<div class="box span12 hidden-smartphone" >
 					<div class="box-header" data-original-title>
 						<h2><i class="halflings-icon barcode"></i><span class="break"></span>Productos</h2>
 						<div class="box-icon">
@@ -34,16 +34,16 @@
 						  </thead>   
 						  <tbody>
 
-<?php
+						<?php
 
-$query = "SELECT producto_id,producto,precio_compra,precio_contado,precio_credito,stock,proveedor,subcategoria FROM producto,proveedor,subcategoria 
-			where producto.proveedor_id=proveedor.proveedor_id AND producto.subcategoria_id=subcategoria.subcategoria_id";
-$results = $database->get_results( $query );
-foreach( $results as $row )
-{
+						$query = "SELECT producto_id,producto,precio_compra,precio_contado,precio_credito,stock,proveedor,subcategoria FROM producto,proveedor,subcategoria 
+								where producto.proveedor_id=proveedor.proveedor_id AND producto.subcategoria_id=subcategoria.subcategoria_id";
+								$results = $database->get_results( $query );
+						foreach( $results as $row )
+						{
 
 
-?>
+						?>
 							<tr>
 								<td class="center"><?php echo $row['producto_id']?></td>
 								<td><a href=index.php?data=productos&op=detalles&prid=<?=$row['producto_id']?>><?php echo strtoupper($row['producto'])?></a></td>
