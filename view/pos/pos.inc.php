@@ -182,12 +182,10 @@
 
 
 
-									
-								echo "<tr><td colspan=4 style=\"border-bottom:1px dotted black\">&nbsp;</td></tr>
-									<tr><td></td><td style='text-align:right'>Total</td>
-									<td style='text-align:right;boarder-top:2px solid;'>$". dinero($total_credito+$total_iva_credito)."</td></tr>";
-								echo "<tr><td></td><td style='text-align:right'>&nbsp;Incluye IVA(16%) por</td><td style='text-align:right;border-bottom:2px solid;'>".dinero($total_iva_credito)."</td></tr>";	
-								echo "<tr><td></td><td style='text-align:right'>&nbsp;<strong>Total</strong></td><td style='text-align:right;'><strong>".dinero($total_iva_credito+$total_credito)."</strong></td></tr>";	
+								echo "<tr><td><br></td></td>";									
+								// echo "<tr><td colspan=4 style=\"border-bottom:1px dotted black\">&nbsp;</td></tr><tr><td></td><td style='text-align:right'>Total</td><td style='text-align:right;boarder-top:2px solid;'>$". dinero($total_credito+$total_iva_credito)."</td></tr>";
+								// echo "<tr><td></td><td style='text-align:right'>&nbsp;Incluye IVA(16%) por</td><td style='text-align:right;border-bottom:2px solid;'>".dinero($total_iva_credito)."</td></tr>";	
+								echo "<tr><td></td><td style='text-align:right'>&nbsp;<strong>Total</strong></td><td style='text-align:right;border-top:1px solid black;'><strong>".dinero($total_iva_credito+$total_credito)."</strong></td></tr>";	
 								echo "<tr><td>&nbsp;</td></tr>";
 								echo "<tr><td></td><td style='text-align:right'>Saldo Actual</td><td style='text-align:right'>+ &nbsp;&nbsp; $ ".dinero($saldo)."</td></tr>";	
 								echo "<tr><td></td><td style='text-align:right;'>Saldo Total</td><td style='text-align:right;border-top:2px solid;'>$ ".dinero($saldo_total)."</td></tr>";	
@@ -215,11 +213,9 @@
 								if ($total_contado)
 									{
 								$total_iva_contado=$total_contado*.16;
-									echo "<tr><td>&nbsp;</td></tr>
-									<tr><td></td><td style='text-align:right'>Subtotal</td>
-									<td style='text-align:right'>$". dinero($total_contado+$total_iva_contado)."</td></tr>";
-									echo "<tr><td></td><td style='text-align:right'>Incluye IVA(16%) por</td>
-									<td style='text-align:right'>$". dinero($total_iva_contado)."</td></tr>";
+									echo "<tr><td><br></td></tr>";
+									// echo "<tr><td>&nbsp;</td></tr><tr><td></td><td style='text-align:right'>Subtotal</td><td style='text-align:right'>$". dinero($total_contado+$total_iva_contado)."</td></tr>";
+									// echo "<tr><td></td><td style='text-align:right'>Incluye IVA(16%) por</td><td style='text-align:right'>$". dinero($total_iva_contado)."</td></tr>";
 									echo "<tr><td></td><td style='text-align:right'>&nbsp;<strong>Total</strong></td>
 											<td style='text-align:right;text-align:right;border-top:2px solid;'><strong>".dinero($total_iva_contado+$total_contado)."</strong></td></tr>";	
 									
@@ -270,10 +266,10 @@
 			{
 				echo "<p> Tipo de Venta: <span class=\"label label-inverse\">Credito</span><br><br>
 					Cliente: <strong>$cliente</strong></p><br>
-					<table width=100%><tr>
-					<td style='text-align:right'>SubTotal:</td><td width=100 style='text-align:right'> $". dinero($total_credito+$total_iva_credito)."</td></tr>";
-								echo "<tr><td style='text-align:right'>&nbsp;Incluye IVA(16%) por</td><td style='text-align:right;border-bottom:2px solid;'>".dinero($total_iva_credito)."</td></tr>";	
-								echo "<tr><td style='text-align:right'>&nbsp;<strong>Total</strong></td><td style='text-align:right;'><strong>".dinero($total_iva_credito+$total_credito)."</strong></td></tr>";	
+					<table width=100%>";
+					//echo "<tr><td style='text-align:right'>SubTotal:</td><td width=100 style='text-align:right'> $". dinero($total_credito+$total_iva_credito)."</td></tr>";
+								// echo "<tr><td style='text-align:right'>&nbsp;Incluye IVA(16%) por</td><td style='text-align:right;border-bottom:2px solid;'>".dinero($total_iva_credito)."</td></tr>";	
+								echo "<tr><td style='text-align:right'>&nbsp;<strong>Total</strong></td><td width=120 style='text-align:right;'><strong>$ ".dinero($total_iva_credito+$total_credito)."</strong></td></tr>";	
 								echo "<tr><td>&nbsp;</td></tr>";
 								echo "<tr><td style='text-align:right'>Saldo Actual</td><td style='text-align:right'>+ $ ".dinero($saldo)."</td></tr>";	
 					echo "<tr><td style='text-align:right'>Saldo Nuevo:</td><td style='text-align:right;border-top:2px solid black;'> $ ". dinero($saldo_total)."</td></tr>";
@@ -289,13 +285,11 @@
 					<table  width=100%>";
 
 					$total_iva_contado=$total_contado*.16;
-									echo "<tr><td>&nbsp;</td></tr>
-									<tr><td>&nbsp;</td><td style='text-align:right'>Total</td>
-									<td style='text-align:right'>$". dinero($total_contado+$total_iva_contado)."</td></tr>";
-									echo "<tr><td>&nbsp;</td><td style='text-align:right'>Incluye IVA(16%) por</td>
-									<td style='text-align:right'>$". dinero($total_iva_contado)."</td></tr>";
+									echo "<tr><td>&nbsp;</td></tr>";
+									// echo "<tr><td>&nbsp;</td><td style='text-align:right'>Total</td><td style='text-align:right'>$". dinero($total_contado+$total_iva_contado)."</td></tr>";
+									// echo "<tr><td>&nbsp;</td><td style='text-align:right'>Incluye IVA(16%) por</td><td style='text-align:right'>$". dinero($total_iva_contado)."</td></tr>";
 									echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;<strong>Total</strong></td>
-											<td style='text-align:right;text-align:right;border-top:2px solid;'><strong>".dinero($total_iva_contado+$total_contado)."</strong></td></tr>";	
+											<td width=190 style='text-align:right;text-align:right;border-top:0px solid;'><h1> $ ".dinero($total_iva_contado+$total_contado)."</h1></td></tr>";	
 									
 									echo"</table>";
 

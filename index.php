@@ -428,6 +428,7 @@ header($location);
 								<li><a href="index.php?data=empresas"><i class="icon-road"></i><span class="hidden-tablet"> Empresas Nomina</span></a></li>
 								<li><a href="index.php?data=proveedores"><i class="icon-road"></i><span class="hidden-tablet"> Proveedores</span></a></li>
 								<li><a href="index.php?data=productos"><i class="icon-barcode"></i><span class="hidden-tablet"> Productos</span></a></li>
+								<li><a href="index.php?data=tallas"><i class="icon-barcode"></i><span class="hidden-tablet"> Tallas</span></a></li>
 							</ul>
 						</li>
 
