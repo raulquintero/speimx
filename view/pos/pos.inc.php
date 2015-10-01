@@ -93,7 +93,8 @@
 								<tr>
 									<td classes="center " height=30><span class="hide"><?php echo $codigo." ".$row['producto_id']?></span> <?php echo $row['codigo']?></td>
 									<td><a href=index.php?data=pos&op=detalles&prid=<?php echo $row['producto_id']?>&color=<?php echo $row['color_id']?>>
-										<?php echo strtoupper($row['producto'])?> </a></td>
+										<?php echo strtoupper($row['producto'])?> </a>
+										</td>
 									 <!-- <td><?php echo strtoupper($row['color'])?></td> --> 
 							<?php			
 									$precio_contadomasiva=($row['precio_contado']*.16)+$row['precio_contado'];					
@@ -154,7 +155,8 @@
 									foreach ($item as $row => $value) 
 									{
 										echo "<tr><td> 1 ".$item[$n]['id_hide']."</td> <td>
-											<a href=\"/index.php?data=pos&op=detalles&prid=".$item[$n]['id']."\">". substr($item[$n]['producto'],0,18)."...</a> ".$item[$n]['colores']."</td> 
+											<a href=\"/index.php?data=pos&op=detalles&prid=".$item[$n]['id']."\">". substr($item[$n]['producto'],0,18)."...</a> 
+											<br>".strtolower($item[$n]['color'])." ".strtoupper($item[$n]['talla'])."</td> 
 											<td style='text-align:right'>";
 											if ($cliente_id) echo dinero($item[$n]['precio_credito']+($item[$n]['precio_credito']*.16)); else echo dinero($item[$n]['precio_contado']+($item[$n]['precio_contado']*.16));
 											echo "</td><td><a href=\"/functions/cart.php?func=del_item&i=$n\" class=\"\">

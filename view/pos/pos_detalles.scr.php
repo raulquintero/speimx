@@ -4,20 +4,20 @@ $prid=(htmlspecialchars($_GET["prid"]));
 $code=(htmlspecialchars($_GET["code"]));
 
 
-if ($prid)
 
-	$cadena="producto_id='".$prid."'";
+	if ($prid)
+
+		$cadena="producto_id='".$prid."'";
 	else
 		if ($code)
 			$cadena="codigo='".$code."'";
 
-
-$query = "SELECT producto_id,producto,proveedor,precio_compra,precio_contado,precio_credito,precio_promocion,descuento,
-		marca,producto.codigo,producto.talla_id,talla,unidad,estilo,subcategoria FROM producto,proveedor,marca,talla,unidad,subcategoria 
-	WHERE producto.proveedor_id=proveedor.proveedor_id AND producto.marca_id=marca.marca_id AND producto.talla_id=talla.talla_id
-		AND producto.unidad_id=unidad.unidad_id AND producto.subcategoria_id=subcategoria.subcategoria_id AND ".$cadena;
-list( $producto_id,$producto,$proveedor,$precio_compra,$precio_contado,$precio_credito,$precio_promocion,$descuento,
-		$marca,$codigo, $talla_id, $talla,$unidad,$estilo,$subcategoria  ) = $database->get_row( $query );
+		$query = "SELECT producto_id,producto,proveedor,precio_compra,precio_contado,precio_credito,precio_promocion,descuento,
+			marca,producto.codigo,producto.talla_id,talla,unidad,estilo,subcategoria FROM producto,proveedor,marca,talla,unidad,subcategoria 
+			WHERE producto.proveedor_id=proveedor.proveedor_id AND producto.marca_id=marca.marca_id AND producto.talla_id=talla.talla_id
+			AND producto.unidad_id=unidad.unidad_id AND producto.subcategoria_id=subcategoria.subcategoria_id AND ".$cadena;
+		list( $producto_id,$producto,$proveedor,$precio_compra,$precio_contado,$precio_credito,$precio_promocion,$descuento,
+			$marca,$codigo, $talla_id, $talla,$unidad,$estilo,$subcategoria  ) = $database->get_row( $query );
 
 
 

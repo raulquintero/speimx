@@ -22,7 +22,27 @@ foreach( $_GET as $key => $value )
 
 
 
+$code=(htmlspecialchars($_GET["code"]));
 
+
+$cuantos=strlen($code);
+
+if ($cuantos==8){
+		$query = "SELECT color.color,producto.producto_id,producto,proveedor,precio_compra,precio_contado,precio_credito,
+		precio_promocion,descuento, marca,producto.codigo,inventariodet.codigo,producto.talla_id,talladet.talladet,unidad,estilo,subcategoria FROM producto,proveedor,marca,talla,
+		unidad,subcategoria,color,inventariodet,talladet WHERE producto.proveedor_id=proveedor.proveedor_id AND producto.marca_id=marca.marca_id 
+		AND producto.talla_id=talla.talla_id AND producto.unidad_id=unidad.unidad_id AND producto.subcategoria_id=subcategoria.subcategoria_id 
+		AND producto.producto_id=color.producto_id AND color.color_id=inventariodet.color_id AND inventariodet.talladet_id=talladet.talladet_id
+		AND inventariodet.codigo='$code'";
+
+		list( $color,$producto_id,$producto,$proveedor,$precio_compra,$precio_contado,$precio_credito,$precio_promocion,$descuento,
+			$marca,$codigo,$codigo_inventario ,$talla_id, $talla,$unidad,$estilo,$subcategoria  ) = $database->get_row( $query );
+
+
+		echo $location="Location: /functions/cart.php?func=add_item&prid=$producto_id&producto=$producto&marca=$marca&codigo=$codigo&codigo_inventario=$codigo_inventario
+		&talla=$talla&color=$color&precio_credito=$precio_credito&precio_contado=$precio_contado";
+header($location);
+}
 
 ?>
 
