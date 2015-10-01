@@ -1,4 +1,3 @@
-		<!-- start: Content **************************************************************************************************************************                  -->
 		<?php 
 			$cliente_id = $_SESSION['cliente_id'];
 
@@ -19,6 +18,7 @@
 					echo "<div class=\"alert alert-info\">
 		 			<a href=/functions/cart.php?func=del_cliente&cid=".$row['cliente_id']."><button type=\"button\" class=\"close\" >×</button></a>
 					<strong>Cliente: <a href=\"/index.php?data=clientes&op=detalles&h=1&cid=$cliente_id\" >".$cliente."</a></strong> <br><strong>Saldo: </strong>$ ". dinero($saldo)." 
+		<!-- start: Content **************************************************************************************************************************                  -->
 					<strong>Credito: </strong>$ ".dinero($credito)."<br><strong> Credito Total Disponible: </strong>$ ".dinero($credito-$saldo)."</div> ";
 						
 				} 
@@ -31,12 +31,8 @@
 
 
 			<div class="row-fluid condensed">
-
-					<div class="box-content span8 hidden-print" >
-
-
-			
-			
+		
+					<div class="box-content span8 hidden-print hidden-phone" >
 
 					<div>
 					<form action="/index.php" method="get">
@@ -57,10 +53,7 @@
 				
 				  		<div class="box-header " data-original-title>
 					  		<h2><i class="halflings-icon calendar"></i><span class="break"></span>Punto de Venta</h2>
-				  		</div><br>
-				  		<form>
-				  			Codigo: <input type=text size=10>
-				  		</form>
+				  		</div>
 						<table class="table table-striped table-bordered bootstrap-datatable datatable">
 						  <thead>
 							  <tr>
@@ -120,8 +113,23 @@
 					</div>
 
 
-					<div class="box span4" style='border:1px dotted'>
+					<div class="box span4" style='border-left:1px dotted'>
 						
+<div class="hidden-desktop">
+					<form action="/index.php" method="get">
+							<table  width=100%  >
+				 			<tr bgcolor=#dddddd>
+				  			<td style="padding:10px">
+
+							<input type=hidden name=data value=pos>
+							<input type=hidden name=op value=detalles>
+				  			 &nbsp;&nbsp;Codigo <input classe="input-xlarge focused" id="textcode" name="code" >
+				  			</td>
+				  		</tr>
+				  		</table>
+				  		</form>
+				  	</div>
+
 						<table width=100% >
 							<tr>
 								<td style='text-align:center;border-bottom:1px dotted black' colspan=4>

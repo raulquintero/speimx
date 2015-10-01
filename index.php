@@ -534,7 +534,7 @@ header($location);
 	 -->
 	<div class="clearfix"></div>
 	
-	<footer>
+	<footer class="hidden-print">
 
 		<p>
 			<span style="text-align:left;float:left">&copy; 2010 Tienda de Ropa Alberto's</span>
