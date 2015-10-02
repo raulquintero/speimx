@@ -3,7 +3,7 @@
 	 $prid=(htmlspecialchars($_GET["prid"]));
 	 $f=(htmlspecialchars($_GET["f"]));
 	 if ($f=="editar")
-	 	$title="Editar Producto [$prid]";
+	 	$title="Editar Producto ";
 	 		else
 	 	$title="Agregar Producto";
 
@@ -35,7 +35,7 @@
 			<div class="row-fluid">
 				<div class="box  span12">
 					<div class="box-header" data-original-title>
-						<h2><i class="halflings-icon edit"></i><span class="break"></span><?=$title?></h2>
+						<h2><i class="halflings-icon edit"></i><span class="break"></span><?=$title." ".$codigo?></h2>
 						<div class="box-icon">
 							
 							<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>

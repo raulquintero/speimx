@@ -1,5 +1,6 @@
 <?php
 $func=$_GET['func'];
+$sku=htmlspecialchars ($_GET['codigo_inventario']);
 $i=$_GET['i'];
 if (!$i) $i=0;
 
@@ -22,6 +23,7 @@ if ($func=="add_item")
                 'precio_contado'   => $_GET['precio_contado'],
                 'producto'    => $_GET['producto'],
                 'codigo' => $_GET['codigo'],
+                'sku' => $sku,
                 'color'    => $_GET['color'],
                 'talla'    => $_GET['talla']
             );
@@ -72,8 +74,8 @@ if ($func=="del_cliente")
 
 
 
-// echo "<br><br>array: <br>";
-  //   print_r($item);
+ //echo "<br><br>array: <br>";
+    // print_r($item);
 
 
   //echo "<br><br>array: <br>";

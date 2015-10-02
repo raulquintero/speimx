@@ -23,9 +23,9 @@
 								  <th>ID</th>
 								  <th>Producto</th>
 								  <th>Subcategoria</th>
-								  <th>Precio Compra</th>
-								  <th>Precio Contado</th>
-								  <th>Precio Credito</th>
+								  <th>PCM</th>
+								  <th>PCN</th>
+								  <th>PCR</th>
 								  <th>Stock</th>
 								  <th>Proveedor</th>
 								  <th>Acciones</th>
@@ -36,7 +36,7 @@
 
 						<?php
 
-						$query = "SELECT producto_id,producto,precio_compra,precio_contado,precio_credito,stock,proveedor,subcategoria FROM producto,proveedor,subcategoria 
+						$query = "SELECT producto_id,producto,precio_compra,precio_contado,precio_credito,stock,proveedor,subcategoria,codigo FROM producto,proveedor,subcategoria 
 								where producto.proveedor_id=proveedor.proveedor_id AND producto.subcategoria_id=subcategoria.subcategoria_id";
 								$results = $database->get_results( $query );
 						foreach( $results as $row )
@@ -45,7 +45,7 @@
 
 						?>
 							<tr>
-								<td class="center"><?php echo $row['producto_id']?></td>
+								<td class="center"><?php echo $row['codigo']?></td>
 								<td><a href=index.php?data=productos&op=detalles&prid=<?=$row['producto_id']?>><?php echo strtoupper($row['producto'])?></a></td>
 								<td class="center"><?php echo $row['subcategoria']?></td>
 								<td class="center"><?php echo $row['precio_compra']?></td>
@@ -129,7 +129,7 @@
 													<button class="btn btn-primary"><i class="halflings-icon white edit"></i></button></a>
 
 									<a href="index.php?data=clientes&op=subirfoto&cid=<?php echo $producto_id?>">
-											<button class="btn btn-info"><i class="halflings-icon white th-list"></i></button></a><br>
+											<button class="btn btn-info hidden"><i class="halflings-icon white th-list"></i></button></a><br>
 									<!-- <a class="btn btn-danger" href="#">
 										<i class="halflings-icon white trash"></i> 
 									</a> -->

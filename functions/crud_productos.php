@@ -1,4 +1,4 @@
-<?php
+http://speimx.dev/index.php?data=productos&op=producto_form&f=editar&prid=6<?php
 
 
 include '../config/config.php';
@@ -127,8 +127,7 @@ $where_clause = array(
 // //Output errors if they exist for the update query
 //$database->display( $updated );
 
-	header("Location: /index.php?data=$data&op=detalles&prid=$prid&eed=1");
-
+	header("Location: /index.php?data=$data&op=producto_form&f=editar&prid=$prid&eed=1");
 
 
 
