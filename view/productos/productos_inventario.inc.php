@@ -37,7 +37,7 @@
 			<div class="row-fluid">
 				<div class="box  span12">
 					<div class="box-header" data-original-title>
-						<h2><i class="halflings-icon edit"></i><span class="break"></span><strong><?php echo strtoupper($producto)?> [<?php echo $codigo?>]</strong></h2>
+						<h2><i class="halflings-icon edit"></i><span class="break"></span><strong><a href="/index.php?data=productos&op=producto_form&f=editar&prid=<?php echo $prid?>"><?php echo strtoupper($producto)?> [<?php echo $codigo?>]</a></strong></h2>
 							<div class="box-icon">
 							
 							<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
@@ -144,9 +144,17 @@
 						<table>
 
 							  <?php
-
+							  if (!$color_id)
+							  		echo	"<div class=\"alert alert-warning\">
+										<button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
+										<strong>Aviso:</strong> No se ha especificado un color .
+										</div>";
+							  	else
 							 if (!$talla_id)
-							 	echo "Es necesario asignar una talla a este producto";
+							 	echo	"<div class=\"alert alert-warning\">
+										<button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
+										<strong>Aviso:</strong> Es necesario asignar un esquema de tallas a este productos.
+										</div>";
 							 else
 							 {
 							  	if (!$color_id) $color_id=0;

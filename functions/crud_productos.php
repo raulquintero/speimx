@@ -1,4 +1,4 @@
-http://speimx.dev/index.php?data=productos&op=producto_form&f=editar&prid=6<?php
+<?php
 
 
 include '../config/config.php';
@@ -56,7 +56,7 @@ if ($_GET['producto'])
 {
 	$add_query = $database->insert( 'producto', $registro );
 	$last_id = $database->lastid();
-	$location="Location: /index.php?data=$data&op=detalles&prid=$last_id&eed=2";
+	$location="Location: /index.php?data=$data&op=producto_form&f=editar&prid=$last_id&eed=2";
 
 	//$sku=sku13($last_id);
 
@@ -83,7 +83,6 @@ else
 		$location="Location: /index.php?data=$data&op=producto_form&f=agregar&eed=3";
 
 header($location);
-
 
 
 }				

@@ -26,6 +26,21 @@
 		$queryWhere="";
 	 }
 
+ 
+if ($_GET['eed']==1)
+	 			echo	"<div class=\"alert alert-success\">
+							<button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
+							<strong>Registro Actualizado!</strong> Se han grabado los cambios.
+						</div>";
+
+if ($_GET['eed']==2)
+	 			echo	"<div class=\"alert alert-success\">
+							<button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
+							<strong>Registro Agregado!</strong> El Registro $cid esta listo para usarse.
+						</div>";
+
+
+
 
 	 		if ($f=="editar")
 			echo "<p><a href=\"/index.php?data=$data&op=inventario&prid=$prid\" ><button class=\"btn btn-small btn-primary\">Editar Inventario</button></a></p>"
