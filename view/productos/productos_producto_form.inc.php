@@ -3,7 +3,7 @@
 	 $prid=(htmlspecialchars($_GET["prid"]));
 	 $f=(htmlspecialchars($_GET["f"]));
 	 if ($f=="editar")
-	 	$title="Editar Producto ";
+	 	$title="Editar Producto [$prid]";
 	 		else
 	 	$title="Agregar Producto";
 
@@ -22,24 +22,13 @@
 		if (!$activo) $checado="";
 		if (!$inventariable) $checado_inv="";
 
+		$precio_compra=dinero($precio_compra*1.16);
+		$precio_contado=dinero($precio_contado*1.16);
+		$precio_credito=dinero($precio_credito*1.16);
+
 
 		$queryWhere="";
 	 }
-
- 
-if ($_GET['eed']==1)
-	 			echo	"<div class=\"alert alert-success\">
-							<button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
-							<strong>Registro Actualizado!</strong> Se han grabado los cambios.
-						</div>";
-
-if ($_GET['eed']==2)
-	 			echo	"<div class=\"alert alert-success\">
-							<button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
-							<strong>Registro Agregado!</strong> El Registro $cid esta listo para usarse.
-						</div>";
-
-
 
 
 	 		if ($f=="editar")
@@ -50,7 +39,7 @@ if ($_GET['eed']==2)
 			<div class="row-fluid">
 				<div class="box  span12">
 					<div class="box-header" data-original-title>
-						<h2><i class="halflings-icon edit"></i><span class="break"></span><?=$title." ".$codigo?></h2>
+						<h2><i class="halflings-icon edit"></i><span class="break"></span><?=$title?></h2>
 						<div class="box-icon">
 							
 							<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
@@ -129,7 +118,7 @@ if ($_GET['eed']==2)
 							  <div class="control-group">
 								<label class="control-label" >Precio Compra</label>
 								<div class="controls">
-								  <input class="input-small" id="precio_compra" name="precio_compra" type="text" value="<?php echo $precio_compra?>"> <?php echo dinero($precio_compra+($precio_compra*.16))?>
+								  <input class="input-small" id="precio_compra" name="precio_compra" type="text" value="<?php echo $precio_compra?>"> <?php echo dinero($precio_compra/1.16)?>
 								</div>
 							  </div>
 							  
@@ -137,14 +126,14 @@ if ($_GET['eed']==2)
 							<div class="control-group">
 							  <label class="control-label" for="precio_contado">Precio Contado</label>
 							  <div class="controls">
-								<input type="text" class="input-small" id="precio_contado" name="precio_contado" value="<?php echo $precio_contado?>"> <?php echo dinero($precio_contado+($precio_contado*.16))?>
+								<input type="text" class="input-small" id="precio_contado" name="precio_contado" value="<?php echo $precio_contado?>"> <?php echo dinero($precio_contado/1.16)?>
 							  </div>
 							</div>
 
 							  <div class="control-group">
 								<label class="control-label" >Precio Credito</label>
 								<div class="controls">
-								  <input class="input-small" id="precio_credito" name="precio_credito" type="text" value="<?php echo $precio_credito?>"> <?php echo dinero($precio_credito+($precio_credito*.16))?>
+								  <input class="input-small" id="precio_credito" name="precio_credito" type="text" value="<?php echo $precio_credito?>"> <?php echo dinero($precio_credito/1.16)?>
 								</div>
 							  </div>
 							  

@@ -27,7 +27,12 @@ if ($_GET['func']=="c")
 $eed=1;
 // echo "<br><br>";          // ********DEBUG**********
 // foreach ($_GET as $k => $v) { echo "<br>[$k] => $v \n";}
+		
 
+
+		$precio_compra=$_GET['precio_compra']/1.16;
+		$precio_contado=$_GET['precio_contado']/1.16;
+		$precio_credito=$_GET['precio_credito']/1.16;
 
 //The fields and values to insert
 	$registro = array(
@@ -36,9 +41,9 @@ $eed=1;
 	'producto'=>$_GET['producto'],
 	'codigo'=>$_GET['producto'],
 	'subcategoria_id'=>$_GET['subcategoria_id'],
-	'precio_compra'=>$_GET['precio_compra'],
-	'precio_contado'=>$_GET['precio_contado'],
-	'precio_credito'=>$_GET['precio_credito'],
+	'precio_compra'=>$precio_compra,
+	'precio_contado'=>$precio_contado,
+	'precio_credito'=>$precio_credito,
 	'precio_promocion'=>$_GET['precio_promocion'],
 	'descuento'=>$_GET['descuento'],
 	'proveedor_id'=>$_GET['proveedor_id'],
@@ -56,7 +61,7 @@ if ($_GET['producto'])
 {
 	$add_query = $database->insert( 'producto', $registro );
 	$last_id = $database->lastid();
-	$location="Location: /index.php?data=$data&op=producto_form&f=editar&prid=$last_id&eed=2";
+	$location="Location: /index.php?data=$data&op=detalles&prid=$last_id&eed=2";
 
 	//$sku=sku13($last_id);
 
@@ -85,6 +90,7 @@ else
 header($location);
 
 
+
 }				
 	
 //************************************************************			
@@ -95,14 +101,19 @@ if ($_GET['func']=="u")
  //foreach ($_GET as $k => $v) { echo "<br>[$k] => $v \n";}
 
 
+
+		$precio_compra=$_GET['precio_compra']/1.16;
+		$precio_contado=$_GET['precio_contado']/1.16;
+		$precio_credito=$_GET['precio_credito']/1.16;
+
 $update = array(
 
 	'activo'=>$_GET['activo'],
 	'producto'=>$_GET['producto'],
 	'subcategoria_id'=>$_GET['subcategoria_id'],
-	'precio_compra'=>$_GET['precio_compra'],
-	'precio_contado'=>$_GET['precio_contado'],
-	'precio_credito'=>$_GET['precio_credito'],
+	'precio_compra'=>$precio_compra,
+	'precio_contado'=>$precio_contado,
+	'precio_credito'=>$precio_credito,
 	'precio_promocion'=>$_GET['precio_promocion'],
 	'descuento'=>$_GET['descuento'],
 	'proveedor_id'=>$_GET['proveedor_id'],
@@ -126,7 +137,8 @@ $where_clause = array(
 // //Output errors if they exist for the update query
 //$database->display( $updated );
 
-	header("Location: /index.php?data=$data&op=producto_form&f=editar&prid=$prid&eed=1");
+	header("Location: /index.php?data=$data&op=detalles&prid=$prid&eed=1");
+
 
 
 

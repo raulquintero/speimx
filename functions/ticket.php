@@ -16,7 +16,7 @@ $database = new DB();
 				echo "<table   width=100%>
 						<tr>
 							<td style='text-align:center;border-bottom:1px dotted black' colspan=4>
-								<br><strong>Tienda de Ropa Alberto's</strong>
+								<br><strong>Tiendas Alberto</strong>
 								<br>R.F.C QURC750708PM7
 								<br>Av. Presa Lopez Zamora #1501 <br>Col. Venustiano Carranza<br>
 								<br>";
@@ -60,10 +60,10 @@ $database = new DB();
 						if ($tipomov_id==3) echo dinero($item['precio_credito']+($item['precio_credito']*.16)); else echo dinero($item['precio_contado']+($item['precio_contado']*.16));
 					
 						echo "</td>";
-						if ($item['tipomov_id']==2 )
-							echo "<td></td>";
-						else
+						if ($item['tipomov_id']==2 || $item['tipomov_id']==3 )
 							echo "<td style='text-align:right;vertical-align:text-top'><a href=\"#\" class=\"btn btn-info blue btn-setting\">Devolucion</a></td> ";
+						else
+							echo "<td></td>";
 						echo"</tr>";
 										
 						$total_credito+=$item['precio_credito'];
@@ -113,7 +113,14 @@ $database = new DB();
 							<td style='text-align:right;vertical-align:text-top'>";
 							echo dinero($item['precio_contado']);
 					
-						echo "</td></tr>";
+						echo "</td>";
+
+						if ($item['tipomov_id']==2 || $item['tipomov_id']==3 )
+							echo "<td></td>";
+						else
+							echo "	<td style='text-align:right;vertical-align:text-top'><a href=\"#\" class=\"btn btn-info blue btn-setting\">Devolucion</a></td> ";
+
+						echo "</tr>";
 										
 						$total_credito+=$item['precio_credito'];
 						$total_contado+=$item['precio_contado'];
@@ -125,18 +132,17 @@ $database = new DB();
 
 						$total_iva_contado=$total_contado*.16;
 						echo "<tr>
-								<td></td><td>&nbsp;</td></tr>
+								<td>&nbsp;</td></tr>
 				  			<tr>
-				  				<td></td><td stsyle='text-align:right'>Subtotal</td>
+				  				<td></td><td style='text-align:right'>Subtotal</td>
 							<td style='text-align:right'>$". dinero($total_contado+$total_iva_contado)."</td></tr>";
 						echo "<tr><td></td><td style='text-align:right'>Inclue IVA(16%) por:</td>
 							<td style='text-align:right'>$". dinero($total_iva_contado)."</td></tr>";
 						echo "<tr><td></td><td style='text-align:right'>&nbsp;<strong>Total</strong></td>
 							<td style='text-align:right;text-align:right;border-top:2px solid;'><strong>".dinero($total_iva_contado+$total_contado)."</strong></td></tr>";	
 									
-
-									
-									}
+								
+							}
 					
 				echo "</table>";
 
