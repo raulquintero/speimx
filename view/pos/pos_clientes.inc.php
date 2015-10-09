@@ -1,6 +1,22 @@
 
 						
 <div class="box span12">
+
+					<div>
+					<form action="/index.php" method="get">
+							<table  width=100%  >
+				 			<tr bgcolor=#dddddd>
+				  			<td style="padding:10px">
+
+							<input type=hidden name=data value=pos>
+							<input type=hidden name=op value=detalles>
+				  			 &nbsp;&nbsp;Cliente Id <input classe="input-xlarge focused" id="textcode" name="code" >
+				  			</td>
+				  		</tr>
+				  		</table>
+				  		</form>
+				  	</div>
+
 					<div class="box-header" data-original-title>
 						<h2><i class="halflings-icon user"></i><span class="break"></span>Seleccione Cliente</h2>
 						<div class="box-icon">

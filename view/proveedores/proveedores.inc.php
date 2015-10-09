@@ -32,7 +32,7 @@
 
 <?php
 
-$query = "SELECT proveedor_id, rfc, proveedor, contacto, telefono, email FROM proveedor where proveedor_id>0  ";
+$query = "SELECT proveedor_id, rfc, proveedor, contacto, telefono, email FROM proveedor where proveedor_id>=0  ";
 $results = $database->get_results( $query );
 foreach( $results as $row )
 {

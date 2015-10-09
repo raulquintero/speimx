@@ -81,7 +81,7 @@ if($cliente_id)
 	<div class="documento">
 		<p>En <strong>Tiendas Alberto</strong> estamos interesados en apoyar la economia de las familias mexicalenses, en convenio 
 		con <strong><?php echo $empresa?></strong> reconociendo  a sus exelentes empleados, les ofrece este 
-		 <strong>CREDITO PRE APROBADO</strong> por la cantidad de:<br>    
+		 <strong style="backgorund:red;">CREDITO PRE APROBADO</strong> por la cantidad de:<br>    
 		<center><h1><br><strong>$ 3 000.00 MXN</strong></h1></center>
 		   <!-- para la adquision de productos en Tiendas Alberto. -->
 		   </p>

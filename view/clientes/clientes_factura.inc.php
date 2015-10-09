@@ -1,7 +1,25 @@
 <div class="box span12">
+
+					<div>
+					<form action="/index.php" method="get">
+							<table  width=100%  >
+				 			<tr bgcolor=#dddddd>
+				  			<td style="padding:10px">
+
+							<input type=hidden name=data value=pos>
+							<input type=hidden name=op value=detalles>
+							<input type=hidden name=type value=dev>
+				  			 &nbsp;&nbsp;item <input classe="input-xlarge focused" id="textcode" name="code" >
+				  			</td>
+				  		</tr>
+				  		</table>
+				  		</form>
+				  	</div>
+
+
 		<div class="row-fluid condensed">	
 
-				<div class="box span6">
+				<div class="box span4">
 					<div class="box-header">
 						<h2><i class="halflings-icon align-justify"></i><span class="break"></span>Nota de Venta</h2>
 						<div class="box-icon">
@@ -22,12 +40,17 @@
 				</div>
 
 
-				<div class="box span6">
+				<div class="box span4">
 
 							  		<?php view_devoluciones($_GET['fid'])?>
 					
 				</div><!--/span-->
 
+				<div class="box span4">
+
+							  		<?php ticket_devolucion($_GET['fid'])?>
+					
+				</div><!--/span-->
 
 
 

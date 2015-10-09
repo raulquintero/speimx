@@ -81,13 +81,13 @@ $database = new DB();
 
 }
 
-function productos($proveedor_id,$subcat)
+function productos($proveedor_id,$subcat,$pid)
 {
 $database = new DB();
 echo "<div class=\"box-header\">
 						<h2><i class=\"halflings-icon align-justify\"></i><span class=\"break\"></span>Productos</h2>
 						<div class=\"box-icon\">
-							<a href=\"#\" class=\"btn-setting\"><i class=\"halflings-icon wrench\"></i></a>
+							<a href=\"/index.php?data=productos&op=producto_form&f=agregar&pid=$pid&subcat=$subcat\" classe=\"btn-setting\"><i class=\"halflings-icon plus\"></i></a>
 							<a href=\"#\" class=\"btn-minimize\"><i class=\"halflings-icon chevron-up\"></i></a>
 							<a href=\"#\" class=\"btn-close\"><i class=\"halflings-icon remove\"></i></a>
 						</div>

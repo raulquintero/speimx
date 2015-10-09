@@ -163,7 +163,7 @@ if ($_GET['eed']==2)
 				  		 <?php
 
 							  		 if ($_GET['subcat'])
-							  		 productos($prid,$_GET['subcat']); 
+							  		 productos($prid,$_GET['subcat'],$_GET['pid']); 
 							  			else
 							  			movimientos($prid);
 									 ?>

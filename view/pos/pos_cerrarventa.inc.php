@@ -2,7 +2,6 @@
 			//$cid = $_SESSION['cliente_id'];
 
 			$fid=$_GET['fid'];
-
 		
 
 
@@ -10,7 +9,7 @@
 				{
 					$query = "SELECT cliente.cliente_id,apellidop, apellidom, nombre, credito, saldo,total_ultimo,factura.fecha, abono,factura_id,
 							tipomov_id,fecha,saldo_actual,saldo_total,ticket  FROM cliente,factura 
-						WHERE  factura.cliente_id=cliente.cliente_id AND factura.factura_id=".$fid;
+						WHERE  factura.cliente_id=cliente.cliente_id AND factura.factura_id='".$fid."'";
 					list( $cliente_id,$apellidop,$apellidom,$nombre,$credito, $saldo, $total_ultimo, $fecha_factura,$abono, $factura_id,
 							 $tipomov_id,$fecha_factura,$saldo_actual,$saldo_total,$ticket  ) = $database->get_row( $query );
 	 					$cliente= $apellidop." ".$apellidom." ".$nombre;
@@ -27,28 +26,40 @@
 		?>
 
 
-<div class="box-content span12">
+<div class="box-content span12" >
 
-					<div class="box span4" style='border:1px dotted'>
+					<div class=" span4" styles='border:1px dotted'>
 						
 				
-						<?php getticket($factura_id);?>
+						<?php 
+						if ($factura_id)
+						{
+							getticket($factura_id);
+				
+							echo "<br><Br>
 
-
-					<br><Br>
-
-					<center>
-					_______________________<br>
-					<?php echo strtoupper($nombre_completo)?></center>
-					<center><br><br>
-						 http://tiendasalberto.com<br>
+							<center>
+							_______________________<br>";
+							echo strtoupper($nombre_completo);
+							echo "</center>
+							<center><br><br>
+						 	http://tiendasalberto.com<br>";
 						 
-						 <?php echo $ticket ?><br>
-						</center>
-						<br><Br>
+						 	echo $ticket;
+						 	echo "<br>
+							</center>
+							<br><Br>";
+						}
+					
+
+
+
+						else
+							echo "<div class=\"alert alert-error \">
+							AVISO: No se genero la nota de venta.</div> ";
 						
-   				
-				
+						;?>
+
 
 						<div class="clearfix">
 						</div>

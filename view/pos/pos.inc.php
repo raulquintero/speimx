@@ -1,3 +1,4 @@
+		<!-- start: Content **************************************************************************************************************************                  -->
 		<?php 
 			$cliente_id = $_SESSION['cliente_id'];
 
@@ -15,10 +16,9 @@
 	 		
 
 						
-					echo "<div class=\"alert alert-info\">
+					echo "<div class=\"alert alert-info \">
 		 			<a href=/functions/cart.php?func=del_cliente&cid=".$row['cliente_id']."><button type=\"button\" class=\"close\" >×</button></a>
 					<strong>Cliente: <a href=\"/index.php?data=clientes&op=detalles&h=1&cid=$cliente_id\" >".$cliente."</a></strong> <br><strong>Saldo: </strong>$ ". dinero($saldo)." 
-		<!-- start: Content **************************************************************************************************************************                  -->
 					<strong>Credito: </strong>$ ".dinero($credito)."<br><strong> Credito Total Disponible: </strong>$ ".dinero($credito-$saldo)."</div> ";
 						
 				} 
@@ -32,9 +32,9 @@
 
 			<div class="row-fluid condensed">
 		
-					<div class="box-content span8 hidden-print hidden-phone" >
+					<div class="box-content span8  hidden-phone" >
 
-					<div>
+					<div class="hidden-print">
 					<form action="/index.php" method="get">
 							<table  width=100%  >
 				 			<tr bgcolor=#dddddd>
@@ -42,7 +42,8 @@
 
 							<input type=hidden name=data value=pos>
 							<input type=hidden name=op value=detalles>
-				  			 &nbsp;&nbsp;Codigo <input classe="input-xlarge focused" id="textcode" name="code" >
+							<input type=hidden name=type value=item>
+				  			 &nbsp;&nbsp;Item <input class="input-large" id="textcode" name="code" >
 				  			</td>
 				  		</tr>
 				  		</table>
@@ -113,7 +114,7 @@
 					</div>
 
 
-					<div class="box span4" style='border-left:1px dotted'>
+					<div class="boxi span4" styles='border-left:1px dotted'>
 						
 <div class="hidden-desktop">
 					<form action="/index.php" method="get">
@@ -136,18 +137,15 @@
 									<br>Tiendas Alberto
 									<br>R.F.C QURC750708PM7
 									<br>Av. Presa Lopez Zamora #1501 <br>Col. Venustiano Carranza<br>
-								</td><tr><td align=center colspan=4>	
+								</td></tr>
 									<?php
 										if ($cliente_id)
-											echo "Tipo de Venta: <span class=\"label label-inverse\">Credito</span><br>";
+											echo "<tr><td align=center style=\"border-bottom:1px dotted black\" colspan=4>Tipo de Venta: <span class=\"label label-inverse\">Credito</span><br></td></tr>";
 										else
-										echo "<br>"; //Tipo de Venta: <span class=\"label label-inverse\">Contado</span><br><br>";
+										echo "<tr><td align=center style=\"border-bottom:1px  black\" colspan=4><br></td></tr>"; //Tipo de Venta: <span class=\"label label-inverse\">Contado</span><br><br>";
 
 									?>
 
-								</td>
-							</tr>
-							<tr> <td style="border-top:1px dotted black" colspan=4>&nbsp;<br></td> </tr>
 
 
 							<?php 
@@ -162,8 +160,8 @@
 									$total=0;
 									foreach ($item as $row => $value) 
 									{
-										echo "<tr><td> 1 ".$item[$n]['id_hide']."</td> <td>
-											<a href=\"/index.php?data=pos&op=detalles&prid=".$item[$n]['id']."\">". substr($item[$n]['producto'],0,18)."...</a> 
+										echo "<tr><td> 1 @  ".$item[$n]['id_hide']."</td> <td>
+											<a href=\"/index.php?data=pos&op=detalles&prid=".$item[$n]['id']."\">".$item[$n]['sku']."<br>". substr($item[$n]['producto'],0,23)."...</a> 
 											<br>".strtolower($item[$n]['color'])." ".strtoupper($item[$n]['talla'])."</td> 
 											<td style='text-align:right'>";
 											if ($cliente_id) echo dinero($item[$n]['precio_credito']+($item[$n]['precio_credito']*.16)); else echo dinero($item[$n]['precio_contado']+($item[$n]['precio_contado']*.16));

@@ -24,12 +24,15 @@ foreach( $_GET as $key => $value )
 
 $code=(htmlspecialchars($_GET["code"]));
 
+$type=(htmlspecialchars($_GET["type"]));
 
-$cuantos=strlen($code);
+switch ($type) {
+	case 'item':
+		$cuantos=strlen($code);
+		if ($cuantos==8){
 
-if ($cuantos==8){
 		$query = "SELECT color.color,producto.producto_id,producto,proveedor,precio_compra,precio_contado,precio_credito,
-		precio_promocion,descuento, marca,producto.codigo,inventariodet.codigo,producto.talla_id,talladet.talladet,unidad,estilo,subcategoria FROM producto,proveedor,marca,talla,
+		precio_promocion,descuento, marca,producto.codigo,inventariodet.codigo as codigo_inventario,producto.talla_id,talladet.talladet,unidad,estilo,subcategoria FROM producto,proveedor,marca,talla,
 		unidad,subcategoria,color,inventariodet,talladet WHERE producto.proveedor_id=proveedor.proveedor_id AND producto.marca_id=marca.marca_id 
 		AND producto.talla_id=talla.talla_id AND producto.unidad_id=unidad.unidad_id AND producto.subcategoria_id=subcategoria.subcategoria_id 
 		AND producto.producto_id=color.producto_id AND color.color_id=inventariodet.color_id AND inventariodet.talladet_id=talladet.talladet_id
@@ -39,10 +42,27 @@ if ($cuantos==8){
 			$marca,$codigo,$codigo_inventario ,$talla_id, $talla,$unidad,$estilo,$subcategoria  ) = $database->get_row( $query );
 
 
-		echo $location="Location: /functions/cart.php?func=add_item&prid=$producto_id&producto=$producto&marca=$marca&codigo=$codigo&codigo_inventario=$codigo_inventario
+		 $location="Location: /functions/cart.php?func=add_item&prid=$producto_id&producto=$producto&marca=$marca&codigo=$codigo&codigo_inventario=$codigo_inventario
 		&talla=$talla&color=$color&precio_credito=$precio_credito&precio_contado=$precio_contado";
-header($location);
+		//if ($codigo_inventario)
+		header($location);
+		}
+		break;
+	
+	case 'dev':
+		# code...
+		break;
+
+	default:
+		# code...
+		break;
 }
+
+echo $type;
+//exit();
+
+
+
 
 ?>
 
@@ -90,7 +110,8 @@ header($location);
 		
 	<script type="text/javascript">
 	function setFocusToTextBox(){
-		document.getElementById('textcode').focus();
+		$('#textcode').focus();
+		//document.getElementById('textcode').focus();
 	}
 	</script>	
 </head>
@@ -405,15 +426,15 @@ header($location);
 
 			<!-- start: Main Menu -->
 
-			<div id="sidebar-left" class="span2">
+			<div id="sidebar-left" class="span2 hidden-print">
 				<div class="nav nav-collapse  sidebar-nav">
 					<ul class="nav nav-tabs nav-stacked main-menu">
-						<li><a href="index.html"><i class="icon-bar-chart"></i><span class="hidden-tablet"> Dashboard</span></a></li>	
-						<li><a href="index.php?data=mensajes"   ><i class="icon-envelope"></i><span class="hidden-tablet"> Messages</span></a></li>
-						<li><a href="index.php?data=pos"        ><i class="icon-shopping-cart" ></i><span class="hidden-tablet"> PoS</span></a></li>
+						<li><a href="index.html"><i class="icon-bar-chart hidden-print"></i><span class="hidden-tablet hidden-print"> Dashboard</span></a></li>	
+						<li><a href="index.php?data=mensajes"   ><i class="icon-envelope hidden-print"></i><span class="hidden-tablet hidden-print"> Messages</span></a></li>
+						<li><a href="index.php?data=pos"        ><i class="icon-shopping-cart hidden-print" ></i><span class="hidden-tablet hidden-print"> PoS</span></a></li>
 
 						<li>
-							<a class="dropmenu" href="#"><i class="icon-chevron-right">   </i><span class="hidden-tablet"> Sistema </span><span class="label label-important"> 2 </span></a>
+							<a class="dropmenu" href="#"><i class="icon-chevron-right hidden-print"></i><span class="hidden-tablet hidden-print"> Sistema </span><span class="label label-important"> 2 </span></a>
 							<ul>
 								
 								<li><a href="index.php?data=clientes&op=devoluciones"><i class="icon-book"    ></i><span class="hidden-tablet"> Devoluciones</span></a></li>
@@ -422,7 +443,7 @@ header($location);
 							</ul>
 						</li>
 						<li>
-							<a class="dropmenu" href="#"><i class="icon-chevron-right">   </i><span class="hidden-tablet"> Captura </span><span class="label label-important"> 4 </span></a>
+							<a class="dropmenu" href="#"><i class="icon-chevron-right hidden-print">   </i><span class="hidden-tablet hidden-print"> Captura </span><span class="label label-important"> 4 </span></a>
 							<ul>
 								<li><a href="index.php?data=clientes"><i class="icon-group"></i><span class="hidden-tablet"> Clientes</span></a></li>
 								<li><a href="index.php?data=empresas"><i class="icon-road"></i><span class="hidden-tablet"> Empresas Nomina</span></a></li>
@@ -432,7 +453,7 @@ header($location);
 							</ul>
 						</li>
 
-						<li><a href="index.php?data=agenda"><i class="icon-calendar"></i><span class="hidden-tablet"> Agenda</span></a></li>
+						<li><a href="index.php?data=agenda"><i class="icon-calendar hidden-print"></i><span class="hidden-tablet hidden-print"> Agenda</span></a></li>
 					</ul>
 				</div>
 			</div>
@@ -452,7 +473,7 @@ header($location);
 
 
 			<!-- start: Content -->
-			<div id="content" class="span10">
+			<div id="content" class="span10 ">
 			
 <?php
 	$data=(htmlspecialchars($_GET["data"]));
@@ -462,11 +483,11 @@ header($location);
 						
 			<ul class="breadcrumb hidden-print">
 				<li>
-					<i class="icon-home"></i>
-					<a href="index.html">Home</a> 
+					<i class="icon-home "></i>
+					<a href="index.html" >Home</a> 
 					<i class="icon-angle-right"></i>
 				</li>
-				<li><a href="/index.php?data=<?php echo $data?>"><?php echo ucfirst($data)?></a></li>
+				<li><a  href="/index.php?data=<?php echo $data?>"><?php echo ucfirst($data)?></a></li>
 				
 			</ul>
 
@@ -537,7 +558,7 @@ header($location);
 	<footer class="hidden-print">
 
 		<p>
-			<span style="text-align:left;float:left">&copy; 2010 Tienda de Ropa Alberto's</span>
+			<span style="text-align:left;float:left" class="hidden-print">&copy; 2010 Tienda de Ropa Alberto's</span>
 			
 		</p>
 

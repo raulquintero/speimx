@@ -98,7 +98,7 @@ function plandepagos($total,$fecha,$abono,$saldo)
 
 	echo "
 					<div class=\"box-header\">
-						<h2><i class=\"halflings-icon align-justify\"></i><span class=\"break\"></span>Plan de Pagos</h2>
+						<h2></span>Plan de Pagos</h2>
 						<div class=\"box-icon\">
 							<a href=\"#\" class=\"btn-setting\"><i class=\"halflings-icon wrench\"></i></a>
 							<a href=\"#\" class=\"btn-minimize\"><i class=\"halflings-icon chevron-up\"></i></a>
@@ -109,8 +109,8 @@ function plandepagos($total,$fecha,$abono,$saldo)
 						<table class=\"table table-condensed striped\">
 							  <thead>
 								  <tr>
-									  <th>ID</th>
-									  <th>Fecha Vence</th>
+									  <th>Num</th>
+									  <th>Vence</th>
 									  <th>Saldo</th>
 									  <th>Abono</th>
 									  <th></th>                                          
@@ -184,7 +184,7 @@ $database = new DB();
 							<td style='text-align:center;border-bottom:1px dotted black' colspan=3>
 								<br><strong>Tiendas Alberto</strong>
 								<br>R.F.C QURC750708PM7
-								<br>Av. Presa Lopez Zamora #1501 <br>Col. Venustiano Carranza<br>
+								<br>Av. Presa Lopez Zamora #1501 <br>Col. Venustiano Carranzas<br>
 								<br>";
 								
 				echo "Cliente: ". strtoupper($cliente)."<br>";
@@ -205,7 +205,7 @@ $database = new DB();
 				if ($tipomov_id==3)
 							
 				{
-					$query = "SELECT  facturadet.producto_id,facturadet.factura_id,facturadet.producto,facturadet.precio_credito,facturadet.iva_credito,producto.codigo,color,talla,sku FROM facturadet,producto
+					$query = "SELECT  facturadet.producto_id,facturadet.factura_id,facturadet.producto,facturadet.precio_credito,facturadet.iva_credito,producto.codigo,color,talla,facturadet.sku FROM facturadet,producto
 					WHERE  facturadet.producto_id=producto.producto_id AND facturadet.factura_id=".$fid;
 
 					$results = $database->get_results( $query );
@@ -222,13 +222,13 @@ $database = new DB();
 							<br><p class=\"muted\" >"
 							.$item['color']." ".$item['talla']."</p></td> 
 							<td style='text-align:right;vertical-align:text-top'>";
-						if ($tipomov_id==3) echo dinero($item['precio_credito']); else echo dinero($item['precio_contado']);
+						if ($tipomov_id==3) echo dinero($item['precio_credito']*1.16); else echo dinero($item['precio_contado']*1.16);
 					
 						echo "</td></tr>";
 										
 						$total_credito+=$item['precio_credito'];
 						$total_contado+=$item['precio_contado'];
-										
+
 						$n++;
 					}
 				}	
@@ -243,9 +243,9 @@ $database = new DB();
 
 
 
-					echo "<tr style=\"border-top:1px dotted black\"><td>&nbsp;</td><td style='text-align:right'>SubTotal</td>
-					      	  <td style='text-align:right;boarder-top:2px solid;'>$". dinero($total_credito)."</td></tr>";
-					echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;IVA(16%)</td><td style='text-align:right;border-bottom:2px solid;'>+&nbsp;".dinero($total_iva_credito)."</td></tr>";	
+					echo "<tr style=\"border-top:1px dotted black\"><td>&nbsp;</td><td style='text-align:right'>Total</td>
+					      	  <td style='text-align:right;boarder-top:2px solid;'>$". dinero($total_credito*1.16)."</td></tr>";
+					echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;Incluye IVA(16%) por</td><td style='text-align:right;border-bottom:2px solid;'>+&nbsp;".dinero($total_iva_credito)."</td></tr>";	
 					echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;<strong>Total</strong></td><td style='text-align:right;'><strong>".dinero($total_iva_credito+$total_credito)."</strong></td></tr>";	
 					echo "<tr><td>&nbsp;</td><td>&nbsp;</td></tr>";
 					echo "<tr><td>&nbsp;</td><td style='text-align:right'>Saldo Actual</td><td style='text-align:right'>+  $ ".dinero($saldo_actual)."</td></tr>";	
@@ -271,7 +271,7 @@ $database = new DB();
 					if ($cliente_id==0)
 					{
 
-						$query = "SELECT  facturadet.factura_id,facturadet.producto,facturadet.precio_contado,facturadet.iva_contado,producto.codigo,color,talla FROM facturadet,producto
+						$query = "SELECT  facturadet_id,facturadet.factura_id,facturadet.producto,facturadet.precio_contado,facturadet.iva_contado,producto.codigo,color,talla,sku FROM facturadet,producto
 					WHERE  facturadet.producto_id=producto.producto_id AND facturadet.factura_id=".$fid;
 
 					$results = $database->get_results( $query );
@@ -283,7 +283,7 @@ $database = new DB();
 					foreach( $results as $item )
 					{
 		
-						echo "<tr><td>&nbsp;</td><td>".$item['factura_id']." ".$item['codigo']."<br>
+						echo "<tr><td>&nbsp;</td><td>".$item['facturadet_id']." ".$item['sku']."<br>
 							". substr($item['producto'],0,26)."...</a>
 							<br><p class=\"muted\" >"
 							.$item['color']." ".$item['talla']."</p></td> 
@@ -301,10 +301,9 @@ $database = new DB();
 
 
 						$total_iva_contado=$total_contado*.16;
-						echo "<tr>
-								<td></td><td>&nbsp;</td></tr>
-				  			<tr>
-				  				<td></td><td style='text-align:right'>Subtotal</td>
+						//echo "<tr><td></td><td>&nbsp;</td></tr>";"
+				  			echo "<tr style=\"border-top:1px dotted black\">
+				  				<td></td><td style='text-align:right'>Total</td>
 							<td style='text-align:right'>$". dinero($total_contado+$total_iva_contado)."</td></tr>";
 						echo "<tr><td></td><td style='text-align:right'>Incluye IVA(16%) por</td>
 							<td style='text-align:right'>$". dinero($total_iva_contado)."</td></tr>";

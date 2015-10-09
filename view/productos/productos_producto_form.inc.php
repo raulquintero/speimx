@@ -2,6 +2,7 @@
 	 $data=$_GET['data'];
 	 $prid=(htmlspecialchars($_GET["prid"]));
 	 $f=(htmlspecialchars($_GET["f"]));
+	 
 	 if ($f=="editar")
 	 	$title="Editar Producto [$prid]";
 	 		else
@@ -28,7 +29,12 @@
 
 
 		$queryWhere="";
+	 }else
+	 {
+	 	$proveedor_id=$_GET['pid'];
+	 	echo $subcategoria_id=$_GET['subcat'];
 	 }
+
 
 
 	 		if ($f=="editar")
@@ -80,9 +86,9 @@
 								  </label>
 								 </div>
 								</div>
+hola
 
-
-							<?php combobox("subcategoria",$subcategoria_id)?>
+							<?php echo $subcategoria_id;combobox("subcategoria",$subcategoria_id)?>
 
 
 							  <div class="control-group ">

@@ -47,11 +47,11 @@
 							<tr>
 								<td class="center"><?php echo $row['codigo']?></td>
 								<td><a href=index.php?data=productos&op=detalles&prid=<?=$row['producto_id']?>><?php echo strtoupper($row['producto'])?></a></td>
-								<td class="center"><?php echo $row['subcategoria']?></td>
-								<td class="center"><?php echo $row['precio_compra']?></td>
-								<td class="center"><?php echo $row['precio_contado']?></td>
-								<td class="center"><?php echo $row['precio_credito']?></td>
-								<td class="center"><?php echo $row['stock']?></td>
+								<td ><?php echo $row['subcategoria']?></td>
+								<td style="text-align:right;"><?php echo dinero($row['precio_compra']*1.16)?></td>
+								<td style="text-align:right;"><?php echo dinero($row['precio_contado']*1.16)?></td>
+								<td style="text-align:right;"><?php echo dinero($row['precio_credito']*1.16)?></td>
+								<td style="text-align:right;"><?php echo $row['stock']?></td>
 								<td class="center"><?php echo $row['proveedor']?></td>
 								<td class="center">  
 									<a class="btn btn-success" href="index.php?data=productos&op=detalles&prid=<?php echo $row['producto_id']?>">
