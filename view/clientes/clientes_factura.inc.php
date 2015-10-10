@@ -1,14 +1,16 @@
-<div class="box span12">
+<div class=" span12">
 
-					<div>
+					<div class="hidden-print">
 					<form action="/index.php" method="get">
 							<table  width=100%  >
 				 			<tr bgcolor=#dddddd>
 				  			<td style="padding:10px">
 
-							<input type=hidden name=data value=pos>
-							<input type=hidden name=op value=detalles>
+							<input type=hidden name=data value=clientes>
+							<input type=hidden name=op value=factura>
 							<input type=hidden name=type value=dev>
+							<input type=hidden name=fid value='<?php echo $_GET['fid']?>'>
+
 				  			 &nbsp;&nbsp;item <input classe="input-xlarge focused" id="textcode" name="code" >
 				  			</td>
 				  		</tr>
@@ -19,23 +21,17 @@
 
 		<div class="row-fluid condensed">	
 
-				<div class="box span4">
-					<div class="box-header">
-						<h2><i class="halflings-icon align-justify"></i><span class="break"></span>Nota de Venta</h2>
-						<div class="box-icon">
-							<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
-							<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
-							<a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
-						</div>
+				<div class=" span4">
+					<div class="header">
+						<!-- <h2><i class="halflings-icon align-justify "></i><span class="break "></span>Nota de Venta</h2> -->
+						
 					</div>
-					<div class="box-content">
+					<div class="">
 		
-<?php
-
-	getfactura($_GET['fid']);
-
-?>
-
+					<?php
+					getfactura($_GET['fid']);
+					?>
+					<br><br><br>
 					</div>
 				</div>
 
@@ -46,7 +42,7 @@
 					
 				</div><!--/span-->
 
-				<div class="box span4">
+				<div class="box span4 hidden-print">
 
 							  		<?php ticket_devolucion($_GET['fid'])?>
 					

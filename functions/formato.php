@@ -106,20 +106,20 @@ function plandepagos($total,$fecha,$abono,$saldo)
 						</div>
 					</div>
 					<div>
-						<table class=\"table table-condensed striped\">
+						<table class=\"table table-condensed striped\" width=100%>
 							  <thead>
 								  <tr>
-									  <th>Num</th>
-									  <th>Vence</th>
-									  <th>Saldo</th>
-									  <th>Abono</th>
+									  <th style='text-align:right'>Num</th>
+									  <th style='text-align:center'>Vence</th>
+									  <th style='text-align:right'>Saldo</th>
+									  <th style='text-align:right'>Abono</th>
 									  <th></th>                                          
 								  </tr>
 							  </thead>   
 							  <tbody>";
 
 	$c=1;
-
+	$pagos_atrazados=0;
 	$saldo_temp=$total-$saldo;
 		for ($i=0; $i < $total_pagos; $i++) {
 			$fecha=fechaplusweek($fecha);
@@ -129,12 +129,23 @@ function plandepagos($total,$fecha,$abono,$saldo)
 					
 				}
 			if($total>=($saldo+$abono)){
-				$strike_begin="<s>";$strike_end="</s>";
+				$atributo_begin="<s>";$atributo_end="</s>";
+			}
+				else {
+					$atributo_begin=$atributo_end="";
+			if ($ultimo<$saldo && $fecha<date("Y-m-d")) {
+			$atributo_begin="<font color=red><b><i>";$atributo_end="</i></b></font>";
+			$pagos_atrazados+=1;
 			}
 				else 
-					$strike_begin=$strike_end="";
+					$atributo_begin=$atributo_end="";
+				}
 			
-			echo "<tr><td>".($c)."</td><td align=right>".fechamysqltous($fecha,1)."</td><td class=\"right\">$strike_begin".dinero($total)."$strike_end</td><td class=\"right\"> $strike_begin".dinero($abono)."$strike_end </td><td align=right><font color=gray>".dinero($ultimo)." &nbsp;</td></tr>";
+			echo "<tr><td  style='text-align:right'>".($c)."</td>
+			<td style='text-align:center'>$atributo_begin".fechamysqltous($fecha,1)."$atributo_end</td>
+			<td  style='text-align:right'>$atributo_begin".dinero($total)."$atributo_end</td>
+			<td  style='text-align:right'> $atributo_begin".dinero($abono)."$atributo_end </td>
+			<td  style='text-align:right'><font color=gray>$atributo_begin".dinero($ultimo)."$atributo_end</font>&nbsp;</td></tr>";
 			$total=$total-$abono;
 			$c++;
 			if($saldo_temp<=$abono) $saldo_temp=0;
@@ -147,7 +158,9 @@ function plandepagos($total,$fecha,$abono,$saldo)
 			$total=0;
 
 
-			echo "<tr ><td>".($c)."</td><td align=right> ".fechamysqltous(fechaplusweek($fecha),1)."</td><td align=right>".dinero($total)."</td><td class=\"right\">".dinero($abono)."</td><td align=right><font color=gray> ".dinero($ultimo)."&nbsp;</td></tr>";
+			echo "<tr ><td style='text-align:right'>".($c)."</td>
+			<td  style='text-align:center'> ".fechamysqltous(fechaplusweek($fecha),1)."</td><td  style='text-align:right'>".dinero($total)."</td><td style='text-align:right'>".dinero($abono)."</td>
+			<td  style='text-align:right'><font color=gray> ".dinero($ultimo)."&nbsp;</td></tr>";
 
 		}
 
@@ -159,6 +172,7 @@ function plandepagos($total,$fecha,$abono,$saldo)
 
 	echo " </tbody>
 		</table> ";
+		echo "Pagos Atrazados: ".$pagos_atrazados;
 echo "</div>";
 
 
@@ -179,12 +193,12 @@ $database = new DB();
 	 					$cliente= $apellidop." ".$apellidom." ".$nombre;
 	 }
 
-				echo "<table   width=100%>
+				echo "<table  width=100%>
 						<tr>
 							<td style='text-align:center;border-bottom:1px dotted black' colspan=3>
-								<br><strong>Tiendas Alberto</strong>
+								<br><strong><a href=\"/index.php\">Tiendas Alberto</a></strong>
 								<br>R.F.C QURC750708PM7
-								<br>Av. Presa Lopez Zamora #1501 <br>Col. Venustiano Carranzas<br>
+								<br>Av. Presa Lopez Zamora #1501 <br>Col. Venustiano Carranza<br>
 								<br>";
 								
 				echo "Cliente: ". strtoupper($cliente)."<br>";
@@ -205,7 +219,7 @@ $database = new DB();
 				if ($tipomov_id==3)
 							
 				{
-					$query = "SELECT  facturadet.producto_id,facturadet.factura_id,facturadet.producto,facturadet.precio_credito,facturadet.iva_credito,producto.codigo,color,talla,facturadet.sku FROM facturadet,producto
+					$query = "SELECT  facturadet_id,facturadet.producto_id,facturadet.factura_id,facturadet.producto,facturadet.precio_credito,facturadet.iva_credito,producto.codigo,color,talla,facturadet.sku FROM facturadet,producto
 					WHERE  facturadet.producto_id=producto.producto_id AND facturadet.factura_id=".$fid;
 
 					$results = $database->get_results( $query );
@@ -217,10 +231,9 @@ $database = new DB();
 					foreach( $results as $item )
 					{
 		
-						echo "<tr><td>&nbsp;</td><td>".$item['producto_id']." ".$item['sku']."<br>
+						echo "<tr><td>&nbsp;</td><td>".$itemaaaaa['facturadet_id']." ".$item['sku']."<br>
 							". substr($item['producto'],0,26)."...</a>
-							<br><p class=\"muted\" >"
-							.$item['color']." ".$item['talla']."</p></td> 
+							<br>".$item['color']." ".$item['talla']."</td> 
 							<td style='text-align:right;vertical-align:text-top'>";
 						if ($tipomov_id==3) echo dinero($item['precio_credito']*1.16); else echo dinero($item['precio_contado']*1.16);
 					
@@ -283,10 +296,9 @@ $database = new DB();
 					foreach( $results as $item )
 					{
 		
-						echo "<tr><td>&nbsp;</td><td>".$item['facturadet_id']." ".$item['sku']."<br>
+						echo "<tr><td>&nbsp;</td><td>".$itemaaaaaa['facturadet_id']." ".$item['sku']."<br>
 							". substr($item['producto'],0,26)."...</a>
-							<br><p class=\"muted\" >"
-							.$item['color']." ".$item['talla']."</p></td> 
+							<br>".$item['color']." ".$item['talla']."</td> 
 							<td style='text-align:right;vertical-align:text-top'>";
 							echo dinero($item['precio_contado']+$item['iva_contado']);
 					
@@ -315,6 +327,10 @@ $database = new DB();
 									}
 					
 				echo "</table>";
+
+
+
+
 
 
 

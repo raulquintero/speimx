@@ -18,7 +18,7 @@ $database = new DB();
 							<td style='text-align:center;border-bottom:1px dotted black' colspan=4>
 								<br><strong>Tiendas Alberto</strong>
 								<br>R.F.C QURC750708PM7
-								<br>Av. Presa Lopez Zamora #1501 <br>Col. Venustiano Carranza";
+								<br>Av. Presa Lopez Zamora #1501 <br>Col. Venustiano Carranzass";
 								
 				echo "<br>Cliente: ". strtoupper($cliente);
 				if ($tipomov_id==3)
@@ -38,7 +38,7 @@ $database = new DB();
 				if ($tipomov_id==3)
 							
 				{
-					$query = "SELECT  facturadet.facturadet_id,facturadet.factura_id,facturadet.producto,facturadet.precio_credito,facturadet.iva_credito,producto.codigo,facturadet.tipomov_id, color,talla 
+					$query = "SELECT  facturadet_id,facturadet.factura_id,facturadet.producto,facturadet.precio_credito,facturadet.iva_credito,producto.codigo,facturadet.tipomov_id, color,talla 
 					FROM facturadet,producto, factura
 					WHERE  facturadet.producto_id=producto.producto_id AND facturadet.factura_id=factura.factura_id AND facturadet.factura_id=".$fid;
 
@@ -93,7 +93,7 @@ $database = new DB();
 					if ($cliente_id==0)
 					{
 
-						$query = "SELECT  facturadet.factura_id,facturadet.producto,facturadet.precio_contado,facturadet.iva_contado,producto.codigo,color,talla,sku FROM facturadet,producto
+						$query = "SELECT  facturadet_id,facturadet.factura_id,facturadet.producto,facturadet.precio_contado,facturadet.iva_contado,producto.codigo,color,talla,sku FROM facturadet,producto
 					WHERE  facturadet.producto_id=producto.producto_id AND facturadet.factura_id=".$fid;
 
 					$results = $database->get_results( $query );
@@ -105,12 +105,12 @@ $database = new DB();
 					foreach( $results as $item )
 					{
 		
-						echo "<tr><td>&nbsp;</td><td>".$item['facturadet_id']." ".$item['sku']."<br>
+						echo "<tr><td>&nbsp;</td><td>".$item['facturadet_id']."-".$item['sku']."<br>
 							". substr($item['producto'],0,26)."...</a>
 							<br><p class=\"muted\" >"
 							.$item['color']." ".$item['talla']."</p></td> 
 							<td style='text-align:right;vertical-align:text-top'>";
-							echo dinero($item['precio_contado']);
+							echo dinero($item['precio_contado']*1.16);
 					
 						echo "</td>";
 
@@ -142,6 +142,17 @@ $database = new DB();
 									
 								
 							}
+
+
+						echo "<tr><td colspan=4 align=center><br><br><br>
+							_________________________________________";
+
+						
+						if ($cliente_id) echo "<br>Cliente: ". strtoupper($cliente);
+						echo "<br><br><br><br>"; //Tipo de Venta: <span class=\"label label-inverse\">Contado</span><br><br>";
+
+
+						echo "</td></tr>";	
 					
 				echo "</table>";
 
@@ -262,7 +273,7 @@ $database = new DB();
 							<br><p class=\"muted\" >"
 							.$item['color']." ".$item['talla']."</p></td> 
 							<td style='text-align:right;vertical-align:text-top'>";
-							echo dinero($item['precio_contado']);
+							echo dinero($item['precio_contado']*1.16);
 					
 						echo "</td>";
 

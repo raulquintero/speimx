@@ -292,10 +292,9 @@ $database = new DB();
 unset($_SESSION['cart']);
 unset($_SESSION['cliente_id']);
 
-header("Location: /index.php?data=pos&op=cerrarventa&fid=$factura_id");
+header("Location: /imprimir_ticket.php?fid=$factura_id");
 						?>
 				
-			
 
 				<!-- **********************************endd  ticket********************* -->
 

@@ -166,6 +166,8 @@ if ($_GET['eed']==2)
 		</div>
 		<div class="modal-body">
 
+
+<div style="text-align:center;"><h1>Saldo Actual: $ <?php echo $saldo?></h1> <br><br></div>
 			<form class="form-horizontal" action="./functions/abono.php" >
 				<input type="hidden" name="data" value="clientes">
 				<input type="hidden" name="op" value="abono">
@@ -173,10 +175,10 @@ if ($_GET['eed']==2)
 
 			<fieldset>
 
-				<div class="control-group">
-								<label class="control-label" for="focusedInput">Cantidad</label>
+				<div class="control-group">	
+								<label class="control-label" for="focusedInput">Cantidad: $</label>
 								<div class="controls">
-								  $<input class="input-xlarge focused" id="focusedInput" type="cantidad" value="">
+								  <input class="input-xlarge focused" id="focusedInput" type="cantidad" value="">
 								</div>
 							  </div>
 
