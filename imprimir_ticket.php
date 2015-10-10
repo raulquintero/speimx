@@ -66,7 +66,7 @@ foreach( $_GET as $key => $value )
 						<?php 
 						if ($factura_id)
 						{
-							echo "<table width=400><tr><td>";
+							echo "<table width=380><tr><td>";
 							getticket($factura_id);
 				
 							echo "<br><Br><br><br>
@@ -104,7 +104,7 @@ foreach( $_GET as $key => $value )
 			<div class="row-fluid condensed">	
 
 				<div class="box-content span6">
-				<table width=400>
+				<table width=380>
 					<tr><td>	
 					<?php if ($tipomov_id==3) plandepagos($saldo_total,$fecha_factura,$abono,$saldo);?>
 					</td></tr>
@@ -115,7 +115,7 @@ foreach( $_GET as $key => $value )
 			<div class="row-fluid condensed">	
 
 				<div class="box-content span6">
-				<table width=400>
+				<table width=380>
 					<tr><td>	
 						<br><br><br>
 						Gracias por su preferencia.<br><br>

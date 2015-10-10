@@ -111,17 +111,24 @@ function plandepagos($total,$fecha,$abono,$saldo)
 								  <tr>
 									  <th style='text-align:right'>Num</th>
 									  <th style='text-align:center'>Vence</th>
-									  <th style='text-align:right'>Saldo</th>
 									  <th style='text-align:right'>Abono</th>
+									  <th style='text-align:right'>Saldo</th>
 									  <th></th>                                          
 								  </tr>
 							  </thead>   
 							  <tbody>";
+echo "<tr ><td style='text-align:right'>".($c)."</td>
+			<td  style='text-align:center'> ".fechamysqltous($fecha,1)."</td>
+			<td style='text-align:right'>----</td>
+			<td  style='text-align:right'>".dinero($total)."</td>
+			<td  style='text-align:right'><font color=gray> &nbsp;</td></tr>";
+
 
 	$c=1;
 	$pagos_atrazados=0;
+	//$total-=$abono;
 	$saldo_temp=$total-$saldo;
-		for ($i=0; $i < $total_pagos; $i++) {
+		for ($i=1; $i < $total_pagos; $i++) {
 			$fecha=fechaplusweek($fecha);
 			if ($saldo_temp>$abono) $ultimo=$abono;
 				else {
@@ -143,8 +150,8 @@ function plandepagos($total,$fecha,$abono,$saldo)
 			
 			echo "<tr><td  style='text-align:right'>".($c)."</td>
 			<td style='text-align:center'>$atributo_begin".fechamysqltous($fecha,1)."$atributo_end</td>
-			<td  style='text-align:right'>$atributo_begin".dinero($total)."$atributo_end</td>
 			<td  style='text-align:right'> $atributo_begin".dinero($abono)."$atributo_end </td>
+			<td  style='text-align:right'>".dinero($total-$abono)."</td>
 			<td  style='text-align:right'><font color=gray>$atributo_begin".dinero($ultimo)."$atributo_end</font>&nbsp;</td></tr>";
 			$total=$total-$abono;
 			$c++;
@@ -154,12 +161,14 @@ function plandepagos($total,$fecha,$abono,$saldo)
 		}
 
 		if ($total) {
-			$abono=$abono+$total;
+			$abono=$total;
 			$total=0;
 
 
 			echo "<tr ><td style='text-align:right'>".($c)."</td>
-			<td  style='text-align:center'> ".fechamysqltous(fechaplusweek($fecha),1)."</td><td  style='text-align:right'>".dinero($total)."</td><td style='text-align:right'>".dinero($abono)."</td>
+			<td  style='text-align:center'> ".fechamysqltous(fechaplusweek($fecha),1)."</td>
+			<td style='text-align:right'>".dinero($abono)."</td>
+			<td  style='text-align:right'>".dinero($total)."</td>
 			<td  style='text-align:right'><font color=gray> ".dinero($ultimo)."&nbsp;</td></tr>";
 
 		}

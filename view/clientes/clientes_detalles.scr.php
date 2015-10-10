@@ -10,7 +10,6 @@ $query = "SELECT cliente_id,gruponomina.gruponomina_id,gruponomina,empresa, curp
 list( $cliente_id,$gruponomina_id, $gruponomina, $empresa, $curp,$nombre, $apellidop,$apellidom,$domicilio_casa, 
 	$telefono_personal,$credito,$saldo,	$abono,$fecha_total_inicio,$fecha_total_ultimo,$total_ultimo, $observaciones) = $database->get_row( $query );
 
-
 function n_pagos_total($total_ultimo,$abono)
 {
  	 return $num_pagos = ceil($total_ultimo/$abono);
@@ -42,32 +41,40 @@ $database = new DB();
 	$i=0;
 	foreach( $results as $row )
 	{
-		
+		if ($row['tmov']==0 || $row['tmov']==1)
+		{
 		$i+=1;
 		echo "<tr >
 			<td align=right><font >&nbsp;$i&nbsp;</td>
-			<td><font ><a href=\"/index.php?data=clientes&op=factura&fid=".$row['factura_id']."\">".fechamysqltous($row['fecha'],1)."<a> </td>";
+			<td><a class=\"hidden-print\" href=\"/index.php?data=clientes&op=factura&fid=".$row['factura_id']."\">".fechamysqltous($row['fecha'],1)."<a>
+				<a class=\"visible-print\" >".fechamysqltous($row['fecha'],1)."<a>
+			 </td>";
 
-			if (!$row['tmov'])
-					echo "<td align=center>---</td>
-					<td align=right> <font >$ ".$row['cantidad']."&nbsp;&nbsp; </td>";
-				else
+			if ($row['tmov']==0)
+			{
+				echo "<td align=center>---</td>
+				<td align=right> <font >$ ".$row['cantidad']."&nbsp;&nbsp; </td>";
+			}
+			if ($row['tmov']==1)
+			{
 					echo "
-					<td align=right> <font >$ ".$row['cantidad']."&nbsp;&nbsp; </td>
-					<td align=center>---</td>";
-				
+				<td align=right> <font >$ ".$row['cantidad']."&nbsp;&nbsp; </td>
+				<td align=center>---</td>";
+			}	
+
 
 
 			echo "<td><font ><b>$ ".dinero($saldo)."</td>
 			<td><font >".$row['tipomov']."</td>
-			<td> <font >".$row['admin_nombre']."</td></tr>";
+			<td> <font >".$row['admin_id']."</td>";
 
-
-		if (!$row['tmov'])		
+		if ($row['tmov']==0)		
 			$saldo+=$row['cantidad'];
-		else
+		if ($row['tmov']==1)
 			$saldo-=$row['cantidad'];
+		echo "</tr>";
 	
+		}
 	}						  	
 
 

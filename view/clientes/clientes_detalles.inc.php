@@ -3,7 +3,7 @@
 <?php
 include 'clientes_detalles.scr.php';
 
-
+$cid=htmlspecialchars($_GET['cid']);
 ?>
 
 <?php 
@@ -22,7 +22,7 @@ if ($_GET['eed']==2)
 						<h2><i class="halflings-icon th"></i><span class="break">Detalles del Cliente</span></h2>
 					</div>
 					<div class="box-content">
-						<ul class="nav tab-menu nav-tabs" id="myTab">
+						<ul class="nav tab-menu nav-tabs hidden-print" id="myTab">
 							<li class="active"><a href="#info">Datos Personales</a></li>
 							<li><a href="#custom">Credito</a></li>
 							<li><a href="#messages">Notas</a></li>
@@ -32,16 +32,19 @@ if ($_GET['eed']==2)
 							<div class="tab-pane active" id="info">
 								<p>
 											
-											<img class=grayscale src=fotos/images.jpeg width=150 align=right></img>									
+											<img class="grayscale hidden-print" src=fotos/images.jpeg width=150 align=right></img>									
 											
 											<b><?php echo strtoupper($nombre.' '.$apellidop.' '.$apellidom)?></b> &nbsp;&nbsp;											
 											
 											<?php
 											if (!$_GET['h'])
-											echo "<br>Direccion: $domicilio_casa
-											<br>Telefono:  $telefono_personal											
-											<br>Trabajo:  $empresa
-											<br>Grupo Nomina: <a href='index.php?data=cobronomina&op=empresas&nid=$gruponomina_id' >". strtoupper($gruponomina)."</a>";
+											{
+												echo "<br>Direccion: $domicilio_casa
+												<br>Telefono:  $telefono_personal											
+												<br>Trabajo:  $empresa
+												<br>Grupo Nomina: <a class=\"visible-print\" >". strtoupper($gruponomina)."</a>";
+												echo  "	<a class=\"hidden-print\" href='index.php?data=cobronomina&op=empresas&nid=$gruponomina_id' >". strtoupper($gruponomina)."</a>";
+											}
 											else
 												echo "<br><a href=\"#\" class=\"btn btn-info blue btn-setting\" data-toggle=\"modal\" data-target=\"#abonaracuenta\">Abonar a Cuenta</a>";
 
@@ -50,6 +53,7 @@ if ($_GET['eed']==2)
 
 											
 											<br><br>
+											<div class="hidden-print">
 											<?php
 											if (!$_GET['h'])
 											{
@@ -69,7 +73,7 @@ if ($_GET['eed']==2)
 											<a href="index.php?data=clientes&op=cliente_form&f=editar&cid=<?=$cliente_id?>"><button 
 													class="btn btn-mini btn-primary">Cambiar Imagen</button></a> 
 											 -->	
-										
+										</div>
 								</p>
 
 							</div>
@@ -171,14 +175,16 @@ if ($_GET['eed']==2)
 			<form class="form-horizontal" action="./functions/abono.php" >
 				<input type="hidden" name="data" value="clientes">
 				<input type="hidden" name="op" value="abono">
-				<input type="hidden" name="f" value="a">
+				<input type="hidden" name="f" value="ab">
+				<input type="hidden" name="cid" value="<?php echo $cid?>">
+
 
 			<fieldset>
 
 				<div class="control-group">	
 								<label class="control-label" for="focusedInput">Cantidad: $</label>
 								<div class="controls">
-								  <input class="input-xlarge focused" id="focusedInput" type="cantidad" value="">
+								  <input class="input-xlarge focused" id="focusedInput" name="cantidad" value="">
 								</div>
 							  </div>
 
