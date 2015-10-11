@@ -32,7 +32,7 @@
 
 			<div class="row-fluid condensed">
 		
-					<div class="box-content span8  hidden-phone" >
+					<div class="box-content span8 " >
 
 					<div class="hidden-print">
 					<form action="/index.php" method="get">
@@ -55,7 +55,7 @@
 				  		<div class="box-header " data-original-title>
 					  		<h2><i class="halflings-icon calendar"></i><span class="break"></span>Punto de Venta</h2>
 				  		</div>
-						<table class="table table-striped table-bordered bootstrap-datatable datatable">
+						<table class="table table-striped table-bordered bootstrap-datatable datatable hidden-phone">
 						  <thead>
 							  <tr>
 								  <!-- <th>sku1</th> -->
