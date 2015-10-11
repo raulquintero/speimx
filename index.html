@@ -41,11 +41,17 @@
 			body { background: url(img/bg-login.jpg) !important; }
 		</style>
 		
-		
+
+		<script type="text/javascript">
+	function setFocusToTextBox(){
+		$('#user_name').focus();
+		//document.getElementById('textcode').focus();
+	}
+		</script>	
 		
 </head>
 
-<body>
+<body onload='setFocusToTextBox()'>
 		<div class="container-fluid-full">
 		<div class="row-fluid">
 					
@@ -62,7 +68,7 @@
 							
 							<div class="input-prepend" title="Username">
 								<span class="add-on"><i class="halflings-icon user"></i></span>
-								<input class="input-large span10" name="user_name" id="user_name" type="text" placeholder="type username"/>
+								<input class="input-large span10" name="user_name" id="user_name" type="password" placeholder="type username"/>
 							</div>
 							<div class="clearfix"></div>
 

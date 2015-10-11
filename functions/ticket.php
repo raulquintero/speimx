@@ -38,7 +38,7 @@ $database = new DB();
 				if ($tipomov_id==3)
 							
 				{
-					$query = "SELECT  facturadet_id,facturadet.factura_id,facturadet.producto,facturadet.precio_credito,facturadet.iva_credito,producto.codigo,facturadet.tipomov_id, color,talla 
+					$query = "SELECT  facturadet_id,facturadet.factura_id,facturadet.producto,facturadet.precio_credito,facturadet.iva_credito,producto.codigo,facturadet.tipomov_id, color,talla,sku 
 					FROM facturadet,producto, factura
 					WHERE  facturadet.producto_id=producto.producto_id AND facturadet.factura_id=factura.factura_id AND facturadet.factura_id=".$fid;
 
@@ -256,7 +256,7 @@ $database = new DB();
 					if ($cliente_id==0)
 					{
 
-						$query = "SELECT  facturadet.factura_id,facturadet.producto,facturadet.precio_contado,facturadet.iva_contado,producto.codigo,color,talla,sku FROM facturadet,producto
+						$query = "SELECT  facturadet_id,facturadet.factura_id,facturadet.producto,facturadet.precio_contado,facturadet.iva_contado,producto.codigo,color,talla,sku FROM facturadet,producto
 					WHERE  facturadet.producto_id=producto.producto_id AND facturadet.factura_id=".$fid;
 
 					$results = $database->get_results( $query );

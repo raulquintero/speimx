@@ -232,7 +232,7 @@
 						<?php
 								if ($_SESSION['cliente_id'])
 								{ 
-								$disponible=$credito-$saldo-$total_credito;
+								$disponible=$credito-$saldo-($total_credito*1.16);
 								if($disponible>=0 AND $total_credito>0 AND $cliente_id)
 									echo "<a href=\"#\" class=\"btn btn-info blue btn-setting\">Cerrar Venta a Credito</a>
 									 <!-- <button class=\"btn\">Cancelar</button> -->";

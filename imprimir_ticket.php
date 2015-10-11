@@ -26,7 +26,13 @@ foreach( $_GET as $key => $value )
 <html>
 <head>
 	<title></title>
-	
+	<style type="text/css">
+	body{
+		font-family: arial, helvetica;
+		font-size: x-small; 
+	}
+
+	</style>
 </head>
 <body onload="window.print()">
 
@@ -66,8 +72,8 @@ foreach( $_GET as $key => $value )
 						<?php 
 						if ($factura_id)
 						{
-							echo "<table width=380><tr><td>";
-							getticket($factura_id);
+							echo "<table width=350><tr><td>";
+							getticket($factura_id);      // formato.php
 				
 							echo "<br><Br><br><br>
 
@@ -82,7 +88,7 @@ foreach( $_GET as $key => $value )
 						 	echo "<br>
 							</center>
 							<br><Br><br><br>";
-							echo "</td></tr></table>";
+							echo "</td><td>&nbsp;</td></tr></table>";
 						}
 					
 
@@ -104,10 +110,10 @@ foreach( $_GET as $key => $value )
 			<div class="row-fluid condensed">	
 
 				<div class="box-content span6">
-				<table width=380>
+				<table cellpadding=5 width=350>
 					<tr><td>	
 					<?php if ($tipomov_id==3) plandepagos($saldo_total,$fecha_factura,$abono,$saldo);?>
-					</td></tr>
+					</td><td>&nbsp;</td></tr>
 				</table>
 					</div>
 			</div>
@@ -115,14 +121,17 @@ foreach( $_GET as $key => $value )
 			<div class="row-fluid condensed">	
 
 				<div class="box-content span6">
-				<table width=380>
+				<table width=350>
 					<tr><td>	
 						<br><br><br>
+						Recuerde que:<br>
+						Todas las ventas son VENTAS FINALES, <br>
+						NO se regresa dinero, solo se cambia por mercancia dentro de los primeros 7 dias
 						Gracias por su preferencia.<br><br>
 						Recuerde ser puntual en sus pagos, el no cumplir a tiempo con sus pagos
 						puede afectar su credito
 						<br><br><br><br>
-					</td></tr>
+					</td><td>&nbsp;</td></tr>
 				</table>
 					</div>
 			</div>

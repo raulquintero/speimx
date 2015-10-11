@@ -181,7 +181,7 @@ echo "<tr ><td style='text-align:right'>".($c)."</td>
 
 	echo " </tbody>
 		</table> ";
-		echo "Pagos Atrazados: ".$pagos_atrazados;
+		//echo "Pagos Atrazados: ".$pagos_atrazados;
 echo "</div>";
 
 
@@ -205,8 +205,8 @@ $database = new DB();
 				echo "<table  width=100%>
 						<tr>
 							<td style='text-align:center;border-bottom:1px dotted black' colspan=3>
-								<br><strong><a href=\"/index.php\">Tiendas Alberto</a></strong>
-								<br>R.F.C QURC750708PM7
+								<a href=\"/index.php\"><img width=300 src=/img/tiendasalberto.png></a>
+								<br>R.F.C QUCR750708PM7
 								<br>Av. Presa Lopez Zamora #1501 <br>Col. Venustiano Carranza<br>
 								<br>";
 								
@@ -264,9 +264,9 @@ $database = new DB();
 					//$saldo_total=$saldo+$total_credito+$total_iva_credito;
 
 
-
-					echo "<tr style=\"border-top:1px dotted black\"><td>&nbsp;</td><td style='text-align:right'>Total</td>
-					      	  <td style='text-align:right;boarder-top:2px solid;'>$". dinero($total_credito*1.16)."</td></tr>";
+					echo "<tr><td>&nbsp;</td></tr>";
+					echo "<tr style=\"border-top:1px dotted black\"><td style=\"border-top:1px dotted black\">&nbsp;</td><td style='text-align:right;border-top:1px dotted black'>Total</td>
+					      	  <td style='text-align:right;border-top:1px dotted;'>$". dinero($total_credito*1.16)."</td></tr>";
 					echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;Incluye IVA(16%) por</td><td style='text-align:right;border-bottom:2px solid;'>+&nbsp;".dinero($total_iva_credito)."</td></tr>";	
 					echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;<strong>Total</strong></td><td style='text-align:right;'><strong>".dinero($total_iva_credito+$total_credito)."</strong></td></tr>";	
 					echo "<tr><td>&nbsp;</td><td>&nbsp;</td></tr>";
@@ -323,9 +323,10 @@ $database = new DB();
 
 						$total_iva_contado=$total_contado*.16;
 						//echo "<tr><td></td><td>&nbsp;</td></tr>";"
-				  			echo "<tr style=\"border-top:1px dotted black\">
-				  				<td></td><td style='text-align:right'>Total</td>
-							<td style='text-align:right'>$". dinero($total_contado+$total_iva_contado)."</td></tr>";
+						echo "<tr><td>&nbsp;</td></tr>";
+					echo "<tr style=\"border-top:1px dotted black\"><td style=\"border-top:1px dotted black\">&nbsp;</td><td style='text-align:right;border-top:1px dotted black'>Total</td>
+					      	  <td style='text-align:right;border-top:1px dotted;'>$". dinero($total_contado*1.16)."</td></tr>";
+				  			// echo "<tr style=\"border-top:1px dotted black\"><td></td><td style='text-align:right'>Total</td><td style='text-align:right'>$". dinero($total_contado+$total_iva_contado)."</td></tr>";
 						echo "<tr><td></td><td style='text-align:right'>Incluye IVA(16%) por</td>
 							<td style='text-align:right'>$". dinero($total_iva_contado)."</td></tr>";
 						echo "<tr><td></td><td style='text-align:right'>&nbsp;<strong>Total</strong></td>
@@ -363,11 +364,11 @@ $database = new DB();
 	 					$cliente= $apellidop." ".$apellidom." ".$nombre;
 	 }
 
-				echo "<table  width=100%>
+				echo "<table  width=100% >
 						<tr>
 							<td style='text-align:center;border-bottom:1px dotted black' colspan=3>
-								<br><strong><a href=\"/index.php\">Tiendas Alberto</a></strong>
-								<br>R.F.C QURC750708PM7
+								<a href=\"/index.php\"><img width=350 src=/img/tiendasalberto.png></a>
+								<br>R.F.C QUCR750708PM7
 								<br>Av. Presa Lopez Zamora #1501 <br>Col. Venustiano Carranza<br>
 								<br>";
 								
@@ -381,11 +382,11 @@ $database = new DB();
 				echo "</td></tr>";
 				echo "<tr><td>&nbsp;</td></tr>";
 
-				echo "<tr><td>Saldo Anterior</td><td style=\"text-align:right\">$ ". dinero($saldo_abono+$cantidad)."</td></tr>";				
+				echo "<tr><td>Saldo Anterior</td><td style=\"text-align:right\">$ ". dinero($saldo_abono+$cantidad)."</td><td>&nbsp;</td></tr>";				
 				echo "<tr><td>Cantidad a Abonada</td><td style=\"text-align:right\">$ ". dinero($cantidad)."</td></tr>";				
 				echo "<tr><td>Saldo Actual</td><td style=\"text-align:right;border-top:1px solid black;\">$ ". dinero($saldo_abono)."</td></tr>";				
  
-				echo "<tr><td style=\"border-bottom:1px dotted black\" colspan=3>&nbsp;</td></tr>";	
+				echo "<tr><td style=\"border-bottom:1px dotted black\" colspan=3>&nbsp;&nbsp;</td></tr>";	
 				echo "</table>";
 
 

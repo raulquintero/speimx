@@ -26,9 +26,13 @@ foreach( $_GET as $key => $value )
 <html>
 <head>
 	<title></title>
-	
+	<style type="text/css">
+	body {
+		font-family: verdana,arial;
+	}
+	</style>
 </head>
-<body conload="window.print()">
+<body onload="window.print()">
 
 				<?php 
 			//$cid = $_SESSION['cliente_id'];
@@ -63,10 +67,10 @@ foreach( $_GET as $key => $value )
 						if ($movimiento_id)
 						{
 							echo "<table width=380><tr><td>";
-							getabono($movimiento_id);
+							getabono($movimiento_id);   //formato.php
 										
 							echo "<br>";
-							echo "</td></tr></table>";
+							echo "</td><td>&nbsp</td></tr></table>";
 						}
 					
 
@@ -99,7 +103,7 @@ foreach( $_GET as $key => $value )
 						Recuerde ser puntual en sus pagos, el no cumplir a tiempo con sus pagos
 						puede afectar su credito
 						<br><br><br><br>
-					</td></tr>
+					</td><td>&nbsp;</td></tr>
 				</table>
 					</div>
 			</div>

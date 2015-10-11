@@ -79,7 +79,7 @@ if ($func=="del_cliente")
 
 
   //echo "<br><br>array: <br>";
-    //  print_r($_SESSION['cart']);
+   //   print_r($_SESSION['cart']);
 
 
 
