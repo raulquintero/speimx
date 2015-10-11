@@ -345,4 +345,58 @@ $database = new DB();
 
 }
 
+
+
+
+
+function getabono($mid)
+{
+$database = new DB();
+
+	if($mid)
+	{
+					$query = "SELECT cliente.cliente_id,apellidop, apellidom, nombre, credito, saldo,total_ultimo,fecha_total_ultimo, abono,
+							tipomov_id,fecha,saldo,cantidad,saldo_abono  FROM cliente,movimiento 
+						WHERE  movimiento.cliente_id=cliente.cliente_id AND movimiento.movimiento_id=".$mid;
+					list( $cliente_id,$apellidop,$apellidom,$nombre,$credito, $saldo, $total_ultimo, $fecha_total_ultimo,$abono, 
+							 $tipomov_id,$fecha,$saldo,$cantidad,$saldo_abono  ) = $database->get_row( $query );
+	 					$cliente= $apellidop." ".$apellidom." ".$nombre;
+	 }
+
+				echo "<table  width=100%>
+						<tr>
+							<td style='text-align:center;border-bottom:1px dotted black' colspan=3>
+								<br><strong><a href=\"/index.php\">Tiendas Alberto</a></strong>
+								<br>R.F.C QURC750708PM7
+								<br>Av. Presa Lopez Zamora #1501 <br>Col. Venustiano Carranza<br>
+								<br>";
+								
+				echo "Cliente: ". strtoupper($cliente)."<br>";
+
+				echo "Abono a Cuenta: [$cliente_id]<br>";
+				echo "Fecha y Hora: <br>".$fecha;    //date("d-m-Y  H:m:s");
+				echo "<br>";
+				
+
+				echo "</td></tr>";
+				echo "<tr><td>&nbsp;</td></tr>";
+
+				echo "<tr><td>Saldo Anterior</td><td style=\"text-align:right\">$ ". dinero($saldo_abono+$cantidad)."</td></tr>";				
+				echo "<tr><td>Cantidad a Abonada</td><td style=\"text-align:right\">$ ". dinero($cantidad)."</td></tr>";				
+				echo "<tr><td>Saldo Actual</td><td style=\"text-align:right;border-top:1px solid black;\">$ ". dinero($saldo_abono)."</td></tr>";				
+ 
+				echo "<tr><td style=\"border-bottom:1px dotted black\" colspan=3>&nbsp;</td></tr>";	
+				echo "</table>";
+
+
+
+
+
+
+
+}
+
+
+
+
 ?>

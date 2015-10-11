@@ -39,10 +39,10 @@ $results = $database->get_results( $query );
 foreach( $results as $row )
 {
 
-
+$nombre_cliente=$row['apellidop'].' '.$row['apellidom'].' '.$row['nombre'];
 ?>
 							<tr>
-								<td><a href=index.php?data=clientes&op=detalles&cid=<?=$row['cliente_id']?>><?=$row['apellidop'].' '.$row['apellidom'].' '.$row['nombre']?></a></td>
+								<td><a href=index.php?data=clientes&op=detalles&cid=<?php echo $row['cliente_id']?>><?php echo strtoupper($nombre_cliente)?></a></td>
 								<td class="center"><?php echo $row['abono']?></td>
 								<td class="center"><?php echo $row['saldo']?></td>
 								

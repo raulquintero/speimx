@@ -153,8 +153,8 @@ $database = new DB();
                 						'iva_credito'   => ($item[$n]['precio_credito']*.16),
                 						'precio_contado'   => ($item[$n]['precio_contado']),
                 						'iva_contado'   => ($item[$n]['precio_contado']*.16),
-                						'codigo'     => $item[n]['codigo'],
-                						'sku'     => $item[n]['sku'],
+                						'codigo'     => $item[$n]['codigo'],
+                						'sku'     => $item[$n]['sku'],
                 						'producto'    => $item[$n]['producto'],
                 						'color'    => $item[$n]['color'],
                 						'talla'    => $item[$n]['talla']
@@ -236,7 +236,6 @@ $database = new DB();
 									{
 
 										$codigo=substr(num_ticket16($item['id']),0,13);
-								
 
 										$names= array(
 										'factura_id'      => $factura_id,
@@ -288,7 +287,7 @@ $database = new DB();
 
 
   //echo "<br><br><br>cart: <br>";
-    //  print_r($_SESSION['cart']);
+//      print_r($_SESSION['cart']);
 unset($_SESSION['cart']);
 unset($_SESSION['cliente_id']);
 

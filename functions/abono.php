@@ -28,10 +28,11 @@ if ($_GET['f']=="ab")
     		'fecha' => $fecha_hoy,
     		'admin_id' => $_SESSION['user_id'],
     		'tipomov_id' => 1, /// abono 
-    		'cantidad' => ($cantidad)
+    		'cantidad' => ($cantidad),
+    		'saldo_abono' => ($saldo-$cantidad)
 			);
 			$add_query = $database->insert( 'movimiento', $names );
-			//$movimiento_id = $database->lastid();
+			$movimiento_id = $database->lastid();
 
 			$update = array(
     		'saldo' => ($saldo-$cantidad)
@@ -56,9 +57,8 @@ if ($_GET['f']=="ab")
   //echo "<br><br><br>cart: <br>";
     //  print_r($_SESSION['cart']);
 
-// header("Location: /imprimir_abono.phpa?mid=$movimiento_id");
-						?>
-				
+header("Location: /imprimir_abono.php?mid=$movimiento_id");
+?>				
 
 				<!-- **********************************endd  ticket********************* -->
 
