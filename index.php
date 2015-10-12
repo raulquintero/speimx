@@ -20,7 +20,7 @@ foreach( $_GET as $key => $value )
     $_GET[$key] = $database->filter( $value );
 }
 
-
+$nid=$_SESSION['nid'];
 
 $code=strtoupper(htmlspecialchars($_GET["code"]));
 
@@ -36,7 +36,8 @@ if ($cuantos==7)
 					$location="Location: /index.php?data=clientes&op=factura&fid=$code";
 					break;
 				case 'C':
-					$location="Location: /functions/cart.php?func=sel_cliente&cid=$code";
+					 $location="Location: /index.php?data=clientes&op=verificar&cid=$code";
+					// $location="Location: /functions/cart.php?func=sel_cliente&cid=$code";
 					break;
 				
 				default:
@@ -469,31 +470,38 @@ switch ($type) {
 			<div id="sidebar-left" class="span2 hidden-print">
 				<div class="nav nav-collapse  sidebar-nav">
 					<ul class="nav nav-tabs nav-stacked main-menu">
-						<li><a href="index.html"><i class="icon-bar-chart hidden-print"></i><span class="hidden-tablet hidden-print"> Dashboard</span></a></li>	
-						<li><a href="index.php?data=mensajes"   ><i class="icon-envelope hidden-print"></i><span class="hidden-tablet hidden-print"> Messages</span></a></li>
-						<li><a href="index.php?data=pos"        ><i class="icon-shopping-cart hidden-print" ></i><span class="hidden-tablet hidden-print"> PoS</span></a></li>
 
-						<li>
-							<a class="dropmenu" href="#"><i class="icon-chevron-right hidden-print"></i><span class="hidden-tablet hidden-print"> Sistema </span><span class="label label-important"> 2 </span></a>
-							<ul>
+<?php
+
+						if ($nid<=6) echo "<li><a href=\"index.html\"><i class=\"icon-bar-chart hidden-print\"></i><span class=\"hidden-tablet hidden-print\"> Dashboard</span></a></li>";
+						if ($nid<5) echo "<li><a href=\"index.php?data=mensajes\"   ><i class=\"icon-envelope hidden-print\"></i><span class=\"hidden-tablet hidden-print\"> Messages</span></a></li>";
+						 echo "<li><a href=\"index.php?data=pos\"        ><i class=\"icon-shopping-cart hidden-print\" ></i><span class=\"hidden-tablet hidden-print\"> PoS</span></a></li>";
+
+						if ($nid<=8) echo "<li><a class=\"dropmenu\" href=\"#\"><i class=\"icon-chevron-right hidden-print\"></i><span class=\"hidden-tablet hidden-print\"> Sistema </span>";
+							echo "<ul>";
 								
-								<li><a href="index.php?data=clientes&op=devoluciones"><i class="icon-book"    ></i><span class="hidden-tablet"> Devoluciones</span></a></li>
-								<li><a href="index.php?data=cobronomina"><i class="icon-book"    ></i><span class="hidden-tablet"> Cobro x Nomina</span></a></li>
-								<li><a href="index.php?data=catalogo"><i class="icon-barcode"></i><span class="hidden-tablet"> Catalogo</span></a></li>
-							</ul>
-						</li>
-						<li>
-							<a class="dropmenu" href="#"><i class="icon-chevron-right hidden-print">   </i><span class="hidden-tablet hidden-print"> Captura </span><span class="label label-important"> 4 </span></a>
-							<ul>
-								<li><a href="index.php?data=clientes"><i class="icon-group"></i><span class="hidden-tablet"> Clientes</span></a></li>
-								<li><a href="index.php?data=empresas"><i class="icon-road"></i><span class="hidden-tablet"> Empresas Nomina</span></a></li>
-								<li><a href="index.php?data=proveedores"><i class="icon-road"></i><span class="hidden-tablet"> Proveedores</span></a></li>
-								<li><a href="index.php?data=productos"><i class="icon-barcode"></i><span class="hidden-tablet"> Productos</span></a></li>
-								<li><a href="index.php?data=tallas"><i class="icon-barcode"></i><span class="hidden-tablet"> Tallas</span></a></li>
-							</ul>
-						</li>
+								if ($nid<=8) echo "<li><a href=\"index.php?data=clientes&op=devoluciones\"><i class=\"icon-book\"    ></i><span class=\"hidden-tablet\"> Devoluciones</span></a></li>";
+								if ($nid<=6) echo "<li><a href=\"index.php?data=cobronomina\"><i class=\"icon-book\"    ></i><span class=\"hidden-tablet\"> Cobro x Nomina</span></a></li>";
+								if ($nid<=6) echo "<li><a href=\"index.php?data=catalogo\"><i class=\"icon-barcode\"></i><span class=\"hidden-tablet\"> Catalogo</span></a></li>";
+							echo "</ul>";
+						echo "</li>";
+						echo "<li>";
+							if ($nid<=6) echo "<a class=\"dropmenu\" href=\"#\"><i class=\"icon-chevron-right hidden-print\">   </i><span class=\"hidden-tablet hidden-print\"> Captura </span>";
+							echo "<ul>";
+								if ($nid<=6) echo "<li><a href=\"index.php?data=clientes\"><i class=\"icon-group\"></i><span class=\"hidden-tablet\"> Clientes</span></a></li>";
+								if ($nid<=6) echo "<li><a href=\"index.php?data=empresas\"><i class=\"icon-road\"></i><span class=\"hidden-tablet\"> Empresas Nomina</span></a></li>";
+								if ($nid<=6) echo "<li><a href=\"index.php?data=proveedores\"><i class=\"icon-road\"></i><span class=\"hidden-tablet\"> Proveedores</span></a></li>";
+								if ($nid<=6) echo "<li><a href=\"index.php?data=productos\"><i class=\"icon-barcode\"></i><span class=\"hidden-tablet\"> Productos</span></a></li>";
+								if ($nid<=6) echo "<li><a href=\"index.php?data=tallas\"><i class=\"icon-barcode\"></i><span class=\"hidden-tablet\"> Tallas</span></a></li>";
+							echo "</ul>";
+						echo "</li>";
 
-						<li><a href="index.php?data=agenda"><i class="icon-calendar hidden-print"></i><span class="hidden-tablet hidden-print"> Agenda</span></a></li>
+						if ($nid<=6) echo "<li><a href=\"index.php?data=agenda\"><i class=\"icon-calendar hidden-print\"></i><span class=\"hidden-tablet hidden-print\"> Agenda</span></a></li>";
+					
+
+?>
+
+
 					</ul>
 				</div>
 			</div>

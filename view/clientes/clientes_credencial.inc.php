@@ -1,7 +1,7 @@
 
 <?php
 
-$cliente_id = $_SESSION['cliente_id'];?>
+$cliente_id = $_GET['cid'];?>
 
 <html>
 <head>

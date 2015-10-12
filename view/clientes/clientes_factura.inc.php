@@ -1,6 +1,7 @@
 <?php 
 $fid=$_GET['fid'];
 $fid=substr($fid,1,6);
+$nid=$_SESSION['nid'];
 
  ?>
 <div class=" span12">
@@ -16,7 +17,10 @@ $fid=substr($fid,1,6);
 							<input type=hidden name=type value=dev>
 							<input type=hidden name=fid value='<?php echo $fid?>'>
 
-				  			 &nbsp;&nbsp;item <input classe="input-xlarge focused" id="textcode" name="code" >
+				  			 <?php 
+				  			 	if ($nid<=8) echo "&nbsp;&nbsp;item <input classe=\"input-xlarge focused\" id=\"textcode\" name=\"code\" >";   
+				  			 	
+				  			 ?>
 				  			</td>
 				  		</tr>
 				  		</table>
@@ -43,13 +47,13 @@ $fid=substr($fid,1,6);
 
 				<div class="box span4">
 
-							  		<?php view_devoluciones($fid)?>
+							  		<?php if ($nid<=8)view_devoluciones($fid)?>
 					
 				</div><!--/span-->
 
 				<div class="box span4 hidden-print">
 
-							  		<?php ticket_devolucion($fid)?>
+							  		<?php if ($nid<=8) ticket_devolucion($fid)?>
 					
 				</div><!--/span-->
 

@@ -1,8 +1,10 @@
 
 <?php
 
-$cliente_id = $_GET['cid'];?>
+$cliente_id = $_GET['cid'];
+$cliente_id=substr($cliente_id,1,6);
 
+?>
 <html>
 <head>
 	<title></title>
@@ -10,15 +12,19 @@ $cliente_id = $_GET['cid'];?>
 <style type="text/css">
 
 
-
+.credencial {
+	width:300px;
+}
 .destinatario{
-	height:50px;
+	/*height:50px;*/
 	text-transform: uppercase;
+	font-size: 8pt;
 }
 	
 
 .header{
-	height: 150px;
+	height: 50px;
+	text-align: center;
 
 }
 .beneficios{
@@ -51,7 +57,7 @@ $cliente_id = $_GET['cid'];?>
 
 }
 .fecha{
-	text-align: right;
+	text-align: left;
 	width:700px;
 }
 
@@ -61,29 +67,48 @@ $cliente_id = $_GET['cid'];?>
 <?php 
 if($cliente_id)
 	{
-		 $query = "SELECT apellidop, apellidom, nombre, empresa  FROM cliente,empresa
+		 $query = "SELECT cliente_id,apellidop, apellidom, nombre, empresa  FROM cliente,empresa
 			WHERE  cliente.empresa_id=empresa.empresa_id AND cliente_id=".$cliente_id;
-		list( $apellidop,$apellidom,$nombre,$empresa ) = $database->get_row( $query );
-			$cliente= $apellidop." ".$apellidom." ".$nombre;
+		list( $cliente_id,$apellidop,$apellidom,$nombre,$empresa ) = $database->get_row( $query );
+			$apellidos= $apellidop." ".$apellidom;
 
 						
 						
-				} 
+		$cliente_id=sprintf('C%06d', $cliente_id);
+	} 
+
+
  ?>
-
+<div class="credencial">
 
 <div class="header">
-<img width=300 src="/img/tiendasalberto.png">
-<div class="fecha">Mexicali a <?php echo date("d-m-Y")?></div>
-</div>
 
-	<div class="destinatario">Apreciable <strong><?php echo strtoupper($cliente)?></strong></div>
-	<div class="documento">
+<img width=200 src="/img/tiendasalberto.png">
+<!-- <div class="fecha">Mexicali a <?php echo date("d-m-Y")?></div> -->
+</div>
+<div><table width=100%>
+	<tr><td>&nbsp;</td>
+		<td ><center><img width=150 src="barcode.php?text=<?php echo $cliente_id?>" alt="barcode" /></center>
+			<div class="destinatario">Nombre:<br> <strong><?php echo strtoupper($apellidos)?><br>
+			<?php echo strtoupper($nombre)?></strong></div>
+		</td>
+		
+		<td><img width=100 src=/img/avatar.jpg align=right></td>
+	</tr>
+	<tr><td colspan=4><center><br><br>Es correcta la informacion?<br><br> 
+
+<a href="/index.php?data=pos" class="btn" data-dismiss="modal">NO</a>
+<a href="/functions/cart.php?func=sel_cliente&cid=<?php echo $cliente_id?>" class="btn btn-primary" data-dismiss="modal">SI</a>
+
+		</center></td></tr>
+	</table>
+</div>
+	
+<!-- 	<div class="documento">
 		<p>En <strong>Tiendas Alberto</strong> estamos interesados en apoyar la economia de las familias mexicalenses, en convenio 
 		con <strong><?php echo $empresa?></strong> reconociendo  a sus exelentes empleados, les ofrece este 
 		 <strong style="backgorund:red;">CREDITO PRE APROBADO</strong> por la cantidad de:<br>    
 		<center><h1><br><strong>$ 3 000.00 MXN</strong></h1></center>
-		   <!-- para la adquision de productos en Tiendas Alberto. -->
 		   </p>
 
 	<p><Br><Br>Unicamente presente esta carta  y una identificacion oficial a un representante o personalmente 
@@ -105,12 +130,10 @@ if($cliente_id)
 
 <div class="conocenos"><br><br><br><br>VEN Y UTILIZA TU CREDITO INMEDIATAMENTE</div>
 
-<div class="firma">
-	<!-- <div>Atentamente</div>  -->
-	<!-- <div><h2>Tiendas Alberto</h2></div> -->
+ -->
+
+
+
 </div>
-
-
-
 </body>
 </html>

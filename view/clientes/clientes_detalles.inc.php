@@ -63,8 +63,9 @@ if ($_GET['eed']==2)
 												<a href=\"index.php?data=clientes&op=subirfoto&cid=$cliente_id\">
 												<button class=\"btn btn-primary\"><i class=\"halflings-icon white camera\"></i></button></a>";
 												
-												echo " <a href=\"/index.php?data=clientes&op=cartainvitacion\" class=\"btn btn-primary hidden-print\">*</a>";
-												echo " <a href=\"/index.php?data=clientes&op=credencial\" class=\"btn btn-primary hidden-print\">CRED</a>";
+												echo " <a href=\"/index.php?data=clientes&op=cartainvitacion&cid=$cid\" class=\"btn btn-primary hidden-print\">*</a>";
+												echo " <a href=\"/index.php?data=clientes&op=credencial&cid=$cid\" class=\"btn btn-primary hidden-print\">CRED</a>";
+												echo " <a href=\"/index.php?data=clientes&op=contrato&cid=$cid\" class=\"btn btn-primary hidden-print\">Contrato</a>";
 											}
 
 											?>											
