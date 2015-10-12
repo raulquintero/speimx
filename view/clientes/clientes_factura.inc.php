@@ -1,3 +1,8 @@
+<?php 
+$fid=$_GET['fid'];
+$fid=substr($fid,1,6);
+
+ ?>
 <div class=" span12">
 
 					<div class="hidden-print">
@@ -9,7 +14,7 @@
 							<input type=hidden name=data value=clientes>
 							<input type=hidden name=op value=factura>
 							<input type=hidden name=type value=dev>
-							<input type=hidden name=fid value='<?php echo $_GET['fid']?>'>
+							<input type=hidden name=fid value='<?php echo $fid?>'>
 
 				  			 &nbsp;&nbsp;item <input classe="input-xlarge focused" id="textcode" name="code" >
 				  			</td>
@@ -29,7 +34,7 @@
 					<div class="">
 		
 					<?php
-					getfactura($_GET['fid']);
+					getfactura($fid);
 					?>
 					<br><br><br>
 					</div>
@@ -38,13 +43,13 @@
 
 				<div class="box span4">
 
-							  		<?php view_devoluciones($_GET['fid'])?>
+							  		<?php view_devoluciones($fid)?>
 					
 				</div><!--/span-->
 
 				<div class="box span4 hidden-print">
 
-							  		<?php ticket_devolucion($_GET['fid'])?>
+							  		<?php ticket_devolucion($fid)?>
 					
 				</div><!--/span-->
 

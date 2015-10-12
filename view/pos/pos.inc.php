@@ -43,7 +43,7 @@
 							<input type=hidden name=data value=pos>
 							<input type=hidden name=op value=detalles>
 							<input type=hidden name=type value=item>
-				  			 &nbsp;&nbsp;Item <input class="input-large" id="textcode" name="code" >
+				  			 &nbsp;&nbsp;Codigo: <input class="input-large" id="textcode" name="code" >
 				  			</td>
 				  		</tr>
 				  		</table>
@@ -52,10 +52,10 @@
 			
 		
 				
-				  		<div class="box-header " data-original-title>
+				  		<div class="box-header  " data-original-title>
 					  		<h2><i class="halflings-icon calendar"></i><span class="break"></span>Punto de Venta</h2>
 				  		</div>
-						<table class="table table-striped table-bordered bootstrap-datatable datatable hidden-phone">
+						<table class="table hidden table-striped table-bordered bootstrap-datatable datatable hidden-phone">
 						  <thead>
 							  <tr>
 								  <!-- <th>sku1</th> -->

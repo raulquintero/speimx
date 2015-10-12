@@ -64,6 +64,7 @@ if ($_GET['eed']==2)
 												<button class=\"btn btn-primary\"><i class=\"halflings-icon white camera\"></i></button></a>";
 												
 												echo " <a href=\"/index.php?data=clientes&op=cartainvitacion\" class=\"btn btn-primary hidden-print\">*</a>";
+												echo " <a href=\"/index.php?data=clientes&op=credencial\" class=\"btn btn-primary hidden-print\">CRED</a>";
 											}
 
 											?>											

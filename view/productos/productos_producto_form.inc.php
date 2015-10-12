@@ -86,9 +86,8 @@
 								  </label>
 								 </div>
 								</div>
-hola
 
-							<?php echo $subcategoria_id;combobox("subcategoria",$subcategoria_id)?>
+							<?php combobox("subcategoria",$subcategoria_id)?>
 
 
 							  <div class="control-group ">

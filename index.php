@@ -22,9 +22,50 @@ foreach( $_GET as $key => $value )
 
 
 
-$code=(htmlspecialchars($_GET["code"]));
+$code=strtoupper(htmlspecialchars($_GET["code"]));
 
 $type=(htmlspecialchars($_GET["type"]));
+
+$cuantos=strlen($code);
+
+echo $code[0];
+if ($cuantos==7)
+		{
+			switch ($code[0]) {
+				case 'T':
+					$location="Location: /index.php?data=clientes&op=factura&fid=$code";
+					break;
+				case 'C':
+					$location="Location: /functions/cart.php?func=sel_cliente&cid=$code";
+					break;
+				
+				default:
+					# code...
+					break;
+			}
+			header($location);
+
+
+				//  ************ consultar tickets
+			if ($code[0]=="T")
+			{
+				// ************  devoluciones
+
+				$location="Location: /index.php?data=clientes&op=factura&fid=T000006";
+				header($location);
+
+			}  
+			 if ($code[0]=="T")
+			{
+				// ************  devoluciones
+
+				$location="Location: /index.php?data=clientes&op=factura&fid=T000006";
+				header($location);
+
+			}   
+
+		}
+
 
 switch ($type) {
 	case 'item':
