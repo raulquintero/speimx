@@ -72,6 +72,8 @@ foreach( $_GET as $key => $value )
 						<?php 
 						if ($factura_id)
 						{
+							$no_ticket=sprintf('T%06d', $factura_id);
+
 							echo "<table width=350><tr><td>";
 							getticket($factura_id);      // formato.php
 				
@@ -80,14 +82,17 @@ foreach( $_GET as $key => $value )
 							<center>
 							_______________________<br>";
 							echo strtoupper($nombre_completo);
-							echo "</center>
-							<center><br><br>
+							echo "<br><br><br>";
+
+							echo " <img width=200 src=\"barcode.php?text=".$no_ticket."\" alt=\"barcode\" />";
+							
+							echo "<br><br>
 						 	http://tiendasalberto.com<br>";
 						 
 						 	echo $ticket;
 						 	echo "<br>
 							</center>
-							<br><Br><br><br>";
+							<br><Br>";
 							echo "</td><td>&nbsp;</td></tr></table>";
 						}
 					
@@ -123,7 +128,7 @@ foreach( $_GET as $key => $value )
 				<div class="box-content span6">
 				<table width=350>
 					<tr><td>	
-						<br><br><br>
+						
 						Recuerde que:<br>
 						Todas las ventas son VENTAS FINALES, <br>
 						NO se regresa dinero, solo se cambia por mercancia dentro de los primeros 7 dias

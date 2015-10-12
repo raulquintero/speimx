@@ -66,11 +66,16 @@ foreach( $_GET as $key => $value )
 						<?php 
 						if ($movimiento_id)
 						{
+							$no_ticket=sprintf('A%06d', $movimiento_id);
+
 							echo "<table width=380><tr><td>";
 							getabono($movimiento_id);   //formato.php
 										
 							echo "<br>";
-							echo "</td><td>&nbsp</td></tr></table>";
+							echo "</td><td>&nbsp</td></tr>";
+							echo "<tr><td><br><br><Br><center><img width=200 src=\"barcode.php?text=".$no_ticket."\" alt=\"barcode\" /></center></td></tr>";
+							echo "</table>";
+
 						}
 					
 
