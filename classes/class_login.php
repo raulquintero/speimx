@@ -165,6 +165,9 @@ class Login
                 $_SESSION['user_login_session']=TRUE;
                 $_SESSION['administrador']=$fetch['nombre'].' '.$fetch['apellidop'];
                 $_SESSION['cart']=$item;
+                $_SESSION['fid_dev']=0;
+                $_SESSION['cart_temp']=$item;
+                $_SESSION['cart_dev']=$item;
                 $_SESSION['cliente_id']=0;
                 $_SESSION['nid']=$fetch['nivel_id'];
             }

@@ -91,7 +91,7 @@ if($cliente_id)
 			<?php echo strtoupper($nombre)?></strong></div>
 		</td>
 		
-		<td><img width=100 src=/img/avatar.jpg align=right></td>
+		<td><img width=100 src=/img/noimage.png align=right></td>
 	</tr>
 	</table>
 </div>

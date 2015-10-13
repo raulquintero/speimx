@@ -34,11 +34,13 @@ $database = new DB();
 				echo "</td></tr>";
 				echo "<tr><td>&nbsp;</td></tr>";
 
+						//$item = $_SESSION['cart_temp'];
 							 
 				if ($tipomov_id==3)
 							
 				{
-					$query = "SELECT  facturadet_id,facturadet.factura_id,facturadet.producto,facturadet.precio_credito,facturadet.iva_credito,producto.codigo,facturadet.tipomov_id, color,talla,sku 
+					$query = "SELECT  facturadet.producto_id,facturadet_id,facturadet.factura_id,facturadet.producto,facturadet.precio_credito,
+					facturadet.iva_credito,producto.codigo,facturadet.tipomov_id, color,talla,sku 
 					FROM facturadet,producto, factura
 					WHERE  facturadet.producto_id=producto.producto_id AND facturadet.factura_id=factura.factura_id AND facturadet.factura_id=".$fid;
 
@@ -50,6 +52,20 @@ $database = new DB();
 	
 					foreach( $results as $item )
 					{
+ 					   	$item_temp[] = array(
+                			'id'      => $_item['producto_id'],
+                			'facturadet_id'      => $item['facturadet_id'],
+                			'cantidad'     => 1,
+                			'precio_credito'   => $item['precio_credito'],
+                			'precio_contado'   => $item['precio_contado'],
+                			'producto'    => substr($item['producto'],0,26),
+                			'codigo' => $item['codigo'],
+                			'sku' => $item['sku'],
+                			'color'    => $item['color'],
+                			'talla'    => $item['talla'],
+                			'tipomov_id'    => $item['tipomov_id']
+            				);
+        
 		
 						echo "<tr><td>&nbsp;</td><td>".$item['facturadet_id']." ".$item['sku']."<br>
 							". substr($item['producto'],0,26)."...</a>
@@ -105,6 +121,20 @@ $database = new DB();
 					foreach( $results as $item )
 					{
 		
+								$item_temp[] = array(
+                			'id'      => $_item['producto_id'],
+                			'facturadet_id'      => $item['facturadet_id'],
+                			'cantidad'     => 1,
+                			'precio_credito'   => $item['precio_credito'],
+                			'precio_contado'   => $item['precio_contado'],
+                			'producto'    => substr($item['producto'],0,26),
+                			'codigo' => $item['codigo'],
+                			'sku' => $item['sku'],
+                			'color'    => $item['color'],
+                			'talla'    => $item['talla'],
+                			'tipomov_id'    => $item['tipomov_id']
+            				);
+
 						echo "<tr><td>&nbsp;</td><td>".$item['facturadet_id']."-".$item['sku']."<br>
 							". substr($item['producto'],0,26)."...</a>
 							<br><p class=\"muted\" >"
@@ -144,18 +174,24 @@ $database = new DB();
 							}
 
 
-						echo "<tr><td colspan=4 align=center><br><br><br>
-							_________________________________________";
+						// echo "<tr><td colspan=4 align=center><br><br><br>_________________________________________";
 
 						
-						if ($cliente_id) echo "<br>Cliente: ". strtoupper($cliente);
-						echo "<br><br><br><br>"; //Tipo de Venta: <span class=\"label label-inverse\">Contado</span><br><br>";
+						// if ($cliente_id) echo "<br>Cliente: ". strtoupper($cliente);
+						//echo "<br><br><br><br>"; //Tipo de Venta: <span class=\"label label-inverse\">Contado</span><br><br>";
 
 
-						echo "</td></tr>";	
+						//echo "</td></tr>";	
 					
 				echo "</table>";
 
+ // echo "<br><br>array: <br>";
+ //     print_r($item_temp);
+
+    						$_SESSION['cart_temp']=$item_temp;
+
+  // echo "<br><br>session: <br>";
+  //     print_r($_SESSION['cart_dev']);
 
 
 }
@@ -175,6 +211,8 @@ $database = new DB();
 	 					$cliente= $apellidop." ".$apellidom." ".$nombre;
 	 }
 
+
+
 				echo "<table   width=100%>
 						<tr>
 							<td style='text-align:center;border-bottom:1px dotted black' colspan=4>
@@ -190,7 +228,7 @@ $database = new DB();
 					echo "<br>"; //Tipo de Venta: <span class=\"label label-inverse\">Contado</span><br><br>";
 
 				echo "Folio: $factura_id [$cliente_id]<br>";
-				echo "Fecha y Hora: ".$fecha_factura;    //date("d-m-Y  H:m:s");
+				echo "Fecha y Horas : ".$fecha_factura;    //date("d-m-Y  H:m:s");
 				echo "<br>";
 				
 
@@ -201,40 +239,64 @@ $database = new DB();
 				if ($tipomov_id==3)
 							
 				{
-					$query = "SELECT  facturadet.facturadet_id,facturadet.factura_id,facturadet.producto,facturadet.precio_credito,facturadet.iva_credito,producto.codigo,facturadet.tipomov_id, color,talla 
-					FROM facturadet,producto, factura
-					WHERE  facturadet.producto_id=producto.producto_id AND facturadet.factura_id=factura.factura_id AND facturadet.factura_id=".$fid;
-
-					$results = $database->get_results( $query );
-								
-					$n=0;
-					$total=0;
-	
-	
-					foreach( $results as $item )
-					{
-		
-						echo "<tr><td>&nbsp;</td><td>".$item['facturadet_id']." ".$item['sku']."<br>
-							". substr($item['producto'],0,26)."...</a>
-							<br><p class=\"muted\" >"
-							.$item['color']." ".$item['talla']."</p></td> 
-							<td style='text-align:right;vertical-align:text-top'>";
-						if ($tipomov_id==3) echo dinero($item['precio_credito']+($item['precio_credito']*.16)); else echo dinero($item['precio_contado']+($item['precio_contado']*.16));
 					
-						echo "</td>";
-						// if ($item['tipomov_id']==2 || $item['tipomov_id']==3 )
-						// 	echo "<td style='text-align:right;vertical-align:text-top'><a href=\"#\" class=\"btn btn-info blue btn-setting\">Devolucion</a></td> ";
-						// else
-						// 	echo "<td></td>";
-						echo"</tr>";
+								if (!$_SESSION['cart_dev'])
+									echo "<tr><td style='text-align:center'><br>
+										<img src=/img/empty_cart.jpeg><br><strong>Carrito Vacio</strong><br><br><br></td></tr>";
+								else
+								{
+									$item=$_SESSION['cart_dev'];
+								
+									$n=0;
+									$total=0;
+									foreach ($item as $row => $value) 
+									{
+										echo "<tr><td>hola".$item[$n]['facturadet_id']."</td> <td>
+											<a href=\"/index.php?data=pos&op=detalles&prid=".$item[$n]['id']."\">".$item[$n]['sku']."<br>". substr($item[$n]['producto'],0,23)."...</a> 
+											<br>".strtolower($item[$n]['color'])." ".strtoupper($item[$n]['talla'])."</td> 
+											<td style='text-align:right'>";
+											if ($cliente_id) echo dinero($item[$n]['precio_credito']+($item[$n]['precio_credito']*.16)); else echo dinero($item[$n]['precio_contado']+($item[$n]['precio_contado']*.16));
+											echo "</td><td><a href=\"/functions/cart_dev.php?func=del_item&i=$n\" class=\"\">
+											<i class=\"halflings-icon trash\"></i></i></a></td></tr>";
 										
-						$total_credito+=$item['precio_credito'];
-						$total_contado+=$item['precio_contado'];
+										$total_credito+=$item[$n]['precio_credito'];
+										$total_contado+=$item[$n]['precio_contado'];
 										
-						$n++;
-					}
+										$n++;
+
+									}
+
+// echo "<tr><td>---</td><td>";
+
+//   echo "<br><br>session: <br>";
+//       print_r($_SESSION['cart_dev']);
+//       echo "<br>";
+
+//  echo "</td></tr>";
+									
+								}
+							
 				}	
 
+									// $item_temp=$_SESSION['cart_temp'];
+								
+									// $n=0;
+									// $total=0;
+									// foreach ($item_temp as $row => $value) 
+									// {
+									// 	echo "<tr><td>aqui ".$item_temp[$n]['facturadet_id']."</td> <td>
+									// 		<a href=\"/index.php?data=pos&op=detalles&prid=".$item_temp[$n]['id']."\">".$item_temp[$n]['sku']."<br>". substr($item_temp[$n]['producto'],0,23)."...</a> 
+									// 		<br>".strtolower($item_temp[$n]['color'])." ".strtoupper($item_temp[$n]['talla'])."</td> 
+									// 		<td style='text-align:right'>";
+									// 		if ($cliente_id) echo dinero($item_temp[$n]['precio_credito']+($item_temp[$n]['precio_credito']*.16)); else echo dinero($item_temp[$n]['precio_contado']+($item_temp[$n]['precio_contado']*.16));
+									// 		echo "</td><td>".$item_temp[$n]['tipomov_id']."</td></tr>";
+										
+									// 	$total_credito+=$item_temp[$n]['precio_credito'];
+									// 	$total_contado+=$item_temp[$n]['precio_contado'];
+										
+									// 	$n++;
+
+									// }
 
 				if ($total_credito AND $cliente_id>0)
 				{
@@ -252,7 +314,7 @@ $database = new DB();
 					echo "<tr><td>&nbsp;</td><td>&nbsp;</td></tr>";
 					
 				} 
-				else
+				else 
 					if ($cliente_id==0)
 					{
 
@@ -263,20 +325,21 @@ $database = new DB();
 								
 					$n=0;
 					$total=0;
+					
+					$item_temp=$_SESSION['cart_dev'];
 	
-	
-					foreach( $results as $item )
+					foreach ($item_temp as $row => $value)
 					{
 		
-						echo "<tr><td>&nbsp;</td><td>".$item['facturadet_id']." ".$item['sku']."<br>
-							". substr($item['producto'],0,26)."...</a>
+						echo "<tr><td>&nbsp;</td><td>".$item_temp[$n]['facturadet_id']." ".$item_temp[$n]['sku']."<br>
+							". substr($item_temp[$n]['producto'],0,26)."...</a>
 							<br><p class=\"muted\" >"
-							.$item['color']." ".$item['talla']."</p></td> 
+							.$item_temp[$n]['color']." ".$item_temp[$n]['talla']."</p></td> 
 							<td style='text-align:right;vertical-align:text-top'>";
-							echo dinero($item['precio_contado']*1.16);
+							echo dinero($item_temp[$n]['precio_contado']*1.16);
 					
-						echo "</td>";
-
+						echo "</td><td><a href=\"/functions/cart_dev.php?func=del_item&i=$n\" class=\"\">
+											<i class=\"halflings-icon trash\"></i></i></a></td>";
 						// if ($item['tipomov_id']==2 || $item['tipomov_id']==3 )
 						// 	echo "<td></td>";
 						// else
@@ -284,8 +347,8 @@ $database = new DB();
 
 						echo "</tr>";
 										
-						$total_credito+=$item['precio_credito'];
-						$total_contado+=$item['precio_contado'];
+						$total_credito+=$item_temp[$n]['precio_credito'];
+						$total_contado+=$item_temp[$n]['precio_contado'];
 										
 						$n++;
 					}

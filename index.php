@@ -25,14 +25,16 @@ $nid=$_SESSION['nid'];
 $code=strtoupper(htmlspecialchars($_GET["code"]));
 
 $type=(htmlspecialchars($_GET["type"]));
+$fid_dev=(htmlspecialchars($_GET["fid_dev"]));
 
 $cuantos=strlen($code);
 
-echo $code[0];
-if ($cuantos==7)
+if ($cuantos==7 )
 		{
 			switch ($code[0]) {
 				case 'T':
+					$_SESSION['cart_dev']="";
+					$_SESSION['cart_temp']="";
 					$location="Location: /index.php?data=clientes&op=factura&fid=$code";
 					break;
 				case 'C':
@@ -45,28 +47,39 @@ if ($cuantos==7)
 					break;
 			}
 			header($location);
-
-
-				//  ************ consultar tickets
-			if ($code[0]=="T")
-			{
-				// ************  devoluciones
-
-				$location="Location: /index.php?data=clientes&op=factura&fid=T000006";
-				header($location);
-
-			}  
-			 if ($code[0]=="T")
-			{
-				// ************  devoluciones
-
-				$location="Location: /index.php?data=clientes&op=factura&fid=T000006";
-				header($location);
-
-			}   
-
 		}
 
+
+if ($cuantos==8)
+		{
+			switch ($type) {
+				case 'dev':
+					$_SESSION['fid_dev']=$fid_dev;
+					$query = "SELECT facturadet_id,producto,sku,color,talla,precio_contado,precio_credito,iva_contado,iva_credito 
+					 FROM facturadet WHERE facturadet.sku='$code' AND facturadet.factura_id='$fid_dev'";
+
+					list( $facturadet_id,$producto,$sku,$color,$talla,$precio_contado,$precio_credito,$iva_contado,$iva_credito,
+						$precio_promocion,$descuento) = $database->get_row( $query );
+					//$precio_credito+=$iva_credito;
+					//$precio_contado+=$iva_contado;
+
+					$location="Location: /functions/cart_dev.php?fid_dev=$fid_dev&facturadet_id=$facturadet_id&sku=$sku&producto=$producto&color=$color&talla=$talla
+					&precio_contado=$precio_contado&precio_credito=$precio_credito&func=add_item";
+					break;
+				case 'C':
+					 $location="Location: /index.php?data=clientes&op=verificar&cid=$code";
+					// $location="Location: /functions/cart.php?func=sel_cliente&cid=$code";
+					break;
+				
+				default:
+					# code...
+					break;
+			}
+			//exit();
+			header($location);
+		}
+
+//exit();
 
 switch ($type) {
 	case 'item':
@@ -82,12 +95,13 @@ switch ($type) {
 
 		list( $color,$producto_id,$producto,$proveedor,$precio_compra,$precio_contado,$precio_credito,$precio_promocion,$descuento,
 			$marca,$codigo,$codigo_inventario ,$talla_id, $talla,$unidad,$estilo,$subcategoria  ) = $database->get_row( $query );
-
+		$producto=htmlspecialchars($producto);
 
 		 $location="Location: /functions/cart.php?func=add_item&prid=$producto_id&producto=$producto&marca=$marca&codigo=$codigo&codigo_inventario=$codigo_inventario
 		&talla=$talla&color=$color&precio_credito=$precio_credito&precio_contado=$precio_contado";
 		//if ($codigo_inventario)
-		header($location);
+		
+		if ($producto_id) 		header($location);
 		}
 		break;
 	
@@ -477,7 +491,7 @@ switch ($type) {
 						if ($nid<5) echo "<li><a href=\"index.php?data=mensajes\"   ><i class=\"icon-envelope hidden-print\"></i><span class=\"hidden-tablet hidden-print\"> Messages</span></a></li>";
 						 echo "<li><a href=\"index.php?data=pos\"        ><i class=\"icon-shopping-cart hidden-print\" ></i><span class=\"hidden-tablet hidden-print\"> PoS</span></a></li>";
 
-						if ($nid<=8) echo "<li><a class=\"dropmenu\" href=\"#\"><i class=\"icon-chevron-right hidden-print\"></i><span class=\"hidden-tablet hidden-print\"> Sistema </span>";
+						if ($nid<=8) echo "<li><a class=\"dropmenu\" href=\"#\"><i class=\"icon-chevron-right hidden-print\"></i><span class=\"hidden-tablet hidden-print\"> Sistema </span></a>";
 							echo "<ul>";
 								
 								if ($nid<=8) echo "<li><a href=\"index.php?data=clientes&op=devoluciones\"><i class=\"icon-book\"    ></i><span class=\"hidden-tablet\"> Devoluciones</span></a></li>";
@@ -486,7 +500,7 @@ switch ($type) {
 							echo "</ul>";
 						echo "</li>";
 						echo "<li>";
-							if ($nid<=6) echo "<a class=\"dropmenu\" href=\"#\"><i class=\"icon-chevron-right hidden-print\">   </i><span class=\"hidden-tablet hidden-print\"> Captura </span>";
+							if ($nid<=6) echo "<a class=\"dropmenu\" href=\"#\"><i class=\"icon-chevron-right hidden-print\">   </i><span class=\"hidden-tablet hidden-print\"> Captura </span></a>";
 							echo "<ul>";
 								if ($nid<=6) echo "<li><a href=\"index.php?data=clientes\"><i class=\"icon-group\"></i><span class=\"hidden-tablet\"> Clientes</span></a></li>";
 								if ($nid<=6) echo "<li><a href=\"index.php?data=empresas\"><i class=\"icon-road\"></i><span class=\"hidden-tablet\"> Empresas Nomina</span></a></li>";

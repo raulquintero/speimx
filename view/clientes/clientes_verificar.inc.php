@@ -93,7 +93,7 @@ if($cliente_id)
 			<?php echo strtoupper($nombre)?></strong></div>
 		</td>
 		
-		<td><img width=100 src=/img/avatar.jpg align=right></td>
+		<td><img width=100 src=/img/noimage.png align=right></td>
 	</tr>
 	<tr><td colspan=4><center><br><br>Es correcta la informacion?<br><br> 
 

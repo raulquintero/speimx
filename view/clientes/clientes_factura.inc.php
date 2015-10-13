@@ -12,10 +12,10 @@ $nid=$_SESSION['nid'];
 				 			<tr bgcolor=#dddddd>
 				  			<td style="padding:10px">
 
-							<input type=hidden name=data value=clientes>
-							<input type=hidden name=op value=factura>
-							<input type=hidden name=type value=dev>
-							<input type=hidden name=fid value='<?php echo $fid?>'>
+							<input type="hidden" name="data" value="clientes">
+							<input type="hidden" name="op" value="factura">
+							<input type="hidden" name="type" value="dev">
+							<input type="hidden" name="fid_dev" value='<?php echo $fid?>'>
 
 				  			 <?php 
 				  			 	if ($nid<=8) echo "&nbsp;&nbsp;item <input classe=\"input-xlarge focused\" id=\"textcode\" name=\"code\" >";   
