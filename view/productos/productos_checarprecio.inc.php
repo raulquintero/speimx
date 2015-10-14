@@ -15,9 +15,8 @@
 
 <?php
 
-echo $code=$_GET['code'];
-
-$query="SELECT producto.producto_id,producto,precio_contado,precio_credito,stock,cantidad,subcategoria,color,talladet
+$code=$_GET['code'];
+	$query="SELECT producto.producto_id,producto,precio_contado,precio_credito,stock,cantidad,subcategoria,color,talladet
 	from producto,inventariodet,subcategoria,color,talladet
 		where producto.producto_id=inventariodet.producto_id AND 
 		producto.subcategoria_id=subcategoria.subcategoria_id AND 
@@ -25,25 +24,39 @@ $query="SELECT producto.producto_id,producto,precio_contado,precio_credito,stock
 		talladet.talladet_id=inventariodet.talladet_id AND
 		inventariodet.codigo=$code";
 	
-list( $producto_id,$producto,$precio_contado,$precio_credito,$stock,$cantidad,$subcategoria,$color,$talla) = $database->get_row( $query );
+	list( $producto_id,$producto,$precio_contado,$precio_credito,$stock,$cantidad,$subcategoria,$color,$talla) = $database->get_row( $query );
 
-echo "<br> $producto";
-echo "<br> $subcategoria";
-echo "<br>Precio Contado: $".dinero($precio_contado*1.16);
-echo "<br>Precio Credito: $".dinero($precio_credito*1.16);
+if ($producto_id)
+{
 
-echo "<br>Color: $color";
-echo "<br>Talla: $talla";
-echo "<br>Stock: $stock";
+	echo "<br> $code";
+	echo "<br> $producto";
+	echo "<br> $subcategoria";
+	echo "<br>Precio Contado: $".dinero($precio_contado*1.16);
+	echo "<br>Precio Credito: $".dinero($precio_credito*1.16);
 
-$query="SELECT color from color where  producto_id=$producto_id ";
+	echo "<br>Color: $color";
+	echo "<br>Talla: $talla";
+	echo "<br>Stock: $stock";
+
+	$query="SELECT color from color where  producto_id=$producto_id ";
 
 	$results = $database->get_results( $query );
 	
 	
 	$i=0;
-foreach( $results as $row )
+	foreach( $results as $row )
+	{
+
+	}
+
+}
+else
 {
+				echo "<div class=\"alert alert-block span10\">
+					<h4 class=\"alert-heading\">Aviso!</h4>
+					<p>No se encotro informacion sobre este producto.</p>
+				</div>";
 
 }
 ?>
