@@ -66,8 +66,8 @@ if ($cuantos==8)
 					$location="Location: /functions/cart_dev.php?fid_dev=$fid_dev&facturadet_id=$facturadet_id&sku=$sku&producto=$producto&color=$color&talla=$talla
 					&precio_contado=$precio_contado&precio_credito=$precio_credito&func=add_item";
 					break;
-				case 'C':
-					 $location="Location: /index.php?data=clientes&op=verificar&cid=$code";
+				case 'checarprecio':
+					 $location="Location: /index.php?data=productos&op=checarprecio&code=$code";
 					// $location="Location: /functions/cart.php?func=sel_cliente&cid=$code";
 					break;
 				
@@ -490,6 +490,7 @@ switch ($type) {
 						if ($nid<=6) echo "<li><a href=\"index.html\"><i class=\"icon-bar-chart hidden-print\"></i><span class=\"hidden-tablet hidden-print\"> Dashboard</span></a></li>";
 						if ($nid<5) echo "<li><a href=\"index.php?data=mensajes\"   ><i class=\"icon-envelope hidden-print\"></i><span class=\"hidden-tablet hidden-print\"> Messages</span></a></li>";
 						 echo "<li><a href=\"index.php?data=pos\"        ><i class=\"icon-shopping-cart hidden-print\" ></i><span class=\"hidden-tablet hidden-print\"> PoS</span></a></li>";
+						 echo "<li><a href=\"index.php?data=productos&op=checarprecio\"><i class=\"icon-barcode hidden-print\" ></i><span class=\"hidden-tablet hidden-print\"> Checar Precio</span></a></li>";
 
 						if ($nid<=8) echo "<li><a class=\"dropmenu\" href=\"#\"><i class=\"icon-chevron-right hidden-print\"></i><span class=\"hidden-tablet hidden-print\"> Sistema </span></a>";
 							echo "<ul>";
@@ -535,15 +536,15 @@ switch ($type) {
 
 
 			<!-- start: Content -->
-			<div id="content" class="span10 ">
-			
 <?php
 	$data=(htmlspecialchars($_GET["data"]));
 	$op=(htmlspecialchars($_GET["op"]));
 	$lnk=(htmlspecialchars($_GET["data"])).".inc.php";
 ?>
+			<div id="content" class="span10 ">
+			
 						
-			<ul class="breadcrumb hidden-print">
+			<ul class="breadcrumb hidden-print hidden-phone">
 				<li>
 					<i class="icon-home "></i>
 					<a href="index.html" >Home</a> 

@@ -32,9 +32,9 @@
 
 			<div class="row-fluid condensed">
 		
-					<div class="box-content span8 " >
+					<div class="box-content span8 hidden-phone" >
 
-					<div class="hidden-print">
+					<div class="hidden-print ">
 					<form action="/index.php" method="get">
 							<table  width=100%  >
 				 			<tr bgcolor=#dddddd>
@@ -52,64 +52,10 @@
 			
 		
 				
-				  		<div class="box-header  " data-original-title>
+				  		<div class="box-header " data-original-title>
 					  		<h2><i class="halflings-icon calendar"></i><span class="break"></span>Punto de Venta</h2>
 				  		</div>
-						<table class="table hidden table-striped table-bordered bootstrap-datatable datatable hidden-phone">
-						  <thead>
-							  <tr>
-								  <!-- <th>sku1</th> -->
-								  <th classes="hide">SKU</th>
-								  <th>Producto</th>
-								  <!-- <th>Color</th> -->
-								  <th  style="text-align:right">Precio</th>
-								  <th class="hide" style="text-align:right">Stock</th>
-
-							  </tr>
-						  </thead>   
-						  <tbody>
-
-							<?php
-
-							for ($i=0; $i < 10; $i++) { 
-								echo "<tr><td>&nbsp;</td><td></td><td></td><td></td></tr>";
-							}
-
-									$query = "SELECT producto.producto_id,producto,precio_compra,precio_contado,precio_credito,stock,proveedor,codigo, subcategoria 
-										FROM producto,proveedor,subcategoria 
-										where producto.proveedor_id=proveedor.proveedor_id AND producto.subcategoria_id=subcategoria.subcategoria_id 
-											AND producto.stock>0";
-							$results = $database->get_results( $query );
-							foreach( $results as $row )
-							{
-
-							?>
-								<tr>
-									<td classes="center " height=30><span class="hide"><?php echo $codigo." ".$row['producto_id']?></span> <?php echo $row['codigo']?></td>
-									<td><a href=index.php?data=pos&op=detalles&prid=<?php echo $row['producto_id']?>&color=<?php echo $row['color_id']?>>
-										<?php echo strtoupper($row['producto'])?> </a>
-										</td>
-									 <!-- <td><?php echo strtoupper($row['color'])?></td> --> 
-							<?php			
-									$precio_contadomasiva=($row['precio_contado']*.16)+$row['precio_contado'];					
-									$precio_creditomasiva=($row['precio_credito']*.16)+$row['precio_credito'];	
-
-									 if ($cliente_id>0)
-									 	echo "<td class=\"right\" style='text-align:right'>$ ".dinero($precio_creditomasiva)."</td>";
-									 else
-										echo "<td class=\"right \" style='text-align:right'>$ ".dinero($precio_contadomasiva)."</td>";
-							?>								
-									<td class="center hide" style='text-align:right'><?php echo $row['stock']?></td>
-								
-								</tr>
-
-							<?php 
-								}
-							?>
-
-
-						  </tbody>
-					  </table>            
+						        
 					
 					</div>
 
@@ -124,6 +70,7 @@
 
 							<input type=hidden name=data value=pos>
 							<input type=hidden name=op value=detalles>
+							<input type=hidden name=type value=item>
 				  			 &nbsp;&nbsp;Codigo <input classe="input-xlarge focused" id="textcode" name="code" >
 				  			</td>
 				  		</tr>
@@ -131,13 +78,19 @@
 				  		</form>
 				  	</div>
 
-						<table width=100% >
+					<div class="hidden-phone">
+							<table width=100% >
 							<tr>
 								<td style='text-align:center;border-bottom:1px dotted black' colspan=4>
 									<br>Tiendas Alberto
 									<br>R.F.C QURC750708PM7
 									<br>Av. Presa Lopez Zamora #1501 <br>Col. Venustiano Carranza<br>
-								</td></tr>
+								</td>
+							</tr>
+						</table>
+					</div>
+						
+						<table width=100%>
 									<?php
 										if ($cliente_id)
 											echo "<tr><td align=center style=\"border-bottom:1px dotted black\" colspan=4>Tipo de Venta: <span class=\"label label-inverse\">Credito</span><br></td></tr>";
