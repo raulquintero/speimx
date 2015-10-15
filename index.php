@@ -25,17 +25,21 @@ $nid=$_SESSION['nid'];
 $code=strtoupper(htmlspecialchars($_GET["code"]));
 
 $type=(htmlspecialchars($_GET["type"]));
-$fid_dev=(htmlspecialchars($_GET["fid_dev"]));
+
 
 $cuantos=strlen($code);
 
 if ($cuantos==7 )
 		{
 			switch ($code[0]) {
-				case 'T':
-					$_SESSION['cart_dev']="";
-					$_SESSION['cart_temp']="";
-					$location="Location: /index.php?data=clientes&op=factura&fid=$code";
+				case 'T': //ticket devolucion
+					//$_SESSION['cart_dev']="";
+					//$_SESSION['cart_temp']="";
+					getfactura_temp($code);
+					$fid_dev=$_SESSION['fid_dev'];
+
+					$location="Location: /index.php?data=clientes&op=factura&fid=$fid_dev";
+					//exit();
 					break;
 				case 'C':
 					 $location="Location: /index.php?data=clientes&op=verificar&cid=$code";
@@ -54,17 +58,19 @@ if ($cuantos==8)
 		{
 			switch ($type) {
 				case 'dev':
-					$_SESSION['fid_dev']=$fid_dev;
+					$fid_dev=$_SESSION['fid_dev'];
 					$query = "SELECT facturadet_id,producto,sku,color,talla,precio_contado,precio_credito,iva_contado,iva_credito 
-					 FROM facturadet WHERE facturadet.sku='$code' AND facturadet.factura_id='$fid_dev'";
+					 FROM facturadet WHERE facturadet.sku='$code' AND facturadet.factura_id=$fid_dev";
 
 					list( $facturadet_id,$producto,$sku,$color,$talla,$precio_contado,$precio_credito,$iva_contado,$iva_credito,
 						$precio_promocion,$descuento) = $database->get_row( $query );
 					//$precio_credito+=$iva_credito;
 					//$precio_contado+=$iva_contado;
 
-					$location="Location: /functions/cart_dev.php?fid_dev=$fid_dev&facturadet_id=$facturadet_id&sku=$sku&producto=$producto&color=$color&talla=$talla
-					&precio_contado=$precio_contado&precio_credito=$precio_credito&func=add_item";
+					// $location="Location: /functions/cart_dev.php?fid_dev=$fid_dev&facturadet_id=$facturadet_id&sku=$sku&producto=$producto&color=$color&talla=$talla
+					// &precio_contado=$precio_contado&precio_credito=$precio_credito&func=add_item";
+
+					$location="Location: /functions/cart_dev.php?facturadet_id=$facturadet_id&func=add_dev_item";
 					break;
 				case 'checarprecio':
 					 $location="Location: /index.php?data=productos&op=checarprecio&code=$code";
@@ -75,7 +81,6 @@ if ($cuantos==8)
 					# code...
 					break;
 			}
-			//exit();
 			header($location);
 		}
 

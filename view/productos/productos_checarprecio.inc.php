@@ -16,6 +16,8 @@
 <?php
 
 $code=$_GET['code'];
+if ($code)
+{
 	$query="SELECT producto.producto_id,producto,precio_contado,precio_credito,stock,cantidad,subcategoria,color,talladet
 	from producto,inventariodet,subcategoria,color,talladet
 		where producto.producto_id=inventariodet.producto_id AND 
@@ -25,6 +27,7 @@ $code=$_GET['code'];
 		inventariodet.codigo=$code";
 	
 	list( $producto_id,$producto,$precio_contado,$precio_credito,$stock,$cantidad,$subcategoria,$color,$talla) = $database->get_row( $query );
+}
 
 if ($producto_id)
 {
@@ -38,6 +41,7 @@ if ($producto_id)
 	echo "<br>Color: $color";
 	echo "<br>Talla: $talla";
 	echo "<br>Stock: $stock";
+	echo "<br>Stock T+C: $cantidad";
 
 	$query="SELECT color from color where  producto_id=$producto_id ";
 

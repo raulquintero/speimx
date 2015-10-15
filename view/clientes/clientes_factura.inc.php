@@ -1,6 +1,7 @@
 <?php 
 $fid=$_GET['fid'];
 $fid=substr($fid,1,6);
+$fid_dev=$_SESSION['fid_dev'];
 $nid=$_SESSION['nid'];
 
  ?>
@@ -37,9 +38,7 @@ $nid=$_SESSION['nid'];
 					</div>
 					<div class="">
 		
-					<?php
-					getfactura($fid);
-					?>
+					<?php getfactura($fid_dev);?>
 					<br><br><br>
 					</div>
 				</div>
@@ -47,13 +46,18 @@ $nid=$_SESSION['nid'];
 
 				<div class="box span4">
 
-							  		<?php if ($nid<=8)view_devoluciones($fid)?>
+							  		<?php 
+
+
+							  		if ($nid<=8)view_devoluciones($fid_dev)
+
+							  		?>
 					
 				</div><!--/span-->
 
 				<div class="box span4 hidden-print">
-
-							  		<?php if ($nid<=8) ticket_devolucion($fid)?>
+					
+							  		<?php if ($nid<=8) ticket_devolucion($fid_dev)?>
 					
 				</div><!--/span-->
 

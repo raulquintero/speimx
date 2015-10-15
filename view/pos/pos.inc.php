@@ -32,7 +32,7 @@
 
 			<div class="row-fluid condensed">
 		
-					<div class="box-content span8 hidden-phone" >
+					<div class="box-content span8 hidden-phone hidden-tablet" >
 
 					<div class="hidden-print ">
 					<form action="/index.php" method="get">

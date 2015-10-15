@@ -18,7 +18,8 @@ $cliente_id=substr($cliente_id,1,6);
 .destinatario{
 	/*height:50px;*/
 	text-transform: uppercase;
-	font-size: 8pt;
+	font-size: 12pt;
+	text-align:center;
 }
 	
 
@@ -79,7 +80,7 @@ if($cliente_id)
 
 
  ?>
-<div class="credencial">
+<div class="box-content span4 hidden-tablet">
 
 <div class="header">
 
@@ -103,35 +104,27 @@ if($cliente_id)
 		</center></td></tr>
 	</table>
 </div>
+
+</div>
+</div>
 	
-<!-- 	<div class="documento">
-		<p>En <strong>Tiendas Alberto</strong> estamos interesados en apoyar la economia de las familias mexicalenses, en convenio 
-		con <strong><?php echo $empresa?></strong> reconociendo  a sus exelentes empleados, les ofrece este 
-		 <strong style="backgorund:red;">CREDITO PRE APROBADO</strong> por la cantidad de:<br>    
-		<center><h1><br><strong>$ 3 000.00 MXN</strong></h1></center>
-		   </p>
 
-	<p><Br><Br>Unicamente presente esta carta  y una identificacion oficial a un representante o personalmente 
-	en nuestra sucursal ubicada en Av. Presa Lopez Zamora #1501, Col. 18 de Marzo, Mxl, B.C..</p>
+<div class="box-content span4 hidden-phone ">
 
-	<br><br>
-<div class="beneficios">
-	<h3>Conoce nuestros beneficios:</h3>
-	<ul>
-		<li>Descuento Via Nomina</li>
-		<li>Requisitos Minimos</li>
-		<li>Plazo de 3 a 12 meses para liquidar tu adeudo</li>
-		<li>Puedes incrementar tu credito hasta $7,000 MXN</li>
-		<li>Sin penalizacion por pago anticipado</li>
-	</ul>
+<div class="header">
+
+<img width=200 src="/img/tiendasalberto.png">
+<!-- <div class="fecha">Mexicali a <?php echo date("d-m-Y")?></div> -->
 </div>
-
+<div><table width=100%>
+	<tr><td>&nbsp;</td>
+		<td ><center><img width=150 src="barcode.php?text=<?php echo $cliente_id?>" alt="barcode" /></center><br>
+			<div class="destinatario">Verificando Identidad<br> <br></div>
+		
+	</tr>
+	
+	</table>
 </div>
-
-<div class="conocenos"><br><br><br><br>VEN Y UTILIZA TU CREDITO INMEDIATAMENTE</div>
-
- -->
-
 
 
 </div>

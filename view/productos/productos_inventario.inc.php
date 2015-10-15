@@ -37,10 +37,11 @@
 			<div class="row-fluid">
 				<div class="box  span12">
 					<div class="box-header" data-original-title>
-						<h2><i class="halflings-icon edit"></i><span class="break"></span><strong><a href="/index.php?data=productos&op=producto_form&f=editar&prid=<?php echo $prid?>"><?php echo strtoupper($producto)?> [<?php echo $codigo?>]</a></strong></h2>
+						<h2><i class="halflings-icon edit"></i><span class="break"></span>
+							<strong><a href="/index.php?data=productos&op=producto_form&f=editar&prid=<?php echo $prid?>"><?php echo strtoupper($producto)?> [<?php echo $codigo?>]</a></strong></h2>
 							<div class="box-icon">
 							
-							<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
+							<a href="/index.php?data=productos" class="btn"><i class="halflings-icon barcode "></i></a>
 							<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
 							<a href='<?php echo "/index.php?data=clientes&op=detalles&cid=$cid"?>' ><i class="halflings-icon remove"></i></a>
 						</div>
