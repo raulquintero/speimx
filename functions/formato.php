@@ -204,24 +204,26 @@ $database = new DB();
 
 				echo "<table  width=100%>
 						<tr>
-							<td style='text-align:center;border-bottom:1px dotted black' colspan=3>
+							<td style='text-align:center;border-bottom:1px dotted black;' colspan=3>
 								<a href=\"/index.php\"><img width=300 src=/img/tiendasalberto.png></a>
 								<br>R.F.C QUCR750708PM7
-								<br>Av. Presa Lopez Zamora #1501 <br>Col. Venustiano Carranza<br>
-								<br>";
+								<center>NOTA DE VENTA</center>";
+								
+				echo "<font size=-1>";
 								
 				echo "Cliente: ". strtoupper($cliente)."<br>";
 				if ($tipomov_id==3)
 					echo "Tipo de Venta: <span class=\"label label-inverse\">Credito</span><br>";
 				else
 					echo "<br>"; //Tipo de Venta: <span class=\"label label-inverse\">Contado</span><br><br>";
+							$no_ticket=sprintf('%06d', $factura_id);
 
-				echo "Folio: $factura_id [$cliente_id]<br>";
+				echo "No.: $no_ticket [$cliente_id.345]<br>";
 				echo "Fecha y Hora: <br>".$fecha_factura;    //date("d-m-Y  H:m:s");
 				echo "<br>";
 				
 
-				echo "</td></tr>";
+				echo "</font></td></tr>";
 				echo "<tr><td>&nbsp;</td></tr>";
 
 							 
@@ -368,9 +370,7 @@ $database = new DB();
 						<tr>
 							<td style='text-align:center;border-bottom:1px dotted black' colspan=3>
 								<a href=\"/index.php\"><img width=350 src=/img/tiendasalberto.png></a>
-								<br>R.F.C QUCR750708PM7
-								<br>Av. Presa Lopez Zamora #1501 <br>Col. Venustiano Carranza<br>
-								<br>";
+								<br>R.F.C QUCR750708PM7";
 								
 				echo "Cliente: ". strtoupper($cliente)."<br>";
 

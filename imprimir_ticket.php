@@ -131,11 +131,19 @@ foreach( $_GET as $key => $value )
 						
 						Recuerde que:<br>
 						Todas las ventas son VENTAS FINALES, <br>
-						NO se regresa dinero, solo se cambia por mercancia dentro de los primeros 7 dias
-						Gracias por su preferencia.<br><br>
+						NO se regresa dinero, solo se cambia por mercancia dentro de los primeros 7 dias, 
+						es requisito indispensable presentar este ticket, y la mercancia con sus etiquetas
 						Recuerde ser puntual en sus pagos, el no cumplir a tiempo con sus pagos
 						puede afectar su credito
-						<br><br><br><br>
+						<br><br>
+						<center>
+						<br>Gracias por su preferencia.</center><br>
+						<center>
+						Tiendas Alberto
+						<br>Av. Presa Lopez Zamora #1501 <br>Col. Venustiano Carranza<br>
+								</center>
+						<br><br>
+
 					</td><td>&nbsp;</td></tr>
 				</table>
 					</div>

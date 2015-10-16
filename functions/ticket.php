@@ -25,8 +25,10 @@ $database = new DB();
 					echo "<br>Tipo de Venta: <span class=\"label label-inverse\">Credito</span>";
 				else
 					echo "<br>"; //Tipo de Venta: <span class=\"label label-inverse\">Contado</span><br><br>";
+				
+				$no_ticket=sprintf('%06d', $factura_id);
 
-				echo "<br>Folio: $factura_id [$cliente_id]<br>";
+				echo "<br>Folio: $no_ticket [$cliente_id]<br>";
 				echo "Fecha y Hora: ".$fecha_factura;    //date("d-m-Y  H:m:s");
 				echo "<br>";
 				
@@ -48,7 +50,8 @@ $database = new DB();
 								
 					$n=0;
 					$total=0;
-	
+					
+
 	
 					foreach( $results as $item )
 					{
@@ -63,7 +66,7 @@ $database = new DB();
 
 								}
 		
-						echo "<tr><td>&nbsp;</td><td>".$item['facturadet_id']." ".$item['sku']."<br>
+						echo "<tr><td>".$item['facturadet_id']."</td><td>".$item['sku']."<br>
 							". substr($item['producto'],0,26)."...</a>
 							<br><p class=\"muted\" >"
 							.$item['color']." ".$item['talla']."</p></td> 
@@ -128,7 +131,7 @@ $database = new DB();
 
 								}
 
-						echo "<tr $bgcolor ><td>$textcolor ".$item['tipomov_id']."</td><td>$textcolor ".$item['sku']."<br>
+						echo "<tr $bgcolor ><td>$textcolor ".$item['facturadet_id']."</td><td>$textcolor ".$item['sku']."<br>
 							". substr($item['producto'],0,26)."...</a>
 							<br><p class=\"muted\" >"
 							.$item['color']." ".$item['talla']."</p></td> 
@@ -312,7 +315,7 @@ $database = new DB();
 								else
 								{
 									$item=$_SESSION['cart_temp'];
-								
+
 									$n=0;
 									$total=0;
 							foreach ($item as $row => $value) 
@@ -329,16 +332,22 @@ $database = new DB();
 									break;
 
 								}
+
+								$query = "SELECT  facturadet_id,producto,precio_contado,iva_contado,precio_credito,iva_credito,codigo,color,talla,sku 
+						FROM facturadet
+						WHERE  facturadet_id=".$item[$n]['facturadet_id'];
+						list( $faturadet_id,$producto,$precio_contado,$iva_contado,$precio_credito,$iva_credito,$codigo,$color,$talla,$sku  ) = $database->get_row( $query );
+		
 										echo "<tr $bgcolor><td>".$item[$n]['facturadet_id']."</td> <td>
-											<a href=\"/index.php?data=pos&op=detalles&prid=".$item[$n]['id']."\">".$item[$n]['sku']."<br>". substr($item[$n]['producto'],0,23)."...</a> 
-											<br>".strtolower($item[$n]['color'])." ".strtoupper($item[$n]['talla'])."</td> 
+											<a href=\"/index.php?data=pos&op=detalles&prid=".$item['id']."\">".$sku."<br>". substr($producto,0,23)."...</a> 
+											<br>".strtolower($color)." ".strtoupper($talla)."</td> 
 											<td style='text-align:right'>";
-											if ($cliente_id) echo dinero($item[$n]['precio_credito']+($item[$n]['precio_credito']*.16)); else echo dinero($item[$n]['precio_contado']+($item[$n]['precio_contado']*.16));
-											echo "</td><td><a href=\"/functions/cart_dev.php?func=del_item&i=$n\" class=\"\">
+											if ($cliente_id) echo dinero($precio_credito+$iva_credito); else echo dinero($precio_contado+$iva_contado);
+											echo "</td><td><a href=\"/functions/cart_dev.php?func=del_dev_item&facturadet_id=".$item[$n]['facturadet_id']."\" class=\"\">
 											<i class=\"halflings-icon trash\"></i></a>".$item[$n]['tipomov_id']."</td></tr>";
-										
-										$total_credito+=$item[$n]['precio_credito'];
-										$total_contado+=$item[$n]['precio_contado'];
+									if($item[$n]['tipomov_id']=="X")
+										$total_credito+=$precio_credito+$iva_credito;
+										$total_contado+=$precio_contado+$iva_contado;
 										
 										$n++;
 
@@ -372,10 +381,10 @@ $database = new DB();
 
 									// }
 
-				if ($total_credito AND $cliente_id>0)
+				if ($cliente_id>0)
 				{
-					$total_iva_credito=$total_credito*.16;
-					$disponible=$credito-$saldo-$total_credito-$total_iva_credito;
+					//$total_iva_credito=$total_credito+$iva_credito;
+					//$disponible=$credito-$saldo-$total_credito-$total_iva_credito;
 
 					//$saldo_total=$saldo+$total_credito+$total_iva_credito;
 
@@ -383,7 +392,7 @@ $database = new DB();
 
 					echo "<tr style=\"border-top:1px dotted black\"><td>&nbsp;</td><td style='text-align:right'>SubTotal</td>
 					      	  <td style='text-align:right;boarder-top:2px solid;'>$". dinero($total_credito+$total_iva_credito)."</td></tr>";
-					echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;Inclue IVA(16%) por:</td><td style='text-align:right;border-bottom:2px solid;'>".dinero($total_iva_credito)."</td></tr>";	
+					//echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;Inclue IVA(16%) por:</td><td style='text-align:right;border-bottom:2px solid;'>".dinero($total_iva_credito)."</td></tr>";	
 					echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;<strong>Total</strong></td><td style='text-align:right;'><strong>".dinero($total_iva_credito+$total_credito)."</strong></td></tr>";	
 					echo "<tr><td>&nbsp;</td><td>&nbsp;</td></tr>";
 					
