@@ -1,6 +1,7 @@
 <?php
 $func=htmlspecialchars($_GET['func']);
 $i=$_GET['i'];
+$code=$_GET['code'];
 if (!$i) $i=0;
 
 
@@ -23,18 +24,23 @@ if ($func=="add_dev_item")
         $n=0;
         foreach ($item as $row => $value) 
         {
-            echo    "<br>existe: ".$existe=array_search($fdid, $item[$n]);
+            $existe=array_search($fdid,$item[$n]);
+            echo "<br>existe: $fdid , $existe ,".$item[$n]['facturadet_id'];
             if ($existe)
                 {
-                    echo "<br>clave: ".$clave=array_search('14', $item[$n]);
-                    if ($clave==tipomov_id)
+
+                        $clave=array_search('14', $item[$n]);
+                        echo "<br>clave: $clave , ".$item[$n]['tipomov_id'];
+                        if ($clave==tipomov_id)
+                        {
                             echo "<br>".$item[$n]['tipomov_id']="X";
-                    echo "<br>clave: ".$clave=array_search('3', $item[$n]);
-                    if ($clave==tipomov_id)
+                        }
+                        echo "<br>clave: ".$clave=array_search('3', $item[$n]);
+                        if ($clave==tipomov_id)
+                        {
                             echo "<br>".$item[$n]['tipomov_id']="X";
-                    echo "<br>clave: ".$clave=array_search('0', $item[$n]);
-                     if ($clave==tipomov_id)
-                            echo "<br>".$item[$n]['tipomov_id']="X";
+                        }
+                       
                 }
             $n+=1;
         }
@@ -43,7 +49,7 @@ if ($func=="add_dev_item")
 echo "<br><br>array: <br>";
       print_r($item);
 
-//exit();
+      //exit();
 
 }
 

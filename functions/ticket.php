@@ -234,6 +234,7 @@ $fid=substr($fid, 1,7);
 					{
  					   	$item_temp[] = array(
                 			'facturadet_id'      => $item['facturadet_id'],
+                			'code' => $item['sku'],
                 			'tipomov_id'    => $item['tipomov_id']
             				);
 

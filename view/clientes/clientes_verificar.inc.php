@@ -90,13 +90,13 @@ if($cliente_id)
 <div><table width=100%>
 	<tr><td>&nbsp;</td>
 		<td ><center><img width=150 src="barcode.php?text=<?php echo $cliente_id?>" alt="barcode" /></center>
-			<div class="destinatario">Nombre:<br> <strong><?php echo strtoupper($apellidos)?><br>
+			<div class="destinatario"><br> <strong><?php echo strtoupper($apellidos)?><br>
 			<?php echo strtoupper($nombre)?></strong></div>
 		</td>
 		
 		<td><img width=100 src=/img/noimage.png align=right></td>
 	</tr>
-	<tr><td colspan=4><center><br><br>Es correcta la informacion?<br><br> 
+	<tr><td colspan=4><center><br>Si NO aparece la foto, verifique identidad con una identificacion oficial.<br><br>Es correcta la informacion?<br><br> 
 
 <a href="/index.php?data=pos" class="btn" data-dismiss="modal">NO</a>
 <a href="/functions/cart.php?func=sel_cliente&cid=<?php echo $cliente_id?>" class="btn btn-primary" data-dismiss="modal">SI</a>
@@ -109,22 +109,6 @@ if($cliente_id)
 </div>
 	
 
-<div class="box-content span4 hidden-phone ">
-
-<div class="header">
-
-<img width=200 src="/img/tiendasalberto.png">
-<!-- <div class="fecha">Mexicali a <?php echo date("d-m-Y")?></div> -->
-</div>
-<div><table width=100%>
-	<tr><td>&nbsp;</td>
-		<td ><center><img width=150 src="barcode.php?text=<?php echo $cliente_id?>" alt="barcode" /></center><br>
-			<div class="destinatario">Verificando Identidad<br> <br></div>
-		
-	</tr>
-	
-	</table>
-</div>
 
 
 </div>

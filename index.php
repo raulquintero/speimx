@@ -64,13 +64,8 @@ if ($cuantos==8)
 
 					list( $facturadet_id,$producto,$sku,$color,$talla,$precio_contado,$precio_credito,$iva_contado,$iva_credito,
 						$precio_promocion,$descuento) = $database->get_row( $query );
-					//$precio_credito+=$iva_credito;
-					//$precio_contado+=$iva_contado;
-
-					// $location="Location: /functions/cart_dev.php?fid_dev=$fid_dev&facturadet_id=$facturadet_id&sku=$sku&producto=$producto&color=$color&talla=$talla
-					// &precio_contado=$precio_contado&precio_credito=$precio_credito&func=add_item";
-
-					$location="Location: /functions/cart_dev.php?facturadet_id=$facturadet_id&func=add_dev_item";
+					// corregir aqui agregar item devolucion [buscar en arreglo]
+					$location="Location: /functions/cart_dev.php?facturadet_id=$facturadet_id&func=add_dev_item&code=$code";
 					break;
 				case 'checarprecio':
 					 $location="Location: /index.php?data=productos&op=checarprecio&code=$code";
