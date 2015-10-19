@@ -92,7 +92,7 @@
 						</table>
 					</div>
 						
-						<table width=100%>
+						<table width=100% >
 									<?php
 										if ($cliente_id)
 											echo "<tr><td align=center style=\"border-bottom:1px dotted black\" colspan=4>Tipo de Venta: <span class=\"label label-inverse\">Credito</span><br></td></tr>";
@@ -203,11 +203,13 @@
 											<td width=180 style='text-align:right;text-align:right;background:yellow;color:black;border-bottom:1px dotted black;'>
 											<font size=+3><b>$ ".dinero($total_iva_contado+$total_contado)."</b></font></td></tr>";	
 									
+										echo "<tr><td colspan=3 style='text-align:center'><a href=\"#\" class=\"btn btn-info blue btn-setting\">Cerrar Venta</a></td</tr>";
+
 									}
 
 							}
 
-							echo "</able>";
+							echo "</table>";
 
 
 
@@ -228,8 +230,9 @@
 
 
 							echo "<table width=100%>";
+							echo "<tr><td>&nbsp;</td></tr>";
 									$item=$_SESSION['cart'];
-								
+									
 									$n=$items-1;
 									//$total=0;
 									foreach ($item as $row => $value) 
