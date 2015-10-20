@@ -171,6 +171,9 @@ class Login
                 $_SESSION['cliente_id']=0;
                 $_SESSION['nid']=$fetch['nivel_id'];
                 $_SESSION['fdid_tipomov_id']=0;
+                $_SESSION['dev_saldo'];
+                $_SESSION['dev_cliente_id'];
+                $_SESSION['display']="pos";
             }
             else
             {

@@ -48,8 +48,179 @@ foreach( $_GET as $key => $value )
 
 
 
-			$cliente_id = $_SESSION['cliente_id'];
+			$cliente_id = $_SESSION['dev_cliente_id'];
+			$saldo = $_SESSION['dev_saldo'];
 
+
+
+
+	 		
+
+						
+				 // else
+				 // 		echo "<a href=\"/index.php?data=pos&op=clientes\" class=\"btn btn-success blue  hidden-print\">Seleccionar Cliente</a>";
+
+
+				
+if ($_SESSION['display']=='dev'){
+
+			echo "<div class=\"row-fluid condensed\">";
+		
+			echo "Devolucion";
+					
+
+							echo "<table width=100% style=\"border:1px solid #4EF84E;\">";
+									$item=$_SESSION['cart_temp'];
+									$items = count($item);
+									$n=$items-1;
+									$total=0;
+									foreach ($item as $row => $value) 
+									{
+										if($item[$n]['tipomov_id']=="X")
+										{
+										$total_credito+=$item[$n]['precio_credito'];
+										$total_contado+=$item[$n]['precio_contado'];
+										}
+										$n--;
+
+									}
+							if ($total_credito AND $cliente_id)
+							{
+								$total_iva_credito=$total_credito*.16;
+
+								$disponible=$credito-$saldo-$total_credito-$total_iva_credito;
+
+								$saldo_total=$saldo+$total_credito+$total_iva_credito;
+
+
+								// echo "<tr><td colspan=4 style=\"border-bottom:1px dotted black\">&nbsp;</td></tr><tr><td></td><td style='text-align:right'>Total</td><td style='text-align:right;boarder-top:2px solid;'>$". dinero($total_credito+$total_iva_credito)."</td></tr>";
+								// echo "<tr><td></td><td style='text-align:right'>&nbsp;Incluye IVA(16%) por</td><td style='text-align:right;border-bottom:2px solid;'>".dinero($total_iva_credito)."</td></tr>";	
+								
+								echo "<tr><td></td><td style='text-align:right'>&nbsp;<font size=+2>Total</font></td>
+								<td width=180 style='text-align:right;border-top:1px solid black;background:white;color:black'><font size=+3><b>$ ".dinero($total_iva_credito+$total_credito)."</strong></td></tr>";	
+								echo "<tr><td>&nbsp;</td></tr>";
+								echo "<tr><td></td><td style='text-align:right'>Saldo Actual</td><td style='text-align:right'> &nbsp;&nbsp; $ ";
+									echo dinero($saldo);
+								echo "</td></tr>";	
+								$cupon=dinero($total_iva_credito+$total_credito-$saldo);//-$total_iva_credito-$total_credito);
+								$saldoafavor=($total_iva_credito+$total_credito);
+								if ($cupon>0)
+									echo "<tr><td></td><td style='text-align:right'>Cupon</td><td style='text-align:right;background:yellow;color:black'><b>$". dinero($cupon)."</b></td></tr>";
+								else
+								{
+									echo "<tr><td></td><td style='text-align:right'>Saldo a Favor</td><td style='text-align:right;'>$". dinero($saldoafavor)."</td></tr>";
+									echo "<tr><td></td><td style='text-align:right'>Saldo Nuevo</td><td style='text-align:right;border-top:2px solid white'>$". dinero($saldo-$saldoafavor)."</td></tr>";
+
+								}
+
+
+
+
+							}
+							else
+							{
+								if ($total_contado)
+									{
+								$total_iva_contado=$total_contado*.16;
+									// echo "<tr><td>&nbsp;</td></tr><tr><td></td><td style='text-align:right'>Subtotal</td><td style='text-align:right'>$". dinero($total_contado+$total_iva_contado)."</td></tr>";
+									// echo "<tr><td></td><td style='text-align:right'>Incluye IVA(16%) por</td><td style='text-align:right'>$". dinero($total_iva_contado)."</td></tr>";
+									echo "<tr><td></td><td style='text-align:right'>&nbsp;<font size=+2>Total</font></td>
+											<td width=180 style='text-align:right;text-align:right;background:white;color:black;border:2px solid;'>
+											<font size=+3><b>$ ".dinero($total_iva_contado+$total_contado)."</b></font></td></tr>";	
+									
+									}
+
+							}
+								echo "</table>";
+
+								echo "<table width=100%";
+								echo "<tr><td></td><td>&nbsp;Descripcion<br></td><td align=right>Precio<br> Unitario</td></tr>";
+
+
+									$n=$items-1;
+									$nn=$items-1;
+									$total=0;
+									foreach ($item as $row => $value) 
+									{
+										
+										if($item[$n]['tipomov_id']=="X")
+										{
+										echo "<tr><td style='border-top:1px dotted #4EF84E;'> ".(1)." &nbsp  ".$item[$n]['id_hide']."</td> 
+												<td  style='border-top:1px dotted #4EF84E;'>".$item[$n]['sku']."<br>". substr($item[$n]['producto'],0,23)."...</a> 
+											<br>".strtolower($item[$n]['color'])." ".strtoupper($item[$n]['talla'])."</td> 
+											<td style='text-align:right;border-top:1px dotted #4EF84E;'><b>";
+											if ($cliente_id) echo dinero($item[$n]['precio_credito']+($item[$n]['precio_credito']*.16)); else echo dinero($item[$n]['precio_contado']+($item[$n]['precio_contado']*.16));
+											echo "</td><td><a href=\"/functions/cart.php?func=del_item&i=$n\" class=\"\">
+											<i class=\"halflings-icon trash\"></i></i></a></td></tr>";
+										
+										$total_credito+=$item[$n]['precio_credito'];
+										$total_contado+=$item[$n]['precio_contado'];
+										$nn--;
+										}
+										$n--;
+									}
+								
+						
+
+
+
+						echo "</table>";
+				
+
+
+
+}
+
+
+
+
+					        
+					
+			echo "</div>";
+
+		?>				
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?php //***********************************************display=pos**********************?>
+
+
+
+
+
+
+
+<?php if ($_SESSION['display']=='pos')
+
+{
+?>
+
+<div class="boxi span4 " styles='border-left:1px dotted'>
+						
+		<div class="hidden-desktop">
+				
+				<?php	
 
 			if($cliente_id)
 				{
@@ -60,65 +231,83 @@ foreach( $_GET as $key => $value )
 
 
 
-
-	 		
-
-						
-					echo "
+				echo "
 		 			<strong>Cliente: ".strtoupper($cliente)."</a></strong>";
-						
 				} 
-				 // else
-				 // 		echo "<a href=\"/index.php?data=pos&op=clientes\" class=\"btn btn-success blue  hidden-print\">Seleccionar Cliente</a>";
 
 
-		?>				
-				
-
-
-			<div class="row-fluid condensed">
-		
-			
-		
-				
-				  		
-						        
-					
-					</div>
-
-
-					<div class="boxi span4" styles='border-left:1px dotted'>
-						
-<div class="hidden-desktop">
-				
-
-					<div class="hidden-phone">
-							<table width=100% >
-							<tr>
-								<td style='text-align:center;border-bottom:1px dotted black' colspan=4>
-								</td>
-							</tr>
-						</table>
-					</div>
-						
+				?>		
 						<table width=100%>
 									<?php
 										if ($cliente_id)
-											echo "<tr><td align=center style=\"border-bottom:1px dotted black\" colspan=4>Tipo de Venta: <span class=\"label label-inverse\">Credito</span><br></td></tr>";
+											echo "<tr><td align=center style=\"border-bottom:1px dotted black\" colspan=4>Tipo de Venta: <span class=\"label label-inverse\">Credito</span></td></tr>";
 										else
-										echo "<tr><td align=center style=\"border-bottom:1px  black\" colspan=4><br></td></tr>"; //Tipo de Venta: <span class=\"label label-inverse\">Contado</span><br><br>";
+										echo "<tr><td align=center style=\"border-bottom:1px  black\" colspan=4>&nbsp;</td></tr>"; //Tipo de Venta: <span class=\"label label-inverse\">Contado</span><br><br>";
 
 									?>
-
-									</table><br>
-									<table width=100% style="border:1px solid #4EF84E;">
-
+									</table>
 							<?php 
 								if (!$_SESSION['cart'])
-									echo "<tr><td style='text-align:center'><br>
-										<imge src=/img/empty_cart.jpeg><br><strong></strong><br><br><br></td></tr>";
+								{
+									echo "<table>";
+									echo "<tr><td>";
+									?>
+<pre>
+
+ Powered by linux.
+                                .:xxxxxxxx:. 
+                             .xxxxxxxxxxxxxxxx. 
+                            :xxxxxxxxxxxxxxxxxxx:. 
+                           .xxxxxxxxxxxxxxxxxxxxxxx: 
+                          :xxxxxxxxxxxxxxxxxxxxxxxxx: 
+                          xxxxxxxxxxxxxxxxxxxxxxxxxxX: 
+                          xxx:::xxxxxxxx::::xxxxxxxxx: 
+                         .xx:   ::xxxxx:     :xxxxxxxx 
+                         :xx  x.  xxxx:  xx.  xxxxxxxx 
+                         :xx xxx  xxxx: xxxx  :xxxxxxx 
+                         'xx 'xx  xxxx:. xx'  xxxxxxxx 
+                          xx ::::::xx:::::.   xxxxxxxx 
+                          xx:::::.::::.:::::::xxxxxxxx 
+                          :x'::::'::::':::::':xxxxxxxxx. 
+                          :xx.::::::::::::'   xxxxxxxxxx 
+                          :xx: '::::::::'     :xxxxxxxxxx. 
+                         .xx     '::::'        'xxxxxxxxxx. 
+                       .xxxx                     'xxxxxxxxx. 
+                     .xxxx                         'xxxxxxxxx. 
+                   .xxxxx:                          xxxxxxxxxx. 
+                  .xxxxx:'                          xxxxxxxxxxx. 
+                 .xxxxxx:::.           .       ..:::_xxxxxxxxxxx:. 
+                .xxxxxxx''      ':::''            ''::xxxxxxxxxxxx. 
+                xxxxxx            :                  '::xxxxxxxxxxxx 
+               :xxxx:'            :                    'xxxxxxxxxxxx: 
+              .xxxxx              :                     ::xxxxxxxxxxxx 
+              xxxx:'                                    ::xxxxxxxxxxxx 
+              xxxx               .                      ::xxxxxxxxxxxx. 
+          .:xxxxxx               :                      ::xxxxxxxxxxxx:: 
+          xxxxxxxx               :                      ::xxxxxxxxxxxxx: 
+          xxxxxxxx               :                      ::xxxxxxxxxxxxx: 
+          ':xxxxxx               '                      ::xxxxxxxxxxxx:' 
+            .:. xx:.                                   .:xxxxxxxxxxxxx' 
+          ::::::.'xx:.            :                  .:: xxxxxxxxxxx': 
+  .:::::::::::::::.'xxxx.                            ::::'xxxxxxxx':::. 
+  ::::::::::::::::::.'xxxxx                          :::::.'.xx.'::::::. 
+  ::::::::::::::::::::.'xxxx:.                       :::::::.'':::::::::   
+  ':::::::::::::::::::::.'xx:'                     .'::::::::::::::::::::.. 
+    :::::::::::::::::::::.'xx                    .:: ::::::::::::::::::::::: 
+  .:::::::::::::::::::::::. xx               .::xxxx ::::::::::::::::::::::: 
+  :::::::::::::::::::::::::.'xxx..        .::xxxxxxx ::::::::::::::::::::' 
+  '::::::::::::::::::::::::: xxxxxxxxxxxxxxxxxxxxxxx :::::::::::::::::' 
+    '::::::::::::::::::::::: xxxxxxxxxxxxxxxxxxxxxxx :::::::::::::::' 
+        ':::::::::::::::::::_xxxxxx::'''::xxxxxxxxxx '::::::::::::' 
+             '':.::::::::::'                        `._'::::::'' 
+</pre>
+
+									<?php
+									echo "</td></tr></table>";
+								}
 								else
 								{
+									echo "<table width=100% style=\"border:1px solid #4EF84E;\">";
 									$item=$_SESSION['cart'];
 									$items = count($item);
 									$n=$items-1;
@@ -305,6 +494,12 @@ foreach( $_GET as $key => $value )
 						<div class="clearfix">
 						</div>
 				</div>
+
+<?php
+}
+?>
+
+
 <br><br><br><br><br><br><br><br>	
 			</div><!--/row-->
 		

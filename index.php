@@ -29,7 +29,7 @@ $type=(htmlspecialchars($_GET["type"]));
 
 $cuantos=strlen($code);
 
-if ($cuantos==7 )
+//if ($cuantos==7 )
 		{
 			switch ($code[0]) {
 				case 'T': //ticket devolucion
@@ -58,14 +58,12 @@ if ($cuantos==8)
 		{
 			switch ($type) {
 				case 'dev':
-					$fid_dev=$_SESSION['fid_dev'];
-					$query = "SELECT facturadet_id,producto,sku,color,talla,precio_contado,precio_credito,iva_contado,iva_credito 
-					 FROM facturadet WHERE facturadet.sku='$code' AND facturadet.factura_id=$fid_dev";
-
-					list( $facturadet_id,$producto,$sku,$color,$talla,$precio_contado,$precio_credito,$iva_contado,$iva_credito,
-						$precio_promocion,$descuento) = $database->get_row( $query );
-					// corregir aqui agregar item devolucion [buscar en arreglo]
-					$location="Location: /functions/cart_dev.php?facturadet_id=$facturadet_id&func=add_dev_item&code=$code";
+					//$fid_dev=$_SESSION['fid_dev'];
+					$query="SELECT saldo from cliente,factura where cliente.cliente_id=factura.cliente_id AND factura.factura_id=".$_SESSION['fid_dev']." limit 1";
+					list( $dev_saldo  ) = $database->get_row( $query );
+					$_SESSION['dev_saldo']=$dev_saldo;
+					$fdid=get_fiddev($code);
+					$location="Location: /functions/cart_dev.php?facturadet_id=$facturadet_id&func=add_dev_item&facturadet_id=$fdid";
 					break;
 				case 'checarprecio':
 					 $location="Location: /index.php?data=productos&op=checarprecio&code=$code";

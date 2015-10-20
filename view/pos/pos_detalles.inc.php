@@ -9,6 +9,21 @@ if (!$producto_id)
 							<button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
 							<strong>Producto no Encontrado.
 						</div>";
+	echo "<div class=\"hidden-print\">
+					<form action=\"/index.php\" method=\"get\">
+							<table  width=100%  >
+				 			<tr bgcolor=#dddddd>
+				  			<td style=\"padding:10px\">
+
+							<input type=hidden name=data value=pos>
+							<input type=hidden name=op value=detalles>
+							<input type=hidden name=type value=item>
+				  			 &nbsp;&nbsp;Codigo: <input class=\"input-large\" id=\"textcode\" name=\"code\" >
+				  			</td>
+				  		</tr>
+				  		</table>
+				  		</form>
+				  	</div>";
 	echo "<a href=\"/index.php\" class=\"btn btn-info blue \">Regresar</a>";
 }
 else

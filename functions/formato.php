@@ -248,7 +248,7 @@ $database = new DB();
 							<td style='text-align:right;vertical-align:text-top'>";
 						if ($tipomov_id==3) echo dinero($item['precio_credito']*1.16); else echo dinero($item['precio_contado']*1.16);
 					
-						echo "</td></tr>";
+						echo "&nbsp;&nbsp;</td></tr>";
 										
 						$total_credito+=$item['precio_credito'];
 						$total_contado+=$item['precio_contado'];
@@ -268,12 +268,12 @@ $database = new DB();
 
 					echo "<tr><td>&nbsp;</td></tr>";
 					echo "<tr style=\"border-top:1px dotted black\"><td style=\"border-top:1px dotted black\">&nbsp;</td><td style='text-align:right;border-top:1px dotted black'>Total</td>
-					      	  <td style='text-align:right;border-top:1px dotted;'>$". dinero($total_credito*1.16)."</td></tr>";
-					echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;Incluye IVA(16%) por</td><td style='text-align:right;border-bottom:2px solid;'>+&nbsp;".dinero($total_iva_credito)."</td></tr>";	
-					echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;<strong>Total</strong></td><td style='text-align:right;'><strong>".dinero($total_iva_credito+$total_credito)."</strong></td></tr>";	
+					      	  <td style='text-align:right;border-top:1px dotted;'>$". dinero($total_credito*1.16)."&nbsp;&nbsp;</td></tr>";
+					echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;Incluye IVA(16%) por</td><td style='text-align:right;border-bottom:2px solid;'>+&nbsp;".dinero($total_iva_credito)."&nbsp;&nbsp;</td></tr>";	
+					echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;<strong>Total</strong></td><td style='text-align:right;'><strong>".dinero($total_iva_credito+$total_credito)."</strong>&nbsp;&nbsp;</td></tr>";	
 					echo "<tr><td>&nbsp;</td><td>&nbsp;</td></tr>";
-					echo "<tr><td>&nbsp;</td><td style='text-align:right'>Saldo Actual</td><td style='text-align:right'>+  $ ".dinero($saldo_actual)."</td></tr>";	
-					echo "<tr><td>&nbsp;</td><td style='text-align:right;'><strong>Saldo Total</strong></td><td style='text-align:right;border-top:2px solid;'><strong>$ ".dinero($saldo_total)."</strong></td></tr>";	
+					echo "<tr><td>&nbsp;</td><td style='text-align:right'>Saldo Actual</td><td style='text-align:right'>+  $ ".dinero($saldo_actual)."&nbsp;&nbsp;</td></tr>";	
+					echo "<tr><td>&nbsp;</td><td style='text-align:right;'><strong>Saldo Total</strong></td><td style='text-align:right;border-top:2px solid;'><strong>$ ".dinero($saldo_total)."</strong>&nbsp;&nbsp;</td></tr>";	
 					echo "<tr><td>&nbsp;</td><td style='text-align:right'>Abono</td>";
 
 					$query = "SELECT abono,limite FROM abono ORDER BY limite ASC";
@@ -313,7 +313,7 @@ $database = new DB();
 							<td style='text-align:right;vertical-align:text-top'>";
 							echo dinero($item['precio_contado']+$item['iva_contado']);
 					
-						echo "</td></tr>";
+						echo "&nbsp;&nbsp;</td></tr>";
 										
 						$total_credito+=$item['precio_credito'];
 						$total_contado+=$item['precio_contado'];
@@ -327,12 +327,12 @@ $database = new DB();
 						//echo "<tr><td></td><td>&nbsp;</td></tr>";"
 						echo "<tr><td>&nbsp;</td></tr>";
 					echo "<tr style=\"border-top:1px dotted black\"><td style=\"border-top:1px dotted black\">&nbsp;</td><td style='text-align:right;border-top:1px dotted black'>Total</td>
-					      	  <td style='text-align:right;border-top:1px dotted;'>$". dinero($total_contado*1.16)."</td></tr>";
+					      	  <td style='text-align:right;border-top:1px dotted;'>$". dinero($total_contado*1.16)."&nbsp;&nbsp;</td></tr>";
 				  			// echo "<tr style=\"border-top:1px dotted black\"><td></td><td style='text-align:right'>Total</td><td style='text-align:right'>$". dinero($total_contado+$total_iva_contado)."</td></tr>";
 						echo "<tr><td></td><td style='text-align:right'>Incluye IVA(16%) por</td>
-							<td style='text-align:right'>$". dinero($total_iva_contado)."</td></tr>";
+							<td style='text-align:right'>$". dinero($total_iva_contado)."&nbsp;&nbsp;</td></tr>";
 						echo "<tr><td></td><td style='text-align:right'>&nbsp;<strong>Total</strong></td>
-							<td style='text-align:right;text-align:right;border-top:2px solid;'><strong>".dinero($total_iva_contado+$total_contado)."</strong></td></tr>";	
+							<td style='text-align:right;text-align:right;border-top:2px solid;'><strong>".dinero($total_iva_contado+$total_contado)."</strong>&nbsp;&nbsp;</td></tr>";	
 									
 
 									

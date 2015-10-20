@@ -3,6 +3,7 @@ $fid=$_GET['fid'];
 $fid=substr($fid,1,6);
 $fid_dev=$_SESSION['fid_dev'];
 $nid=$_SESSION['nid'];
+$_SESSION['display']="dev";
 
  ?>
 <div class=" span12">

@@ -18,40 +18,27 @@ if ($func=="add_dev_item")
 {
 
     $item = $_SESSION['cart_temp'];
-    $fdid=$_GET['facturadet_id'];
-
+     $fdid=$_GET['facturadet_id'];
 
         $n=0;
         foreach ($item as $row => $value) 
         {
-            $existe=array_search($fdid,$item[$n]);
-            echo "<br>existe: $fdid , $existe ,".$item[$n]['facturadet_id'];
-            if ($existe)
+
+            if ($item[$n]['facturadet_id']==($fdid+0))
                 {
 
-                        $clave=array_search('14', $item[$n]);
-                        echo "<br>clave: $clave , ".$item[$n]['tipomov_id'];
-                        if ($clave==tipomov_id)
-                        {
-                            echo "<br>".$item[$n]['tipomov_id']="X";
-                        }
-                        echo "<br>clave: ".$clave=array_search('3', $item[$n]);
-                        if ($clave==tipomov_id)
-                        {
-                            echo "<br>".$item[$n]['tipomov_id']="X";
-                        }
-                       
+                    $item[$n]['tipomov_id']="X";
+              
+
                 }
-            $n+=1;
+            $n++;
         }
      $_SESSION['cart_temp']=$item;
 
-echo "<br><br>array: <br>";
-      print_r($item);
-
-      //exit();
-
 }
+
+
+
 
 if ($func=="del_dev_item")
 {
@@ -64,12 +51,9 @@ if ($func=="del_dev_item")
         $n=0;
         foreach ($item as $row => $value) 
         {
-            echo    "<br>existe: ".$existe=array_search($fdid, $item[$n]);
-            if ($existe)
+            if ($item[$n]['facturadet_id']==$fdid)
                 {
-                    echo "<br>clave: ".$clave=array_search('X', $item[$n]);
-                    if ($clave==tipomov_id)
-                            echo "<br>".$item[$n]['tipomov_id']=$fdid_tipomov_id;
+                            $item[$n]['tipomov_id']=$fdid_tipomov_id;
                 }
             $n+=1;
         }

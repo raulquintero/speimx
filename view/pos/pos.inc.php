@@ -1,5 +1,6 @@
 		<!-- start: Content **************************************************************************************************************************                  -->
 		<?php 
+		$_SESSION['display']="pos";
 			$cliente_id = $_SESSION['cliente_id'];
 
 
@@ -203,7 +204,7 @@
 											<td width=180 style='text-align:right;text-align:right;background:yellow;color:black;border-bottom:1px dotted black;'>
 											<font size=+3><b>$ ".dinero($total_iva_contado+$total_contado)."</b></font></td></tr>";	
 									
-										echo "<tr><td colspan=3 style='text-align:center'><a href=\"#\" class=\"btn btn-info blue btn-setting\">Cerrar Venta</a></td</tr>";
+										echo "<tr><td colspan=3 style='text-align:center'><br><a href=\"#\" class=\"btn btn-info blue btn-setting\">Cerrar Venta</a></td</tr>";
 
 									}
 
@@ -237,10 +238,10 @@
 									//$total=0;
 									foreach ($item as $row => $value) 
 									{
-										echo "<tr><td style='border-bottom:1px dotted gray;'> ".($n+1)."  ".$item[$n]['id_hide']."</td> <td style='border-bottom:1px dotted gray;''>
-											".$item[$n]['sku']."<br>". substr($item[$n]['producto'],0,23)."... 
-											<br>".strtolower($item[$n]['color'])." ".strtoupper($item[$n]['talla'])."</td> 
-											<td style='text-align:right;border-bottom:1px dotted gray;'>";
+										echo "<tr><td style='border-top:1px dotted gray;'> ".($n+1)."  ".$item[$n]['id_hide']."</td> <td style='border-top:1px dotted gray;''>
+											".$item[$n]['sku']."<br>". substr($item[$n]['producto'],0,30)."... 
+											<br><i><font size=-1>".strtolower($item[$n]['color'])." ".strtoupper($item[$n]['talla'])."</font></i></td> 
+											<td style='text-align:right;border-top:1px dotted gray;'>";
 											if ($cliente_id) echo dinero($item[$n]['precio_credito']+($item[$n]['precio_credito']*.16)); else echo dinero($item[$n]['precio_contado']+($item[$n]['precio_contado']*.16));
 											echo "</td><td class='hidden-print'><a href=\"/functions/cart.php?func=del_item&i=$n\" class=\"\">
 											<i class=\"halflings-icon trash\"></i></i></a></td></tr>";

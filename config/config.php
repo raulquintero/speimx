@@ -24,7 +24,7 @@ define( 'DB_PASS', 'despachado16' ); // set database password
 define( 'DB_NAME', 'speimx' ); // set database name
 define( 'SEND_ERRORS_TO', 'raul.quintero@live.com' ); //set email notification email address
 define( 'DISPLAY_DEBUG', true ); //display db errors?
-
+$item_impresion='70001603';
 
 /* sanitize data
 foreach( $_POST as $key => $value )
