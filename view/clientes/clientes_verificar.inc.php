@@ -68,7 +68,7 @@ $cliente_id=substr($cliente_id,1,6);
 <?php 
 if($cliente_id)
 	{
-		 $query = "SELECT cliente_id,apellidop, apellidom, nombre, empresa  FROM cliente,empresa
+		$query = "SELECT cliente_id,apellidop, apellidom, nombre, empresa  FROM cliente,empresa
 			WHERE  cliente.empresa_id=empresa.empresa_id AND cliente_id=".$cliente_id;
 		list( $cliente_id,$apellidop,$apellidom,$nombre,$empresa ) = $database->get_row( $query );
 			$apellidos= $apellidop." ".$apellidom;
@@ -78,7 +78,8 @@ if($cliente_id)
 		$cliente_id=sprintf('C%06d', $cliente_id);
 	} 
 
-
+if ($nombre)
+{
  ?>
 <div class="box-content span4 hidden-tablet">
 
@@ -106,9 +107,15 @@ if($cliente_id)
 </div>
 
 </div>
-</div>
 	
+<?php 
 
+}
+
+
+else
+	echo "no existe";
+ ?>
 
 
 </div>

@@ -5,6 +5,7 @@ $database = new DB();
 
 
 			$cid = $_SESSION['cliente_id'];
+			$efectivo=$_GET['efectivo'];
 
 
 			if($cid)
@@ -197,7 +198,8 @@ $database = new DB();
     								'comision' => 5,
     								'tipomov_id' => 14,
     								'saldo_actual' => $saldo,
-    								'saldo_total' => $saldo_total
+    								'saldo_total' => $saldo_total,
+    								'efectivo' => $efectivo
 									);
 
 									$add_query = $database->insert( 'factura', $names );

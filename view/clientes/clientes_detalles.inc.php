@@ -46,7 +46,7 @@ if ($_GET['eed']==2)
 												echo  "	<a class=\"hidden-print\" href='index.php?data=cobronomina&op=empresas&nid=$gruponomina_id' >". strtoupper($gruponomina)."</a>";
 											}
 											else
-												echo "<br><a href=\"#\" class=\"btn btn-info blue btn-setting\" data-toggle=\"modal\" data-target=\"#abonaracuenta\">Abonar a Cuenta</a>";
+												echo "<br><a class=\"btn btn-info blue btn-setting hidden-print\" data-toggle=\"modal\" data-target=\"#abonaracuenta\">Abonar a Cuenta</a>";
 
 
 											?>
@@ -80,7 +80,7 @@ if ($_GET['eed']==2)
 
 							</div>
 							<div class="tab-pane" id="custom">
-								<img class=grayscale src=fotos/images.jpeg width=150 align=right></img>
+								<img class="grayscale hidden-print" src=fotos/images.jpeg width=150 align=right></img>
 									<p><b><?php echo $nombre.' '.$apellidop.' '.$apellidom?></b> &nbsp;&nbsp;</p>
 									<table><tr><td valign=top align=right>																			
 									<p>Limite de Credito:<b> <?php echo dinero($credito)?></b></p>
@@ -92,9 +92,7 @@ if ($_GET['eed']==2)
 									<p>Fin Plazo: <b><?=$fecha_total_ultimo?></b></p>
 									</td>
 									<td>&nbsp;&nbsp;</td>
-									<td valign=top align=right>
-										<p>Monedero:<b>   <?php echo dinero($monedero)?></b></p>
-									</td></tr>
+									</tr>
 								</table>
 							</div>
 							<div class="tab-pane" id="messages">
@@ -111,7 +109,7 @@ if ($_GET['eed']==2)
 			<div class="row-fluid condensed">	
 
 				<div class="box span6">
-					<div class="box-header">
+					<div class="box-header hidden-print">
 						<h2><i class="halflings-icon align-justify"></i><span class="break"></span>Movimientos</h2>
 						<div class="box-icon">
 							<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
@@ -119,7 +117,7 @@ if ($_GET['eed']==2)
 							<a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
 						</div>
 					</div>
-					<div class="box-content">
+					<div class="box-content hidden-print">
 						<table class="table table-striped">
 							  <thead>
 								  <tr>
@@ -129,7 +127,7 @@ if ($_GET['eed']==2)
 									  <th>Abono</th>
 									  <th>Saldo</th>
 									  <th>Mov</th>
-									  <th>Agente</th>                                          
+									  <th hidden>Agente</th>                                          
 								  </tr>
 							  </thead>   
 							  <tbody>
@@ -140,7 +138,7 @@ if ($_GET['eed']==2)
 							
  							 </tbody>
 						 </table>  
-						 <div class="pagination pagination-centered">
+						 <div class="pagination pagination-centered hidden-print">
 						  <ul>
 							<li><a href="#">Prev</a></li>
 							<li class="active">

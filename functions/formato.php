@@ -195,10 +195,10 @@ $database = new DB();
 	if($fid)
 	{
 					$query = "SELECT cliente.cliente_id,apellidop, apellidom, nombre, credito, saldo,total_ultimo,fecha_total_ultimo, abono,factura_id,
-							tipomov_id,fecha,saldo_actual,saldo_total,ticket  FROM cliente,factura 
+							tipomov_id,fecha,saldo_actual,saldo_total,ticket,efectivo  FROM cliente,factura 
 						WHERE  factura.cliente_id=cliente.cliente_id AND factura.factura_id=".$fid;
 					list( $cliente_id,$apellidop,$apellidom,$nombre,$credito, $saldo, $total_ultimo, $fecha_total_ultimo,$abono, $factura_id,
-							 $tipomov_id,$fecha_factura,$saldo_actual,$saldo_total,$ticket  ) = $database->get_row( $query );
+							 $tipomov_id,$fecha_factura,$saldo_actual,$saldo_total,$ticket,$efectivo  ) = $database->get_row( $query );
 	 					$cliente= $apellidop." ".$apellidom." ".$nombre;
 	 }
 
@@ -333,6 +333,10 @@ $database = new DB();
 							<td style='text-align:right'>$". dinero($total_iva_contado)."&nbsp;&nbsp;</td></tr>";
 						echo "<tr><td></td><td style='text-align:right'>&nbsp;<strong>Total</strong></td>
 							<td style='text-align:right;text-align:right;border-top:2px solid;'><strong>".dinero($total_iva_contado+$total_contado)."</strong>&nbsp;&nbsp;</td></tr>";	
+						echo "<tr><td></td><td style='text-align:right'>&nbsp;Efectivo</td>
+							<td style='text-align:right;text-align:right;'>".dinero($efectivo)."&nbsp;&nbsp;</td></tr>";	
+						echo "<tr><td></td><td style='text-align:right'>&nbsp;Cambio</td>
+							<td style='text-align:right;text-align:right;border-top:2px solid;'>".dinero($efectivo-$total_iva_contado-$total_contado)."&nbsp;&nbsp;</td></tr>";	
 									
 
 									

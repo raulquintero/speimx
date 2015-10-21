@@ -53,20 +53,20 @@ $database = new DB();
 			if ($row['tmov']==0)
 			{
 				echo "<td align=center>---</td>
-				<td align=right> <font >$ ".$row['cantidad']."&nbsp;&nbsp; </td>";
+				<td align=right> <font >".$row['cantidad']."&nbsp;&nbsp; </td>";
 			}
 			if ($row['tmov']==1)
 			{
 					echo "
-				<td align=right> <font >$ ".$row['cantidad']."&nbsp;&nbsp; </td>
+				<td align=right> <font >".$row['cantidad']."&nbsp;&nbsp; </td>
 				<td align=center>---</td>";
 			}	
 
 
 
-			echo "<td><font ><b>$ ".dinero($saldo)."</td>
+			echo "<td><font ><b>".dinero($saldo)."</td>
 			<td><font >".$row['tipomov']."</td>
-			<td> <font >".$row['admin_id']."</td>";
+			<td hidden> <font >".$row['admin_id']."</td>";
 
 		if ($row['tmov']==0)		
 			$saldo+=$row['cantidad'];

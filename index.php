@@ -29,6 +29,7 @@ $type=(htmlspecialchars($_GET["type"]));
 
 $cuantos=strlen($code);
 
+
 //if ($cuantos==7 )
 		{
 			switch ($code[0]) {
@@ -45,7 +46,9 @@ $cuantos=strlen($code);
 					 $location="Location: /index.php?data=clientes&op=verificar&cid=$code";
 					// $location="Location: /functions/cart.php?func=sel_cliente&cid=$code";
 					break;
-				
+				case 'N':
+					$location="Location: /notaventa.php?nv=$code";
+					break;
 				default:
 					# code...
 					break;
@@ -164,6 +167,10 @@ switch ($type) {
 	<script type="text/javascript">
 	function setFocusToTextBox(){
 		$('#textcode').focus();
+		//document.getElementById('textcode').focus();
+	}
+	function setFocusToCantidad(){
+		$('#cantidad').focus();
 		//document.getElementById('textcode').focus();
 	}
 	</script>	

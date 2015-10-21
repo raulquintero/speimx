@@ -47,22 +47,11 @@ foreach( $_GET as $key => $value )
 
 
 
-
-			$cliente_id = $_SESSION['dev_cliente_id'];
-			$saldo = $_SESSION['dev_saldo'];
-
-
-
-
-	 		
-
-						
-				 // else
-				 // 		echo "<a href=\"/index.php?data=pos&op=clientes\" class=\"btn btn-success blue  hidden-print\">Seleccionar Cliente</a>";
-
-
 				
 if ($_SESSION['display']=='dev'){
+			
+			$cliente_id = $_SESSION['dev_cliente_id'];
+			$saldo = $_SESSION['dev_saldo'];
 
 			echo "<div class=\"row-fluid condensed\">";
 		
@@ -102,10 +91,10 @@ if ($_SESSION['display']=='dev'){
 								echo "<tr><td></td><td style='text-align:right'>Saldo Actual</td><td style='text-align:right'> &nbsp;&nbsp; $ ";
 									echo dinero($saldo);
 								echo "</td></tr>";	
-								$cupon=dinero($total_iva_credito+$total_credito-$saldo);//-$total_iva_credito-$total_credito);
+								$notaventa=dinero($total_iva_credito+$total_credito-$saldo);//-$total_iva_credito-$total_credito);
 								$saldoafavor=($total_iva_credito+$total_credito);
-								if ($cupon>0)
-									echo "<tr><td></td><td style='text-align:right'>Cupon</td><td style='text-align:right;background:yellow;color:black'><b>$". dinero($cupon)."</b></td></tr>";
+								if ($notaventa>0)
+									echo "<tr><td></td><td style='text-align:right'>Nota de Venta</td><td style='text-align:right;background:yellow;color:black'><b>$". dinero($notaventa)."</b></td></tr>";
 								else
 								{
 									echo "<tr><td></td><td style='text-align:right'>Saldo a Favor</td><td style='text-align:right;'>$". dinero($saldoafavor)."</td></tr>";
@@ -214,6 +203,8 @@ if ($_SESSION['display']=='dev'){
 <?php if ($_SESSION['display']=='pos')
 
 {
+			$cliente_id = $_SESSION['cliente_id'];
+
 ?>
 
 <div class="boxi span4 " styles='border-left:1px dotted'>

@@ -346,7 +346,7 @@ $cliente_id = $_SESSION['dev_cliente_id'];
 								$cupon=dinero($total_iva_credito+$total_credito-$saldo);//-$total_iva_credito-$total_credito);
 								$saldoafavor=($total_iva_credito+$total_credito);
 								if ($cupon>0)
-									echo "<tr><td></td><td style='text-align:right'>Cupon</td><td style='text-align:right;background:yellow;color:black'><b>$". dinero($cupon)."</b></td></tr>";
+									echo "<tr><td></td><td style='text-align:right'>Nota de Venta</td><td style='text-align:right;background:yellow;color:black'><b>$". dinero($cupon)."</b></td></tr>";
 								else
 								{
 									echo "<tr><td></td><td style='text-align:right'>Saldo a Favor</td><td style='text-align:right;'>$". dinero($saldoafavor)."</td></tr>";
