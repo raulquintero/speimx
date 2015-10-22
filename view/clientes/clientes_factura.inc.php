@@ -81,6 +81,6 @@ $_SESSION['display']="dev";
 		</div>
 		<div class="modal-footer">
 			<a href="#" class="btn" data-dismiss="modal">Cancelar</a>
-			<a href="/functions/cerrarventa.php" class="btn btn-primary">Continuar</a>
+			<a href="/functions/devolucion.php" class="btn btn-primary">Continuar</a>
 		</div>
 	</div>
