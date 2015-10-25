@@ -8,10 +8,24 @@ $database = new DB();
 
 session_start();
 
+// $k=$cuantos=0;
+// $item=$_SESSION['cart_temp'];
 
-echo "<br>".$cuantos=count($_SESSION['cart_termp']);
+//  foreach ($item as $row => $value) 
+//   {
+  	
+// 	if ( $item[$k]['tipomov_id']=="X")
+// 		$cuantos++;
+// 	$k++;
+// }
 
-if ($cuantos>0){
+
+
+$cuantos=get_cuantosdev();
+
+echo "<br>cuantos: $cuantos<br>";
+if ($cuantos)
+{
 echo "<br>user: ".$admin_id=$_SESSION['user_id'];
 echo "<br>fid: ".$fid=$_SESSION['fid_dev'];
 echo "<br>nid: ".$nid=$_SESSION['nid'];
@@ -21,6 +35,9 @@ echo "<br>saldo _anterior: ".$saldo_anterior=$_SESSION['dev_saldo'];
 echo "<br>saldo: ".$saldo_nuevo=0;
 
 echo "<br>";
+
+
+
 
 $fecha_hoy=date("Y-m-d H:i:s");
 											//The fields and values to insert
@@ -38,6 +55,7 @@ $fecha_hoy=date("Y-m-d H:i:s");
 									$add_query = $database->insert( 'devolucion', $names );
 									$devolucion_id = $database->lastid();
 
+echo "<a href=/imprimir_devolucion.php?did=$devolucion_id&fid=$fid>Imprimir Ticket</a><br>";
 
 $item=$_SESSION['cart_temp'];
 	$k=0; 
@@ -83,8 +101,13 @@ $item=$_SESSION['cart_temp'];
   		echo $total_contado;
   		echo $total_iva_credito;
   		echo $total_iva_contado;
+  		if ($tipomov_id==3)
+  			$total=round($total_credito+$total_iva_credito);
+  		if ($tipomov_id==14)
+  			$total=round($total_contado+$total_iva_contado);
 
-$total=round($total_credito+$total_iva_credito);
+echo "<br>tipomov_id: ".$tipomov_id;
+echo "<br>total: ".$total;
 $saldo=($saldo_anterior-$total);
 
 				//Fields and values to update
@@ -99,20 +122,59 @@ $saldo=($saldo_anterior-$total);
 					);
 					$updated = $database->update( 'devolucion', $update, $where_clause, 1 );
 
+											//The fields and values to insert
+									$names = array(
+    								'cliente_id' => $cliente_id,
+    								'fecha_actual' => $fecha_hoy,
+    								'fecha' => $fecha_hoy,
+    								'admin_id' => $admin_id,
+    								'tipomov_id' => 2,
+    								'factura_id' => $devolucion_id,
+    								'cantidad' => $total
+
+			);
+									$add_query = $database->insert( 'movimiento', $names );
+									$devolucion_id = $database->lastid();
+
+
+
+
+
+
+
+
+
+
+
+
+
+				//Fields and values to update
+					$update = array(
+    				'total_ultimo' => $saldo,
+    				'fecha_total_inicio' => $fecha_hoy,
+    				'saldo' => $saldo
+					);
+
+					//Add the WHERE clauses
+					$where_clause = array(
+    				'cliente_id' => $cliente_id
+					);
+					$updated = $database->update( 'cliente', $update, $where_clause, 1 );
+
 
 
 echo "<br><br>total:\n".$total;
-echo "<br>Saldo: saldo: ".$saldo;
+echo "<br>Saldo:  ".$saldo;
 
 
 
-echo "<br><br>Sesion:<br>";          // ********DEBUG**********
-foreach ($_SESSION as $k => $v) { echo "<br>[$k] => $v \n";}
+// echo "<br><br>Sesion:<br>";          // ********DEBUG**********
+// foreach ($_SESSION as $k => $v) { echo "<br>[$k] => $v \n";}
 
 
 }
-else
-echo "nada k hacer!";
+// else
+// echo "nada k hacer!";
 
 
 

@@ -14,6 +14,7 @@ require_once($realpath.'/functions/ticket.php');
 require_once($realpath.'/functions/formato.php');
 require_once($realpath.'/functions/formas.php');
 require_once($realpath.'/functions/error.php');
+require_once($realpath.'/functions/estadisticas.php');
 
 
 

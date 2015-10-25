@@ -41,7 +41,7 @@ $database = new DB();
 	$i=0;
 	foreach( $results as $row )
 	{
-		if ($row['tmov']==0 || $row['tmov']==1)
+		if ($row['tmov']==0 || $row['tmov']==1 )
 		{
 		$i+=1;
 		echo "<tr >

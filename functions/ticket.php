@@ -16,7 +16,9 @@ $database = new DB();
 				echo "<table   width=100%>
 						<tr>
 							<td style='text-align:center;border-bottom:1px dotted black' colspan=4>
-								<br><strong>Tiendas Alberto</strong>
+								<br>
+								<a href=\"/index.php\"><img width=300 src=/img/tiendasalberto.png></a>
+
 								<br>R.F.C QURC750708PM7
 								<br>Av. Presa Lopez Zamora #1501 <br>Col. Venustiano Carranzass";
 								
@@ -34,7 +36,7 @@ $database = new DB();
 				
 
 				echo "</td></tr>";
-				echo "<tr><td>&nbsp;</td></tr>";
+				echo "<tr><td width=30>&nbsp;</td><td>&nbsp;</td><td width=90>&nbsp;</td></tr>";
 
 						//$item = $_SESSION['cart_temp'];
 							 
@@ -68,12 +70,12 @@ $database = new DB();
 		
 						echo "<tr $bgcolor ><td>".$item['facturadet_id']."</td><td>$textcolor".$item['sku']."<br>
 							". substr($item['producto'],0,26)."...</a>
-							<br><p class=\"muted\" >"
-							.$item['color']." ".$item['talla']."</p></td> 
+							<br>"
+							.$item['color']." ".$item['talla']."</td> 
 							<td style='text-align:right;vertical-align:text-top'>";
 						if ($tipomov_id==3) echo dinero($item['precio_credito']+($item['precio_credito']*.16)); else echo dinero($item['precio_contado']+($item['precio_contado']*.16));
 					
-						echo "</td>";
+						echo "</s>&nbsp;&nbsp;&nbsp;&nbsp;</td>";
 						// if ($item['tipomov_id']==2 || $item['tipomov_id']==3 )
 						// 	echo "<td style='text-align:right;vertical-align:text-top'><a href=\"#\" class=\"btn btn-info blue btn-setting\">Devolucion</a></td> ";
 						// else
@@ -97,10 +99,10 @@ $database = new DB();
 
 
 
-					echo "<tr style=\"border-top:1px dotted black\"><td>&nbsp;</td><td style='text-align:right'>SubTotal</td>
-					      	  <td style='text-align:right;boarder-top:2px solid;'>$". dinero($total_credito+$total_iva_credito)."</td></tr>";
+					echo "<tr style=\"border-top:1px dotted black\"><td >&nbsp;</td><td style='text-align:right'>SubTotal</td>
+					      	  <td style='text-align:right;boarder-top:2px solid;'>$". dinero($total_credito+$total_iva_credito)."&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>";
 					//echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;Inclue IVA(16%) por:</td><td style='text-align:right;border-bottom:2px solid;'>".dinero($total_iva_credito)."</td></tr>";	
-					echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;<strong>Total</strong></td><td style='text-align:right;'><strong>".dinero($total_iva_credito+$total_credito)."</strong></td></tr>";	
+					echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;<strong>Total</strong></td><td style='text-align:right;'><strong>".dinero($total_iva_credito+$total_credito)."</strong>&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>";	
 					echo "<tr><td>&nbsp;</td><td>&nbsp;</td></tr>";
 					
 				} 
@@ -133,12 +135,12 @@ $database = new DB();
 
 						echo "<tr $bgcolor ><td>$textcolor ".$item['facturadet_id']."</td><td>$textcolor ".$item['sku']."<br>
 							". substr($item['producto'],0,26)."...</a>
-							<br><p class=\"muted\" >"
-							.$item['color']." ".$item['talla']."</p></td> 
+							<br>"
+							.$item['color']." ".$item['talla']."</td> 
 							<td style='text-align:right;vertical-align:text-top'>$textcolor";
 							echo dinero($item['precio_contado']*1.16);
 					
-						echo "</td>";
+						echo "</s>&nbsp;&nbsp;&nbsp;&nbsp;</td>";
 
 						// if ($item['tipomov_id']==2 || $item['tipomov_id']==3 )
 						// 	echo "<td></td>";
@@ -160,11 +162,11 @@ $database = new DB();
 								<td>&nbsp;</td></tr>
 				  			<tr>
 				  				<td></td><td style='text-align:right'>Subtotal</td>
-							<td style='text-align:right'>$". dinero($total_contado+$total_iva_contado)."</td></tr>";
+							<td style='text-align:right'>$". dinero($total_contado+$total_iva_contado)."&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>";
 						// echo "<tr><td></td><td style='text-align:right'>Inclue IVA(16%) por:</td>
 						// 	<td style='text-align:right'>$". dinero($total_iva_contado)."</td></tr>";
 						echo "<tr><td></td><td style='text-align:right'>&nbsp;<strong>Total</strong></td>
-							<td style='text-align:right;text-align:right;border-top:2px solid;'><strong>".dinero($total_iva_contado+$total_contado)."</strong></td></tr>";	
+							<td style='text-align:right;text-align:right;border-top:2px solid;'><strong>".dinero($total_iva_contado+$total_contado)."&nbsp;&nbsp;&nbsp;&nbsp;</strong></td></tr>";	
 									
 								
 							}
@@ -295,7 +297,7 @@ $database = new DB();
 				else
 					echo "<br>"; //Tipo de Venta: <span class=\"label label-inverse\">Contado</span><br><br>";
 
-				echo "Folio: $factura_id [$cliente_id]";
+				//echo "Folio: $factura_id [$cliente_id]";
 				
 
 				echo "</td></tr>";
@@ -304,7 +306,7 @@ $database = new DB();
 
 $cliente_id = $_SESSION['dev_cliente_id'];
 			$saldo = $_SESSION['dev_saldo'];
-								$cuantos=count($_SESSION['cart_temp']);
+								$cuantos=get_cuantosdev();
 
 
 
@@ -338,7 +340,7 @@ $cliente_id = $_SESSION['dev_cliente_id'];
 								// echo "<tr><td colspan=4 style=\"border-bottom:1px dotted black\">&nbsp;</td></tr><tr><td></td><td style='text-align:right'>Total</td><td style='text-align:right;boarder-top:2px solid;'>$". dinero($total_credito+$total_iva_credito)."</td></tr>";
 								// echo "<tr><td></td><td style='text-align:right'>&nbsp;Incluye IVA(16%) por</td><td style='text-align:right;border-bottom:2px solid;'>".dinero($total_iva_credito)."</td></tr>";	
 								echo "<tr><td style='text-align:center;'>ITEMS</td><td style='text-align:right'>&nbsp;<font size=+1>Total</font></td>
-								<td width=100 style='text-align:right;background:white;color:black'><font size=+1><b>$ ".dinero($total_iva_credito+$total_credito)."</strong></td></tr>";	
+								<td  style='text-align:right;background:white;color:black'><font size=+1><b>$ ".dinero($total_iva_credito+$total_credito)."</strong></td></tr>";	
 								echo "<tr><td style='text-align:center'>$cuantos&nbsp;</td></tr>";
 								echo "<tr><td></td><td style='text-align:right'>Saldo Actual</td><td style='text-align:right'> &nbsp;&nbsp; $ ";
 									echo dinero($saldo);
@@ -366,7 +368,7 @@ $cliente_id = $_SESSION['dev_cliente_id'];
 									// echo "<tr><td>&nbsp;</td></tr><tr><td></td><td style='text-align:right'>Subtotal</td><td style='text-align:right'>$". dinero($total_contado+$total_iva_contado)."</td></tr>";
 									// echo "<tr><td></td><td style='text-align:right'>Incluye IVA(16%) por</td><td style='text-align:right'>$". dinero($total_iva_contado)."</td></tr>";
 									echo "<tr><td></td><td style='text-align:right'>&nbsp;<font size=+2>Total</font></td>
-											<td width=180 style='text-align:right;text-align:right;background:white;color:black;border:2px solid;'>
+											<td width=220 style='text-align:right;text-align:right;background:white;color:black;border:2px solid;'>
 											<font size=+3><b>$ ".dinero($total_iva_contado+$total_contado)."</b></font></td></tr>";	
 									
 									}
@@ -671,5 +673,239 @@ echo "<br>items: ".$n."<br>";
 //exit();
 return $fdet;
 }
+
+
+
+
+function get_cuantosdev()
+{
+
+$k=$cuantos=0;
+$item=$_SESSION['cart_temp'];
+
+ foreach ($item as $row => $value) 
+  	{
+  	
+	if ( $item[$k]['tipomov_id']=="X")
+		$cuantos++;
+	$k++;
+	}
+return $cuantos;
+
+}
+
+
+
+function get_devolucion($did)
+{
+$database = new DB();
+
+	if($did)
+	{
+					$query = "SELECT cliente.cliente_id,apellidop, apellidom, nombre, credito, cliente.saldo,total_ultimo,fecha_total_ultimo, abono,factura_id,
+							tipomov_id,fecha,total,saldo_anterior FROM cliente,devolucion 
+						WHERE  devolucion.cliente_id=cliente.cliente_id AND devolucion.devolucion_id=".$did;
+					list( $cliente_id,$apellidop,$apellidom,$nombre,$credito, $saldo, $total_ultimo, $fecha_total_ultimo,$abono, $factura_id,
+							 $tipomov_id,$fecha_factura,$total,$saldo_anterior  ) = $database->get_row( $query );
+	 					$cliente= $apellidop." ".$apellidom." ".$nombre;
+	 }
+
+				echo "<table   width=100%>
+						<tr>
+							<td style='text-align:center;border-bottom:1px dotted black' colspan=4>
+								<br><strong>DEVOLLUCION</strong>";
+								
+				 "<br>"; //Tipo de Venta: <span class=\"label label-inverse\">Contado</span><br><br>";
+				
+
+				echo "<br>Fecha y Hora: ".$fecha_factura;    //date("d-m-Y  H:m:s");
+				echo "<br>";
+				
+
+				echo "</td></tr>";
+				echo "<tr><td width=30>&nbsp;</td><td>&nbsp;</td><td width=90>&nbsp;</td></tr>";
+
+						//$item = $_SESSION['cart_temp'];
+							 
+				if ($tipomov_id==3)
+							
+				{
+					$query= "SELECT saldo from cliente where cliente_id=$cliente_id";
+					list( $saldo_nuevo ) = $database->get_row( $query );
+					$query = "SELECT  facturadet.producto_id,facturadet.facturadet_id,facturadet.factura_id,facturadet.producto,facturadet.precio_credito,
+					facturadet.iva_credito,facturadet.tipomov_id, color,talla,facturadet.sku 
+					FROM facturadet,devoluciondet, devolucion
+					WHERE  devoluciondet.facturadet_id=facturadet.facturadet_id AND devoluciondet.devolucion_id=devolucion.devolucion_id AND devolucion.devolucion_id=".$did;
+
+					$results = $database->get_results( $query );
+								
+					$n=0;
+					$total=0;
+					
+
+	
+					foreach( $results as $item )
+					{
+ 					   switch($item['tipomov_id']){
+								case '2':$bgcolor="bgcolor='#FFB8D6' ";
+										$textcolor="<font color=gray><s> ";
+									break;
+								
+								default:$bgcolor="";
+										$textcolor="";
+									break;
+
+								}
+		
+						echo "<tr $bgcolor ><td>".$item['facturadet_id']."</td><td>$textcolor".$item['sku']."<br>
+							". substr($item['producto'],0,26)."...</a>
+							<br>"
+							.$item['color']." ".$item['talla']."</td> 
+							<td style='text-align:right;vertical-align:text-top'>";
+						if ($tipomov_id==3) echo dinero($item['precio_credito']+($item['precio_credito']*.16)); else echo dinero($item['precio_contado']+($item['precio_contado']*.16));
+					
+						echo "</s>&nbsp;&nbsp;&nbsp;&nbsp;</td>";
+						// if ($item['tipomov_id']==2 || $item['tipomov_id']==3 )
+						// 	echo "<td style='text-align:right;vertical-align:text-top'><a href=\"#\" class=\"btn btn-info blue btn-setting\">Devolucion</a></td> ";
+						// else
+						// 	echo "<td></td>";
+						echo"</tr>";
+										
+						$total_credito+=$item['precio_credito'];
+						$total_contado+=$item['precio_contado'];
+										
+						$n++;
+					}
+				}	
+
+
+				if ($total_credito AND $cliente_id>0)
+				{
+					$total_iva_credito=$total_credito*.16;
+					$disponible=$credito-$saldo-$total_credito-$total_iva_credito;
+
+					//$saldo_total=$saldo+$total_credito+$total_iva_credito;
+
+
+
+					//echo "<tr style=\"border-top:1px dotted black\"><td >&nbsp;</td><td style='text-align:right'>SubTotal</td>
+					  //    	  <td style='text-align:right;boarder-top:2px solid;'>$". dinero($total_credito+$total_iva_credito)."&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>";
+					//echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;Inclue IVA(16%) por:</td><td style='text-align:right;border-bottom:2px solid;'>".dinero($total_iva_credito)."</td></tr>";	
+					echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;<strong>Total</strong></td><td style='text-align:right;'><strong>".dinero($total_iva_credito+$total_credito)."</strong>&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>";	
+					echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;<strong>Saldo Ant</strong></td><td style='text-align:right;'><strong>".dinero($saldo_nuevo+$total_credito+$total_iva_credito)."</strong>&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>";	
+					echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;<strong>Saldo Nuevo</strong></td><td style='text-align:right;border-top:2px solid black'><strong>".dinero($saldo_nuevo)."</strong>&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>";	
+					echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;<strong>Abono</strong></td><td style='text-align:right;'><strong>".dinero($total_iva_credito+$total_credito)."</strong>&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>";	
+					echo "<tr><td>&nbsp;</td><td>&nbsp;</td></tr>";
+					
+				} 
+				else
+					if ($cliente_id==0)
+					{
+
+						$query = "SELECT  facturadet.facturadet_id,facturadet.factura_id,facturadet.producto,facturadet.precio_contado,facturadet.iva_contado,color,talla,facturadet.sku,tipomov_id FROM facturadet,devoluciondet
+					WHERE  facturadet.facturadet_id=devoluciondet.facturadet_id AND devoluciondet.devolucion_id=".$did;
+
+					$results = $database->get_results( $query );
+								
+					$n=0;
+					$total=0;
+	
+	
+					foreach( $results as $item )
+					{
+		
+						switch($item['tipomov_id']){
+								case '2':$bgcolor="bgcolor='#FFB8D6' ";
+										$textcolor="<font color=gray><s> ";
+									break;
+								
+								default:$bgcolor="";
+										$textcolor="";
+									break;
+
+								}
+
+						echo "<tr $bgcolor ><td>$textcolor ".$item['facturadet_id']."</td><td>$textcolor ".$item['sku']."<br>
+							". substr($item['producto'],0,26)."...</a>
+							<br>"
+							.$item['color']." ".$item['talla']."</td> 
+							<td style='text-align:right;vertical-align:text-top'>$textcolor";
+							echo dinero($item['precio_contado']*1.16);
+					
+						echo "</s>&nbsp;&nbsp;&nbsp;&nbsp;</td>";
+
+						// if ($item['tipomov_id']==2 || $item['tipomov_id']==3 )
+						// 	echo "<td></td>";
+						// else
+						// 	echo "	<td style='text-align:right;vertical-align:text-top'><a href=\"#\" class=\"btn btn-info blue btn-setting\">Devolucion</a></td> ";
+
+						echo "</tr>";
+										
+						$total_credito+=$item['precio_credito'];
+						$total_contado+=$item['precio_contado'];
+										
+						$n++;
+					}
+					
+
+
+						$total_iva_contado=$total_contado*.16;
+						echo "<tr>
+								<td>&nbsp;</td></tr>
+				  			<tr>";
+				  	// 	echo "<td></td><td style='text-align:right'>Subtotal</td>
+							// <td style='text-align:right'>$". dinero($total_contado+$total_iva_contado)."&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>";
+						// echo "<tr><td></td><td style='text-align:right'>Inclue IVA(16%) por:</td>
+						// 	<td style='text-align:right'>$". dinero($total_iva_contado)."</td></tr>";
+						echo "<tr><td></td><td style='text-align:right'>&nbsp;<strong>Total</strong></td>
+							<td style='text-align:right;text-align:right;'><strong>".dinero($total_iva_contado+$total_contado)."&nbsp;&nbsp;&nbsp;&nbsp;</strong></td></tr>";	
+						echo "<tr><td></td><td style='text-align:right'>&nbsp;<strong>Nota de Venta:</strong></td>
+							<td style='text-align:right;text-align:right;border-top:2px solid;'><strong>".dinero($total_iva_contado+$total_contado)."&nbsp;&nbsp;&nbsp;&nbsp;</strong></td></tr>";	
+							$notaventa=$total_iva_contado+$total_contado;		
+								
+							}
+
+
+						// echo "<tr><td colspan=4 align=center><br><br><br>_________________________________________";
+
+						
+						// if ($cliente_id) echo "<br>Cliente: ". strtoupper($cliente);
+						//echo "<br><br><br><br>"; //Tipo de Venta: <span class=\"label label-inverse\">Contado</span><br><br>";
+
+
+						//echo "</td></tr>";	
+					
+				echo "</table>";
+				
+					return $notaventa;
+			
+
+ // echo "<br><br>array: <br>";
+ //     print_r($item_temp);
+
+    						//$_SESSION['cart_temp']=$item_temp;
+
+  // echo "<br><br>session: <br>";
+  //     print_r($_SESSION['cart_dev']);
+
+
+}
+
+
+function get_notaventa($nvid)
+{
+$fecha_hoy=date("Y-m-d H:i:s");
+	
+	echo "<table width=100% >";
+	echo "<tr><td style='text-align:center'>NOTA DE VENTA</td></tr>";
+	echo "<tr><td style='text-align:center'><font size=-2>Fecha: $fecha_hoy</font></td></tr>";
+	echo "<tr><td style='text-align:center'><font size=-2>Valida por 30 dias</font></td></tr>";
+	$no_ticket=sprintf('%06d', '3872839982');
+
+ echo "<tr><td style='text-align:center'><br><img width=\"300\" src=\"barcode.php?text=v76-89878987\" alt=\"barcode\"></td></tr>";
+ echo "<tr><td style='text-align:center'>$745.00 MXN</td></tr>";
+ echo "</table>";
+}
+
 
 ?>

@@ -513,6 +513,15 @@ switch ($type) {
 								if ($nid<=6) echo "<li><a href=\"index.php?data=proveedores\"><i class=\"icon-road\"></i><span class=\"hidden-tablet\"> Proveedores</span></a></li>";
 								if ($nid<=6) echo "<li><a href=\"index.php?data=productos\"><i class=\"icon-barcode\"></i><span class=\"hidden-tablet\"> Productos</span></a></li>";
 								if ($nid<=6) echo "<li><a href=\"index.php?data=tallas\"><i class=\"icon-barcode\"></i><span class=\"hidden-tablet\"> Tallas</span></a></li>";
+								if ($nid<=6) echo "<li><a href=\"index.php?data=estadisticas&op=ventas\"><i class=\"icon-barcode\"></i><span class=\"hidden-tablet\"> Ventas</span></a></li>";
+							echo "</ul>";
+						echo "</li>";
+						if ($nid<=8) echo "<li><a class=\"dropmenu\" href=\"#\"><i class=\"icon-chevron-right hidden-print\"></i><span class=\"hidden-tablet hidden-print\"> Mantenimiento </span></a>";
+							echo "<ul>";
+								
+								if ($nid<=8) echo "<li><a href=\"index.php?data=mantenimiento&op=db\"><i class=\"icon-book\"    ></i><span class=\"hidden-tablet\"> Base de Datos</span></a></li>";
+								if ($nid<=6) echo "<li><a href=\"index.php?data=mantenimiento&op=impuestos\"><i class=\"icon-book\"    ></i><span class=\"hidden-tablet\"> Impuestos</span></a></li>";
+								if ($nid<=6) echo "<li><a href=\"index.php?data=catalogo\"><i class=\"icon-barcode\"></i><span class=\"hidden-tablet\"> Temas</span></a></li>";
 							echo "</ul>";
 						echo "</li>";
 
