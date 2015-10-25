@@ -261,12 +261,12 @@ $fid=substr($fid, 1,7);
 
 
     						$_SESSION['cart_temp']=$item_temp;
- //echo $_SESSION['fid_dev'];
-   //   print_r($item_temp);
-   // echo "<br><br>session: <br>";
-   //     print_r($_SESSION['cart_temp']);
+ // echo $_SESSION['fid_dev'];
+ //     print_r($item_temp);
+ //   echo "<br><br>session: <br>";
+ //       print_r($_SESSION['cart_temp']);
 
-      //exit();
+ //      exit();
 
 }
 
@@ -305,7 +305,7 @@ $database = new DB();
 
 
 $cliente_id = $_SESSION['dev_cliente_id'];
-			$saldo = $_SESSION['dev_saldo'];
+			//$saldo = $_SESSION['dev_saldo'];
 								$cuantos=get_cuantosdev();
 
 

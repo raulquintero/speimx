@@ -53,9 +53,9 @@ $fecha_hoy=date("Y-m-d H:i:s");
 
 			);
 									$add_query = $database->insert( 'devolucion', $names );
-									$devolucion_id = $database->lastid();
+									echo "did: ".$devolucion_id = $database->lastid();
 
-echo "<a href=/imprimir_devolucion.php?did=$devolucion_id&fid=$fid>Imprimir Ticket</a><br>";
+//echo "<a href=/imprimir_devolucion.php?did=$devolucion_id&fid=$fid>Imprimir Ticket</a><br>";
 
 $item=$_SESSION['cart_temp'];
 	$k=0; 
@@ -175,12 +175,11 @@ echo "<br>Saldo:  ".$saldo;
 }
 // else
 // echo "nada k hacer!";
+//echo "Location: /imprimir_devolucion.php?did=$devolucion_id&fid=$fid";
+ 
 
 
-
-
-
-
+header("Location: /imprimir_devolucion.php?did=$devolucion_id&fid=$fid");
 
 
 

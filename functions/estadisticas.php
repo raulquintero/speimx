@@ -23,6 +23,7 @@ $database = new DB();
 							  <thead>
 								  <tr>
 									  <th style='text-align:right'>Id</th>
+									  <th style='text-align:right'>Fecha</th>
 									  <th style='text-align:right'>Cliente</th>
 									  <th style='text-align:center'>Tipo Venta</th>
 									  <th style='text-align:center'>Total</th>
@@ -39,7 +40,8 @@ $database = new DB();
 	foreach( $results as $item )
 					{
 						$vendedor=$item['nombre']." ".$item['apellidop'];
-						echo "<tr><td style='text-align:right'>".$item['factura_id']."</td><td style='text-align:right'>".$item['cliente_id']."</td><td>".$item['tipomov']."
+						echo "<tr><td style='text-align:right'>".$item['factura_id']."</td><td style='text-align:right'>".$item['fecha']."</td><td style='text-align:right'>".$item['cliente_id']."</td>
+							<td>".$item['tipomov']."
 							<br></td> 
 							<td style='text-align:right'>$ ".dinero($item['total'])."<td style='text-align:right'>".$vendedor;
 					
