@@ -2,7 +2,7 @@
 <div class="row-fluid condensed">	
 
 
-	<div class="box-content span5">
+	<div class="box-content span6">
 				<table cellpadding=5 width=100%>
 					<tr><td>	
 					<?php mostrar_ventas();?>

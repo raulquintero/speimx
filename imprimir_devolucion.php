@@ -44,6 +44,10 @@ echo"<html>
 		font-size: x-small; 
 	}
 
+	table{
+		font-size: small;
+	}
+
 	</style>
 	</head>
 	<body>";

@@ -6,7 +6,7 @@ $database = new DB();
  if (!$login->getUserActive())
  		header("location:/index.html");
 
-session_start();
+//session_start();
 
 // $k=$cuantos=0;
 // $item=$_SESSION['cart_temp'];
@@ -53,7 +53,7 @@ $fecha_hoy=date("Y-m-d H:i:s");
 
 			);
 									$add_query = $database->insert( 'devolucion', $names );
-									echo "did: ".$devolucion_id = $database->lastid();
+									$devolucion_id = $database->lastid();
 
 //echo "<a href=/imprimir_devolucion.php?did=$devolucion_id&fid=$fid>Imprimir Ticket</a><br>";
 
@@ -134,7 +134,6 @@ $saldo=($saldo_anterior-$total);
 
 			);
 									$add_query = $database->insert( 'movimiento', $names );
-									$devolucion_id = $database->lastid();
 
 
 
@@ -144,14 +143,15 @@ $saldo=($saldo_anterior-$total);
 
 
 
-
-
+				$abono=get_abono($saldo);
+				echo "<br>abono".$abono;
 
 
 				//Fields and values to update
 					$update = array(
     				'total_ultimo' => $saldo,
     				'fecha_total_inicio' => $fecha_hoy,
+    				'abono' => $abono,
     				'saldo' => $saldo
 					);
 
@@ -175,7 +175,7 @@ echo "<br>Saldo:  ".$saldo;
 }
 // else
 // echo "nada k hacer!";
-//echo "Location: /imprimir_devolucion.php?did=$devolucion_id&fid=$fid";
+echo "Location: /imprimir_devolucion.php?did=$devolucion_id&fid=$fid";
  
 
 

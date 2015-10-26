@@ -31,6 +31,9 @@ foreach( $_GET as $key => $value )
 		font-family: arial, helvetica;
 		font-size: x-small; 
 	}
+	table{
+		font-size: small;
+	}
 
 	</style>
 </head>

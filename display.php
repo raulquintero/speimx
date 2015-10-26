@@ -26,6 +26,12 @@ require_once('config/config.php');
 $database = new DB();
 
 
+$total_credito=0;
+$total_contado=0;
+$sku=0;
+$id_hide=0;
+$credito=0;
+
 
  //if (!$login->getUserActive())
  	//	header("location:/index.html");
@@ -134,6 +140,12 @@ if ($_SESSION['display']=='dev'){
 										
 										if($item[$n]['tipomov_id']=="X")
 										{
+
+						// $query = "SELECT  facturadet_id,producto,precio_contado,iva_contado,precio_credito,iva_credito,codigo,color,talla,sku 
+						// FROM facturadet
+						// WHERE  facturadet_id=".$item[$n]['facturadet_id'];
+						// list( $faturadet_id,$producto,$precio_contado,$iva_contado,$precio_credito,$iva_credito,$codigo,$color,$talla,$sku  ) = $database->get_row( $query );
+		
 										echo "<tr><td style='border-top:1px dotted #4EF84E;'> ".(1)." &nbsp  ".$item[$n]['id_hide']."</td> 
 												<td  style='border-top:1px dotted #4EF84E;'>".$item[$n]['sku']."<br>". substr($item[$n]['producto'],0,23)."...</a> 
 											<br>".strtolower($item[$n]['color'])." ".strtoupper($item[$n]['talla'])."</td> 

@@ -713,9 +713,9 @@ $database = new DB();
 				echo "<table   width=100%>
 						<tr>
 							<td style='text-align:center;border-bottom:1px dotted black' colspan=4>
-								<br><strong>DEVOLLUCION</strong>";
+								<br><strong>DEVOLUCION</strong>";
 								
-				 "<br>"; //Tipo de Venta: <span class=\"label label-inverse\">Contado</span><br><br>";
+				 echo "<br>Transaccion: <span class=\"label label-inverse\">$did</span>";
 				
 
 				echo "<br>Fecha y Hora: ".$fecha_factura;    //date("d-m-Y  H:m:s");
@@ -727,7 +727,7 @@ $database = new DB();
 
 						//$item = $_SESSION['cart_temp'];
 							 
-				if ($tipomov_id==3)
+				//if ($tipomov_id==3)
 							
 				{
 					$query= "SELECT saldo from cliente where cliente_id=$cliente_id";
@@ -794,7 +794,7 @@ $database = new DB();
 					echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;<strong>Total</strong></td><td style='text-align:right;'><strong>".dinero($total_iva_credito+$total_credito)."</strong>&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>";	
 					echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;<strong>Saldo Ant</strong></td><td style='text-align:right;'><strong>".dinero($saldo_nuevo+$total_credito+$total_iva_credito)."</strong>&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>";	
 					echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;<strong>Saldo Nuevo</strong></td><td style='text-align:right;border-top:2px solid black'><strong>".dinero($saldo_nuevo)."</strong>&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>";	
-					echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;<strong>Abono</strong></td><td style='text-align:right;'><strong>".dinero($total_iva_credito+$total_credito)."</strong>&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>";	
+					echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;<strong>Abono</strong></td><td style='text-align:right;'><strong>".dinero($abono)."</strong>&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>";	
 					echo "<tr><td>&nbsp;</td><td>&nbsp;</td></tr>";
 					
 				} 
@@ -906,6 +906,36 @@ $fecha_hoy=date("Y-m-d H:i:s");
  echo "<tr><td style='text-align:center'>$745.00 MXN</td></tr>";
  echo "</table>";
 }
+
+
+
+
+function get_abono($saldo_total)
+{
+$database = new DB();
+
+
+ 	$query = "SELECT abono,limite FROM abono ORDER BY limite ASC";
+
+	$results = $database->get_results( $query );
+	foreach ($results as $row ) 
+	{
+		//echo $total_credito." ".$row['limite']." <br> ";
+		if ($saldo_total<=$row['limite'])
+		{
+			$abono=$row['abono'];
+			break;
+		}
+	}
+
+	return $abono;
+}
+
+
+
+
+
+
 
 
 ?>
