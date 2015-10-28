@@ -32,7 +32,7 @@ $cuantos = $database->truncate( array('devolucion', 'devoluciondet','factura','f
 
 					//Add the WHERE clauses
 					$where_clause = array(
-    				'store_id' => '0'
+    				'1' => '1'
 					);
 					$updated = $database->update( 'cliente', $update, $where_clause, 1 );
 

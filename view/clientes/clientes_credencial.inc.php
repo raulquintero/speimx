@@ -17,6 +17,7 @@ $cliente_id = $_GET['cid'];?>
 	/*height:50px;*/
 	text-transform: uppercase;
 	font-size: 8pt;
+	text-align: center;
 }
 	
 
@@ -65,14 +66,14 @@ $cliente_id = $_GET['cid'];?>
 <?php 
 if($cliente_id)
 	{
-		 $query = "SELECT cliente_id,apellidop, apellidom, nombre, empresa  FROM cliente,empresa
+		 $query = "SELECT cliente_id,codigo_cliente,apellidop, apellidom, nombre, empresa  FROM cliente,empresa
 			WHERE  cliente.empresa_id=empresa.empresa_id AND cliente_id=".$cliente_id;
-		list( $cliente_id,$apellidop,$apellidom,$nombre,$empresa ) = $database->get_row( $query );
+		list( $cliente_id,$codigo_cliente,$apellidop,$apellidom,$nombre,$empresa ) = $database->get_row( $query );
 			$apellidos= $apellidop." ".$apellidom;
 
 						
 						
-		$cliente_id=sprintf('C%06d', $cliente_id);
+		$codigo_cliente="C".$codigo_cliente;
 	} 
 
 
@@ -86,9 +87,10 @@ if($cliente_id)
 </div>
 <div><table width=100%>
 	<tr><td>&nbsp;</td>
-		<td ><center><img width=150 src="barcode.php?text=<?php echo $cliente_id?>" alt="barcode" /></center>
+		<td >
 			<div class="destinatario">Nombre:<br> <strong><?php echo strtoupper($apellidos)?><br>
 			<?php echo strtoupper($nombre)?></strong></div>
+			<center><img width=150 src="barcode.php?text=<?php echo $codigo_cliente?>" alt="barcode" /></center>
 		</td>
 		
 		<td><img width=100 src=/img/noimage.png align=right></td>

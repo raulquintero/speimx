@@ -93,7 +93,7 @@
 							  <div class="control-group ">
 								<label class="control-label" for="producto">Producto</label>
 								<div class="controls">
-								  <input class="input-xlarge focused" id="producto" name="producto" type="text" value="<?php echo strtoupper($producto)?>">
+								  <input classe="input-xlarge focused" id="producto" name="producto" type="text" value="<?php echo strtoupper(stripslashes($producto))?>">
 								</div>
 							  </div>
 

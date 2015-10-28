@@ -3,6 +3,7 @@
 
 $cliente_id = $_GET['cid'];
 $cliente_id=substr($cliente_id,1,6);
+$codigo_cliente=substr($_GET['cid'],1);
 
 ?>
 <html>
@@ -69,7 +70,7 @@ $cliente_id=substr($cliente_id,1,6);
 if($cliente_id)
 	{
 		$query = "SELECT cliente_id,apellidop, apellidom, nombre, empresa  FROM cliente,empresa
-			WHERE  cliente.empresa_id=empresa.empresa_id AND cliente_id=".$cliente_id;
+			WHERE  cliente.empresa_id=empresa.empresa_id AND codigo_cliente=".$codigo_cliente;
 		list( $cliente_id,$apellidop,$apellidom,$nombre,$empresa ) = $database->get_row( $query );
 			$apellidos= $apellidop." ".$apellidom;
 
@@ -90,7 +91,8 @@ if ($nombre)
 </div>
 <div><table width=100%>
 	<tr><td>&nbsp;</td>
-		<td ><center><img width=150 src="barcode.php?text=<?php echo $cliente_id?>" alt="barcode" /></center>
+		<td ><center>
+			<imge width=150 src="barcode.php?text=<?php echo $cliente_id?>" alt="barcode" /></center>
 			<div class="destinatario"><br> <strong><?php echo strtoupper($apellidos)?><br>
 			<?php echo strtoupper($nombre)?></strong></div>
 		</td>

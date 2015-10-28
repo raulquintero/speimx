@@ -67,7 +67,7 @@
 <div class="row-fluid condensed">	
 
 
-<div class="box span6">
+<div class="box span6 hidden-print">
 					<div class="box-header">
 						<h2><i class="halflings-icon align-justify"></i><span class="break"></span>Color</h2>
 						<div class="box-icon">
@@ -175,8 +175,7 @@
 								 		<td>
 								<div class=\"controls\">
 								  <input class=\"input-small\" id=\"cantidad\" name=\"cantidad\" type=\"text\" value=\"".$row['cantidad']."\"> ".$row['codigo']." 
-								</div>
-							  </td></tr> ";
+								<img width=130 src=\"barcode.php?text=".$row['codigo']."\" alt=\"barcode\" /></div></td></tr> ";
 							  	else
 							  		echo "<tr><td><br>Es necesario asginar las tallas en la descripcion del producto.<br><br><br><br></td></tr>";
 
@@ -258,7 +257,7 @@
 							  
 
 
-							  <div class="form-actions">
+							  <div class="form-actions hidden-print">
 								<button type="submit" class="btn btn-primary">Save changes</button>
 								<button class="btn">Cancel</button>
 							  </div>

@@ -165,19 +165,8 @@
 								echo "<tr><td></td><td style='text-align:right;'>Saldo Total</td><td style='text-align:right;color:black;text-align:right;border-top:2px solid;'><font size=+1>$ ".dinero($saldo_total)."</font></td></tr>";	
 								echo "<tr><td></td><td style='text-align:right'>Abono</td>";
 
-									$query = "SELECT abono,limite FROM abono where activado=TRUE ORDER BY limite ASC";
-
-									$results = $database->get_results( $query );
-									foreach ($results as $row ) 
-									{
-										//echo $total_credito." ".$row['limite']." <br> ";
-										if ($saldo_total<=$row['limite'])
-											{
-												$abono=$row['abono'];
-												break;
-											}
-									}
-
+									
+									$abono=get_abono($saldo);
 										echo "<td style='text-align:right;'>$". dinero($abono)."</td>";
 									
 									echo "</tr>";
@@ -194,7 +183,9 @@
 										<strong>Credito Excedido por: $ ".dinero($disponible*-1)."</strong> <br>Quite uno o mas productos.
 										</div>";
 									else
-										echo "<a href=\"#\" class=\"btn btn-info blue btn-setting\">Cerrar Venta a Credito</a>";
+										echo "<div  style='text-align:center;padding:10px;background:#dddddd;border:1px solid #bbbbbb;color:white;'>
+											<a href=\"#\" class=\"btn btn-info blue btn-setting\">Cerrar Venta a Credito</a>
+											</div>";
 										//echo "<div  style='text-align:center;padding:10px;background:#336699;border:1px solid blue;color:white;'>
 										//<strong>Cerrar Venta</div>";
 									
@@ -214,7 +205,10 @@
 											<td width=180 style='text-align:right;text-align:right;background:yellow;color:black;border-bottom:1px dotted black;'>
 											<font size=+3><b>$ ".dinero($total_iva_contado+$total_contado)."</b></font></td></tr>";	
 									
-										echo "<tr><td colspan=3 style='text-align:center'><br><a href=\"#\" class=\"btn btn-info blue btn-setting\"  >Cerrar Venta</a></td</tr>";
+										echo "<tr><td colspan=3 style='text-align:center'><br>
+											<div  style='text-align:center;padding:10px;background:#dddddd;border:1px solid #bbbbbb;color:white;'>
+											<a href=\"#\" class=\"btn btn-info blue btn-setting\"  >Cerrar Venta</a>
+											</div></td</tr>";
 
 									}
 
@@ -401,8 +395,7 @@
 									// echo "<tr><td>&nbsp;</td><td style='text-align:right'>Incluye IVA(16%) por</td><td style='text-align:right'>$". dinero($total_iva_contado)."</td></tr>";
 									echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;<strong>Total</strong></td>
 											<td width=190 style='text-align:right;text-align:right;border-top:0px solid;'><h1> $ ".dinero($total_iva_contado+$total_contado)."</h1></td></tr>";	
-									echo "<tr><td>&nbsp;</td><tdstyle='text-align:right;text-align:right;border-top:0px solid;'>Pagar con: </td>
-									<input type=text name=cantidad><td></td></tr>";
+									
 									echo"</table>";
 
 			
@@ -411,7 +404,7 @@
 			echo "<table width=100%><tr><td>&nbsp;</td><td style='text-align:right;text-align:right;border-top:0px solid;'>
 									<div class=\"control-group\"><label class=control-label>Pagar con:</label></td>
 									<td style=\"text-align:right\" width=120>
-									<div class=controls> <input class=\"input-small\" style=\"text-align:right\" id=cantidad name=efectivo type=text value></div>
+									<div class=controls> <input class=\"input-small\" style=\"text-align:right\" id=cantidad name=efectivo type=text value='0'></div>
 									</div>
 									</td></tr>";
 									echo"</table>";

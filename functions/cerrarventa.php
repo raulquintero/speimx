@@ -2,6 +2,15 @@
 require '../config/config.php';
 $database = new DB();
 
+foreach( $_POST as $key => $value )
+{
+    $_POST[$key] = $database->filter( $value );
+}
+
+foreach( $_GET as $key => $value )
+{
+    $_GET[$key] = $database->filter( $value );
+}
 
 
 			$cid = $_SESSION['cliente_id'];
@@ -156,7 +165,7 @@ $database = new DB();
                 						'iva_contado'   => ($item[$n]['precio_contado']*.16),
                 						'codigo'     => $item[$n]['codigo'],
                 						'sku'     => $item[$n]['sku'],
-                						'producto'    => $item[$n]['producto'],
+                						'producto'    => addslashes($item[$n]['producto']),
                 						'color'    => $item[$n]['color'],
                 						'talla'    => $item[$n]['talla']
                 						);
@@ -184,7 +193,7 @@ $database = new DB();
 									{
 
 									$total_iva_contado=$total_contado*.16;
-
+									$saldo_total=$total_contado+$total_iva_contado;
 									//////////////////////////////////////////////////////////////factura
 									$fecha_hoy=date("Y-m-d H:m:s");
 											//The fields and values to insert
@@ -202,7 +211,9 @@ $database = new DB();
     								'efectivo' => $efectivo
 									);
 
-									$add_query = $database->insert( 'factura', $names );
+	
+	  
+  									$add_query = $database->insert( 'factura', $names );
 									$factura_id = $database->lastid();
 									
 									
@@ -249,7 +260,7 @@ $database = new DB();
                 						'iva_contado'   => ($item[$n]['precio_contado']*.16),
                 						'codigo'     => $item[$n]['codigo'],
                 						'sku'     => $item[$n]['sku'],
-                						'producto'    => $item[$n]['producto'],
+                						'producto'    => addslashes($item[$n]['producto']),
                 						'color'    => $item[$n]['color'],
                 						'talla'    => $item[$n]['talla']
                 						);
@@ -288,8 +299,8 @@ $database = new DB();
 
 
 
-  //echo "<br><br><br>cart: <br>";
-//      print_r($_SESSION['cart']);
+  // echo "<br><br><br>cart: <br>";
+  //    print_r($_SESSION['cart']);
 unset($_SESSION['cart']);
 unset($_SESSION['cliente_id']);
 

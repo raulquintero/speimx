@@ -46,7 +46,7 @@ $database = new DB();
 		$i+=1;
 		echo "<tr >
 			<td align=right><font >&nbsp;$i&nbsp;</td>
-			<td><a class=\"hidden-print\" href=\"/index.php?data=clientes&op=factura&fid=".$row['factura_id']."\">".fechamysqltous($row['fecha'],1)."<a>
+			<td><a class=\"hidden-print\" href=\"/index.php?data=clientes&op=factura&fid=".$row['factura_id']."\">".($row['fecha'])."<a>
 				<a class=\"visible-print\" >".fechamysqltous($row['fecha'],1)."<a>
 			 </td>";
 

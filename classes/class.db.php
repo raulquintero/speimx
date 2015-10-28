@@ -127,7 +127,7 @@ class DB
          if( !is_array( $data ) )
          {
              $data = $this->link->real_escape_string( $data );
-             $data = trim( htmlentities( $data, ENT_QUOTES, 'UTF-8', false ) );
+             $data = trim( htmlentities( $data, ENT_COMPAT, 'UTF-8', false ) );
          }
          else
          {
@@ -172,7 +172,7 @@ class DB
      public function clean( $data )
      {
          $data = stripslashes( $data );
-         $data = html_entity_decode( $data, ENT_QUOTES, 'UTF-8' );
+         $data = html_entity_decode( $data, ENT_COMPAT, 'UTF-8' );
          $data = nl2br( $data );
          $data = urldecode( $data );
          return $data;

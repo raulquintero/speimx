@@ -146,8 +146,8 @@ if ($_SESSION['display']=='dev'){
 						// WHERE  facturadet_id=".$item[$n]['facturadet_id'];
 						// list( $faturadet_id,$producto,$precio_contado,$iva_contado,$precio_credito,$iva_credito,$codigo,$color,$talla,$sku  ) = $database->get_row( $query );
 		
-										echo "<tr><td style='border-top:1px dotted #4EF84E;'> ".(1)." &nbsp  ".$item[$n]['id_hide']."</td> 
-												<td  style='border-top:1px dotted #4EF84E;'>".$item[$n]['sku']."<br>". substr($item[$n]['producto'],0,23)."...</a> 
+										echo "<tr><td style='border-top:1px dotted #4EF84E;'> * &nbsp </td> 
+												<td  style='border-top:1px dotted #4EF84E;'>".$item[$n]['code']."<br>". substr($item[$n]['producto'],0,23)."...</a> 
 											<br>".strtolower($item[$n]['color'])." ".strtoupper($item[$n]['talla'])."</td> 
 											<td style='text-align:right;border-top:1px dotted #4EF84E;'><b>";
 											if ($cliente_id) echo dinero($item[$n]['precio_credito']+($item[$n]['precio_credito']*.16)); else echo dinero($item[$n]['precio_contado']+($item[$n]['precio_contado']*.16));
@@ -216,7 +216,7 @@ if ($_SESSION['display']=='dev'){
 
 {
 			$cliente_id = $_SESSION['cliente_id'];
-
+			//if (!$cliente_id) $cleinte_id="0";
 ?>
 
 <div class="boxi span4 " styles='border-left:1px dotted'>
@@ -343,18 +343,8 @@ if ($_SESSION['display']=='dev'){
 								echo "<tr><td></td><td style='text-align:right;'>Saldo Total</td><td style='text-align:right;background:yellow;color:black;text-align:right;border:2px solid;'><font size=+2>$ ".dinero($saldo_total)."</font></td></tr>";	
 								echo "<tr><td></td><td style='text-align:right'>Abono</td>";
 
-									$query = "SELECT abono,limite FROM abono where activado=TRUE ORDER BY limite ASC";
-
-									$results = $database->get_results( $query );
-									foreach ($results as $row ) 
-									{
-											//echo $total_credito." ".$row['limite']." <br> ";
-										if ($saldo_total<=$row['limite'])
-											{
-												$abono=$row['abono'];
-												break;
-											}
-									}
+									
+									$abono=get_abono($saldo);
 
 										echo "<td style='text-align:right;'>$". dinero($abono)."</td>";
 									
@@ -399,7 +389,7 @@ if ($_SESSION['display']=='dev'){
 									$total=0;
 									foreach ($item as $row => $value) 
 									{
-										echo "<tr><td style='border-top:1px dotted #4EF84E;'> ".($n+1)." &nbsp  ".$item[$n]['id_hide']."</td> 
+										echo "<tr><td style='border-top:1px dotted #4EF84E;'> ".($n+1)." &nbsp;</td> 
 												<td  style='border-top:1px dotted #4EF84E;'>".$item[$n]['sku']."<br>". substr($item[$n]['producto'],0,23)."...</a> 
 											<br>".strtolower($item[$n]['color'])." ".strtoupper($item[$n]['talla'])."</td> 
 											<td style='text-align:right;border-top:1px dotted #4EF84E;'><b>";
@@ -499,8 +489,10 @@ if ($_SESSION['display']=='dev'){
 				</div>
 
 <?php
-}
-?>
+};
+
+//print_r($_SESSION['cart_temp']);
+?>     
 
 
 <br><br><br><br><br><br><br><br>	

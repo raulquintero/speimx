@@ -80,11 +80,16 @@ foreach( $_GET as $key => $value )
 							echo "<table width=350><tr><td>";
 							getticket($factura_id);      // formato.php
 				
+							
+							echo "<center>";
+
+							if ($cliente_id)
+							{
 							echo "<br><Br><br><br>
 
-							<center>
 							_______________________<br>";
 							echo strtoupper($nombre_completo);
+							}
 							echo "<br><br><br>";
 
 							echo " <img width=200 src=\"barcode.php?text=".$no_ticket."\" alt=\"barcode\" />";

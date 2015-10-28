@@ -37,12 +37,14 @@ echo "<br>saldo: ".$saldo_nuevo=0;
 echo "<br>";
 
 
-
+$query="SELECT fecha from factura where factura_id=$fid";
+list( $fecha_factura ) = $database->get_row( $query );
 
 $fecha_hoy=date("Y-m-d H:i:s");
 											//The fields and values to insert
 									$names = array(
     								'admin_id' => $admin_id,
+    								'fecha_factura' => $fecha_factura,
     								'fecha' => $fecha_hoy,
     								'tipomov_id' => $tipomov_id,
     								'factura_id' => $fid,
@@ -146,7 +148,12 @@ $saldo=($saldo_anterior-$total);
 				$abono=get_abono($saldo);
 				echo "<br>abono".$abono;
 
-
+				// if ($saldo>0)
+				// {
+				// 	$notaventa=$saldo*-1;
+				// 	$saldo=0;
+				// 	$abono=0;
+				// }
 				//Fields and values to update
 					$update = array(
     				'total_ultimo' => $saldo,
@@ -163,6 +170,64 @@ $saldo=($saldo_anterior-$total);
 
 
 
+
+
+
+				if ($saldo<0)
+				{
+					$vale=$saldo*-1;
+					$saldo=$saldo+$vale;
+					$abono=0;
+
+					$fechamas_unsegundo=fechaplus_onesecond($fecha_hoy);
+
+				//The fields and values to insert
+					$names = array(
+					'cliente_id' => $cliente_id,
+					'fecha_actual' => $fechamas_unsegundo,
+					'fecha' => $fechamas_unsegundo,
+					'admin_id' => $admin_id,
+					'tipomov_id' => 5,
+					'factura_id' => $devolucion_id,
+					'cantidad' => $vale
+					);
+					$add_query = $database->insert( 'movimiento', $names );
+
+					
+
+				//Fields and values to update
+					$update = array(
+    				'total_ultimo' => $saldo,
+    				'fecha_total_inicio' => $fecha_hoy,
+    				'abono' => $abono,
+    				'saldo' => $saldo
+					);
+
+					//Add the WHERE clauses
+					$where_clause = array(
+    				'cliente_id' => $cliente_id
+					);
+					$updated = $database->update( 'cliente', $update, $where_clause, 1 );
+
+					$codigo=$cliente_id + date("y");
+					$codigo=$codigo.date("mdHis");
+
+					//The fields and values to insert
+					$names = array(
+					'devolucion_id' => $devolucion_id,
+					'fecha' => $fecha_hoy,
+					'cantidad' => $vale,
+					'codigo' => $codigo
+					);
+					$add_query = $database->insert( 'vale', $names );
+
+				}
+
+
+
+
+
+
 echo "<br><br>total:\n".$total;
 echo "<br>Saldo:  ".$saldo;
 
@@ -175,8 +240,9 @@ echo "<br>Saldo:  ".$saldo;
 }
 // else
 // echo "nada k hacer!";
-echo "Location: /imprimir_devolucion.php?did=$devolucion_id&fid=$fid";
+//echo "<br>Location: /imprimir_devolucion.php?did=$devolucion_id&fid=$fid";
  
+ $_SESSION['cart_temp']=0;
 
 
 header("Location: /imprimir_devolucion.php?did=$devolucion_id&fid=$fid");

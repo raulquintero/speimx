@@ -126,13 +126,12 @@ $update = array(
 	
 	);
 
-
 //Add the WHERE clauses
 $where_clause = array(
     'producto_id' => $prid
 );
 
-	$updated = $database->update( 'producto', $update, $where_clause, 1 );
+	$updated = $database->update( 'productos', $update, $where_clause, 1 );
 
 // //Output errors if they exist for the update query
 //$database->display( $updated );

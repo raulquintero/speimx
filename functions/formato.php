@@ -89,6 +89,16 @@ return $final;
 
 }
 
+function fechaplus_onesecond($fecha)
+
+{
+
+	$time = strtotime($fecha);
+	$final = date("Y-m-d H:i:s", strtotime("+1 second", $time));
+return $final;
+
+}
+
 function plandepagos($total,$fecha,$abono,$saldo)
 {
 			//$fecha=fechaplusweek($fecha);
@@ -288,7 +298,7 @@ $database = new DB();
 						}
 					}
 
-					echo "<td style='text-align:right;border-top:2px solid;'>$". dinero($abono)."</td>";
+					echo "<td style='text-align:right;border-top:2px solid;'>$". dinero($abono)."&nbsp;&nbsp;</td>";
 					echo "</tr>";
 				} 
 				else
@@ -333,11 +343,12 @@ $database = new DB();
 							<td style='text-align:right'>$". dinero($total_iva_contado)."&nbsp;&nbsp;</td></tr>";
 						echo "<tr><td></td><td style='text-align:right'>&nbsp;<strong>Total</strong></td>
 							<td style='text-align:right;text-align:right;border-top:2px solid;'><strong>".dinero($total_iva_contado+$total_contado)."</strong>&nbsp;&nbsp;</td></tr>";	
+						if ($efectivo){
 						echo "<tr><td></td><td style='text-align:right'>&nbsp;Efectivo</td>
 							<td style='text-align:right;text-align:right;'>".dinero($efectivo)."&nbsp;&nbsp;</td></tr>";	
 						echo "<tr><td></td><td style='text-align:right'>&nbsp;Cambio</td>
 							<td style='text-align:right;text-align:right;border-top:2px solid;'>".dinero($efectivo-$total_iva_contado-$total_contado)."&nbsp;&nbsp;</td></tr>";	
-									
+						}			
 
 									
 									}
@@ -400,6 +411,8 @@ $database = new DB();
 
 
 }
+
+
 
 
 

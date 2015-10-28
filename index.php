@@ -46,8 +46,8 @@ $cuantos=strlen($code);
 					 $location="Location: /index.php?data=clientes&op=verificar&cid=$code";
 					// $location="Location: /functions/cart.php?func=sel_cliente&cid=$code";
 					break;
-				case 'N':
-					$location="Location: /notaventa.php?nv=$code";
+				case 'V':
+					$location="Location: /index.php?data=pos&op=vale&vale=$code";
 					break;
 				default:
 					# code...
@@ -416,46 +416,26 @@ switch ($type) {
                                     </a>
                                 </li>
                                
-                                <li>
-                                    <a href="#">
-										<span class="header">
-											<span class="title">1500.00</span>
-											<span class="percent">100.00</span> 
-										</span>
-                                    </a>
-                                </li>
-								<li>
-                                    <a href="#">
-										<span class="header">
-											<span class="title">2000.00</span>
-											<span class="percent">150.00</span> 
-										</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-										<span class="header">
-											<span class="title">2500.00</span>
-											<span class="percent">200.00</span> 
-										</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-										<span class="header">
-											<span class="title">3000.00</span>
-											<span class="percent">250.00</span> 
-										</span>
-                                    </a>
-                                </li>
-								<li>
-                                    <a href="#">
-										<span class="header">
-											<span class="title">5000.00</span>
-											<span class="percent">350.00</span> 
-										</span>
-                                    </a>
-                                </li>
+								<?php
+									$query = "SELECT abono,limite FROM abono where activado=1 ORDER BY limite ASC";
+
+									$results = $database->get_results( $query );
+									foreach ($results as $row ) 
+									{
+										
+										echo "<li>
+                                    		<a href=\"#\">
+											<span class=\"header\">
+												<span class=\"title\">".dinero($row['limite'])."</span>
+												<span class=\"percent\">".dinero($row['abono'])."</span> 
+											</span>
+                                    		</a>
+                                		</li>";
+									}
+
+								?>
+
+
 
 								<li>
                             		<a class="dropdown-menu-sub-footer">Ver todos los planes</a>

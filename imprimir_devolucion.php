@@ -62,16 +62,16 @@ echo "</table>";
 
 echo "<table width=350>";
 echo "<tr><td>";
- $notaventa=get_devolucion($_GET['did']);
+ $vale=get_devolucion($_GET['did']);
 echo "</td></tr>";
 echo "</table>";
 
-if ($notaventa)
-	echo "<br><br>Nota de venta por: ".dinero($notaventa);
+//if ($notaventa)
+	//echo "<br><br>Nota de venta por: ".dinero($notaventa);
 
 echo "<table width=350 border=2>";
 echo "<tr><td>";
- get_notaventa($_GET['nvid']);
+ get_vale($_GET['did']);
 echo "</td></tr>";
 echo "</table>";
 

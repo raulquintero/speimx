@@ -56,7 +56,7 @@ if ($_GET['f']=="ab")
 
   //echo "<br><br><br>cart: <br>";
     //  print_r($_SESSION['cart']);
-
+$_SESSION['cliente_id']=0;
 header("Location: /imprimir_abono.php?mid=$movimiento_id");
 ?>				
 

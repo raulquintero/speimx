@@ -32,9 +32,14 @@ if ($_GET['func']=="c")
 // foreach ($_GET as $k => $v) { echo "<br>[$k] => $v \n";}
 
 
+$codigo_cliente=1000+date("y");
+$codigo_cliente.=date("mdHis");
+
+
 //The fields and values to insert
 	$cliente = array(
 
+	'codigo_cliente'=>$codigo_cliente,
 	'activo'=>$_GET['activo'],
 	'curp'=>$_GET['curp'],
 	'nombre'=>$_GET['nombre'],
