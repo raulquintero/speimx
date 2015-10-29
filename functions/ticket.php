@@ -926,7 +926,7 @@ $database = new DB();
 	$results = $database->get_results( $query );
 	foreach ($results as $row ) 
 	{
-		//echo $total_credito." ".$row['limite']." <br> ";
+		//echo $saldo_total." ".$row['limite']." <br> ";
 		if ($saldo_total<=$row['limite'])
 		{
 			$abono=$row['abono'];

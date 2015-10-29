@@ -80,22 +80,23 @@ if($cliente_id)
  ?>
 <div class="credencial">
 
-<div class="header">
-
-<img width=200 src="/img/tiendasalberto.png">
-<!-- <div class="fecha">Mexicali a <?php echo date("d-m-Y")?></div> -->
-</div>
 <div><table width=100%>
-	<tr><td>&nbsp;</td>
+	<tr>
 		<td >
+<img width=200 src="/img/tiendasalberto.png">
 			<div class="destinatario">Nombre:<br> <strong><?php echo strtoupper($apellidos)?><br>
 			<?php echo strtoupper($nombre)?></strong></div>
-			<center><img width=150 src="barcode.php?text=<?php echo $codigo_cliente?>" alt="barcode" /></center>
 		</td>
 		
 		<td><img width=100 src=/img/noimage.png align=right></td>
 	</tr>
+		<td>&nbsp;</td>
 	</table>
+</div>
+<div class="header">
+			<center><img width=350 src="barcode.php?text=<?php echo $codigo_cliente?>" alt="barcode" /></center>
+
+<!-- <div class="fecha">Mexicali a <?php echo date("d-m-Y")?></div> -->
 </div>
 	
 <!-- 	<div class="documento">

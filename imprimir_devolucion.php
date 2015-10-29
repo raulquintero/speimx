@@ -62,8 +62,10 @@ echo "</table>";
 
 echo "<table width=350>";
 echo "<tr><td>";
+ $did=$_GET['did'];
  $vale=get_devolucion($_GET['did']);
-echo "</td></tr>";
+
+echo "<br>dev:$did..$vale</td></tr>";
 echo "</table>";
 
 //if ($notaventa)
@@ -71,7 +73,20 @@ echo "</table>";
 
 echo "<table width=350 border=2>";
 echo "<tr><td>";
- get_vale($_GET['did']);
+ if ($vale>0) get_vale($_GET['did']);
+
+$query = "SELECT tipomov_id  FROM devolucion
+			WHERE devolucion_id=".$_GET['did'];
+		list( $tipomov_id ) = $database->get_row( $query );
+
+ if ($vale && $tipomov_id==3) 
+ 	{
+ 		$query = "SELECT cliente.total_ultimo,devolucion.fecha,cliente.abono,cliente.saldo  FROM cliente,devolucion
+			WHERE  cliente.cliente_id=devolucion.cliente_id AND devolucion_id=$did";
+		list( $saldo_ultimo,$fecha,$abono,$saldo ) = $database->get_row( $query );
+ 		plandepagos($saldo_ultimo,$fecha,$abono,$saldo);
+
+ 	}
 echo "</td></tr>";
 echo "</table>";
 

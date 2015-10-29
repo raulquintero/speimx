@@ -344,7 +344,7 @@ if ($_SESSION['display']=='dev'){
 								echo "<tr><td></td><td style='text-align:right'>Abono</td>";
 
 									
-									$abono=get_abono($saldo);
+									$abono=get_abono($saldo_total);
 
 										echo "<td style='text-align:right;'>$". dinero($abono)."</td>";
 									
