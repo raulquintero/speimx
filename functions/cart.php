@@ -19,9 +19,11 @@ if ($func=="add_item")
     $item[] = array(
                 'id'      => $_GET['prid'],
                 'cantidad'     => 1,
+                'precio_compra'   => $_GET['precio_compra'],
                 'precio_credito'   => $_GET['precio_credito'],
                 'precio_contado'   => $_GET['precio_contado'],
                 'producto'    => $_GET['producto'],
+                'iva'    => $_GET['iva'],
                 'codigo' => $_GET['codigo'],
                 'sku' => $sku,
                 'color'    => $_GET['color'],
