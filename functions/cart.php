@@ -30,7 +30,7 @@ if ($func=="add_item")
                 'talla'    => $_GET['talla']
             );
         
-
+    // iva sin implementar todavia , solo esta indicado aqui arriba
 
     ($_SESSION['cart']=$item);
 

@@ -67,7 +67,7 @@ $codigo_cliente.=date("mdHis");
 	if ($_GET['nombre'] && $_GET['curp'])
 	{
 		$add_query = $database->insert( 'cliente', $cliente );
-		$last_id = $database->lastid();
+		echo $last_id = $database->lastid();
 		$location="Location: /index.php?data=$data&op=detalles&cid=$last_id&eed=2";
 	}
 		else
@@ -98,15 +98,15 @@ $update = array(
 
 	'activo'=>$_GET['activo'],
 	'curp'=>$_GET['curp'],
-	'nombre'=>$_GET['nombre'],
-	'apellidop'=>$_GET['apellidop'],
-	'apellidom'=>$_GET['apellidom'],
+	'nombre'=>strtoupper($_GET['nombre']),
+	'apellidop'=>strtoupper($_GET['apellidop']),
+	'apellidom'=>strtoupper($_GET['apellidom']),
 	'fechanac'=>$_GET['fechanac'],
 	'sexo_id'=>$_GET['sexo_id'],
 	'telefono_personal'=>$_GET['telefono_personal'],
 	'email'=>$_GET['email'],
-	'domicilio_casa'=>$_GET['domicilio_casa'],
-	'colonia_casa_id'=>$_GET['colonia_casa_id'],
+	'domicilio_casa'=>strtoupper($_GET['domicilio_casa']),
+	'colonia_casa_id'=>$_GET['colonia_id'],
 	'telefono_casa'=>$_GET['telefono_casa'],
 	'antiguedad_empleo'=>$_GET['antiguedad_empleo'],
 	'observaciones'=>$_GET['observaciones'],

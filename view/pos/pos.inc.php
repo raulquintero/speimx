@@ -1,3 +1,4 @@
+
 		<!-- start: Content **************************************************************************************************************************                  -->
 		<?php 
 		$_SESSION['display']="pos";
@@ -10,7 +11,7 @@
 
 			<div class="row-fluid condensed">
 
-					<div class="box-content span8 hidden-phone hidden-tablet" >
+					<div class="box-content span8  hidden-tablet" >
 
 <?php 
 
@@ -76,7 +77,7 @@
 
 
 					<div class="boxi span4" styles='border-left:1px dotted'>
-						
+<!-- 						
 <div class="hidden-desktop hidden-print">
 					<form action="/index.php" method="get">
 							<table  width=100%  >
@@ -91,7 +92,7 @@
 				  		</tr>
 				  		</table>
 				  		</form>
-				  	</div>
+				  	</div> -->
 
 					<div class="hidden-phone">
 							<table width=100% >

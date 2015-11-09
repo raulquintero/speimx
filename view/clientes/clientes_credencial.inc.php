@@ -11,7 +11,7 @@ $cliente_id = $_GET['cid'];?>
 
 
 .credencial {
-	width:300px;
+	width:280px;
 }
 .destinatario{
 	/*height:50px;*/
@@ -23,7 +23,7 @@ $cliente_id = $_GET['cid'];?>
 
 .header{
 	height: 50px;
-	text-align: center;
+	text-align: left;
 
 }
 .beneficios{
@@ -94,7 +94,7 @@ if($cliente_id)
 	</table>
 </div>
 <div class="header">
-			<center><img width=350 src="barcode.php?text=<?php echo $codigo_cliente?>" alt="barcode" /></center>
+			<img width=250 src="barcode.php?text=<?php echo $codigo_cliente?>" alt="barcode" />
 
 <!-- <div class="fecha">Mexicali a <?php echo date("d-m-Y")?></div> -->
 </div>

@@ -77,7 +77,7 @@
 							  <div class="control-group ">
 								<label class="control-label" for="curp">CURP</label>
 								<div class="controls">
-								  <input class="input-xlarge focused" id="curp" name="curp" type="text" value="<?php echo $curp?>">
+								  <input class="input-xlarge" id="curp" name="curp" type="text" value="<?php echo $curp?>">
 								</div>
 							  </div>
 
