@@ -4,7 +4,6 @@
 		$_SESSION['display']="pos";
 			$cliente_id = $_SESSION['cliente_id'];
 
- 		
 		?>				
 				
 
@@ -210,7 +209,7 @@
 										$query = "SELECT  promocion_id from promocion where \"$fecha_hoy\">=fecha_inicio AND \"$fecha_hoy\"<=fecha_fin";
 										$promociones= $database->num_rows( $query );
 
-									if ($promociones)
+									if ($promociones && ceil($total_contado+$total_iva_contado)>=500)
 									{
 										$promo=get_promo($total_contado+$total_iva_contado);
 

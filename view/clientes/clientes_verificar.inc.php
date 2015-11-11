@@ -70,7 +70,7 @@ $codigo_cliente=substr($_GET['cid'],1);
 if($cliente_id)
 	{
 		$query = "SELECT cliente_id,apellidop, apellidom, nombre, empresa  FROM cliente,empresa
-			WHERE  cliente.empresa_id=empresa.empresa_id AND codigo_cliente=".$codigo_cliente;
+			WHERE  cliente.empresa_id=empresa.empresa_id AND codigo_cliente='".$codigo_cliente."'";
 		list( $cliente_id,$apellidop,$apellidom,$nombre,$empresa ) = $database->get_row( $query );
 			$apellidos= $apellidop." ".$apellidom;
 

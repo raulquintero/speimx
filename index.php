@@ -177,6 +177,12 @@ switch ($type) {
 </head>
 
 <body onload='setFocusToTextBox()'>
+<?php 
+if($_SESSION['host']=="speimx.dev")
+	echo "<table width=100%><tr bgcolor=yellow><td>".$_SESSION['host'].".- Version Desarrollo.</td></tr></table>";
+
+
+ ?>
 	<?php //echo "session:".$_SESSION['user_login_session'];?>
 		<!-- start: Header -->
 	<div class="navbar hidden-print">

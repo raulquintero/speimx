@@ -174,6 +174,7 @@ class Login
                 $_SESSION['dev_saldo'];
                 $_SESSION['dev_cliente_id'];
                 $_SESSION['display']="pos";
+                $_SESSION['host'] = $_SERVER['HTTP_HOST'];
             }
             else
             {

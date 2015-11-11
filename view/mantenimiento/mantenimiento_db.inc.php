@@ -11,4 +11,10 @@ Tablas [Truncate]<br>
 <br>Tablas <br>
 <br>Cliente - resetear saldo y total_ultimo a 0
 <br><br>
-<a href="/functions/resetdb.php" class="btn btn-primary">Resetear Base de Datos</a>
+<?php 
+
+if($_SESSION['host']=="speimx.dev")
+	echo "<a href=\"/functions/resetdb.php\" class=\"btn btn-primary\">Resetear Base de Datos</a>";
+
+
+ ?>
