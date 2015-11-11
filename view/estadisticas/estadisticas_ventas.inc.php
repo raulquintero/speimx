@@ -1,8 +1,9 @@
 
 <?php 
 
-	$query = "SELECT  count(factura_id) as ventas from factura,tipomov,admin where factura.tipomov_id=tipomov.tipomov_id AND factura.admin_id=admin.admin_id";
-		list( $ventas ) = $database->get_row( $query );
+	//$query = "SELECT  count(factura_id) as ventas from factura,tipomov,admin where factura.tipomov_id=tipomov.tipomov_id AND factura.admin_id=admin.admin_id";
+	$query = "SELECT  sum(cantidad) as abono from movimiento where tipomov_id=1";
+		list( $abono ) = $database->get_row( $query );if (!$abono) $abono=0;
 	$query = "SELECT  admin.admin_id from factura,tipomov,admin where factura.tipomov_id=tipomov.tipomov_id AND factura.admin_id=admin.admin_id GROUP BY admin.admin_id DESC";
 		$vendedores = $database->num_rows( $query );
 
@@ -23,14 +24,7 @@
  ?>
 <div class="row-fluid">
 				
-					<div class="span2 statbox black" onTablet="span6" onDesktop="span3">
-						<!--div class="boxchart">5,6,7,2,0,4,2,4,8,2,3,3,2</div-->
-						<div class="number"><br> <?php echo $ventas?>&nbsp;<!--i class="icon-arrow-up"></i--></div>
-						<div class="title"><br>Numero de Ventas</div>
-						<!--div class="footer">
-						<a href="#"> Saldo</a>
-						</div-->	
-					</div>
+					
 
 					<div class="span2 statbox black" onTablet="span6" onDesktop="span3">
 						<!--div class="boxchart">5,6,7,2,0,4,2,4,8,2,3,3,2</div-->
@@ -56,6 +50,15 @@
 						<div class="title"><br>Ventas Credito</div>
 						<!--div class="footer">
 							<a href="#"> Saldo</a>
+						</div-->	
+					</div>
+
+					<div class="span2 statbox black" onTablet="span6" onDesktop="span3">
+						<!--div class="boxchart">5,6,7,2,0,4,2,4,8,2,3,3,2</div-->
+						<div class="number"><br> <?php echo dinero($abono)?>&nbsp;<!--i class="icon-arrow-up"></i--></div>
+						<div class="title"><br>Abonos</div>
+						<!--div class="footer">
+						<a href="#"> Saldo</a>
 						</div-->	
 					</div>
 

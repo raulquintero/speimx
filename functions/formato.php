@@ -343,6 +343,28 @@ $database = new DB();
 							<td style='text-align:right'>$". dinero($total_iva_contado)."&nbsp;&nbsp;</td></tr>";
 						echo "<tr><td></td><td style='text-align:right'>&nbsp;<strong>Total</strong></td>
 							<td style='text-align:right;text-align:right;border-top:2px solid;'><strong>".dinero($total_iva_contado+$total_contado)."</strong>&nbsp;&nbsp;</td></tr>";	
+						
+
+
+							$fecha_hoy=date("Y-m-d");
+										$query = "SELECT  promocion_id from promocion where \"$fecha_hoy\">=fecha_inicio AND \"$fecha_hoy\"<=fecha_fin";
+										$promociones= $database->num_rows( $query );
+
+									if ($promociones)
+									{
+										$promo=get_promo($total_contado+$total_iva_contado);
+
+										echo "<tr><td></td><td style='text-align:right'>&nbsp;<font size=+1>Promo Buen Fin</font></td>
+											<td width=180 style='text-align:right;text-align:right;color:black;border-bottom:1px solid black;'>
+											<b>- ".dinero($promo)."</b>&nbsp;&nbsp;</td></tr>";
+									
+										echo "<tr><td></td><td style='text-align:right'>&nbsp;<font size=+1>Ud. Pag&oacute;</font></td>
+											<td width=180 style='text-align:right;text-align:right;color:black;border:1px solid black;'>
+											<b> $ ".dinero($total_contado+$total_iva_contado-$promo)."</b>&nbsp;&nbsp;</td></tr>";
+									}
+										
+
+
 						if ($efectivo){
 						echo "<tr><td></td><td style='text-align:right'>&nbsp;Efectivo</td>
 							<td style='text-align:right;text-align:right;'>".dinero($efectivo)."&nbsp;&nbsp;</td></tr>";	
@@ -352,6 +374,13 @@ $database = new DB();
 
 									
 									}
+
+
+						if ($promociones)
+						{
+						echo "<tr><td colspan=3><br><br>RECUERDE:  En Promocion por BUEN FIN no hay cambios ni devoluciones</td></tr>";	
+						
+						}
 					
 				echo "</table>";
 
@@ -413,6 +442,27 @@ $database = new DB();
 }
 
 
+
+function get_promo($total_contado)
+{
+$database = new DB();
+
+	
+
+	 $query = "SELECT limite,descuento FROM promocion,promociondet WHERE promocion.promocion_id=promociondet.promocion_id AND activado=1 ORDER BY descuento ASC";
+
+									$results = $database->get_results( $query );
+									foreach ($results as $row ) 
+									{
+											//echo $total_credito." ".$row['limite']." <br> ";
+										if ($total_contado<=($row['limite']-1))
+											{
+												$descuento=$row['descuento'];
+												break;
+											}
+									}
+	return $descuento;
+}
 
 
 

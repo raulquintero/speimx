@@ -29,10 +29,10 @@ foreach( $_GET as $key => $value )
 	<style type="text/css">
 	body{
 		font-family: arial, helvetica;
-		font-size: x-small; 
+		font-size: small; 
 	}
 	table{
-		font-size: small;
+		font-size: medium;
 	}
 
 	</style>
@@ -141,8 +141,12 @@ foreach( $_GET as $key => $value )
 						Todas las ventas son VENTAS FINALES, <br>
 						NO se regresa dinero, solo se cambia por mercancia dentro de los primeros 7 dias, 
 						es requisito indispensable presentar este ticket, y la mercancia con sus etiquetas
-						Recuerde ser puntual en sus pagos, el no cumplir a tiempo con sus pagos
-						puede afectar su credito
+						
+						<?php if ($tipomov_id==3)
+						echo "Recuerde ser puntual en sus pagos, el no cumplir a tiempo con sus pagos
+						puede afectar su credito";
+						?>
+
 						<br><br>
 						<center>
 						<br>Gracias por su preferencia.</center><br>

@@ -41,7 +41,7 @@ $database = new DB();
 					{
 						$vendedor=$item['nombre']." ".$item['apellidop'];
 						echo "<tr><td style='text-align:right'>".$item['factura_id']."</td>
-						<td style='text-align:right'><a href=http://speimx.dev/index.php?data=estadisticas&op=ventas&fid=".$item['factura_id'].">".$item['fecha']."</a></td><td style='text-align:right'>".$item['cliente_id']."</td>
+						<td style='text-align:right'><a href=/index.php?data=estadisticas&op=ventas&fid=".$item['factura_id'].">".$item['fecha']."</a></td><td style='text-align:right'>".$item['cliente_id']."</td>
 							<td>".$item['tipomov']."
 							<br></td> 
 							<td style='text-align:right'>$ ".dinero($item['total']+$item['iva'])."<td style='text-align:right'>".$vendedor;

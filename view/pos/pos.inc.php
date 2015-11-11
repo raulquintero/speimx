@@ -203,9 +203,25 @@
 									// echo "<tr><td>&nbsp;</td></tr><tr><td></td><td style='text-align:right'>Subtotal</td><td style='text-align:right'>$". dinero($total_contado+$total_iva_contado)."</td></tr>";
 									// echo "<tr><td></td><td style='text-align:right'>Incluye IVA(16%) por</td><td style='text-align:right'>$". dinero($total_iva_contado)."</td></tr>";
 									echo "<tr><td></td><td style='text-align:right'>&nbsp;<font size=+1>Total</font></td>
-											<td width=180 style='text-align:right;text-align:right;background:yellow;color:black;border-bottom:1px dotted black;'>
+											<td width=180 style='text-align:right;text-align:right;background:yellow;color:black;'>
 											<font size=+3><b>$ ".dinero($total_iva_contado+$total_contado)."</b></font></td></tr>";	
+
+										$fecha_hoy=date("Y-m-d");
+										$query = "SELECT  promocion_id from promocion where \"$fecha_hoy\">=fecha_inicio AND \"$fecha_hoy\"<=fecha_fin";
+										$promociones= $database->num_rows( $query );
+
+									if ($promociones)
+									{
+										$promo=get_promo($total_contado+$total_iva_contado);
+
+										echo "<tr><td></td><td style='text-align:right'>&nbsp;<font size=+1>Promo Buen Fin</font></td>
+											<td width=180 style='text-align:right;text-align:right;color:black;border-bottom:1px solid black;'>
+											<font size=+3><b>- ".dinero($promo)."</b></font></td></tr>";
 									
+										echo "<tr><td></td><td style='text-align:right'>&nbsp;<font size=+1>Ud. Paga</font></td>
+											<td width=180 style='text-align:right;text-align:right;color:black;border:1px solid black;'>
+											<font size=+3><b> $ ".dinero($total_contado+$total_iva_contado-$promo)."</b></font></td></tr>";
+									}
 										echo "<tr><td colspan=3 style='text-align:center'><br>
 											<div  style='text-align:center;padding:10px;background:#dddddd;border:1px solid #bbbbbb;color:white;'>
 											<a href=\"#\" class=\"btn btn-info blue btn-setting\"  >Cerrar Venta</a>
@@ -397,6 +413,16 @@
 									echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;<strong>Total</strong></td>
 											<td width=190 style='text-align:right;text-align:right;border-top:0px solid;'><h1> $ ".dinero($total_iva_contado+$total_contado)."</h1></td></tr>";	
 									
+									if ($promociones)
+									{
+										echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;<strong>PROMO Buen Fin</strong></td>
+											<td width=190 style='text-align:right;text-align:right;border-top:0px solid;'><h1> - ".dinero($promo)."</h1></td></tr>";	
+									 
+										echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;<strong>Ud. Paga</strong></td>
+											<td width=190 style='text-align:right;text-align:right;border:1px solid;'><h1> $ ".dinero($total_iva_contado+$total_contado-$promo)."</h1></td></tr>";	
+									 
+									}
+
 									echo"</table>";
 
 			

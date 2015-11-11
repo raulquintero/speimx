@@ -64,7 +64,7 @@ foreach( $_GET as $key => $value )
 								// echo "Saldo Actual</td>".dinero($saldo)."</td></tr>";	
 								// echo "Saldo Total>$ ".dinero($saldo_total)."</td></tr>";	
 
-									 $query = "SELECT abono,limite FROM abono ORDER BY limite ASC";
+									 $query = "SELECT abono,limite FROM abono WHERE activado=1 ORDER BY limite ASC";
 
 									$results = $database->get_results( $query );
 									foreach ($results as $row ) 
@@ -194,11 +194,27 @@ foreach( $_GET as $key => $value )
 							
 								if ($total_contado)
 									{
-
 									$total_iva_contado=$total_contado*.16;
 									$saldo_total=$total_contado+$total_iva_contado;
+									
+									$promo=0;
+
+											$fecha_hoy=date("Y-m-d");
+										$query = "SELECT  promocion_id from promocion where \"$fecha_hoy\">=fecha_inicio AND \"$fecha_hoy\"<=fecha_fin";
+										$promociones= $database->num_rows( $query );
+
+									if ($promociones)
+									{
+										$promo=get_promo($saldo_total);
+
+										
+									}
+
+
+
+
 									//////////////////////////////////////////////////////////////factura
-									$fecha_hoy=date("Y-m-d H:m:s");
+									$fecha_hoy=date("Y-m-d H:i:s");
 											//The fields and values to insert
 									$names = array(
     								'cliente_id' => 0,
@@ -211,7 +227,8 @@ foreach( $_GET as $key => $value )
     								'tipomov_id' => 14,
     								'saldo_actual' => $saldo,
     								'saldo_total' => $saldo_total,
-    								'efectivo' => $efectivo
+    								'efectivo' => $efectivo,
+    								'bono' => $promo
 									);
 
 	
