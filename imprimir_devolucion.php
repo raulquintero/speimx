@@ -50,7 +50,7 @@ echo"<html>
 
 	</style>
 	</head>
-	<body>";
+	<body onload=\"window.print()\">";
 echo "<table width=350>";
 echo "<tr><td style='text-align:center;'>";
  getfactura($fid);

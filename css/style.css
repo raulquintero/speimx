@@ -243,6 +243,11 @@ body {
 	font-weight: 400;
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+ 
+
 a {
 	color: #646464;
 }

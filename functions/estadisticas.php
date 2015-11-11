@@ -33,17 +33,18 @@ $database = new DB();
 							  <tbody>";
 
 
-	$query = "SELECT  * from factura,tipomov,admin where factura.tipomov_id=tipomov.tipomov_id AND factura.admin_id=admin.admin_id";
+	$query = "SELECT  * from factura,tipomov,admin where factura.tipomov_id=tipomov.tipomov_id AND factura.admin_id=admin.admin_id ORDER BY factura_id DESC";
 
 					$results = $database->get_results( $query );
 
 	foreach( $results as $item )
 					{
 						$vendedor=$item['nombre']." ".$item['apellidop'];
-						echo "<tr><td style='text-align:right'>".$item['factura_id']."</td><td style='text-align:right'>".$item['fecha']."</td><td style='text-align:right'>".$item['cliente_id']."</td>
+						echo "<tr><td style='text-align:right'>".$item['factura_id']."</td>
+						<td style='text-align:right'><a href=http://speimx.dev/index.php?data=estadisticas&op=ventas&fid=".$item['factura_id'].">".$item['fecha']."</a></td><td style='text-align:right'>".$item['cliente_id']."</td>
 							<td>".$item['tipomov']."
 							<br></td> 
-							<td style='text-align:right'>$ ".dinero($item['total'])."<td style='text-align:right'>".$vendedor;
+							<td style='text-align:right'>$ ".dinero($item['total']+$item['iva'])."<td style='text-align:right'>".$vendedor;
 					
 						echo "&nbsp;&nbsp;</td></tr>";
 										
@@ -53,6 +54,7 @@ $database = new DB();
 
 	echo " </tbody>
 		</table> ";
+
 		//echo "Pagos Atrazados: ".$pagos_atrazados;
 echo "</div>";
 
