@@ -65,7 +65,7 @@
 				  		<div class="box-header hidden-phone " data-original-title>
 					  		<h2><i class="halflings-icon calendar"></i><span class="break"></span>Punto de Venta</h2>
 				  		</div>
-					  	<div class="box-content hidden-print">
+					  	<div class="box-content hidden-print hidden-phone">
 					  		<br><br><br><br><br><br><br>
 					  		<center><span style="font-size:x-large;color:blue;">
 					  			<b>Encontro Todo lo que buscaba?</b></span>
