@@ -3,7 +3,7 @@
 
 if($_GET['cid'])
 				{
-					$query = "SELECT cliente_id,apellidop, apellidom, nombre, domicilio_casa, colonia,credito, empresa,empresa.domicilio  FROM cliente ,colonia,empresa
+					$query = "SELECT cliente_id,apellidop, apellidom, nombre, domicilio_casa, colonia,credito,empresa.empresa_id, empresa,empresa.domicilio  FROM cliente ,colonia,empresa
 						WHERE  cliente.colonia_casa_id=colonia.colonia_id AND cliente.empresa_id=empresa.empresa_id AND cliente_id=".$_GET['cid'];
 					list( $cliente_id,$apellidop,$apellidom,$nombre,$domicilio,$colonia, $credito, $empresa, $domicilio_empresa  ) = $database->get_row( $query );
 	 					$cliente= $apellidop." ".$apellidom." ".$nombre;
@@ -31,19 +31,31 @@ if($_GET['cid'])
 <br><br>
 
 <table width=100% border=1>
-	<tr><td>FOLIO:</td><td></td></tr>
+	<!-- <tr><td>FOLIO:</td><td></td></tr> -->
 	<tr><td>No. de Credito:</td><td><?php echo strtoupper($contrato)?></td></tr>
 	<tr><td>Nombre del Trabajador:</td><td><?php echo strtoupper($cliente)?></td></tr>
-	<tr><td>Domicilio del Trabajador:</td><td><?php echo strtoupper($domicilio)?></td></tr>
-	<tr><td>Nombre de la Empresa:</td><td><?php echo strtoupper($empresa)?></td></tr>
-	<tr><td>Domicilio de la Empresa:</td><td><?php echo strtoupper($domicilio_empresa)?></td></tr>
+<?php
+	echo "<tr><td>Domicilio del Trabajador:</td><td>".strtoupper($domicilio)."</td></tr>";
+	if ($empresa_id)
+	{
+		echo "<tr><td>Nombre de la Empresa:</td><td>".strtoupper($empresa)."</td></tr>";
+		echo "<tr><td>Domicilio de la Empresa:</td><td>".strtoupper($domicilio_empresa)."</td></tr>";
+	}
+?>
 	<tr><td>Importe del Credito Autorizado:</td><td><?php echo " $ ".dinero($credito)?>M.N.</td></tr>
 </table>
 <br>
-<p>
-Manifiesto mi consentimiento para que el monto del crédito autorizado por Tienda de Ropa Albertos sea descontado vía nómina por mi patrón, en las fechas correspondientes.<br>
-Si no se hacen los descuentos vía nómina para la amortización del crédito otorgado “el suscriptor” se compromete a pagar directamente en el domicilio de la Tienda de Ropa Albertos.
-</p>
+<?php
+
+if($empresa_id)
+echo "<p>
+Manifiesto mi consentimiento para que el monto del crédito autorizado por Tiendas Alberto sea descontado vía nómina por mi patrón, en las fechas correspondientes.<br>
+Si no se hacen los descuentos vía nómina para la amortización del crédito otorgado “el suscriptor” se compromete a pagar directamente en el domicilio de la Tiendas Alberto.
+</p>";
+else
+echo "<p>Manifiesto estar deacuerdo en pagar el credito otorgado directamente en el domicilio de Tiendas ALberto.</p>";
+
+?>
 
 <span>PAGARÉ</span>
 <br>

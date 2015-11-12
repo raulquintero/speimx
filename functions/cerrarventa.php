@@ -236,7 +236,20 @@ foreach( $_GET as $key => $value )
   									$add_query = $database->insert( 'factura', $names );
 									$factura_id = $database->lastid();
 									
-									
+									if ($promociones && $promo>0)
+									{
+										$names = array(
+    									'promocion_id' => 1,
+    									'factura_id' => $factura_id,
+    									'descuento' => 'promo Buen Fin',
+    									'cantidad' => $promo,
+    									'fecha' => $fecha_hoy,
+    									'admin_id' => $_SESSION['user_id'],
+    									);
+
+ 										$add_query = $database->insert( 'descuento', $names );
+									}
+
 									$names = array(
     								'cliente_id' => 0,
     								'fecha_actual' => $fecha_hoy,

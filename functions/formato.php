@@ -359,7 +359,7 @@ $database = new DB();
 											<b>- ".dinero($promo)."</b>&nbsp;&nbsp;</td></tr>";
 									
 										echo "<tr><td></td><td style='text-align:right'>&nbsp;<font size=+1>Ud. Pag&oacute;</font></td>
-											<td style='text-align:right;text-align:right;color:black;border:1px solid black;'>
+											<td width=100 style='text-align:right;text-align:right;color:black;border:1px solid black;'>
 											<b> $ ".dinero($total_contado+$total_iva_contado-$promo)."</b>&nbsp;&nbsp;</td></tr>";
 									}
 										

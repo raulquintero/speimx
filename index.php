@@ -200,7 +200,7 @@ if($_SESSION['host']=="speimx.dev")
 					<ul class="nav pull-right">
 						<li class="dropdown hidden-phone">
 							<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-								<i class="halflings-icon white warning-sign"></i>
+								<i class="halflings-icon white th-list"></i>
 							</a>
 							<ul class="dropdown-menu notifications">
 								<li class="dropdown-menu-title">
@@ -208,16 +208,16 @@ if($_SESSION['host']=="speimx.dev")
 									<a href="#refresh"><i class="icon-repeat"></i></a>
 								</li>	
                             	<li>
-                                    <a href="#">
+                                    <a href="/index.php?data=clientes&op=servicio">
 										<span class="icon blue"><i class="icon-user"></i></span>
-										<span class="message">New user registration</span>
+										<span class="message">Servicio</span>
 										<span class="time">1 min</span> 
                                     </a>
                                 </li>
 								<li>
                                     <a href="https://www.pagoexpress.com.mx/wpimmex/Login.aspx" target="tel">
-										<span class="icon green"><i class="icon-comment-alt"></i></span>
-										<span class="message">New comment</span>
+										<span class="icon green"><i class="icon-bullhorn"></i></span>
+										<span class="message">Recargas</span>
 										<span class="time">7 min</span> 
                                     </a>
                                 </li>
@@ -547,7 +547,7 @@ if($_SESSION['host']=="speimx.dev")
 			<ul class="breadcrumb hidden-print hidden-phone">
 				<li>
 					<i class="icon-home "></i>
-					<a href="index.html" >Home</a> 
+					<a href="/index.php" >Home</a> 
 					<i class="icon-angle-right"></i>
 				</li>
 				<li><a  href="/index.php?data=<?php echo $data?>"><?php echo ucfirst($data)?></a></li>

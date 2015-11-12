@@ -10,7 +10,7 @@
 
 			<div class="row-fluid condensed">
 
-					<div class="box-content span8  hidden-tablet" >
+					<div class="box-content span8  " >
 
 <?php 
 
@@ -42,12 +42,7 @@
 				 // else
 				 //echo "<a href=\"/index.php?data=pos&op=clientes\" class=\"btn btn-success blue  hidden-print\">Seleccionar Cliente</a>";
 
-
-
-
  ?>
-		
-
 
 					<div class="hidden-print ">
 					<form action="/index.php" method="get">
@@ -67,9 +62,16 @@
 			
 		
 				
-				  		<div class="box-header " data-original-title>
+				  		<div class="box-header hidden-phone " data-original-title>
 					  		<h2><i class="halflings-icon calendar"></i><span class="break"></span>Punto de Venta</h2>
 				  		</div>
+					  	<div class="box-content hidden-print">
+					  		<br><br><br><br><br><br><br>
+					  		<center><span style="font-size:x-large;color:blue;">
+					  			<b>Encontro Todo lo que buscaba?</b></span>
+					  		</center>
+
+					  	</div>
 						        
 					
 					</div>
@@ -222,7 +224,7 @@
 											<font size=+3><b> $ ".dinero($total_contado+$total_iva_contado-$promo)."</b></font></td></tr>";
 									}
 										echo "<tr><td colspan=3 style='text-align:center'><br>
-											<div  style='text-align:center;padding:10px;background:#dddddd;border:1px solid #bbbbbb;color:white;'>
+											<div  class='hidden-print' style='text-align:center;padding:10px;background:#dddddd;border:1px solid #bbbbbb;color:white;'>
 											<a href=\"#\" class=\"btn btn-info blue btn-setting\"  >Cerrar Venta</a>
 											</div></td</tr>";
 
@@ -258,7 +260,7 @@
 									//$total=0;
 									foreach ($item as $row => $value) 
 									{
-										echo "<tr><td style='border-top:1px dotted gray;'> ".($n+1)."  ".$item[$n]['id_hide']."</td> <td style='border-top:1px dotted gray;''>
+										echo "<tr><td style='border-top:1px dotted gray;'> ".($n+1)."  ".$item[$n]['id_hide']."</td> <td style='border-top:1px dotted gray;'>
 											".$item[$n]['sku']."<br>". substr($item[$n]['producto'],0,30)."... 
 											<br><i><font size=-1>".strtolower($item[$n]['color'])." ".strtoupper($item[$n]['talla'])."</font></i></td> 
 											<td style='text-align:right;border-top:1px dotted gray;'>";
@@ -353,7 +355,7 @@
 							<br><br><font size=-1>
 							<center>Cotizacion</center>
 							Fecha: <?php echo date("Y-m-d")?><br>
-							Hora: <?php echo date("Y-m-d")?><br>
+							Hora: <?php echo date("H:i:s")?><br>
 							<br>
 							Pecios sujetos a cambio sin previo aviso.
 						</font>
