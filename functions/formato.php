@@ -212,7 +212,7 @@ $database = new DB();
 	 					$cliente= $apellidop." ".$apellidom." ".$nombre;
 	 }
 
-				echo "<table  width=100%>
+				echo "<table  width=100% >
 						<tr>
 							<td style='text-align:center;border-bottom:1px dotted black;' colspan=3>
 								<a href=\"/index.php\"><img width=300 src=/img/tiendasalberto.png></a>
@@ -354,12 +354,12 @@ $database = new DB();
 									{
 										$promo=get_promo($total_contado+$total_iva_contado);
 
-										echo "<tr><td></td><td style='text-align:right'>&nbsp;<font size=+1>Promo Buen Fin</font></td>
-											<td width=180 style='text-align:right;text-align:right;color:black;border-bottom:1px solid black;'>
+										echo "<tr><td></td><td style='text-align:right'>&nbsp;<font size=+1>Promo BUEN FIN</font></td>
+											<td style='text-align:right;text-align:right;color:black;border-bottom:1px solid black;'>
 											<b>- ".dinero($promo)."</b>&nbsp;&nbsp;</td></tr>";
 									
 										echo "<tr><td></td><td style='text-align:right'>&nbsp;<font size=+1>Ud. Pag&oacute;</font></td>
-											<td width=180 style='text-align:right;text-align:right;color:black;border:1px solid black;'>
+											<td style='text-align:right;text-align:right;color:black;border:1px solid black;'>
 											<b> $ ".dinero($total_contado+$total_iva_contado-$promo)."</b>&nbsp;&nbsp;</td></tr>";
 									}
 										
@@ -449,13 +449,13 @@ $database = new DB();
 
 	
 
-	 $query = "SELECT limite,descuento FROM promocion,promociondet WHERE promocion.promocion_id=promociondet.promocion_id AND activado=1 ORDER BY descuento ASC";
+	 $query = "SELECT limite,descuento FROM promocion,promociondet WHERE promocion.promocion_id=promociondet.promocion_id AND activado=1 ORDER BY descuento DESC";
 
 									$results = $database->get_results( $query );
 									foreach ($results as $row ) 
 									{
-											//echo $total_credito." ".$row['limite']." <br> ";
-										if ($total_contado<=($row['limite']-1))
+											//echo round($total_contado)." - ".$row['limite']." <br> ";
+										if (ceil($total_contado)>$row['limite'])
 											{
 												$descuento=$row['descuento'];
 												break;
