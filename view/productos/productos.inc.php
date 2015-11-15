@@ -24,6 +24,7 @@
 								  <th>Producto</th>
 								  <th>Subcategoria</th>
 								  <th>PCM</th>
+								  <th>VLIMP</th>
 								  <th>PCN</th>
 								  <th>PCR</th>
 								  <th>Stock</th>
@@ -42,13 +43,15 @@
 						foreach( $results as $row )
 						{
 
-
+							$vlimp=(($row['precio_contado']*1.16)/2);
 						?>
 							<tr>
 								<td class="center"><?php echo $row['codigo']?></td>
 								<td><a href=index.php?data=productos&op=detalles&prid=<?=$row['producto_id']?>><?php echo strtoupper($row['producto'])?></a></td>
 								<td ><?php echo $row['subcategoria']?></td>
 								<td style="text-align:right;"><?php echo dinero($row['precio_compra']*1.16)?></td>
+								<td <?php if ($vlimp>$row['precio_compra']) echo "style=\"text-align:right;\">"; else echo "style=\"text-align:right;background:red;color:white;\"> ** ";?>
+									 <?php echo dinero(($row['precio_contado']*1.16)/2)?></td>
 								<td style="text-align:right;"><?php echo dinero($row['precio_contado']*1.16)?></td>
 								<td style="text-align:right;"><?php echo dinero($row['precio_credito']*1.16)?></td>
 								<td style="text-align:right;"><?php echo $row['stock']?></td>
