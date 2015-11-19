@@ -347,14 +347,27 @@ $database = new DB();
 
 
 							$fecha_hoy=date("Y-m-d");
-										$query = "SELECT  promocion_id from promocion where \"$fecha_hoy\">=fecha_inicio AND \"$fecha_hoy\"<=fecha_fin";
-										$promociones= $database->num_rows( $query );
+									 $query = "SELECT  promocion_id,promocion,tipodesc from promocion where \"$fecha_hoy\">=fecha_inicio AND \"$fecha_hoy\"<=fecha_fin";
+									list( $promocion_id,$promocion,$tipodesc ) = $database->get_row( $query );
+												$promociones= $database->num_rows( $query );
 
 									if ($promociones)
 									{
-										$promo=get_promo($total_contado+$total_iva_contado);
 
-										echo "<tr><td></td><td style='text-align:right'>&nbsp;<font size=+1>Promo BUEN FIN</font></td>
+										switch ($tipodesc) {
+											case '1':
+												$promo=get_promo($total_contado+$total_iva_contado);
+												break;
+											case '2':
+												$promo=get_promo_porcentaje($total_contado+$total_iva_contado);
+												break;
+											
+											default:
+												# code...
+												break;
+										}
+										
+										echo "<tr><td></td><td style='text-align:right'>&nbsp;<font size=+1>$promocion</font></td>
 											<td style='text-align:right;text-align:right;color:black;border-bottom:1px solid black;'>
 											<b>- ".dinero($promo)."</b>&nbsp;&nbsp;</td></tr>";
 									
@@ -362,25 +375,24 @@ $database = new DB();
 											<td width=100 style='text-align:right;text-align:right;color:black;border:1px solid black;'>
 											<b> $ ".dinero($total_contado+$total_iva_contado-$promo)."</b>&nbsp;&nbsp;</td></tr>";
 									}
-										
 
 
 						if ($efectivo){
 						echo "<tr><td></td><td style='text-align:right'>&nbsp;Efectivo</td>
 							<td style='text-align:right;text-align:right;'>".dinero($efectivo)."&nbsp;&nbsp;</td></tr>";	
 						echo "<tr><td></td><td style='text-align:right'>&nbsp;Cambio</td>
-							<td style='text-align:right;text-align:right;border-top:2px solid;'>".dinero($efectivo-$total_iva_contado-$total_contado)."&nbsp;&nbsp;</td></tr>";	
+							<td style='text-align:right;text-align:right;border-top:2px solid;'>".dinero($efectivo-$total_iva_contado-$total_contado+$promo)."&nbsp;&nbsp;</td></tr>";	
 						}			
 
 									
 									}
 
 
-						if ($promociones)
-						{
-						echo "<tr><td colspan=3><br><br>RECUERDE:  En Promocion por BUEN FIN no hay cambios ni devoluciones</td></tr>";	
+						// if ($promociones)
+						// {
+						// echo "<tr><td colspan=3><br><br>RECUERDE:  En Promociones no hay cambios ni devoluciones</td></tr>";	
 						
-						}
+						// }
 					
 				echo "</table>";
 
@@ -464,7 +476,26 @@ $database = new DB();
 	return $descuento;
 }
 
+function get_promo_porcentaje($total_contado)
+{
+$database = new DB();
 
+	
+
+	 $query = "SELECT limite,descuento FROM promocion,promociondet WHERE promocion.promocion_id=promociondet.promocion_id AND promocion.promocion_id=2 AND activado=1 ORDER BY descuento DESC";
+
+									$results = $database->get_results( $query );
+									foreach ($results as $row ) 
+									{
+											//echo round($total_contado)." - ".$row['limite']." <br> ";
+										if (ceil($total_contado)>$row['limite'])
+											{
+												$descuento=$total_contado*($row['descuento']/100);
+												break;
+											}
+									}
+	return $descuento;
+}
 
 
 ?>

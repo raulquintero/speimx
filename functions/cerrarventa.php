@@ -200,17 +200,28 @@ foreach( $_GET as $key => $value )
 									$promo=0;
 
 											$fecha_hoy=date("Y-m-d");
-										$query = "SELECT  promocion_id from promocion where \"$fecha_hoy\">=fecha_inicio AND \"$fecha_hoy\"<=fecha_fin";
-										$promociones= $database->num_rows( $query );
+										$query = "SELECT  promocion_id,promocion,tipodesc from promocion where \"$fecha_hoy\">=fecha_inicio AND \"$fecha_hoy\"<=fecha_fin";
+									
+
+list( $promocion_id,$promocion,$tipodesc ) = $database->get_row( $query );
+												$promociones= $database->num_rows( $query );
 
 									if ($promociones)
 									{
-										$promo=get_promo($saldo_total);
 
-										
+										switch ($tipodesc) {
+											case '1':
+												$promo=get_promo($total_contado+$total_iva_contado);
+												break;
+											case '2':
+												$promo=get_promo_porcentaje($total_contado+$total_iva_contado);
+												break;
+											
+											default:
+												# code...
+												break;
+										}
 									}
-
-
 
 
 									//////////////////////////////////////////////////////////////factura

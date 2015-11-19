@@ -65,12 +65,19 @@
 				  		<div class="box-header hidden-phone " data-original-title>
 					  		<h2><i class="halflings-icon calendar"></i><span class="break"></span>Punto de Venta</h2>
 				  		</div>
+					
 					  	<div class="box-content hidden-print hidden-phone">
 					  		<br><br><br><br><br><br><br>
-					  		<center><span style="font-size:x-large;color:blue;">
-					  			<b>Encontro Todo lo que buscaba?</b></span>
+					  		<center><span style="font-size:50px;color:blue;">
+<?php 
+if (!$_SESSION['cart']){
+?>	
+					  			<b>ENCONTRO TODO LO <br><br>QUE BUSCABA?</b></span>
+<?php  } 
+else {?>
+					  			<b>QUE LE PARECIO <br><br>LA TIENDA?</b></span>
+<?php } ?>
 					  		</center>
-
 					  	</div>
 						        
 					
@@ -208,14 +215,27 @@
 											<font size=+3><b>$ ".dinero($total_iva_contado+$total_contado)."</b></font></td></tr>";	
 
 										$fecha_hoy=date("Y-m-d");
-										$query = "SELECT  promocion_id from promocion where \"$fecha_hoy\">=fecha_inicio AND \"$fecha_hoy\"<=fecha_fin";
-										$promociones= $database->num_rows( $query );
+										$query = "SELECT  promocion_id,promocion,tipodesc from promocion where \"$fecha_hoy\">=fecha_inicio AND \"$fecha_hoy\"<=fecha_fin";
+										list( $promocion_id,$promocion,$tipodesc ) = $database->get_row( $query );
+												$promociones= $database->num_rows( $query );
 
-									if ($promociones && ceil($total_contado+$total_iva_contado)>=500)
+									if ($promociones)
 									{
-										$promo=get_promo($total_contado+$total_iva_contado);
 
-										echo "<tr><td></td><td style='text-align:right'>&nbsp;<font size=+1>Promo Buen Fin</font></td>
+										switch ($tipodesc) {
+											case '1':
+												$promo=get_promo($total_contado+$total_iva_contado);
+												break;
+											case '2':
+												$promo=get_promo_porcentaje($total_contado+$total_iva_contado);
+												break;
+											
+											default:
+												# code...
+												break;
+										}
+
+										echo "<tr><td></td><td style='text-align:right'>&nbsp;<font size=+1>$promocion</font></td>
 											<td width=180 style='text-align:right;text-align:right;color:black;border-bottom:1px solid black;'>
 											<font size=+3><b>- ".dinero($promo)."</b></font></td></tr>";
 									
@@ -416,7 +436,7 @@
 									
 									if ($promociones)
 									{
-										echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;<strong>PROMO Buen Fin</strong></td>
+										echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;<strong>$promocion</strong></td>
 											<td width=190 style='text-align:right;text-align:right;border-top:0px solid;'><h1> - ".dinero($promo)."</h1></td></tr>";	
 									 
 										echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;<strong>Ud. Paga</strong></td>
