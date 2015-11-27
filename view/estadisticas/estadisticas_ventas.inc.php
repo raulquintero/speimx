@@ -28,7 +28,7 @@
 
 					<div class="span2 statbox black" onTablet="span6" onDesktop="span3">
 						<!--div class="boxchart">5,6,7,2,0,4,2,4,8,2,3,3,2</div-->
-						<div class="number"><br><?php echo dinero($total_contado_hoy)?> &nbsp;<!--i class="icon-arrow-up"></i--></div>
+						<div class="number"><br><a href="/index.php?data=estadisticas&op=reporte_semanal"><font color=white><?php echo dinero($total_contado_hoy)?></font></a> &nbsp;<!--i class="icon-arrow-up"></i--></div>
 						<div class="title"><br>Ventas Contado</div>
 						<!--div class="footer">
 							<a href="#"> Saldo</a>

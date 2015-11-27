@@ -56,15 +56,15 @@ for ($mo=1;$mo<=$mont;$mo++){
 
 
         $query3="select sum(cantidad) as total from movimiento
-            where $condicion AND fecha>='$yr-$mo-01' AND fecha<='$yr-$mo-31' ";
+            where $condicion AND fecha>='$yr-$mo-01' AND fecha<='$yr-$mo-31 11:59:59' ";
   list( $abonos) = $database->get_row( $query3 );
                        $yea=$yr+1;
         $query3="select sum(cantidad) as total from movimiento
-            where $condicion AND fecha>='$yea-$mo-01' AND fecha<='$yea-$mo-31' ";
+            where $condicion AND fecha>='$yea-$mo-01' AND fecha<='$yea-$mo-31 11:59:59' ";
   list( $devoluciones) = $database->get_row( $query3 );
                        $yea=$yr+2;
-       $query3="select sum(cantidad) as total from movimiento
-            where $condicion AND fecha>='$yea-$mo-01' AND fecha<='$yea-$mo-31' ";
+        $query3="select sum(cantidad) as total from movimiento
+            where $condicion AND fecha>='$yea-$mo-01' AND fecha<='$yea-$mo-31 23:59:59' ";
   list( $ventas) = $database->get_row( $query3 );
 if ($cms) {$abonos=$abonos*($comision/100);$devoluciones=$devoluciones*($comision/100);$ventas=$ventas*($comision/100);}
 echo "<tr><td >&nbsp;$mo</td><td align=right><font size=-1>
