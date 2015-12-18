@@ -27,13 +27,14 @@ $database = new DB();
 									  <th style='text-align:right'>Cliente</th>
 									  <th style='text-align:center'>Tipo Venta</th>
 									  <th style='text-align:center'>Total</th>
+									  <th style='text-align:center'>Desc</th>
 									  <th style='text-align:center'>Vendedor</th>
 								  </tr>
 							  </thead>   
 							  <tbody>";
 
 
-	$query = "SELECT  * from factura,tipomov,admin where factura.tipomov_id=tipomov.tipomov_id AND factura.admin_id=admin.admin_id ORDER BY factura_id DESC";
+	$query = "SELECT  *, (notaventa+cupon+bono) as descuento from factura,tipomov,admin where factura.tipomov_id=tipomov.tipomov_id AND factura.admin_id=admin.admin_id ORDER BY factura_id DESC";
 
 					$results = $database->get_results( $query );
 
@@ -44,7 +45,9 @@ $database = new DB();
 						<td style='text-align:right'><a href=/index.php?data=estadisticas&op=ventas&fid=".$item['factura_id'].">".$item['fecha']."</a></td><td style='text-align:right'>".$item['cliente_id']."</td>
 							<td>".$item['tipomov']."
 							<br></td> 
-							<td style='text-align:right'>$ ".dinero($item['total']+$item['iva'])."<td style='text-align:right'>".$vendedor;
+							<td style='text-align:right'>$ ".dinero($item['total']+$item['iva'])."</td>
+							<td style='text-align:right'>$ ".dinero($item['descuento'])."</td>
+							<td style='text-align:right'>".$vendedor;
 					
 						echo "&nbsp;&nbsp;</td></tr>";
 										

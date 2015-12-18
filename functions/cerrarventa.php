@@ -252,7 +252,7 @@ list( $promocion_id,$promocion,$tipodesc ) = $database->get_row( $query );
 										$names = array(
     									'promocion_id' => 1,
     									'factura_id' => $factura_id,
-    									'descuento' => 'promo Buen Fin',
+    									'descuento' => 'promo ',
     									'cantidad' => $promo,
     									'fecha' => $fecha_hoy,
     									'admin_id' => $_SESSION['user_id'],
@@ -267,7 +267,7 @@ list( $promocion_id,$promocion,$tipodesc ) = $database->get_row( $query );
     								'fecha' => $fecha_hoy,
     								'admin_id' => $_SESSION['user_id'],
     								'tipomov_id' => 14,
-    								'cantidad' => ($total_contado+$total_iva_contado),
+    								'cantidad' => ($total_contado+$total_iva_contado-$promo),
     								'factura_id' => $factura_id
 									);
 

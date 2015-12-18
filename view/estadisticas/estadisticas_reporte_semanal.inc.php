@@ -66,18 +66,23 @@ for ($mo=1;$mo<=$mont;$mo++){
         $query3="select sum(cantidad) as total from movimiento
             where $condicion AND fecha>='$yea-$mo-01' AND fecha<='$yea-$mo-31 23:59:59' ";
   list( $ventas) = $database->get_row( $query3 );
+
+        $query3="select sum(cantidad) as descuento from descuento
+            where  fecha>='$yea-$mo-01' AND fecha<='$yea-$mo-31 23:59:59' ";
+  list( $descuentos) = $database->get_row( $query3 );
+
 if ($cms) {$abonos=$abonos*($comision/100);$devoluciones=$devoluciones*($comision/100);$ventas=$ventas*($comision/100);}
 echo "<tr><td >&nbsp;$mo</td><td align=right><font size=-1>
 		<a href=./pm.php?mn=9&sec=pm_edocuenta&cms=$cms&statusc=$statusc&year=".($yea-2)."&month=$mo>$".number_format($abonos, 2, '.', '')."</a></td>";
 echo "<td >&nbsp;</td><td align=right><font size=-1>
 		<a href=./pm.php?mn=9&sec=pm_edocuenta&cms=$cms&statusc=$statusc&year=".($yea-1)."&month=$mo>$".number_format($devoluciones, 2, '.', '')."</a></td>";
 echo "<td >&nbsp;</td><td align=right><font size=-1>
-		<a href=./pm.php?mn=9&sec=pm_edocuenta&cms=$cms&statusc=$statusc&year=$yea&month=$mo>$".number_format($ventas, 2, '.', '')."</a></td></tr>";
+		<a href=./pm.php?mn=9&sec=pm_edocuenta&cms=$cms&statusc=$statusc&year=$yea&month=$mo>$".number_format($ventas-$descuentos, 2, '.', '')."</a></td></tr>";
 //echo "<tr><td>&nbsp;</td></tr>";
 
 $gtotal1+=$abonos;
 $gtotal2+=$devoluciones;
-$gtotal3+=$ventas;
+$gtotal3+=($ventas-$descuentos);
 }
 if ($cms==1) {$gtotal1=$gtotal1*$comision/10;$gtotal2=$gtotal2*$comision/10;$gtotal3=$gtotal3*($comision/10);}
 echo "<tr><td></td><td align=right style='border-top:2px solid black'>".number_format($gtotal1, 2, '.', '')."</td>

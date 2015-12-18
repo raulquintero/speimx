@@ -1,5 +1,11 @@
 
 <?php 
+$mo=date("m");
+$yr=date("Y");
+$fecha_hoy=date("Y-m-d");
+$mysfecha_mes=" AND fecha>='$yr-$mo-1' AND fecha<='$yr-$mo-31 23:59:59' ";
+$mysfecha_hoy=" AND fecha=>'$fecha_hoy 00:00:00' AND fecha<='$fecha_hoy 23:59:59'";
+
 
 	//$query = "SELECT  count(factura_id) as ventas from factura,tipomov,admin where factura.tipomov_id=tipomov.tipomov_id AND factura.admin_id=admin.admin_id";
 	$query = "SELECT  sum(cantidad) as abono from movimiento where tipomov_id=1";
@@ -9,8 +15,10 @@
 
 
 
-	$query = "SELECT  sum(total+iva) as ventas from factura,tipomov,admin where factura.tipomov_id=tipomov.tipomov_id AND factura.admin_id=admin.admin_id AND tipomov.tipomov_id=14 ";
-		list( $total_contado_hoy ) = $database->get_row( $query );
+	echo $query = "SELECT  sum(total+iva) as ventas, sum(notaventa+bono+cupon) as descuento from factura,tipomov,admin where factura.tipomov_id=tipomov.tipomov_id AND factura.admin_id=admin.admin_id AND tipomov.tipomov_id=14 ".$mysfecha_hoy;
+		list( $total_contado_hoy,$descuento_contado ) = $database->get_row( $query );
+	$query = "SELECT  sum(total+iva) as ventas, sum(notaventa+bono+cupon) as descuento from factura,tipomov,admin where factura.tipomov_id=tipomov.tipomov_id AND factura.admin_id=admin.admin_id AND tipomov.tipomov_id=14 ".$mysfecha_mes;
+		list( $total_contado_mes,$descuento_contado_mes ) = $database->get_row( $query );
 
 	$query = "SELECT  sum(total) as ventas from devolucion ";
 		list( $devolucion_contado_hoy ) = $database->get_row( $query );
@@ -46,8 +54,53 @@
 
 					<div class="span2 statbox black" onTablet="span6" onDesktop="span3">
 						<!--div class="boxchart">5,6,7,2,0,4,2,4,8,2,3,3,2</div-->
+						<div class="number"><br><?php echo dinero($descuento_contado)?>&nbsp;<!--i class="icon-arrow-up"></i--></div>
+						<div class="title"><br>descuentos</div>
+						<!--div class="footer">
+							<a href="#"> Saldo</a>
+						</div-->	
+					</div>
+
+					<div class="span2 statbox blue" onTablet="span6" onDesktop="span3">
+						<!--div class="boxchart">5,6,7,2,0,4,2,4,8,2,3,3,2</div-->
+						<div class="number"><br><?php echo dinero($total_contado_hoy-$devolucion_contado_hoy-$descuento_contado)?>&nbsp;<!--i class="icon-arrow-up"></i--></div>
+						<div class="title"><br>Total Hoy</div>
+						<!--div class="footer">
+							<a href="#"> Saldo</a>
+						</div-->	
+					</div>
+
+					<div class="span2 statbox green" onTablet="span6" onDesktop="span3">
+						<!--div class="boxchart">5,6,7,2,0,4,2,4,8,2,3,3,2</div-->
+						<div class="number"><br><?php echo dinero($total_contado_mes-$devolucion_contado_mes-$descuento_contado_mes)?>&nbsp;<!--i class="icon-arrow-up"></i--></div>
+						<div class="title"><br>Total Mes</div>
+						<!--div class="footer">
+							<a href="#"> Saldo</a>
+						</div-->	
+					</div>
+
+				</div>
+
+
+
+<div class="row-fluid">
+				
+					
+
+
+					<div class="span2 statbox black" onTablet="span6" onDesktop="span3">
+						<!--div class="boxchart">5,6,7,2,0,4,2,4,8,2,3,3,2</div-->
 						<div class="number"><br><?php echo dinero($total_credito_hoy)?>&nbsp;<!--i class="icon-arrow-up"></i--></div>
 						<div class="title"><br>Ventas Credito</div>
+						<!--div class="footer">
+							<a href="#"> Saldo</a>
+						</div-->	
+					</div>
+
+					<div class="span2 statbox black" onTablet="span6" onDesktop="span3">
+						<!--div class="boxchart">5,6,7,2,0,4,2,4,8,2,3,3,2</div-->
+						<div class="number"><br><?php echo dinero($devolucion_contado_hoy)?>&nbsp;<!--i class="icon-arrow-up"></i--></div>
+						<div class="title"><br>Devolucion Credito</div>
 						<!--div class="footer">
 							<a href="#"> Saldo</a>
 						</div-->	
@@ -81,6 +134,8 @@
 					</div>
 
 				</div>
+
+
 
 
 
