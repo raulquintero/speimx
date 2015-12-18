@@ -546,8 +546,8 @@ if ($_SESSION['display']=='dev'){
 									// echo "<tr><td>&nbsp;</td></tr><tr><td></td><td style='text-align:right'>Subtotal</td><td style='text-align:right'>$". dinero($total_contado+$total_iva_contado)."</td></tr>";
 									// echo "<tr><td></td><td style='text-align:right'>Incluye IVA(16%) por</td><td style='text-align:right'>$". dinero($total_iva_contado)."</td></tr>";
 									echo "<tr><td></td><td style='text-align:right'>&nbsp;<font size=+2>Total</font></td>
-											<td width=180 style='text-align:right;text-align:right;background:white;color:gray;border:2px solid;'>
-											<font size=+3><b>$ ".dinero($total_iva_contado+$total_contado)."</b></font></td></tr>";	
+											<td width=180 style='text-align:right;text-align:right;background:white;color:black;border:2px solid;'>
+											<font size=+2><b>$ ".dinero($total_iva_contado+$total_contado)."</b></font></td></tr>";	
 
 
 
@@ -577,7 +577,7 @@ if ($_SESSION['display']=='dev'){
 									
 										echo "<tr><td></td><td style='text-align:right'>&nbsp;<font size=+1>Ud. Pagar&aacute;</font></td>
 											<td style='text-align:right;text-align:right;color:black;border:1px solid black;'>
-											<font size=+2><b> $ ".dinero($total_contado+$total_iva_contado-$promo)."</b></font>&nbsp;&nbsp;</td></tr>";
+											<font size=+3><b> $ ".dinero($total_contado+$total_iva_contado-$promo)."</b></font>&nbsp;&nbsp;</td></tr>";
 									}
 
 
