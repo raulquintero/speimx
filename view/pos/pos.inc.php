@@ -68,14 +68,53 @@
 					
 					  	<div class="box-content hidden-print hidden-phone">
 					  		<br><br><br><br><br><br><br>
-					  		<center><span style="font-size:50px;color:blue;">
+					  		<center><span style="font-size:40px;color:blue;">
 <?php 
 if (!$_SESSION['cart']){
 ?>	
 					  			<b>ENCONTRO TODO LO <br><br>QUE BUSCABA?</b></span>
 <?php  } 
-else {?>
-					  			<b>QUE LE PARECIO <br><br>LA TIENDA?</b></span>
+else {
+
+		$ultimo_producto=end($_SESSION['cart']);
+
+									$fecha_hoy=date("Y-m-d");
+										$query = "SELECT  promocion_id,promocion,tipodesc from promocion where \"$fecha_hoy\">=fecha_inicio AND \"$fecha_hoy\"<=fecha_fin";
+										list( $promocion_id,$promocion,$tipodesc ) = $database->get_row( $query );
+ 												$promociones= $database->num_rows( $query );
+
+									if ($promociones)
+									{
+										switch ($tipodesc) {
+											case '1':
+												$promo=get_promo($ultimo_producto['precio_contado']*1.16);
+												break;
+											case '2':
+												$promo=get_promo_porcentaje($ultimo_producto['precio_contado'])*1.16;
+												break;
+											
+											default:
+												# code...
+												break;
+										}
+									}
+
+
+									if ($promociones) echo " <font size=+1>PRODUCTO CON DESCUENTO</font><br><Br>";
+		echo $ultimo_producto['producto'];
+		echo "<br><font size=+2> Color: ";
+		echo $ultimo_producto['color']." Talla:";
+		echo $ultimo_producto['talla']."</font><br><br>";
+			$precio_contado=($ultimo_producto['precio_contado']*1.16);
+		echo "<s><font color=gray> $ ".dinero($precio_contado)."</font></s> - ";
+			$precio_credito=($ultimo_producto['precio_credito']*1.16);
+		if ($cliente_id)
+			echo "$ ".dinero($precio_credito)."<br>";
+			else
+			echo "$ ".dinero($precio_contado-$promo)."<br>";
+
+		
+	?>
 <?php } ?>
 					  		</center>
 					  	</div>
