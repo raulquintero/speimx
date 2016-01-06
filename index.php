@@ -178,7 +178,7 @@ switch ($type) {
 <body onload='setFocusToTextBox()'>
 <?php 
 if($_SESSION['host']=="speimx.dev")
-	echo "<table width=100%><tr bgcolor=yellow><td>".$_SESSION['host'].".- Version Desarrollo.</td></tr></table>";
+	echo "<table width=100%><tr bgcolor=yellow><td>".$_SESSION['host'].".- Version Desarrollo. $realpath</td></tr></table>";
 
 
  ?>
