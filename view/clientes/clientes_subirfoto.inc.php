@@ -21,20 +21,23 @@ $cid=$_GET['cid'];
 
 					<div class="box-content">
 						<table class="table table-condensed">
-							  
+
 							  <tbody>
 							  	<tr><td align=center>
 
-							  		<img src=/fotos/<?php echo $cid?>_f.jpeg width=200>
+							  		<img src=/fotos/<?php echo $cid?>_f.jpg width=200>
 							  	</td>
 							  	<td>
 
-							  		<form action="" method="post" enctype="multipart/form-data">
-										<p><input type="file" name="ife" /></p>
-										<p><input type="submit" value="Actualizar" /></p>
+							  		<form action="view/clientes/subirf.php" method="post" enctype="multipart/form-data">
+										<p><input type="file" name="uploadedfile" /></p>
+										<p><input type="submit" value="Subir Foto" /></p>
+                                        <input type="hidden" name="type" value="<?php echo $cid?>"/>
+                                        <input type="hidden" name="f" value="a"/>
 									</form>
+                                    </td></tr>
  							 </tbody>
-						 </table>  
+						 </table>
 						     
 					</div>
 				</div><!--/span-->

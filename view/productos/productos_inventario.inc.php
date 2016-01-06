@@ -1,4 +1,4 @@
-<?php 
+<?php
 	 $data=$_GET['data'];
 	 $op=$_GET['op'];
 	 $color_id=$_GET['coid'];
@@ -193,13 +193,30 @@
 		
 		<div class="box span6">
 					<div class="box-header">
-						<h2><i class="halflings-icon align-justify"></i><span class="break"></span>Imagenes</h2>
+						<h2><i class="halflings-icon align-justify"></i><span class="break"></span>Imagenes <?php echo $_GET['prid'].$color_id?></h2>
 						<div class="box-icon">
 							<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
 						</div>
 					</div>
 					<div class="box-content">
-						
+						  	<table class="table table-condensed">
+
+							  <tbody>
+							  	<tr><td align=center>
+
+							  		<img src=/productos/<?php echo $_GET['prid'].$color_id?>_p.jpg width=200>
+							  	</td>
+							  	<td>
+
+							  		<form action="view/productos/subirf.php" method="post"" enctype="multipart/form-data">
+										<p><input type="file" name="uploadedfile" /></p>
+										<p><input type="submit" value="Subir Foto" /></p>
+                                        <input type="hidden" name="prid" value="<?php echo $_GET['prid']?>"/>
+                                        <input type="hidden" name="color_id" value="<?php echo $color_id?>"/>
+                                        <input type="hidden" name="f" value="a"/>
+									</form>
+ 							 </tbody>
+						 </table>
 						No hay imagenes por el momento
 
 					</div>
