@@ -98,8 +98,7 @@ switch ($type) {
 			$marca,$codigo,$codigo_inventario ,$talla_id, $talla,$unidad,$estilo,$subcategoria  ) = $database->get_row( $query );
 		$producto=htmlspecialchars($producto);
 
-		 $location="Location: /functions/cart.php?func=add_item&prid=$producto_id&producto=$producto&marca=$marca&codigo=$codigo&codigo_inventario=$codigo_inventario
-		&talla=$talla&color=$color&precio_compra=$precio_compra&precio_credito=$precio_credito&precio_contado=$precio_contado";
+		 $location="Location: /functions/cart.php?func=add_item&prid=$producto_id&producto=$producto&marca=$marca&codigo=$codigo&codigo_inventario=$codigo_inventario&talla=$talla&color=$color&precio_compra=$precio_compra&precio_credito=$precio_credito&precio_contado=$precio_contado";
 		//if ($codigo_inventario)
 		
 		if ($producto_id) 		header($location);

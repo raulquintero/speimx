@@ -4,7 +4,7 @@ $mo=date("m");
 $yr=date("Y");
 $fecha_hoy=date("Y-m-d");
 $mysfecha_mes=" AND fecha>='$yr-$mo-1' AND fecha<='$yr-$mo-31 23:59:59' ";
-$mysfecha_hoy=" AND fecha=>'$fecha_hoy 00:00:00' AND fecha<='$fecha_hoy 23:59:59'";
+$mysfecha_hoy=" AND fecha>='$fecha_hoy 00:00:00' AND fecha<='$fecha_hoy 23:59:59'";
 
 
 	//$query = "SELECT  count(factura_id) as ventas from factura,tipomov,admin where factura.tipomov_id=tipomov.tipomov_id AND factura.admin_id=admin.admin_id";

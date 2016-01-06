@@ -6,7 +6,7 @@ $realpath=getcwd();
 $pos = strpos($realpath, "/functions");
 
 if ($pos) $realpath = substr($realpath, 0, -10);  // devuelve "abcde"
-
+require_once( $realpath.'/config/database.php' );
 require_once( $realpath.'/classes/class.db.php' );
 require_once( $realpath.'/classes/class_login.php' );
 
@@ -19,12 +19,6 @@ require_once($realpath.'/functions/estadisticas.php');
 
 
 
-define( 'DB_HOST', 'localhost' ); // set database host
-define( 'DB_USER', 'root' ); // set database user
-define( 'DB_PASS', 'despachado16' ); // set database password
-define( 'DB_NAME', 'speimx' ); // set database name
-define( 'SEND_ERRORS_TO', 'raul.quintero@live.com' ); //set email notification email address
-define( 'DISPLAY_DEBUG', true ); //display db errors?
 $item_impresion='70001603';
 
 /* sanitize data

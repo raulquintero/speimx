@@ -1,0 +1,7 @@
+#ignore database credentials
+/config/database.php
+/fotos/*
+/ides/*
+
+.htaccess
+

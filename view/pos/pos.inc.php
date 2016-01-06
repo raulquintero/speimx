@@ -100,7 +100,7 @@ else {
 									}
 
 
-									if ($promociones) echo " <font size=+1>PRODUCTO CON DESCUENTO</font><br><Br>";
+									//if ($promociones) echo " <font size=+1>PRODUCTO CON DESCUENTO</font><br><Br>";
 		echo $ultimo_producto['producto'];
 		echo "<br><font size=+2> Color: ";
 		echo $ultimo_producto['color']." Talla:";
