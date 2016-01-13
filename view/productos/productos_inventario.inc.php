@@ -199,20 +199,38 @@
 						</div>
 					</div>
 					<div class="box-content">
+
+                      <?php
+               	$query = "SELECT producto,subcategoria,color from producto,subcategoria,color
+                    where producto.subcategoria_id=subcategoria.subcategoria_id
+                    AND $color_id=color.color_id
+                    AND producto.producto_id=".$_GET['prid'];
+				list( $producto,$subcategoria,$color) = $database->get_row( $query );
+                $nombre_producto=ucwords(strtolower($producto));
+            $nombre_producto = str_replace(" ", "-", $nombre_producto);
+            $nombre_subcategoria = ucwords(str_replace(" ", "-", $subcategoria));
+            $nombre_color=ucwords(strtolower($color));
+
+            $nombre_archivo=$nombre_subcategoria."-".$nombre_producto."-".$nombre_color."-".$_GET['prid']."_p.jpg";
+                                ?>
 						  	<table class="table table-condensed">
 
 							  <tbody>
 							  	<tr><td align=center>
 
-							  		<img src=/productos/<?php echo $_GET['prid'].$color_id?>_p.jpg width=200>
+							  		<img src=/productos/<?php echo $nombre_archivo?> width=200>
 							  	</td>
 							  	<td>
 
-							  		<form action="view/productos/subirf.php" method="post"" enctype="multipart/form-data">
+
+
+
+							  		<form action="view/productos/subirf.php" method="post" enctype="multipart/form-data">
 										<p><input type="file" name="uploadedfile" /></p>
 										<p><input type="submit" value="Subir Foto" /></p>
                                         <input type="hidden" name="prid" value="<?php echo $_GET['prid']?>"/>
-                                        <input type="hidden" name="color_id" value="<?php echo $color_id?>"/>
+                                        <input type="hidden" name="color" value="<?php echo $color_id?>"/>
+                                        <input type="hidden" name="nombre_archivo" value="<?php echo $nombre_archivo?>"/>
                                         <input type="hidden" name="f" value="a"/>
 									</form>
  							 </tbody>

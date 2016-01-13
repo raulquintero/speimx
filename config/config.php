@@ -5,6 +5,7 @@ setlocale(LC_MONETARY, 'es_MX');
 $realpath=getcwd();
 $pos = strpos($realpath, "/functions");
 
+
 if ($pos) $realpath = substr($realpath, 0, -10);  // devuelve "abcde"
 require_once( $realpath.'/../database.php' );
 require_once( $realpath.'/classes/class.db.php' );
@@ -30,7 +31,7 @@ foreach( $_POST as $key => $value )
 
 
 $path="/var/www/html/functions";
-
+$iva=16;     
 /////////////////////////////////////////////login class start
    // Instantiating the class object
     

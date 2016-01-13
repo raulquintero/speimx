@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once('../config/config.php');
 
 $database = new DB();
@@ -91,7 +91,7 @@ $item=$_SESSION['cart_temp'];
 					$updated = $database->update( 'facturadet', $update, $where_clause, 1 );
 
 		$total_credito+=$item[$k]['precio_credito'];
-		$total_contado+=$item[$k]['precio_contado'];
+		$total_contado+=$item[$k]['precio_venta'];
 		$total_iva_credito+=$item[$k]['iva_credito'];
 		$total_iva_contado+=$item[$k]['iva_contado'];
 	}	
@@ -106,7 +106,7 @@ $item=$_SESSION['cart_temp'];
   		if ($tipomov_id==3)
   			$total=round($total_credito+$total_iva_credito);
   		if ($tipomov_id==14)
-  			$total=round($total_contado+$total_iva_contado);
+  			$total=dinero($total_contado);
 
 echo "<br>tipomov_id: ".$tipomov_id;
 echo "<br>total: ".$total;

@@ -34,9 +34,11 @@ if ($_GET['eed']==2)
 											
 											<img class="grayscale hidden-print" src=fotos/images.jpeg width=150 align=right></img>									
 											
-											<b><?php echo strtoupper($nombre.' '.$apellidop.' '.$apellidom)?></b> &nbsp;&nbsp;											
-											
-											<?php
+											<b>
+                                            <?php
+                                            echo "<a classa=\"btn btn-info blue btn-setting hidden-print\" data-toggle=\"modal\" data-target=\"#abonaracuenta\" >".
+                                            strtoupper($nombre.' '.$apellidop.' '.$apellidom)."</b></a>   &nbsp;&nbsp;";
+
 											if (!$_GET['h'])
 											{
 												echo "<br>Direccion: $domicilio_casa

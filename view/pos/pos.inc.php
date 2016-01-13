@@ -30,7 +30,7 @@
 						
 					echo "<div class=\"alert alert-info hidden-print \">
 		 			<a href=/functions/cart.php?func=del_cliente&cid=".$row['cliente_id']."><button type=\"button\" class=\"close\" >×</button></a>
-					<strong>Cliente: <a href=\"/index.php?data=clientes&op=detalles&h=1&cid=$cliente_id\" >".strtoupper($cliente)."</a></strong> <br><strong>Saldo: </strong>$ ". dinero($saldo)." 
+					<strong>Cliente: <a href=\"/index.php?data=clientes&op=detalles&h=1&cid=$cliente_id\" >".strtoupper($cliente)."</a></strong> <br><strong>Saldo: </strong>$ ". dinero($saldo)."
 					<strong>Credito: </strong>$ ".dinero($credito)."<br><strong> Credito Total Disponible: </strong>$ ".dinero($credito-$saldo)."</div> ";
 					
 					echo "<div class=\"alert alert-info visible-print\">
@@ -67,14 +67,16 @@
 				  		</div>
 					
 					  	<div class="box-content hidden-print hidden-phone">
-					  		<br><br><br><br><br><br><br>
+					  		<br><br><br><br>
 					  		<center><span style="font-size:40px;color:blue;">
 <?php 
 if (!$_SESSION['cart']){
 ?>	
 					  			<b>ENCONTRO TODO LO <br><br>QUE BUSCABA?</b></span>
 <?php  } 
-else {
+else {   ////////////////**************** descripcion del producto marcado***************//////////////////
+
+
 
 		$ultimo_producto=end($_SESSION['cart']);
 
@@ -92,7 +94,7 @@ else {
 											case '2':
 												$promo=get_promo_porcentaje($ultimo_producto['precio_contado'])*1.16;
 												break;
-											
+
 											default:
 												# code...
 												break;
@@ -106,20 +108,41 @@ else {
 		echo $ultimo_producto['color']." Talla:";
 		echo $ultimo_producto['talla']."</font><br><br>";
 			$precio_contado=($ultimo_producto['precio_contado']*1.16);
-		echo "<s><font color=gray> $ ".dinero($precio_contado)."</font></s> - ";
+
+        if (!$cliente_id) echo "<s><font color=gray> $ ".dinero($precio_contado)."</font></s> - ";
 			$precio_credito=($ultimo_producto['precio_credito']*1.16);
 		if ($cliente_id)
 			echo "$ ".dinero($precio_credito)."<br>";
 			else
-			echo "$ ".dinero($precio_contado-$promo)."<br>";
+			echo "$ ".dinero($ultimo_producto['precio_venta'])."<br><br>";
 
-		
-	?>
-<?php } ?>
+
+            	$query = "SELECT subcategoria from producto,subcategoria
+                    where producto.subcategoria_id=subcategoria.subcategoria_id AND producto.producto_id=".$ultimo_producto['id'];
+				list( $subcategoria) = $database->get_row( $query );
+                $nombre_producto=ucwords(strtolower($ultimo_producto['producto']));
+            $nombre_producto = str_replace(" ", "-", $nombre_producto);
+            $nombre_subcategoria = ucwords(str_replace(" ", "-", $subcategoria));
+            $nombre_color=ucwords(strtolower($ultimo_producto['color']));
+
+
+
+             $nombre_archivo=$nombre_subcategoria."-".$nombre_producto."-".$nombre_color."-".$ultimo_producto['id']."_p.jpg";
+             $target_path=$realpath."/productos/".$nombre_archivo;
+            if (file_exists($target_path))
+            {
+                echo "<img src='/productos/$nombre_archivo' style='height:300px;' alt='$nombre_subcategoria $nombre_producto $nombre_color'/>";
+            }
+
+
+
+} ///////////////////////////////termina descripcion del producto capturado////////////////////////////////
+
+?>
 					  		</center>
 					  	</div>
-						        
-					
+
+
 					</div>
 
 
@@ -188,7 +211,7 @@ else {
 									{
 										
 										$total_credito+=$item[$n]['precio_credito'];
-										$total_contado+=$item[$n]['precio_contado'];
+										$total_contado+=$item[$n]['precio_venta'];
 										
 										$n--;
 
@@ -205,7 +228,7 @@ else {
 								// echo "<tr><td colspan=4 style=\"border-bottom:1px dotted black\">&nbsp;</td></tr><tr><td></td><td style='text-align:right'>Total</td><td style='text-align:right;boarder-top:2px solid;'>$". dinero($total_credito+$total_iva_credito)."</td></tr>";
 								// echo "<tr><td></td><td style='text-align:right'>&nbsp;Incluye IVA(16%) por</td><td style='text-align:right;border-bottom:2px solid;'>".dinero($total_iva_credito)."</td></tr>";	
 								echo "<tr><td>&nbsp;</td></tr>";
-								echo "<tr><td rowspan=2 style='background:#4EF84E;color:black;text-align:center;'>Articulos<br>$items</td>
+								echo "<tr><td rowspan=2 style='background:#4EF84E;color:black;text-align:center;'>Articulos<br>".$items."</td>
 								<td style='text-align:right'>&nbsp;<font size=+2>Total</font></td>
 								<td width=180 style='text-align:right;border:1px solid black;background:white;color:black;background:yellow;'><font size=+2><b>$ ".dinero($total_iva_credito+$total_credito)."</strong></td></tr>";	
 								echo "<tr><td>&nbsp;</td></tr>";
@@ -251,7 +274,7 @@ else {
 									// echo "<tr><td></td><td style='text-align:right'>Incluye IVA(16%) por</td><td style='text-align:right'>$". dinero($total_iva_contado)."</td></tr>";
 									echo "<tr><td></td><td style='text-align:right'>&nbsp;<font size=+1>Total</font></td>
 											<td width=180 style='text-align:right;text-align:right;background:yellow;color:black;'>
-											<font size=+3><b>$ ".dinero($total_iva_contado+$total_contado)."</b></font></td></tr>";	
+											<font size=+3><b>$ ".dinero($total_contado)."</b></font></td></tr>";
 
 										$fecha_hoy=date("Y-m-d");
 										$query = "SELECT  promocion_id,promocion,tipodesc from promocion where \"$fecha_hoy\">=fecha_inicio AND \"$fecha_hoy\"<=fecha_fin";
@@ -263,10 +286,10 @@ else {
 
 										switch ($tipodesc) {
 											case '1':
-												$promo=get_promo($total_contado+$total_iva_contado);
+												$promo=get_promo($total_contado);
 												break;
 											case '2':
-												$promo=get_promo_porcentaje($total_contado+$total_iva_contado);
+												$promo=get_promo_porcentaje($total_contado);
 												break;
 											
 											default:
@@ -280,7 +303,7 @@ else {
 									
 										echo "<tr><td></td><td style='text-align:right'>&nbsp;<font size=+1>Ud. Paga</font></td>
 											<td width=180 style='text-align:right;text-align:right;color:black;border:1px solid black;'>
-											<font size=+3><b> $ ".dinero($total_contado+$total_iva_contado-$promo)."</b></font></td></tr>";
+											<font size=+3><b> $ ".dinero($total_contado-$promo)."</b></font></td></tr>";
 									}
 										echo "<tr><td colspan=3 style='text-align:center'><br>
 											<div  class='hidden-print' style='text-align:center;padding:10px;background:#dddddd;border:1px solid #bbbbbb;color:white;'>
@@ -319,11 +342,18 @@ else {
 									//$total=0;
 									foreach ($item as $row => $value) 
 									{
-										echo "<tr><td style='border-top:1px dotted gray;'> ".($n+1)."  ".$item[$n]['id_hide']."</td> <td style='border-top:1px dotted gray;'>
-											".$item[$n]['sku']."<br>". substr($item[$n]['producto'],0,30)."... 
+										echo "<tr><td style='border-top:1px dotted gray;'> ".($n+1)."</td> <td style='border-top:1px dotted gray;'>
+											".$item[$n]['sku']."<br>". substr($item[$n]['producto'],0,30)."...
 											<br><i><font size=-1>".strtolower($item[$n]['color'])." ".strtoupper($item[$n]['talla'])."</font></i></td> 
-											<td style='text-align:right;border-top:1px dotted gray;'>";
-											if ($cliente_id) echo dinero($item[$n]['precio_credito']+($item[$n]['precio_credito']*.16)); else echo dinero($item[$n]['precio_contado']+($item[$n]['precio_contado']*.16));
+											<td valign=top style='text-align:right;border-top:1px dotted gray;'>";
+											if ($cliente_id) echo dinero($item[$n]['precio_credito']+($item[$n]['precio_credito']*.16));
+                                             else
+                                                if($item[$n]['descuento']>0) {
+                                                 echo "(-".$item[$n]['descuento']."%)&nbsp; <s>".dinero($item[$n]['precio_contado']*1.16)."</s><br>";
+                                                 echo dinero($item[$n]['precio_venta']);
+                                                 }
+                                                 else
+                                                       echo dinero($item[$n]['precio_contado']*1.16);
 											echo "</td><td class='hidden-print'><a href=\"/functions/cart.php?func=del_item&i=$n\" class=\"\">
 											<i class=\"halflings-icon trash\"></i></i></a></td></tr>";
 										//<a href=\"/index.php?data=pos&op=detalles&prid=".$item[$n]['id']."\"></a>
@@ -471,15 +501,15 @@ else {
 									// echo "<tr><td>&nbsp;</td><td style='text-align:right'>Total</td><td style='text-align:right'>$". dinero($total_contado+$total_iva_contado)."</td></tr>";
 									// echo "<tr><td>&nbsp;</td><td style='text-align:right'>Incluye IVA(16%) por</td><td style='text-align:right'>$". dinero($total_iva_contado)."</td></tr>";
 									echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;<strong>Total</strong></td>
-											<td width=190 style='text-align:right;text-align:right;border-top:0px solid;'><h1> $ ".dinero($total_iva_contado+$total_contado)."</h1></td></tr>";	
-									
+											<td width=190 style='text-align:right;text-align:right;border-top:0px solid;'><h1> $ ".dinero($total_contado)."</h1></td></tr>";
+
 									if ($promociones)
 									{
 										echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;<strong>$promocion</strong></td>
-											<td width=190 style='text-align:right;text-align:right;border-top:0px solid;'><h1> - ".dinero($promo)."</h1></td></tr>";	
-									 
+											<td width=190 style='text-align:right;text-align:right;border-top:0px solid;'><h1> - ".dinero($promo)."</h1></td></tr>";
+
 										echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;<strong>Ud. Paga</strong></td>
-											<td width=190 style='text-align:right;text-align:right;border:1px solid;'><h1> $ ".dinero($total_iva_contado+$total_contado-$promo)."</h1></td></tr>";	
+											<td width=190 style='text-align:right;text-align:right;border:1px solid;'><h1> $ ".dinero($total_contado-$promo)."</h1></td></tr>";
 									 
 									}
 
@@ -491,7 +521,7 @@ else {
 			echo "<table width=100%><tr><td>&nbsp;</td><td style='text-align:right;text-align:right;border-top:0px solid;'>
 									<div class=\"control-group\"><label class=control-label>Pagar con:</label></td>
 									<td style=\"text-align:right\" width=120>
-									<div class=controls> <input class=\"input-small\" style=\"text-align:right\" id=cantidad name=efectivo type=text value='0'></div>
+									<div class=controls> <input class=\"input-small\" style=\"text-align:right\" id=cantidad name=efectivo type=text value='".dinero($total_contado-$promo)."'></div>
 									</div>
 									</td></tr>";
 									echo"</table>";

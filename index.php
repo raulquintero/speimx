@@ -88,9 +88,10 @@ switch ($type) {
 		if ($cuantos==8){
 
 		$query = "SELECT color.color,producto.producto_id,producto,proveedor,precio_compra,precio_contado,precio_credito,
-		precio_promocion,descuento, marca,producto.codigo,inventariodet.codigo as codigo_inventario,producto.talla_id,talladet.talladet,unidad,estilo,subcategoria FROM producto,proveedor,marca,talla,
-		unidad,subcategoria,color,inventariodet,talladet WHERE producto.proveedor_id=proveedor.proveedor_id AND producto.marca_id=marca.marca_id 
-		AND producto.talla_id=talla.talla_id AND producto.unidad_id=unidad.unidad_id AND producto.subcategoria_id=subcategoria.subcategoria_id 
+		precio_promocion,descuento, marca,producto.codigo,inventariodet.codigo as codigo_inventario,producto.talla_id,talladet.talladet,unidad,estilo,subcategoria
+        FROM producto,proveedor,marca,talla,
+		unidad,subcategoria,color,inventariodet,talladet WHERE producto.proveedor_id=proveedor.proveedor_id AND producto.marca_id=marca.marca_id
+		AND producto.talla_id=talla.talla_id AND producto.unidad_id=unidad.unidad_id AND producto.subcategoria_id=subcategoria.subcategoria_id
 		AND producto.producto_id=color.producto_id AND color.color_id=inventariodet.color_id AND inventariodet.talladet_id=talladet.talladet_id
 		AND inventariodet.codigo='$code'";
 
@@ -98,10 +99,10 @@ switch ($type) {
 			$marca,$codigo,$codigo_inventario ,$talla_id, $talla,$unidad,$estilo,$subcategoria  ) = $database->get_row( $query );
 		$producto=htmlspecialchars($producto);
 
-		 $location="Location: /functions/cart.php?func=add_item&prid=$producto_id&producto=$producto&marca=$marca&codigo=$codigo&codigo_inventario=$codigo_inventario&talla=$talla&color=$color&precio_compra=$precio_compra&precio_credito=$precio_credito&precio_contado=$precio_contado";
+	    	 $location="Location: /functions/cart.php?func=add_item&prid=$producto_id&producto=$producto&marca=$marca&codigo=$codigo&codigo_inventario=$codigo_inventario&talla=$talla&color=$color&precio_compra=$precio_compra&precio_credito=$precio_credito&precio_contado=$precio_contado&precio_promocion=$precio_promocion&descuento=$descuento&iva=$iva";
 		//if ($codigo_inventario)
-		
-		if ($producto_id) 		header($location);
+
+	   	if ($producto_id) 		header($location);
 		}
 		break;
 	
@@ -178,7 +179,7 @@ switch ($type) {
 <body onload='setFocusToTextBox()'>
 <?php 
 if($_SESSION['host']=="speimx.dev")
-	echo "<table width=100%><tr bgcolor=yellow><td>".$_SESSION['host'].".- Version Desarrollo. $realpath</td></tr></table>";
+	echo "<table width=100%><tr bgcolor=yellow><td>".$_SESSION['host'].".- Version  Desarrollo. $realpath</td></tr></table>";
 
 
  ?>

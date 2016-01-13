@@ -1,4 +1,4 @@
-<?php 
+<?php
 $fid=$_GET['fid'];
 $fid=substr($fid,1,6);
 $fid_dev=$_SESSION['fid_dev'];
@@ -17,7 +17,7 @@ $_SESSION['display']="dev";
 							<input type="hidden" name="data" value="clientes">
 							<input type="hidden" name="op" value="factura">
 							<input type="hidden" name="type" value="dev">
-							<input type="hidden" name="fid_dev" value='<?php echo $fid?>'>
+							<input type="hidden" name="fid_dev" value='<?php echo $fid_dev?>'>
 
 				  			 <?php 
 				  			 	if ($nid<=8) echo "&nbsp;&nbsp;item <input classe=\"input-xlarge focused\" id=\"textcode\" name=\"code\" >";   
@@ -50,14 +50,14 @@ $_SESSION['display']="dev";
 							  		<?php 
 
 
-							  		if ($nid<=8)view_devoluciones($fid_dev)
+							  		if ($nid<=8) view_devoluciones($fid_dev)
 
 							  		?>
-					
+
 				</div><!--/span-->
 
 				<div class="box span4 hidden-print">
-					
+
 							  		<?php if ($nid<=8) ticket_devolucion($fid_dev)?>
 					
 				</div><!--/span-->

@@ -10,18 +10,18 @@ if (!$i) $i=0;
 session_start();
 
 $fid_dev=htmlspecialchars ($_SESSION['fid_dev']);
- //echo "<br><br>";          // ********DEBUG**********
+// echo "<br><br>";          // ********DEBUG**********
  //foreach ($_GET as $k => $v) { echo "<br>[$k] => $v \n";}
 
 
 if ($func=="add_dev_item")
 {
 
-    $item = $_SESSION['cart_temp'];
+   $item = $_SESSION['cart_temp'];
      $fdid=$_GET['facturadet_id'];
 
         $n=0;
-        foreach ($item as $row => $value) 
+        foreach ($item as $row => $value)
         {
 
             if ($item[$n]['facturadet_id']==($fdid+0))
@@ -88,12 +88,12 @@ if ($func=="del_item")
  header($location);
 
 
-// foreach ($_GET as $k => $v) { echo "<br>[$k] => $v \n";}
+ //foreach ($_GET as $k => $v) { echo "<br>[$k] => $v \n";}
 
 
 
-// echo "<br><br>";          // ********DEBUG**********
-// foreach ($_SESSION as $k => $v) { echo "<br>[$k] => $v \n";}
-
+ //echo "<br><br>";          // ********DEBUG**********
+ //foreach ($_SESSION as $k => $v) { echo "<br>[$k] => $v \n";}
+ //print_r($_SESSION['cart_temp'])
 
 ?>

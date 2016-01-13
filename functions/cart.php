@@ -1,5 +1,7 @@
 <?php
 $func=$_GET['func'];
+$iva=($_GET['iva']/100)+1;
+$descuento=$_GET['precio_contado']*($_GET['descuento']/100);
 $sku=htmlspecialchars ($_GET['codigo_inventario']);
 $i=$_GET['i'];
 if (!$i) $i=0;
@@ -15,6 +17,9 @@ session_start();
 if ($func=="add_item")
 {
 
+
+    $precio_venta=$_GET['precio_contado'];
+
     $item = $_SESSION['cart'];
     $item[] = array(
                 'id'      => $_GET['prid'],
@@ -23,7 +28,10 @@ if ($func=="add_item")
                 'precio_credito'   => $_GET['precio_credito'],
                 'precio_contado'   => $_GET['precio_contado'],
                 'producto'    => $_GET['producto'],
+                                'precio_venta'    => ($precio_venta-$descuento)*$iva,
                 'iva'    => $_GET['iva'],
+                                'precio_promocion'    => $_GET['precio_promocion'],
+                                'descuento'    => $_GET['descuento'],
                 'codigo' => $_GET['codigo'],
                 'sku' => $sku,
                 'color'    => $_GET['color'],
@@ -82,7 +90,7 @@ if ($func=="del_cliente")
     // print_r($item);
 
 
-  //echo "<br><br>array: <br>";
+ // echo "<br><br>array: <br>";
    //   print_r($_SESSION['cart']);
 
 
@@ -98,8 +106,8 @@ if ($func=="del_cliente")
 
 
 
-// echo "<br><br>";          // ********DEBUG**********
-// foreach ($_SESSION as $k => $v) { echo "<br>[$k] => $v \n";}
+ //echo "<br><br>";          // ********DEBUG**********
+ //foreach ($_SESSION as $k => $v) { echo "<br>[$k] => $v \n";}
 
 
 ?>

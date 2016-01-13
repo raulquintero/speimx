@@ -1,4 +1,4 @@
-<?php 
+<?php
 require '../config/config.php';
 $database = new DB();
 
@@ -165,7 +165,10 @@ foreach( $_GET as $key => $value )
                 						'iva_credito'   => ($item[$n]['precio_credito']*.16),
                 						'precio_contado'   => ($item[$n]['precio_contado']),
                 						'iva_contado'   => ($item[$n]['precio_contado']*.16),
+                                        'precio_venta'   => $item[$n]['precio_venta'],
                 						'iva'   => (16),
+                                        'precio_promocion'   => $item[$n]['precio_promocion'],
+                                        'descuento'   => $item[$n]['descuento'],
                 						'codigo'     => $item[$n]['codigo'],
                 						'sku'     => $item[$n]['sku'],
                 						'producto'    => addslashes($item[$n]['producto']),
@@ -191,7 +194,7 @@ foreach( $_GET as $key => $value )
 							} 
 
 							else
-							
+
 								if ($total_contado)
 									{
 									$total_iva_contado=$total_contado*.16;
@@ -304,7 +307,10 @@ list( $promocion_id,$promocion,$tipodesc ) = $database->get_row( $query );
                 						'iva_credito'   => $item[$n]['precio_credito']*.16,
                 						'precio_contado'   => ($item[$n]['precio_contado']),
                 						'iva_contado'   => ($item[$n]['precio_contado']*.16),
+                                        'precio_venta'   => $item[$n]['precio_venta'],
                 						'iva'   => (16),
+                                        'precio_promocion'   => $item[$n]['precio_promocion'],
+                                        'descuento'   => $item[$n]['descuento'],
                 						'codigo'     => $item[$n]['codigo'],
                 						'sku'     => $item[$n]['sku'],
                 						'producto'    => addslashes($item[$n]['producto']),
@@ -321,7 +327,7 @@ list( $promocion_id,$promocion,$tipodesc ) = $database->get_row( $query );
 
 										$total_credito+=$item[$n]['precio_credito'];
 										$total_contado+=$item[$n]['precio_contado'];
-										
+
 										$n++;
 
 									}
@@ -338,22 +344,22 @@ list( $promocion_id,$promocion,$tipodesc ) = $database->get_row( $query );
 									echo "<tr><td></td><td style='text-align:right'>IVA(16%)</td>
 									<td style='text-align:right'>$". dinero($total_iva_contado)."</td></tr>";
 									echo "<tr><td></td><td style='text-align:right'>&nbsp;<strong>Total</strong></td>
-											<td style='text-align:right;text-align:right;border-top:2px solid;'><strong>".dinero($total_iva_contado+$total_contado)."</strong></td></tr>";	
-									
+											<td style='text-align:right;text-align:right;border-top:2px solid;'><strong>".dinero($total_iva_contado+$total_contado)."</strong></td></tr>";
 
-									
+
+
 									}
 
 
 
-  // echo "<br><br><br>cart: <br>";
-  //    print_r($_SESSION['cart']);
+   //echo "<br><br><br>cart: <br>";
+     // print_r($_SESSION['cart']);
 unset($_SESSION['cart']);
 unset($_SESSION['cliente_id']);
 
 header("Location: /imprimir_ticket.php?fid=$factura_id");
 						?>
-				
+
 
 				<!-- **********************************endd  ticket********************* -->
 

@@ -305,7 +305,8 @@ $database = new DB();
 					if ($cliente_id==0)
 					{
 
-						$query = "SELECT  facturadet_id,facturadet.factura_id,facturadet.producto,facturadet.precio_contado,facturadet.iva_contado,producto.codigo,color,talla,sku FROM facturadet,producto
+						$query = "SELECT  facturadet_id,facturadet.factura_id,facturadet.producto,facturadet.precio_contado,facturadet.iva_contado,
+                        precio_venta,iva,facturadet.precio_promocion,facturadet.descuento,producto.codigo,color,talla,sku FROM facturadet,producto
 					WHERE  facturadet.producto_id=producto.producto_id AND facturadet.factura_id=".$fid;
 
 					$results = $database->get_results( $query );
@@ -313,7 +314,7 @@ $database = new DB();
 					$n=0;
 					$total=0;
 	
-	
+
 					foreach( $results as $item )
 					{
 		
@@ -321,28 +322,33 @@ $database = new DB();
 							". substr($item['producto'],0,26)."...</a>
 							<br>".$item['color']." ".$item['talla']."</td> 
 							<td style='text-align:right;vertical-align:text-top'>";
-							echo dinero($item['precio_contado']+$item['iva_contado']);
-					
+                            if ($item['descuento'])
+                            {
+							    echo "(-".$item['descuento']."%) <s>".dinero($item['precio_contado']*1.16)."</s>&nbsp;&nbsp;<br>";
+                                echo dinero($item['precio_venta']);
+                            }
+                            else
+                                echo dinero($item['precio_venta']);
 						echo "&nbsp;&nbsp;</td></tr>";
 										
 						$total_credito+=$item['precio_credito'];
-						$total_contado+=$item['precio_contado'];
+						$total_contado+=$item['precio_venta'];
 										
 						$n++;
 					}
 					
 
 
-						$total_iva_contado=$total_contado*.16;
+						$total_iva_contado=$total_contado-($total_contado/1.16);
 						//echo "<tr><td></td><td>&nbsp;</td></tr>";"
 						echo "<tr><td>&nbsp;</td></tr>";
 					echo "<tr style=\"border-top:1px dotted black\"><td style=\"border-top:1px dotted black\">&nbsp;</td><td style='text-align:right;border-top:1px dotted black'>Total</td>
-					      	  <td style='text-align:right;border-top:1px dotted;'>$". dinero($total_contado*1.16)."&nbsp;&nbsp;</td></tr>";
+					      	  <td style='text-align:right;border-top:1px dotted;'>$". dinero($total_contado)."&nbsp;&nbsp;</td></tr>";
 				  			// echo "<tr style=\"border-top:1px dotted black\"><td></td><td style='text-align:right'>Total</td><td style='text-align:right'>$". dinero($total_contado+$total_iva_contado)."</td></tr>";
 						echo "<tr><td></td><td style='text-align:right'>Incluye IVA(16%) por</td>
 							<td style='text-align:right'>$". dinero($total_iva_contado)."&nbsp;&nbsp;</td></tr>";
 						echo "<tr><td></td><td style='text-align:right'>&nbsp;<strong>Total</strong></td>
-							<td style='text-align:right;text-align:right;border-top:2px solid;'><strong>".dinero($total_iva_contado+$total_contado)."</strong>&nbsp;&nbsp;</td></tr>";	
+							<td style='text-align:right;text-align:right;border-top:2px solid;'><strong>".dinero($total_contado)."</strong>&nbsp;&nbsp;</td></tr>";
 						
 
 
@@ -356,10 +362,10 @@ $database = new DB();
 
 										switch ($tipodesc) {
 											case '1':
-												$promo=get_promo($total_contado+$total_iva_contado);
+												$promo=get_promo($total_contado);
 												break;
 											case '2':
-												$promo=get_promo_porcentaje($total_contado+$total_iva_contado);
+												$promo=get_promo_porcentaje($total_contado);
 												break;
 											
 											default:
@@ -370,10 +376,10 @@ $database = new DB();
 										echo "<tr><td></td><td style='text-align:right'>&nbsp;<font size=+1>$promocion</font></td>
 											<td style='text-align:right;text-align:right;color:black;border-bottom:1px solid black;'>
 											<b>- ".dinero($promo)."</b>&nbsp;&nbsp;</td></tr>";
-									
+
 										echo "<tr><td></td><td style='text-align:right'>&nbsp;<font size=+1>Ud. Pag&oacute;</font></td>
 											<td width=100 style='text-align:right;text-align:right;color:black;border:1px solid black;'>
-											<b> $ ".dinero($total_contado+$total_iva_contado-$promo)."</b>&nbsp;&nbsp;</td></tr>";
+											<b> $ ".dinero($total_contado-$promo)."</b>&nbsp;&nbsp;</td></tr>";
 									}
 
 
@@ -381,7 +387,7 @@ $database = new DB();
 						echo "<tr><td></td><td style='text-align:right'>&nbsp;Efectivo</td>
 							<td style='text-align:right;text-align:right;'>".dinero($efectivo)."&nbsp;&nbsp;</td></tr>";	
 						echo "<tr><td></td><td style='text-align:right'>&nbsp;Cambio</td>
-							<td style='text-align:right;text-align:right;border-top:2px solid;'>".dinero($efectivo-$total_iva_contado-$total_contado+$promo)."&nbsp;&nbsp;</td></tr>";	
+							<td style='text-align:right;text-align:right;border-top:2px solid;'>".dinero($efectivo-$total_contado+$promo)."&nbsp;&nbsp;</td></tr>";
 						}			
 
 									

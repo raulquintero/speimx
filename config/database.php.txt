@@ -1,0 +1,11 @@
+<?php
+
+// instalacion por primera vez (mueva este archivo y renombrelo)
+// mv ../../database.php.txt database.php
+define( 'DB_HOST', 'server' ); // set database host
+define( 'DB_USER', 'user' ); // set database user
+define( 'DB_PASS', 'password' ); // set database password
+define( 'DB_NAME', 'speimx' ); // set database name
+define( 'SEND_ERRORS_TO', 'user@server.com' ); //set email notification $
+define( 'DISPLAY_DEBUG', true ); //display db errors?
+?>
