@@ -109,7 +109,8 @@ else {   ////////////////**************** descripcion del producto marcado******
 		echo $ultimo_producto['talla']."</font><br><br>";
 			$precio_contado=($ultimo_producto['precio_contado']*1.16);
 
-        if (!$cliente_id) echo "<s><font color=gray> $ ".dinero($precio_contado)."</font></s> - ";
+        if (!$cliente_id)
+            if ($precio_contado<>$ultimo_producto['precio_venta']) echo "<s><font color=gray> $ ".dinero($precio_contado)."</font></s> - ";
 			$precio_credito=($ultimo_producto['precio_credito']*1.16);
 		if ($cliente_id)
 			echo "$ ".dinero($precio_credito)."<br>";
