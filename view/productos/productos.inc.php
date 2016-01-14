@@ -27,17 +27,18 @@
 								  <th>VLIMP</th>
 								  <th>PCN</th>
 								  <th>PCR</th>
+                                  <th>DESC %</th>
 								  <th>Stock</th>
 								  <th>Proveedor</th>
 								  <th>Acciones</th>
 
 							  </tr>
-						  </thead>   
+						  </thead>
 						  <tbody>
 
 						<?php
 
-						$query = "SELECT producto_id,producto,precio_compra,precio_contado,precio_credito,stock,proveedor,subcategoria,codigo FROM producto,proveedor,subcategoria 
+						$query = "SELECT producto_id,producto,precio_compra,precio_contado,precio_credito,descuento,precio_promocion,stock,proveedor,subcategoria,codigo FROM producto,proveedor,subcategoria
 								where producto.proveedor_id=proveedor.proveedor_id AND producto.subcategoria_id=subcategoria.subcategoria_id";
 								$results = $database->get_results( $query );
 						foreach( $results as $row )
@@ -54,11 +55,12 @@
 									 <?php echo dinero(($row['precio_contado']*1.16)/2)?></td>
 								<td style="text-align:right;"><?php echo dinero($row['precio_contado']*1.16)?></td>
 								<td style="text-align:right;"><?php echo dinero($row['precio_credito']*1.16)?></td>
+                                <td style="text-align:right;"><?php echo dinero($row['descuento'])?></td>
 								<td style="text-align:right;"><?php echo $row['stock']?></td>
 								<td class="center"><?php echo $row['proveedor']?></td>
-								<td class="center">  
+								<td class="center">
 									<a class="btn btn-success" href="index.php?data=productos&op=detalles&prid=<?php echo $row['producto_id']?>">
-										<i class="halflings-icon white zoom-in"></i>  
+										<i class="halflings-icon white zoom-in"></i>
 									</a>
 									<a href="index.php?data=productos&op=producto_form&f=editar&prid=<?php echo $row['producto_id']?>">
 													<button class="btn btn-primary"><i class="halflings-icon white edit"></i></button></a>

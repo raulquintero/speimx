@@ -1,6 +1,8 @@
 #ignore database credentials
 /fotos/*
 /ides/*
+/productos/*
+
 
 .htaccess
 

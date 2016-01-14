@@ -132,7 +132,7 @@ else {   ////////////////**************** descripcion del producto marcado******
             if (file_exists($target_path))
             {
                 echo "<img src='/productos/$nombre_archivo' style='height:300px;' alt='$nombre_subcategoria $nombre_producto $nombre_color'/>";
-            }
+            }   else echo "<font size=-1 color=gray>No se encontraron imagenes.</font>";
 
 
 
