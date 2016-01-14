@@ -215,7 +215,7 @@ $database = new DB();
 				echo "<table  width=100% >
 						<tr>
 							<td style='text-align:center;border-bottom:1px dotted black;' colspan=3>
-								<a href=\"/index.php\"><img width=300 src=/img/tiendasalberto.png></a>
+								<a href=\"/index.php\"><img width=300 src=/img/logo-tiendas-alberto.jpg></a>
 								<br>R.F.C QUCR750708PM7
 								<center>NOTA DE VENTA</center>";
 								

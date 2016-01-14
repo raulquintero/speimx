@@ -17,7 +17,7 @@ $database = new DB();
 						<tr>
 							<td style='text-align:center;border-bottom:1px dotted black' colspan=4>
 								<br>
-								<a href=\"/index.php\"><img width=300 src=/img/tiendasalberto.png></a>
+								<a href=\"/index.php\"><img width=150 src=/img/logo-tiendas-alberto.jpg></a>
 
 								<br>R.F.C QURC750708PM7
 								<br>Av. Presa Lopez Zamora #1501 <br>Col. Venustiano Carranzass";
@@ -141,8 +141,12 @@ $database = new DB();
 							<br>"
 							.$item['color']." ".$item['talla']."</td> 
 							<td style='text-align:right;vertical-align:text-top'>$textcolor";
+                            if ($item['descuento']){
 							echo "(-".$item['descuento']."%) <s>".dinero($item['precio_contado']*1.16)."</s>&nbsp;&nbsp;&nbsp;&nbsp<br>";
 					        echo dinero($item['precio_venta']);
+                            }
+                            else
+                            echo dinero($item['precio_venta']);
 						echo "&nbsp;&nbsp;&nbsp;&nbsp;</td>";
 
 						// if ($item['tipomov_id']==2 || $item['tipomov_id']==3 )
@@ -529,18 +533,21 @@ $cliente_id = $_SESSION['dev_cliente_id'];
 						$query = "SELECT  facturadet_id,producto,precio_contado,iva_contado,precio_credito,iva_credito,codigo,color,talla,sku,precio_venta,iva,precio_promocion,descuento
 						FROM facturadet
 						WHERE  facturadet_id=".$item_temp[$n]['facturadet_id'];
-						list( $faturadet_id,$producto,$precio_contado,$iva_contado,$precio_credito,$iva_credito,$codigo,$color,$talla,$sku,$precio_venta,$iva,$precio_promocion,$descuento  ) = $database->get_row( $query );
-		
+						list( $faturadet_id,$producto,$precio_contado,$iva_contado,$precio_credito,$iva_credito,$codigo,$color,
+                            $talla,$sku,$precio_venta,$iva,$precio_promocion,$descuento  ) = $database->get_row( $query );
+
 						echo "<tr $bgcolor><td>".$item_temp[$n]['facturadet_id']."</td><td> $textcolor".$sku."<br>
 							". substr($producto,0,26)."...</a>
 							<br><p class=\"muted\" >"
-							.$color." ".$talla."</p></td> 
+							.$color." ".$talla."</p></td>
 							<td style='text-align:right;vertical-align:text-top'>";
                             if ($descuento)
                             {
                                 echo "(-".$descuento."%) &nbsp;<s>".dinero($precio_contado*1.16)."</s><br>";
                                 echo dinero($precio_venta);
 					         }
+                             else
+                                echo dinero($precio_venta);
 						echo "</td><td><a href=\"/functions/cart_dev.php?func=del_dev_item&facturadet_id=".$item_temp[$n]['facturadet_id']."\" class=\"\">
 											<i class=\"halflings-icon trash\"></i></a>".$item_temp[$n]['tipomov_id']."</td>";
 						// if ($item['tipomov_id']==2 || $item['tipomov_id']==3 )
@@ -889,7 +896,7 @@ $database = new DB();
 							<td style='text-align:right;text-align:right;'><strong>".dinero($total_contado)."&nbsp;&nbsp;&nbsp;&nbsp;</strong></td></tr>";
 						echo "<tr><td></td><td style='text-align:right'>&nbsp;<strong>Nota de Venta:</strong></td>
 							<td style='text-align:right;text-align:right;border-top:2px solid;'><strong>".dinero($total_contado)."&nbsp;&nbsp;&nbsp;&nbsp;</strong></td></tr>";
-							$vale=$total_contado;		
+							$vale=$total_contado;
 								
 							}
 
