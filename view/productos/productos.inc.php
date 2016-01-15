@@ -58,18 +58,19 @@
                         {
                         	$query = "SELECT  producto_id from inventariodet
                             where codigo=".$_GET['code'];
-										list( $prid ) = $database->get_row( $query );
+										list( $code ) = $database->get_row( $query );
                          }
 
 
-						$query = "SELECT producto_id,producto,precio_compra,precio_contado,precio_credito,descuento,precio_promocion,stock,proveedor.proveedor_id,proveedor,subcategoria.subcategoria_id,subcategoria,codigo FROM producto,proveedor,subcategoria
+						$query = "SELECT producto_id, producto, precio_compra,precio_contado,precio_credito,descuento,
+                            precio_promocion,stock,proveedor.proveedor_id,proveedor,subcategoria.subcategoria_id,subcategoria,codigo FROM producto,proveedor,subcategoria
 								where producto.proveedor_id=proveedor.proveedor_id AND producto.subcategoria_id=subcategoria.subcategoria_id";
                                 switch ($_GET['filtro'])   {
                                     case "sub":$filtro=" AND subcategoria.subcategoria_id=".$_GET['sub'];
                                     break;
                                     case "proveedor": $filtro= " AND proveedor.proveedor_id=".$_GET['pid'];
                                     break;
-                                    case "buscar" : if ($prid) $filtro= " AND producto.producto_id=$prid";
+                                    case "buscar" : if ($code) $filtro= " AND producto.producto_id=$code";
                                     break;
                                 }
                         $query.=$filtro;
@@ -81,7 +82,7 @@
 						?>
 							<tr>
 								<td class="center hidden-print"><?php echo $row['codigo']?></td>
-								<td><a class="hidden-print" href="index.php?data=productos&op=detalles&prid=<?php $row['producto_id']?>"><?php echo strtoupper($row['producto'])?></a>
+								<td><a class="hidden-print" href="index.php?data=productos&op=detalles&prid=<?php echo $row['producto_id']?>"><?php echo strtoupper($row['producto'])?></a>
                                 <span class=hidden-desktop><?php echo strtoupper($row['producto'])?></span>
                                 </td>
 								<td><a class="hidden-print" href="index.php?data=productos&filtro=sub&sub=<?php echo $row['subcategoria_id']?>"><?php echo $row['subcategoria']?></a>
