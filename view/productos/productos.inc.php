@@ -78,7 +78,7 @@
 						foreach( $results as $row )
 						{
 
-							$vlimp=(($row['precio_contado']*1.16)/2);
+							$vlimp=(($row['precio_contado']*1.16)-($row['precio_contado']*1.16*$row['descuento']/100));
 						?>
 							<tr>
 								<td class="center hidden-print"><?php echo $row['codigo']?></td>
@@ -92,7 +92,7 @@
                                   if ($vlimp>$row['precio_compra']) echo " style=\"text-align:right;\">";
                                         else echo " style=\"text-align:right;background:red;color:white;\"> ** ";
 
-									 echo dinero(($row['precio_contado']*1.16)/2);
+									 echo dinero($vlimp);
                                      echo "</td>";
                                      ?>
 								<td style="text-align:right;"><?php echo dinero($row['precio_contado']*1.16)?></td>
