@@ -208,7 +208,7 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
 									<a href="#refresh"><i class="icon-repeat"></i></a>
 								</li>	
                             	<li>
-                                    <a href="/index.php?data=clientes&op=servicio">
+                                    <a href="/index.php?data=pos&op=servicio">
 										<span class="icon blue"><i class="icon-user"></i></span>
 										<span class="message">Servicio</span>
 										<span class="time">1 min</span> 

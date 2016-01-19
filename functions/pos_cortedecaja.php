@@ -1,6 +1,6 @@
 <?php 
 
-function mostrar_transacciones($fecha_inicio,$fecha_fin)
+function mostrar_transacciones($fecha_inicio,$fecha_fin,$user)
 {
 $database = new DB();
 
@@ -26,10 +26,13 @@ $database = new DB();
 
 
 	$query = "SELECT  * from movimiento,tipomov,admin 
-		where movimiento.tipomov_id=tipomov.tipomov_id AND movimiento.admin_id=admin.admin_id";
+		where movimiento.tipomov_id=tipomov.tipomov_id AND movimiento.admin_id=admin.admin_id  AND (movimiento.tipomov_id=1 OR movimiento.tipomov_id=13 or movimiento.tipomov_id=14)";
 
 		if ($fecha_inicio)
 			$query.=" AND fecha>='$fecha_inicio' AND fecha<='$fecha_fin 23:59:59' ";
+
+		if ($user)
+			$query.=" AND movimiento.admin_id=$user ";
 
 		 $query.=" ORDER BY fecha DESC";
 
@@ -44,6 +47,7 @@ $database = new DB();
 							<br></td> 
 							<td style='text-align:right'>$ ".dinero($item['cantidad']+$item['iva'])."</td>
 							<td style='text-align:right'>".$vendedor;
+							echo " - ".gethostname();
 					
 						echo "&nbsp;&nbsp;</td></tr>";
 										

@@ -58,9 +58,13 @@
 <br><br>
 
 <?php
- $query = "SELECT sum(cantidad) as total from movimiento where fecha>='".fechaustomysql($fecha_inicio)."' AND fecha<='".fechaustomysql($fecha_final)." 23:59:59'";
+ $query = "SELECT sum(cantidad) as total from movimiento where fecha>='".fechaustomysql($fecha_inicio)."' AND fecha<='".fechaustomysql($fecha_final)." 23:59:59'
+ 	 AND (movimiento.tipomov_id=1 OR movimiento.tipomov_id=13 or movimiento.tipomov_id=14) and admin_id=".$_SESSION['user_id'];
 		list( $total ) = $database->get_row( $query );
 
+$query = "SELECT sum(cantidad) as total from movimiento 
+	where movimiento.tipomov_id=2 AND fecha>='".fechaustomysql($fecha_inicio)."' AND fecha<='".fechaustomysql($fecha_final)." 23:59:59'  and admin_id=".$_SESSION['user_id'];
+		list( $devoluciones ) = $database->get_row( $query );
 
 ?>
 
@@ -73,7 +77,7 @@
 								  </tr>
 							  </thead>
 							  <tbody>
-                                <tr><td><h1><?php echo dinero($total)?></h1></td></tr>
+                                <tr><td style="text-align:right"><h1><?php echo dinero($total-$devoluciones)?></h1></td></tr>
 
 							  	<?//php catalogo();?>
 
@@ -86,20 +90,30 @@
 						<table class="table table-condensed">
 							  <thead>
 								  <tr>
-									  <th>Meta</th>
+									  <th>Venta del dia</th>
 
 
 								  </tr>
 							  </thead>
 							  <tbody>
-                                <tr><td><h1>$0.00</h1></td></tr>
-
-							  	<?//php catalogo();?>
-
-
-
-  				</tbody>
+                                <tr><td style="text-align:right"><h2><?php echo dinero($total)?></h1></td></tr>
+			  				</tbody>
 						 </table>
+
+
+						 <table class="table table-condensed">
+							  <thead>
+								  <tr>
+									  <th>Devoluciones</th>
+								  </tr>
+							  </thead>
+							  <tbody>
+                                <tr><td style="text-align:right"><h2><?php echo dinero($devoluciones)?></h1></td></tr>
+			  				</tbody>
+						 </table>
+
+
+
 
 					</div>
 				</div><!--/span-->
@@ -133,8 +147,8 @@
 
                                     	$fecha_inicio=fechaustomysql($fecha_inicio);
                                     	$fecha_final =fechaustomysql($fecha_final);
-                                    mostrar_transacciones($fecha_inicio,$fecha_final);?>
-							  	<?//php catalogo();?>
+                                    mostrar_transacciones($fecha_inicio,$fecha_final,$_SESSION['user_id']);?>
+
 
 
 
