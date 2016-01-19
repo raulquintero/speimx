@@ -16,19 +16,26 @@ session_start();
 
 if ($func=="add_item")
 {
+    $precio_credito=$_GET['precio_credito'];
+    $precio_contado=$_GET['precio_contado'];
+    $precio_compra=$_GET['precio_compra'];
+    $precio_venta=$precio_contado;
 
-
-    $precio_venta=$_GET['precio_contado'];
-
+    if ($_GET['impuesto'])
+        {
+            $precio_contado=$precio_contado/$iva;
+            $precio_credito=$precio_credito/$iva;
+            $precio_compra=$precio_contado;
+        }
     $item = $_SESSION['cart'];
     $item[] = array(
                 'id'      => $_GET['prid'],
                 'cantidad'     => 1,
-                'precio_compra'   => $_GET['precio_compra'],
-                'precio_credito'   => $_GET['precio_credito'],
-                'precio_contado'   => $_GET['precio_contado'],
+                'precio_compra'   => $precio_compra,
+                'precio_credito'   => $precio_credito,
+                'precio_contado'   => $precio_contado,
                 'producto'    => $_GET['producto'],
-                                'precio_venta'    => ($precio_venta-$descuento)*$iva,
+                                'precio_venta'    => $precio_venta,
                 'iva'    => $_GET['iva'],
                                 'precio_promocion'    => $_GET['precio_promocion'],
                                 'descuento'    => $_GET['descuento'],
@@ -37,7 +44,7 @@ if ($func=="add_item")
                 'color'    => $_GET['color'],
                 'talla'    => $_GET['talla']
             );
-        
+
     // iva sin implementar todavia , solo esta indicado aqui arriba
 
     ($_SESSION['cart']=$item);
@@ -87,7 +94,7 @@ if ($func=="del_cliente")
 
 
  //echo "<br><br>array: <br>";
-    // print_r($item);
+   //  print_r($item);
 
 
  // echo "<br><br>array: <br>";
@@ -102,7 +109,7 @@ if ($func=="del_cliente")
      header("Location: /index.php");
 
 
-// foreach ($_GET as $k => $v) { echo "<br>[$k] => $v \n";}
+ //foreach ($_GET as $k => $v) { echo "<br>[$k] => $v \n";}
 
 
 

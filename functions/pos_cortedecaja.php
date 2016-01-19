@@ -47,7 +47,7 @@ $database = new DB();
 							<br></td> 
 							<td style='text-align:right'>$ ".dinero($item['cantidad']+$item['iva'])."</td>
 							<td style='text-align:right'>".$vendedor;
-							echo " - ".gethostname();
+							echo " - ".$_ENV["COMPUTERNAME"];
 					
 						echo "&nbsp;&nbsp;</td></tr>";
 										
