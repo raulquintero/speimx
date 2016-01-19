@@ -29,7 +29,7 @@ $database = new DB();
 		where movimiento.tipomov_id=tipomov.tipomov_id AND movimiento.admin_id=admin.admin_id";
 
 		if ($fecha_inicio)
-			$query.=" AND fecha>='$fecha_inicio' AND fecha<='$fecha_fin' ";
+			$query.=" AND fecha>='$fecha_inicio' AND fecha<='$fecha_fin 23:59:59' ";
 
 		 $query.=" ORDER BY fecha DESC";
 

@@ -26,7 +26,7 @@
 
 
 
-			<form class="form-horizontal" action="?data=pos&op=cortedecaja">
+			<form class="form-vertical" action="?data=pos&op=cortedecaja">
 				<fieldset>
 
 								<input type="hidden" name="data" value="pos" >
@@ -58,7 +58,7 @@
 <br><br>
 
 <?php
- $query = "SELECT sum(cantidad) as total from movimiento where fecha>='".fechaustomysql($fecha_inicio)."' AND fecha<='".fechaustomysql($fecha_final)."'";
+ $query = "SELECT sum(cantidad) as total from movimiento where fecha>='".fechaustomysql($fecha_inicio)."' AND fecha<='".fechaustomysql($fecha_final)." 23:59:59'";
 		list( $total ) = $database->get_row( $query );
 
 
