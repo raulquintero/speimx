@@ -2,7 +2,7 @@
 
 <div class="box-content buttons">
 						<a href="index.php?data=clientes&op=cliente_form&f=agregar"><button class="btn btn-small btn-primary"><b>+</b> AGREGAR CLIENTE</button></a>
-						<a href="index.php?data=cobronomina&op=cobronomina_form&f=agregar"><button class="btn btn-small btn-primary"><b>+</b> AGREGAR GRUPO</button></a>
+						<a href="index.php?data=nomina&op=cobronomina_form&f=agregar"><button class="btn btn-small btn-primary"><b>+</b> AGREGAR GRUPO</button></a>
 						<a href="index.php?data=empresas&op=empresa_form&f=agregar"><button class="btn btn-small btn-primary"><b>+</b> AGREGAR EMPRESA</button></a>
 						
 </div>
@@ -51,7 +51,7 @@ foreach( $results as $row )
 									<a class="btn btn-success" href="#">
 										<i class="halflings-icon white zoom-in"></i>  
 									</a>
-									<a class="btn btn-info" href="/index.php?data=cobronomina&op=cobronomina_form&f=editar&gid=<?=$row['gruponomina_id']?>">
+									<a class="btn btn-info" href="/index.php?data=nomina&op=cobronomina_form&f=editar&gid=<?=$row['gruponomina_id']?>">
 										<i class="halflings-icon white edit"></i>  
 									</a>
 									<a class="btn btn-danger" href="#">

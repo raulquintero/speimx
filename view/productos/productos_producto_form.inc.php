@@ -89,11 +89,47 @@
 
 							<?php combobox("subcategoria",$subcategoria_id)?>
 
+<script type="text/javascript">
+function showUser(str)
+{
+if (str=="")
+  {
+  document.getElementById("txtHint").innerHTML="";
+  return;
+  }
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","/functions/getproducto.php?q="+str,true);
+xmlhttp.send();
+}
+</script>
+
+
 
 							  <div class="control-group ">
 								<label class="control-label" for="producto">Producto</label>
 								<div class="controls">
-								  <input classe="input-xlarge focused" id="producto" name="producto" type="text" value="<?php echo strtoupper(stripslashes($producto))?>">
+								  <input classe="input-xlarge focused"  id="producto" name="producto" type="text"  
+								  <?php 
+								  if ($_GET['f']<>"editar") echo "onkeyup='showUser(this.value)' "; 
+								  ?>
+								  value="<?php echo strtoupper(stripslashes($producto))?>">
+								 <div id='txtHint'><ul><b> </b></ul></div>
+								  
+
 								</div>
 							  </div>
 

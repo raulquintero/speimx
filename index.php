@@ -482,31 +482,53 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
 						if ($nid<5) echo "<li><a href=\"index.php?data=mensajes\"   ><i class=\"icon-envelope hidden-print\"></i><span class=\"hidden-tablet hidden-print\"> Messages</span></a></li>";
 						 echo "<li><a href=\"index.php?data=pos\"        ><i class=\"icon-shopping-cart hidden-print\" ></i><span class=\"hidden-tablet hidden-print\"> PoS</span></a></li>";
 						 echo "<li><a href=\"index.php?data=productos&op=checarprecio\"><i class=\"icon-barcode hidden-print\" ></i><span class=\"hidden-tablet hidden-print\"> Checar Precio</span></a></li>";
+						//if ($nid<=8) echo "<li><a href=\"index.php?data=clientes&op=devoluciones\"><i class=\"icon-book\"    ></i><span class=\"hidden-tablet\"> Devoluciones</span></a></li>";
 
-						if ($nid<=8) echo "<li><a class=\"dropmenu\" href=\"#\"><i class=\"icon-chevron-right hidden-print\"></i><span class=\"hidden-tablet hidden-print\"> Sistema </span></a>";
+						 if ($nid<=8) echo "<li><a class=\"dropmenu\" href=\"#\"><i class=\"icon-chevron-right hidden-print\"></i><span class=\"hidden-tablet hidden-print\"> Compras </span></a>";
 							echo "<ul>";
 								
-								if ($nid<=8) echo "<li><a href=\"index.php?data=clientes&op=devoluciones\"><i class=\"icon-book\"    ></i><span class=\"hidden-tablet\"> Devoluciones</span></a></li>";
-								if ($nid<=6) echo "<li><a href=\"index.php?data=cobronomina\"><i class=\"icon-book\"    ></i><span class=\"hidden-tablet\"> Cobro x Nomina</span></a></li>";
-								if ($nid<=6) echo "<li><a href=\"index.php?data=catalogo\"><i class=\"icon-barcode\"></i><span class=\"hidden-tablet\"> Catalogo</span></a></li>";
+								if ($nid<=6) echo "<li><a href=\"index.php?data=compras\"><i class=\"icon-book\"    ></i><span class=\"hidden-tablet\"> Compras </span></a></li>";
+								if ($nid<=8) echo "<li><a href=\"index.php?data=compras&op=ordendecompra\"><i class=\"icon-book\"    ></i><span class=\"hidden-tablet\"> Orden de Compra</span></a></li>";
+								if ($nid<=6) echo "<li><a href=\"index.php?data=compras&op=proveedores\"><i class=\"icon-barcode\"></i><span class=\"hidden-tablet\"> Proveedores</span></a></li>";
+							echo "</ul>";
+
+
+
+						if ($nid<=8) echo "<li><a class=\"dropmenu\" href=\"#\"><i class=\"icon-chevron-right hidden-print\"></i><span class=\"hidden-tablet hidden-print\"> Nomina </span></a>";
+							echo "<ul>";
+								
+								if ($nid<=6) echo "<li><a href=\"index.php?data=nomina&op=cobronomina\"><i class=\"icon-book\"    ></i><span class=\"hidden-tablet\"> Cobro x Nomina</span></a></li>";
 							echo "</ul>";
 						echo "</li>";
+						
+
 						echo "<li>";
-							if ($nid<=6) echo "<a class=\"dropmenu\" href=\"#\"><i class=\"icon-chevron-right hidden-print\">   </i><span class=\"hidden-tablet hidden-print\"> Captura </span></a>";
+							if ($nid<=6) echo "<a class=\"dropmenu\" href=\"#\"><i class=\"icon-chevron-right hidden-print\">   </i><span class=\"hidden-tablet hidden-print\"> Catalogos </span></a>";
 							echo "<ul>";
+								if ($nid<=6) echo "<li><a href=\"index.php?data=catalogo\"><i class=\"icon-barcode\"></i><span class=\"hidden-tablet\"> Catalogo</span></a></li>";
 								if ($nid<=6) echo "<li><a href=\"index.php?data=clientes\"><i class=\"icon-group\"></i><span class=\"hidden-tablet\"> Clientes</span></a></li>";
 								if ($nid<=6) echo "<li><a href=\"index.php?data=empresas\"><i class=\"icon-road\"></i><span class=\"hidden-tablet\"> Empresas Nomina</span></a></li>";
 								if ($nid<=6) echo "<li><a href=\"index.php?data=proveedores\"><i class=\"icon-road\"></i><span class=\"hidden-tablet\"> Proveedores</span></a></li>";
 								if ($nid<=6) echo "<li><a href=\"index.php?data=productos\"><i class=\"icon-barcode\"></i><span class=\"hidden-tablet\"> Productos</span></a></li>";
 								if ($nid<=6) echo "<li><a href=\"index.php?data=tallas\"><i class=\"icon-barcode\"></i><span class=\"hidden-tablet\"> Tallas</span></a></li>";
+							echo "</ul>";
+
+						if ($nid<=8) echo "<li><a class=\"dropmenu\" href=\"#\"><i class=\"icon-chevron-right hidden-print\"></i><span class=\"hidden-tablet hidden-print\"> Reportes </span></a>";
+							echo "<ul>";
+						
+								if ($nid<=6) echo "<li><a href=\"index.php?data=estadisticas&op=reportegral\"><i class=\"icon-barcode\"></i><span class=\"hidden-tablet\"> Reporte General</span></a></li>";
 								if ($nid<=6) echo "<li><a href=\"index.php?data=estadisticas&op=ventas\"><i class=\"icon-barcode\"></i><span class=\"hidden-tablet\"> Ventas</span></a></li>";
+								if ($nid<=6) echo "<li><a href=\"index.php?data=estadisticas&op=existencias\"><i class=\"icon-barcode\"></i><span class=\"hidden-tablet\"> Existencias</span></a></li>";
+								if ($nid<=6) echo "<li><a href=\"index.php?data=estadisticas&op=entradas_salidas\"><i class=\"icon-barcode\"></i><span class=\"hidden-tablet\"> Entradas/Salidas</span></a></li>";
 							echo "</ul>";
 						echo "</li>";
-						if ($nid<=8) echo "<li><a class=\"dropmenu\" href=\"#\"><i class=\"icon-chevron-right hidden-print\"></i><span class=\"hidden-tablet hidden-print\"> Mantenimiento </span></a>";
+						if ($nid<=8) echo "<li><a class=\"dropmenu\" href=\"#\"><i class=\"icon-chevron-right hidden-print\"></i><span class=\"hidden-tablet hidden-print\"> Sistema </span></a>";
 							echo "<ul>";
 								
+								if ($nid<=6) echo "<li><a href=\"index.php?data=catalogo\"><i class=\"icon-barcode\"></i><span class=\"hidden-tablet\"> Usuarios</span></a></li>";
 								if ($nid<=8) echo "<li><a href=\"index.php?data=mantenimiento&op=db\"><i class=\"icon-book\"    ></i><span class=\"hidden-tablet\"> Base de Datos</span></a></li>";
 								if ($nid<=6) echo "<li><a href=\"index.php?data=mantenimiento&op=impuestos\"><i class=\"icon-book\"    ></i><span class=\"hidden-tablet\"> Impuestos</span></a></li>";
+								if ($nid<=6) echo "<li><a href=\"index.php?data=catalogo\"><i class=\"icon-barcode\"></i><span class=\"hidden-tablet\"> Temas</span></a></li>";
 								if ($nid<=6) echo "<li><a href=\"index.php?data=catalogo\"><i class=\"icon-barcode\"></i><span class=\"hidden-tablet\"> Temas</span></a></li>";
 							echo "</ul>";
 						echo "</li>";

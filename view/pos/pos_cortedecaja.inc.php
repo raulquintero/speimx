@@ -33,17 +33,22 @@
 								<input type="hidden" name="op" value="cortedecaja">
 								<input type="hidden" name="f" value="<?php echo $_GET['f']?>">
 
+
+
+
                     <div class="control-group">
 							  <label class="control-label" for="date01"><b>Fecha Inicio</b> (m/d/A)</label>
 							  <div class="controls">
-								<input type="text" class="input-xlarge datepicker" id="fi" name="fi" value="<?php echo $fecha_inicio?>">
+								<input type="text" class="input-small datepicker" id="fi" name="fi" value="<?php echo $fecha_inicio?>">
+								<input type="text" class="input-small " id="hi" name="hi" value="8:00:00">
 							  </div>
 					</div>
 
                     <div class="control-group">
 							  <label class="control-label" for="date02"><b>Fecha Fin</b> (m/d/A)</label>
 							  <div class="controls">
-								<input type="text" class="input-xlarge datepicker" id="ff" name="ff" value="<?php echo $fecha_final?>">
+								<input type="text" class="input-small datepicker" id="ff" name="ff" value="<?php echo $fecha_final?>">
+								<input type="text" class="input-small " id="hf" name="hf" value="<?php echo date("G:i:s")?>">
 							  </div>
 					</div>
 
@@ -90,7 +95,7 @@ $query = "SELECT sum(cantidad) as total from movimiento
 						<table class="table table-condensed">
 							  <thead>
 								  <tr>
-									  <th>Venta del dia</th>
+									  <th>Ventas Netas</th>
 
 
 								  </tr>

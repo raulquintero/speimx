@@ -23,7 +23,7 @@ Cobrar Servicio
 							  <div class="control-group">
 								<label class="control-label" >Precio Contado</label>
 								<div class="controls">
-								  <input class="input-small" id="precio_contado" name="precio_contado" type="text" value=""> + 16% iva
+								  <input class="input-small" id="precio_contado" name="precio_contado" type="text" value="">
 								</div>
 							  </div>
 
