@@ -16,6 +16,8 @@ require_once($realpath.'/functions/formato.php');
 require_once($realpath.'/functions/formas.php');
 require_once($realpath.'/functions/error.php');
 require_once($realpath.'/functions/estadisticas.php');
+require_once($realpath.'/functions/pos_cortedecaja.php');
+
 
 
 

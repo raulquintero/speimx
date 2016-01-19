@@ -271,9 +271,9 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
                                     </a>
                                 </li>
 								<li>
-                                    <a href="#">
+                                    <a href="?data=pos&op=cortedecaja">
 										<span class="icon blue"><i class="icon-user"></i></span>
-										<span class="message">New user registration</span>
+										<span class="message">Corte de Caja</span>
 										<span class="time">yesterday</span> 
                                     </a>
                                 </li>
