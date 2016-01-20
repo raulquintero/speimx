@@ -264,17 +264,6 @@ list( $promocion_id,$promocion,$tipodesc ) = $database->get_row( $query );
  										$add_query = $database->insert( 'descuento', $names );
 									}
 
-									$names = array(
-    								'cliente_id' => 0,
-    								'fecha_actual' => $fecha_hoy,
-    								'fecha' => $fecha_hoy,
-    								'admin_id' => $_SESSION['user_id'],
-    								'tipomov_id' => 14,
-    								'cantidad' => ($total_contado+$total_iva_contado-$promo),
-    								'factura_id' => $factura_id
-									);
-
-									$add_query = $database->insert( 'movimiento', $names );
 
 									$cadena2=num_ticket16($factura_id);							
 									//Fields and values to update
@@ -327,12 +316,24 @@ list( $promocion_id,$promocion,$tipodesc ) = $database->get_row( $query );
 
 										$total_credito+=$item[$n]['precio_credito'];
 										$total_contado+=$item[$n]['precio_contado'];
+										$total_precio_venta+=$item[$n]['precio_venta'];
 
 										$n++;
 
 									}
 
 
+									$names = array(
+    								'cliente_id' => 0,
+    								'fecha_actual' => $fecha_hoy,
+    								'fecha' => $fecha_hoy,
+    								'admin_id' => $_SESSION['user_id'],
+    								'tipomov_id' => 14,
+    								'cantidad' => $total_precio_venta,
+    								'factura_id' => $factura_id
+									);
+
+									$add_query = $database->insert( 'movimiento', $names );
 
 
 
