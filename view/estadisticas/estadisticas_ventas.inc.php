@@ -6,7 +6,7 @@
 		$fecha_final=date("m/d/Y");else $fecha_final=$_GET['ff'];
 ?>
 
-<div class="hidden-desktop hidden-phone hidden-tablet">
+<div class="hidden-desktop  hidden-tablet">
 	<?php
 		echo "<h2>Corte de Caja GLOBAL</h2><br>";
 		echo "<b>Periodo: $fecha_inicio al $fecha_final</b><br>";  
@@ -21,7 +21,7 @@ $query = "SELECT sum(cantidad) as total from movimiento
 		list( $devoluciones ) = $database->get_row( $query );
 
 ?>
-<div class='hidden-desktop hidden-phone hidden-tablet' >
+<div class='hidden-desktop hidden-tablet' >
 	<br><table>
 		<tr><td>Ingresos Netos</td><td align=right>  $ <?php echo dinero($total)?></td><td>&nbsp;&nbsp;&nbsp;</td><td>Ventas Credito</td><td align=right>  $ <?php echo dinero($descuentos)?><td></tr>
 		<tr><td>Descuentos</td><td align=right>  $ <?php echo dinero($descuentos)?></td><td>&nbsp;&nbsp;&nbsp;</td><td>Abonos</td><td align=right>  $ <?php echo dinero($descuentos)?><td></tr>
