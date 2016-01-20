@@ -6,30 +6,7 @@
 		$fecha_final=date("m/d/Y");else $fecha_final=$_GET['ff'];
 ?>
 
-<div class="hidden-desktop  hidden-tablet">
-	<?php
-		echo "<h2>Corte de Caja GLOBAL</h2><br>";
-		echo "<b>Periodo: $fecha_inicio al $fecha_final</b><br>";  
-	?>
-</div>
-<?php
- $query = "SELECT sum(cantidad) as total from movimiento 
- where fecha>='".fechaustomysql($fecha_inicio)."' AND fecha<='".fechaustomysql($fecha_final)." 23:59:59' AND (movimiento.tipomov_id=1 OR movimiento.tipomov_id=13 or movimiento.tipomov_id=14)";
-		list( $total ) = $database->get_row( $query );
-$query = "SELECT sum(cantidad) as total from movimiento 
-	where movimiento.tipomov_id=2 AND fecha>='".fechaustomysql($fecha_inicio)."' AND fecha<='".fechaustomysql($fecha_final)." 23:59:59'";
-		list( $devoluciones ) = $database->get_row( $query );
 
-?>
-<div class='hidden-desktop hidden-tablet' >
-	<br><table>
-		<tr><td>Ingresos Netos</td><td align=right>  $ <?php echo dinero($total)?></td><td>&nbsp;&nbsp;&nbsp;</td><td>Ventas Credito</td><td align=right>  $ <?php echo dinero($descuentos)?><td></tr>
-		<tr><td>Descuentos</td><td align=right>  $ <?php echo dinero($descuentos)?></td><td>&nbsp;&nbsp;&nbsp;</td><td>Abonos</td><td align=right>  $ <?php echo dinero($descuentos)?><td></tr>
-		<tr><td>Ventas Contado</td><td align=right>  $ <?php echo dinero($descuentos)?><td>&nbsp;&nbsp;&nbsp;</td></td><td>Devoluciones</td><td align=right>  $ <?php echo dinero($descuentos)?><td></tr>
-		<tr><td><b>Total</b></td><td align=right> <h2> $ <?php echo dinero($total-$descuentos)?></h2></td></tr>
-	</table>
-	
-</div>
 
 
 
@@ -37,7 +14,7 @@ $query = "SELECT sum(cantidad) as total from movimiento
 
 
 	<div class="row-fluid condensed">
-				<div class="box span2 hidden-print">
+				<div class="box span4 hidden-print">
 					<div class="box-header">
 						<h2><i class="halflings-icon align-justify"></i><span class="break"></span>Corte de Caja</h2>
 						<div class="box-icon">
@@ -45,22 +22,15 @@ $query = "SELECT sum(cantidad) as total from movimiento
 							<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
 							<a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
 						</div>
-					</div>
+                    </div>
 					<div class="box-content">
 
-
-
-
-
-
-
-
-			<form class="form-vertical" action="?data=estadisticas&op=ventas">
-				<fieldset>
+    			    <form class="form-vertical" action="?data=estadisticas&op=ventas">
+	    			    <fieldset>
 								<input type="hidden" name="data" value="estadisticas" >
 								<input type="hidden" name="op" value="ventas">
 
-								
+
 								<input type="hidden" name="f" value="<?php echo $_GET['f']?>">
 
                     <div class="control-group">
@@ -82,76 +52,103 @@ $query = "SELECT sum(cantidad) as total from movimiento
 					 <div class="form-actions">
 								<button type="submit" class="btn btn-primary">Generar</button>
 							  </div>
-							</fieldset>
-			</form>
+						</fieldset>
+		        	</form>
+
+                    </div>
+
+                    </div>
+
+                    <div class="box span8">
+                     <div class="box-header">
+						<h2><i class="halflings-icon align-justify"></i><span class="break"></span>Reporte Global </h2>
+						<div class="box-icon">
+							<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
+							<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+							<a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+						</div>
+					</div>
 
 
-
-<br><br>
 
 <?php
- $query = "SELECT sum(cantidad) as total from movimiento 
+ $query = "SELECT sum(cantidad) as total from movimiento
  where fecha>='".fechaustomysql($fecha_inicio)."' AND fecha<='".fechaustomysql($fecha_final)." 23:59:59' AND (movimiento.tipomov_id=1 OR movimiento.tipomov_id=13 or movimiento.tipomov_id=14)";
 		list( $total ) = $database->get_row( $query );
-$query = "SELECT sum(cantidad) as total from movimiento 
+$query = "SELECT sum(cantidad) as total from movimiento
 	where movimiento.tipomov_id=2 AND fecha>='".fechaustomysql($fecha_inicio)."' AND fecha<='".fechaustomysql($fecha_final)." 23:59:59'";
 		list( $devoluciones ) = $database->get_row( $query );
 
+$query = "SELECT sum(cantidad) as total from movimiento
+	where movimiento.tipomov_id=14 AND fecha>='".fechaustomysql($fecha_inicio)."' AND fecha<='".fechaustomysql($fecha_final)." 23:59:59'";
+		list( $ventas_contado ) = $database->get_row( $query );
+$query = "SELECT sum(cantidad) as total from movimiento
+	where movimiento.tipomov_id=3 AND fecha>='".fechaustomysql($fecha_inicio)."' AND fecha<='".fechaustomysql($fecha_final)." 23:59:59'";
+		list( $ventas_credito ) = $database->get_row( $query );
+$query = "SELECT sum(cantidad) as total from movimiento
+	where movimiento.tipomov_id=1 AND fecha>='".fechaustomysql($fecha_inicio)."' AND fecha<='".fechaustomysql($fecha_final)." 23:59:59'";
+		list( $abonos ) = $database->get_row( $query );
+$query = "SELECT sum(cantidad) as total from movimiento
+	where movimiento.tipomov_id=13 AND fecha>='".fechaustomysql($fecha_inicio)."' AND fecha<='".fechaustomysql($fecha_final)." 23:59:59'";
+		list( $enganche ) = $database->get_row( $query );
 
 ?>
 
 						<table class="table table-condensed">
 							  <thead>
 								  <tr>
-									  <th>Total</th>
-
-
+									  <th  colspan=2 style="text-align:center">Periodo <?php echo  $fecha_inicio." - ".$fecha_final?> </th>
 								  </tr>
 							  </thead>
 							  <tbody>
-                                <tr><td style="text-align:right"><h1><?php echo dinero($total-$devoluciones)?></h1></td></tr>
 
-
-
-
-  				</tbody>
-						 </table>
-
-
-						<table class="table table-condensed">
-							  <thead>
-								  <tr>
-									  <th>Ventas Netas</th>
-								  </tr>
-							  </thead>
-							  <tbody>
-                                <tr><td style="text-align:right"><h2><?php echo dinero($total)?></h1></td></tr>
-
-			  				</tbody>
-						 </table>
-
-
-
-						<table class="table table-condensed">
-							  <thead>
-								  <tr>
-									  <th>Devoluciones</th>
-								  </tr>
-							  </thead>
-							  <tbody>
-                                <tr><td style="text-align:right"><h2><?php echo dinero($devoluciones)?></h1></td></tr>
-
-			  				</tbody>
+                                  <tr><td>Ingresos Netos</td><td style="text-align:right"><?php echo dinero($total)?></td></tr>
+                                  <tr><td>Devoluciones</td><td style="text-align:right"><?php echo dinero($devoluciones)?></td></tr>
+                                  <tr><td>Ventas Contado</td><td style="text-align:right"><?php echo dinero($ventas_contado)?></td></tr>
+                                  <tr><td>Ventas Credito</td><td style="text-align:right"><?php echo dinero($ventas_credito)?></td></tr>
+                                  <tr><td>Abonos</td><td style="text-align:right"><?php echo dinero($abonos)?></td></tr>
+                                  <tr><td>Enganche</td><td style="text-align:right"><?php echo dinero($enganche)?></td></tr>
+                                <tr bgcolor=gray><td style="color:white;border-top:2px solid"><b>Total</b></td><td style="text-align:right;color:white;border-top:2px solid"><b><?php echo dinero($total-$devoluciones)?></b></td></tr>
+                              </tbody>
 						 </table>
 
 
 
 
-					</div>
-				</div><!--/span-->
 
 
-				<div class="box span6">
+
+
+
+
+
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+    </div>  <!---main condensed  ----->
+
+
+
+
+
+
+
+	<div class="row-fluid condensed">
+
+
+
+
+
+				<div class="box span8">
                     <div class="box-header">
 						<h2><i class="halflings-icon align-justify"></i><span class="break"></span>Transacciones</h2>
 						<div class="box-icon">
@@ -164,12 +161,12 @@ $query = "SELECT sum(cantidad) as total from movimiento
                     <div class="box-content">
 						<table class="table table-condensed">
 							  <thead>
-                                <tr><th bgcolor="#cccccc" colspan=5>Movimientos Efectivo</th></tr>
-								 
+                                <tr><th bgcolor="#cccccc" colspan=5>Ingresos Netos</th></tr>
+
 							  </thead>
 							  <tbody>
 
-                                    <?php 
+                                    <?php
 
                                     	//$fecha_inicio=fechaustomysql($fecha_inicio);
                                     	//$fecha_final =fechamysqltous($fecha_final);
@@ -197,11 +194,11 @@ $query = "SELECT sum(cantidad) as total from movimiento
 						<table class="table table-condensed">
 							  <thead>
                                 <tr><th bgcolor="#cccccc" colspan=5>Preview</th></tr>
-								 
+
 							  </thead>
 							  <tbody>
 
-                                    <?php 
+                                    <?php
 
                                     	//$fecha_inicio=fechaustomysql($fecha_inicio);
                                     	//$fecha_final =fechaustomysql($fecha_final);
