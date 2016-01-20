@@ -1,7 +1,7 @@
 <?php
 $func=$_GET['func'];
 $iva=($_GET['iva']/100)+1;
-$descuento=$_GET['precio_contado']*($_GET['descuento']/100);
+$descuento=$_GET['precio_contado']*$iva*($_GET['descuento']/100);
 $sku=htmlspecialchars ($_GET['codigo_inventario']);
 $i=$_GET['i'];
 if (!$i) $i=0;
@@ -19,13 +19,15 @@ if ($func=="add_item")
     $precio_credito=$_GET['precio_credito'];
     $precio_contado=$_GET['precio_contado'];
     $precio_compra=$_GET['precio_compra'];
-    $precio_venta=$precio_contado;
+    $precio_venta=($precio_contado*$iva)-$descuento;
+    //$precio_venta=$precio_contado*$iva;
 
-    if ($_GET['impuesto'])
+    if ($_GET['servicio'])
         {
             $precio_contado=$precio_contado/$iva;
             $precio_credito=$precio_credito/$iva;
             $precio_compra=$precio_contado;
+            $precio_venta=$precio_venta/$iva;
         }
     $item = $_SESSION['cart'];
     $item[] = array(
@@ -106,7 +108,7 @@ if ($func=="del_cliente")
 
 
 
-     header("Location: /index.php");
+    header("Location: /index.php");
 
 
  //foreach ($_GET as $k => $v) { echo "<br>[$k] => $v \n";}

@@ -24,17 +24,18 @@ $database = new DB();
 							  </thead>   
 							  <tbody>";
 
-
+$fecha_inicio_bd=fechaustomysql($fecha_inicio);
+$fecha_fin_bd=fechaustomysql($fecha_fin);
 	$query = "SELECT  * from movimiento,tipomov,admin 
 		where movimiento.tipomov_id=tipomov.tipomov_id AND movimiento.admin_id=admin.admin_id  AND (movimiento.tipomov_id=1 OR movimiento.tipomov_id=13 or movimiento.tipomov_id=14)";
 
 		if ($fecha_inicio)
-			$query.=" AND fecha>='$fecha_inicio' AND fecha<='$fecha_fin 23:59:59' ";
+			$query.=" AND fecha>='$fecha_inicio_bd' AND fecha<='$fecha_fin_bd 23:59:59' ";
 
 		if ($user)
 			$query.=" AND movimiento.admin_id=$user ";
 
-		 $query.=" ORDER BY fecha DESC";
+		  $query.=" ORDER BY fecha DESC";
 
 					$results = $database->get_results( $query );
 
@@ -42,7 +43,7 @@ $database = new DB();
 					{
 						$vendedor=$item['nombre']." ".$item['apellidop'];
 						echo "<tr><td style='text-align:right' width=30 >".$item['movimiento_id']."</td>
-						<td style='text-align:center'><a href=/index.php?data=estadisticas&op=ventas&fid=".$item['factura_id'].">".$item['fecha']."</a></td>
+						<td style='text-align:center'><span class='hidden-desktop'>".$item['fecha']."</span><a class='hidden-print' href=/index.php?data=estadisticas&op=ventas&fi=$fecha_inicio&hi=$hi&ff=".$fecha_fin."&hf=$hf&fid=".$item['factura_id'].">".$item['fecha']."</a></td>
 							<td style='text-align:center'>".$item['tipomov']."
 							<br></td> 
 							<td style='text-align:right'>$ ".dinero($item['cantidad']+$item['iva'])."</td>

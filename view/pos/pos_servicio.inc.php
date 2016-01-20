@@ -9,7 +9,7 @@ Cobrar Servicio
                                 <input type="hidden" name="codigo_inventario" value="70006139">
 
                                 <input type="hidden" name="iva" value="16">
-                                <input type="hidden" name="impuesto" value="1">
+                                <input type="hidden" name="servicio" value="1">
                                 <input type="hidden" name="codigo" value="1040339">
 								<input type="hidden" name="func" value="add_item">
 

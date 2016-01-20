@@ -117,12 +117,20 @@ xmlhttp.send();
 }
 </script>
 
+<script type="text/javascript">
+function pulsar(e) {
+  tecla = (document.all) ? e.keyCode : e.which;
+  return (tecla != 13);
+}
+</script>
+
+
 
 
 							  <div class="control-group ">
 								<label class="control-label" for="producto">Producto</label>
 								<div class="controls">
-								  <input classe="input-xlarge focused"  id="producto" name="producto" type="text"  
+								  <input classe="input-xlarge focused"  onkeypress="return pulsar(event)" id="producto" name="producto" type="text"  
 								  <?php 
 								  if ($_GET['f']<>"editar") echo "onkeyup='showUser(this.value)' "; 
 								  ?>

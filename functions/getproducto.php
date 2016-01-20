@@ -1,5 +1,5 @@
 <?php
-require '../config/config.php';
+require $realpath.'../config/config.php';
 $database = new DB();
 
 foreach( $_POST as $key => $value )
