@@ -258,6 +258,7 @@ else {   ////////////////**************** descripcion del producto marcado******
 										echo "<div  style='text-align:center;padding:10px;background:#dddddd;border:1px solid #bbbbbb;color:white;'>
 											<a href=\"#\" class=\"btn btn-info blue btn-setting\">Cerrar Venta a Credito</a>
 											</div>";
+
 										//echo "<div  style='text-align:center;padding:10px;background:#336699;border:1px solid blue;color:white;'>
 										//<strong>Cerrar Venta</div>";
 									
@@ -309,7 +310,11 @@ else {   ////////////////**************** descripcion del producto marcado******
 										echo "<tr><td colspan=3 style='text-align:center'><br>
 											<div  class='hidden-print' style='text-align:center;padding:10px;background:#dddddd;border:1px solid #bbbbbb;color:white;'>
 											<a href=\"#\" class=\"btn btn-info blue btn-setting\"  >Cerrar Venta</a>
-											</div></td</tr>";
+										   &nbsp;&nbsp;<a href=\"?data=pos&op=pedido\" class=\"btn btn-info orange \"  >Pedido</a>
+										   &nbsp;&nbsp;<a href=\"?data=pos&op=apartado\" class=\"btn btn-info green\"  >Apartado</a>
+											</div>
+                                            </td</tr>";
+
 
 									}
 
@@ -466,20 +471,20 @@ else {   ////////////////**************** descripcion del producto marcado******
 		</div>
 		<div class="modal-body">
 
-		<?php	
+		<?php
 			if ($_SESSION['cliente_id'])
 			{
 				echo "<p> Tipo de Venta: <span class=\"label label-inverse\">Credito</span><br><br>
 					Cliente: <strong>$cliente</strong></p><br>
 					<table width=100%>";
 					//echo "<tr><td style='text-align:right'>SubTotal:</td><td width=100 style='text-align:right'> $". dinero($total_credito+$total_iva_credito)."</td></tr>";
-								// echo "<tr><td style='text-align:right'>&nbsp;Incluye IVA(16%) por</td><td style='text-align:right;border-bottom:2px solid;'>".dinero($total_iva_credito)."</td></tr>";	
-								echo "<tr><td style='text-align:right'>&nbsp;<strong>Total</strong></td><td width=120 style='text-align:right;'><strong>$ ".dinero($total_iva_credito+$total_credito)."</strong></td></tr>";	
+								// echo "<tr><td style='text-align:right'>&nbsp;Incluye IVA(16%) por</td><td style='text-align:right;border-bottom:2px solid;'>".dinero($total_iva_credito)."</td></tr>";
+								echo "<tr><td style='text-align:right'>&nbsp;<strong>Total</strong></td><td width=120 style='text-align:right;'><strong>$ ".dinero($total_iva_credito+$total_credito)."</strong></td></tr>";
 								echo "<tr><td>&nbsp;</td></tr>";
-								echo "<tr><td style='text-align:right'>Saldo Actual</td><td style='text-align:right'>+ $ ".dinero($saldo)."</td></tr>";	
+								echo "<tr><td style='text-align:right'>Saldo Actual</td><td style='text-align:right'>+ $ ".dinero($saldo)."</td></tr>";
 					echo "<tr><td style='text-align:right'>Saldo Nuevo:</td><td style='text-align:right;border-top:2px solid black;'> $ ". dinero($saldo_total)."</td></tr>";
-								//echo "<tr><td style='text-align:right'>Saldo Actual</td><td style='text-align:right'>+ &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;$ ".dinero($saldo)."</td></tr>";	
-								//echo "<tr><td style='text-align:right;'>Saldo Total</td><td style='text-align:right;border-top:2px solid;'>$ ".dinero($saldo_total)."</td></tr>";	
+								//echo "<tr><td style='text-align:right'>Saldo Actual</td><td style='text-align:right'>+ &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;$ ".dinero($saldo)."</td></tr>";
+								//echo "<tr><td style='text-align:right;'>Saldo Total</td><td style='text-align:right;border-top:2px solid;'>$ ".dinero($saldo_total)."</td></tr>";
 					echo "<tr><td style='text-align:right'>Abono:</td><td style='text-align:right'> $ ". dinero($abono)."</td></tr>
 					</table>";
 			echo "</div>
@@ -489,7 +494,7 @@ else {   ////////////////**************** descripcion del producto marcado******
 				</div>
 			</form>
 			</div>";
-			
+
 			}
 			else
 			{
@@ -511,12 +516,12 @@ else {   ////////////////**************** descripcion del producto marcado******
 
 										echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;<strong>Ud. Paga</strong></td>
 											<td width=190 style='text-align:right;text-align:right;border:1px solid;'><h1> $ ".dinero($total_contado-$promo)."</h1></td></tr>";
-									 
+
 									}
 
 									echo"</table>";
 
-			
+
 
 			echo "<br><br><form action=/functions/cerrarventa.php>";
 			echo "<table width=100%><tr><td>&nbsp;</td><td style='text-align:right;text-align:right;border-top:0px solid;'>
@@ -537,3 +542,7 @@ else {   ////////////////**************** descripcion del producto marcado******
 			}
 
 		?>
+</div>
+</div>
+
+

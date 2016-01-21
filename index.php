@@ -26,8 +26,11 @@ $code=strtoupper(htmlspecialchars($_GET["code"]));
 
 $type=(htmlspecialchars($_GET["type"]));
 
+if ($code=="SERVICIO") header ("location: /index.php?data=pos&op=servicio");
+
 
 $cuantos=strlen($code);
+
 
 
 //if ($cuantos==7 )
@@ -72,11 +75,14 @@ if ($cuantos==8)
 					 $location="Location: /index.php?data=productos&op=checarprecio&code=$code";
 					// $location="Location: /functions/cart.php?func=sel_cliente&cid=$code";
 					break;
-				
+
 				default:
 					# code...
 					break;
 			}
+
+
+
 			header($location);
 		}
 
