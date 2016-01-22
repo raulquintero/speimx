@@ -1,3 +1,31 @@
+<?php
+
+
+$fecha = new DateTime(date("Y-m-d"));
+
+if (date("G")<12)
+    $fecha->add(new DateInterval('P1D'));
+else
+    $fecha->add(new DateInterval('P2D'));
+$fecha =$fecha->format('d-m-Y') . "\n";
+
+$item=$_SESSION['cart'];
+$items = count($item);
+$n=$items-1;
+$total=0;
+foreach ($item as $row => $value)
+									{
+
+
+										$total_contado+=$item[$n]['precio_venta'];
+
+										$n--;
+
+
+
+
+?>
+
 	<div class="box span8">
                     <div class="box-header orange">
 						<h2><i class="halflings-icon align-justify"></i><span class="break"></span>PEDIDOS</h2>
@@ -10,7 +38,7 @@
 
                     <div class="box-content">
 
-
+                                <p style="text-align:center">Fecha de Entrega: <?php echo $fecha?></p>
                         <form class="form-horizontal" action="?data=estadisticas&op=ventas">
 	    			    <fieldset>
 								<input type="hidden" name="data" value="estadisticas" >
@@ -20,35 +48,35 @@
 								<input type="hidden" name="f" value="<?php echo $_GET['f']?>">
 
                     <div class="control-group">
-							  <label class="control-label" for="date02"><b>Telefono</b></label>
+							  <label class="control-label" for="tel"><b>Telefono</b></label>
 							  <div class="controls">
-								<input type="text" class="input-small" id="ff" name="ff" value="686">
+								<input type="text" class="input-small" id="tel" name="tel" value="686">
 							  </div>
 					</div>
 
                     <div class="control-group">
-							  <label class="control-label" for="date01"><b>Nombre del Cliente</b></label>
+							  <label class="control-label" for="nombre"><b>Nombre del Cliente</b></label>
 							  <div class="controls">
-								<input type="text" class="input-xlarge" id="fi" name="fi" value="<?php echo $fecha_inicio?>">
+								<input type="text" class="input-xlarge" id="nombre" name="nombre" value="<?php echo $fecha_inicio?>">
 							  </div>
 					</div>
 
                     <div class="control-group">
-							  <label class="control-label" for="date02"><b>Cantidad</b></label>
+							  <label class="control-label" for="anticipo"><b>Anticipo Minimo</b></label>
 							  <div class="controls">
-								$ <input type="text" class="input-small " id="ff" name="ff" value="<?php echo $fecha_final?>">
+								$ <input type="text" class="input-small " id="anticipo" name="anticipo" value="<?php echo dinero($total_contado/2)?>">
 							  </div>
 					</div>
 
                     <div class="control-group">
-							  <label class="control-label" for="date02"><b>Notas</b></label>
+							  <label class="control-label" for="notas"><b>Notas</b></label>
 							  <div class="controls">
-								 <input type="text" class="input-xlarge" id="ff" name="ff" value="<?php echo $fecha_final?>">
+								 <input type="text" class="input-xlarge" id="notas" name="notas" value="<?php echo $fecha_final?>">
 							  </div>
 					</div>
 
 					 <div class="form-actions">
-								<button type="submit" class="btn btn-primary">Ordenar</button>
+								<button type="submit" class="btn btn-primary">Grabar Pedido</button>
 							  </div>
 						</fieldset>
 		        	</form>
@@ -79,7 +107,103 @@
                                     	//$fecha_inicio=fechaustomysql($fecha_inicio);
                                     	//$fecha_final =fechaustomysql($fecha_final);
                                    // mostrar_transacciones($fecha_inicio,$fecha_final,$user);?>
-							  	<?php  getticket(139);?>
+
+
+
+                    <?php
+
+
+
+												}
+                                  	//if ($total_contado)
+									{
+								$total_iva_contado=$total_contado*.16;
+									// echo "<tr><td>&nbsp;</td></tr><tr><td></td><td style='text-align:right'>Subtotal</td><td style='text-align:right'>$". dinero($total_contado+$total_iva_contado)."</td></tr>";
+									// echo "<tr><td></td><td style='text-align:right'>Incluye IVA(16%) por</td><td style='text-align:right'>$". dinero($total_iva_contado)."</td></tr>";
+									echo "<tr><td></td><td style='text-align:right'>&nbsp;<font size=+1>Total</font></td>
+											<td width=180 style='text-align:right;text-align:right;background:yellow;color:black;'>
+											<font size=+3><b>$ ".dinero($total_contado)."</b></font></td></tr>";
+
+										$fecha_hoy=date("Y-m-d");
+										$query = "SELECT  promocion_id,promocion,tipodesc from promocion where \"$fecha_hoy\">=fecha_inicio AND \"$fecha_hoy\"<=fecha_fin";
+										list( $promocion_id,$promocion,$tipodesc ) = $database->get_row( $query );
+												$promociones= $database->num_rows( $query );
+
+									if ($promociones)
+									{
+
+										switch ($tipodesc) {
+											case '1':
+												$promo=get_promo($total_contado);
+												break;
+											case '2':
+												$promo=get_promo_porcentaje($total_contado);
+												break;
+
+											default:
+												# code...
+												break;
+										}
+
+										echo "<tr><td></td><td style='text-align:right'>&nbsp;<font size=+1>$promocion</font></td>
+											<td width=180 style='text-align:right;text-align:right;color:black;border-bottom:1px solid black;'>
+											<font size=+3><b>- ".dinero($promo)."</b></font></td></tr>";
+
+										echo "<tr><td></td><td style='text-align:right'>&nbsp;<font size=+1>Ud. Paga</font></td>
+											<td width=180 style='text-align:right;text-align:right;color:black;border:1px solid black;'>
+											<font size=+3><b> $ ".dinero($total_contado-$promo)."</b></font></td></tr>";
+									}
+
+
+
+									}
+
+                            echo "</table>";
+							echo "<table width=100%>";
+							echo "<tr><td>&nbsp;</td></tr>";
+									$item=$_SESSION['cart'];
+                                        $items = count($item);
+									$n=$items-1;
+									//$total=0;
+									foreach ($item as $row => $value)
+									{
+										echo "<tr><td style='border-top:1px dotted gray;'> ".($n+1)."</td> <td style='border-top:1px dotted gray;'>
+											".$item[$n]['sku']."<br>". substr($item[$n]['producto'],0,30)."...
+											<br><i><font size=-1>".strtolower($item[$n]['color'])." ".strtoupper($item[$n]['talla'])."</font></i></td>
+											<td valign=top style='text-align:right;border-top:1px dotted gray;'>";
+											if ($cliente_id) echo dinero($item[$n]['precio_credito']+($item[$n]['precio_credito']*.16));
+                                             else
+                                                if($item[$n]['descuento']>0) {
+                                                 echo "(-".$item[$n]['descuento']."%)&nbsp; <s>".dinero($item[$n]['precio_contado']*1.16)."</s><br>";
+                                                 echo dinero($item[$n]['precio_venta']);
+                                                 }
+                                                 else
+                                                       echo dinero($item[$n]['precio_contado']*1.16);
+											echo "</td><td class='hidden-print'><a href=\"/functions/cart.php?func=del_item&i=$n\" class=\"\">
+											<i class=\"halflings-icon trash\"></i></i></a></td></tr>";
+										//<a href=\"/index.php?data=pos&op=detalles&prid=".$item[$n]['id']."\"></a>
+										//$total_credito+=$item[$n]['precio_credito'];
+										//$total_contado+=$item[$n]['precio_contado'];
+
+										$n--;
+
+									}
+                                echo "</table>";
+
+                    ?>
+
+
+
+
+
+
+
+
+
+
+
+
+            			  	<?php  //getticket(139);?>
 
 
 

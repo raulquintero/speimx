@@ -54,6 +54,9 @@
 						  <tbody>
 
 						<?php
+
+
+
                         if ($_GET['code'])
                         {
                         	$query = "SELECT  producto_id from inventariodet
@@ -77,6 +80,8 @@
 								$results = $database->get_results( $query );
 						foreach( $results as $row )
 						{
+                            $query = "SELECT count(producto_id) FROM facturadet WHERE producto_id=".$row['producto_id'];
+                            list( $productos_vendidos  ) = $database->get_row( $query );
 
 							$vlimp=(($row['precio_contado']*1.16)-($row['precio_contado']*1.16*$row['descuento']/100));
 						?>
@@ -98,7 +103,7 @@
 								<td style="text-align:right;"><?php echo dinero($row['precio_contado']*1.16)?></td>
 								<td style="text-align:right;"><?php echo dinero($row['precio_credito']*1.16)?></td>
                                 <td style="text-align:right;"><?php echo dinero($row['descuento'])?></td>
-								<td style="text-align:right;"><?php echo $row['stock']?></td>
+								<td style="text-align:right;"><?php echo $productos_vendidos;//$row['stock']?></td>
 								<td class="center"><a class="hidden-print" href="index.php?data=productos&filtro=proveedor&pid=<?php echo $row['proveedor_id']?>"><?php echo $row['proveedor']?></a>
                                 <span class=hidden-desktop><?php echo $row['proveedor']?></span></td>
 								<td class="center hidden-print">

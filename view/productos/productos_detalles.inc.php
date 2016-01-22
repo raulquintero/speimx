@@ -135,6 +135,11 @@ if ($_GET['eed']==2)
 						</div>
 					</div>
 					<div class="box-content">
+
+
+                    Total Vendidos : <?php echo $productos_vendidos?>
+
+
 						<table class="table table-condensed">
 							  <thead>
 								  <tr>
