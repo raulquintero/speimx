@@ -1,5 +1,11 @@
 <?php
 
+if ($_GET['pnid'])
+    {
+       	$query = "SELECT  pedido_nombre_id,nombre,telefono,notas from pedido_nombre
+             where pedido_nombre_id='".$_GET['pnid']."'";
+        list( $pnid,$nombre,$telefono,$notas ) = $database->get_row( $query );
+    }
 
 $fecha = new DateTime(date("Y-m-d"));
 
@@ -7,7 +13,9 @@ if (date("G")<12)
     $fecha->add(new DateInterval('P1D'));
 else
     $fecha->add(new DateInterval('P2D'));
-$fecha =$fecha->format('d-m-Y') . "\n";
+$fecha_entrega =$fecha->format('Y-m-d');
+
+
 
 $item=$_SESSION['cart'];
 $items = count($item);
@@ -38,26 +46,67 @@ foreach ($item as $row => $value)
 
                     <div class="box-content">
 
-                                <p style="text-align:center">Fecha de Entrega: <?php echo $fecha?></p>
-                        <form class="form-horizontal" action="?data=estadisticas&op=ventas">
+                                <p style="text-align:center">Fecha de Entrega: <?php echo fechamysqltous($fecha_entrega) ?></p>
+                        <form class="form-horizontal" action="/functions/cerrarpedido.php">
 	    			    <fieldset>
-								<input type="hidden" name="data" value="estadisticas" >
-								<input type="hidden" name="op" value="ventas">
 
 
-								<input type="hidden" name="f" value="<?php echo $_GET['f']?>">
+                                <input type="hidden" name="fecha_entrega" value="<?php echo $fecha_entrega?>">
+								<input type="hidden" name="pnid" value="<?php echo $pnid?>">
+
+    <script type="text/javascript">
+function showUser(str)
+{
+if (str=="")
+  {
+  document.getElementById("txtHint").innerHTML="";
+  return;
+  }
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","/functions/getpedido_cliente.php?q="+str,true);
+xmlhttp.send();
+}
+</script>
+
+<script type="text/javascript">
+function pulsar(e) {
+  tecla = (document.all) ? e.keyCode : e.which;
+  return (tecla != 13);
+}
+</script>
+
 
                     <div class="control-group">
-							  <label class="control-label" for="tel"><b>Telefono</b></label>
+							  <label class="control-label" for="telefono"><b>Telefono</b></label>
 							  <div class="controls">
-								<input type="text" class="input-small" id="tel" name="tel" value="686">
-							  </div>
+								<input type="text" onkeypress="return pulsar(event)"
+                                <?php
+								  if ($_GET['f']<>"editar") echo " onkeyup='showUser(this.value)' ";
+								  ?>
+                                class="input-small" id="telefono" name="telefono" value="<?php echo $telefono?>" autocomplete="off">
+
+                              <div id='txtHint'><ul><b> </b></ul></div>
+                              </div>
 					</div>
 
                     <div class="control-group">
 							  <label class="control-label" for="nombre"><b>Nombre del Cliente</b></label>
 							  <div class="controls">
-								<input type="text" class="input-xlarge" id="nombre" name="nombre" value="<?php echo $fecha_inicio?>">
+								<input type="text" class="input-xlarge" id="nombre" name="nombre" value="<?php echo $nombre?>">
 							  </div>
 					</div>
 
@@ -71,7 +120,7 @@ foreach ($item as $row => $value)
                     <div class="control-group">
 							  <label class="control-label" for="notas"><b>Notas</b></label>
 							  <div class="controls">
-								 <input type="text" class="input-xlarge" id="notas" name="notas" value="<?php echo $fecha_final?>">
+								 <input type="text" class="input-xlarge" id="notas" name="notas" value="<?php echo $notas?>">
 							  </div>
 					</div>
 
@@ -81,11 +130,62 @@ foreach ($item as $row => $value)
 						</fieldset>
 		        	</form>
 
-                     </div>
+                    </div>
+                        <br>
+
+	<div class="box span11">
+                    <div class="box-header orange">
+						<h2><i class="halflings-icon align-justify"></i><span class="break"></span>PEDIDOS PENDIENTES</h2>
+						<div class="box-icon">
+							<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
+							<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+							<a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+						</div>
+                    </div><!--/span-->
+
+            <?php
+            if($_GET['pnid'])
+            {
+            $query = "SELECT  nombre,pedido.pedido_id,total,anticipo,status,fecha_orden,fecha_entrega FROM pedido,pedido_nombre,status
+					WHERE  pedido.pedido_nombre_id=pedido_nombre.pedido_nombre_id AND
+                    pedido.status_id=status.status_id AND pedido.pedido_nombre_id=".$pnid." ORDER BY status.status_id,pedido.pedido_id DESC";
+					$results = $database->get_results( $query );
+            echo "<table class='table' width=400>";
+            echo "<thead>
+                    <tr><th></th><th>No.</th><th>Nombre</th><th>Fecha Orden</th><th>Feche Entrega</th><th>Status</th><th>Total</th><th>Anticipo</th><th>Saldo</th>
+                  </thead>  ";
+            echo "<tbody>";
+                    foreach( $results as $item )
+					{
+
+						echo "<tr><td>&nbsp;</td><td>".$item['pedido_id']."</td><td> ".$item['nombre']."</td>
+							<td> ".$item['fecha_orden']."</td><td> ".$item['fecha_entrega']."</td>
+                            <td> ".$item['status']."</td><td>". substr($item['total'],0,26)."</td><td>".dinero($item['anticipo'])."
+							<td style='text-align:right;vertical-align:text-top'>";
+						echo dinero($item['total']-$item['anticipo']);
+
+						echo "&nbsp;&nbsp;</td></tr>";
+
+						$grantotal+=$item['total'];
+
+						$n++;
+					}
+            echo "</tbody>";
+            echo "</table>";
 
 
+            }
 
-					</div>
+
+            ?>
+
+                    <div class="box-content">
+
+                    </div>
+    </div>
+
+
+    </div>
 
 			<div class="box span4 hidden-print">
                     <div class="box-header orange">

@@ -205,7 +205,7 @@ $database = new DB();
 	if($fid)
 	{
 					$query = "SELECT cliente.cliente_id,apellidop, apellidom, nombre, credito, saldo,total_ultimo,fecha_total_ultimo, abono,factura_id,
-							tipomov_id,fecha,saldo_actual,saldo_total,ticket,efectivo  FROM cliente,factura 
+							tipomov_id,fecha,saldo_actual,saldo_total,ticket,efectivo  FROM cliente,factura
 						WHERE  factura.cliente_id=cliente.cliente_id AND factura.factura_id=".$fid;
 					list( $cliente_id,$apellidop,$apellidom,$nombre,$credito, $saldo, $total_ultimo, $fecha_total_ultimo,$abono, $factura_id,
 							 $tipomov_id,$fecha_factura,$saldo_actual,$saldo_total,$ticket,$efectivo  ) = $database->get_row( $query );
@@ -218,7 +218,7 @@ $database = new DB();
 								<a href=\"/index.php\"><img width=300 src=/img/logo-tiendas-alberto.jpg></a>
 								<br>R.F.C QUCR750708PM7
 								<center>NOTA DE VENTA</center>";
-								
+
 				echo "<font size=-1>";
 								
 				echo "Cliente: ". strtoupper($cliente)."<br>";
@@ -251,7 +251,7 @@ $database = new DB();
 	
 					foreach( $results as $item )
 					{
-		
+
 						echo "<tr><td>&nbsp;</td><td>".$itemaaaaa['facturadet_id']." ".$item['sku']."<br>
 							". substr($item['producto'],0,26)."...</a>
 							<br>".$item['color']." ".$item['talla']."</td> 
@@ -300,7 +300,7 @@ $database = new DB();
 
 					echo "<td style='text-align:right;border-top:2px solid;'>$". dinero($abono)."&nbsp;&nbsp;</td>";
 					echo "</tr>";
-				} 
+				}
 				else
 					if ($cliente_id==0)
 					{
@@ -470,7 +470,7 @@ $database = new DB();
 	 $query = "SELECT limite,descuento FROM promocion,promociondet WHERE promocion.promocion_id=promociondet.promocion_id AND activado=1 ORDER BY descuento DESC";
 
 									$results = $database->get_results( $query );
-									foreach ($results as $row ) 
+									foreach ($results as $row )
 									{
 											//echo round($total_contado)." - ".$row['limite']." <br> ";
 										if (ceil($total_contado)>$row['limite'])
@@ -486,12 +486,12 @@ function get_promo_porcentaje($total_contado)
 {
 $database = new DB();
 
-	
+
 
 	 $query = "SELECT limite,descuento FROM promocion,promociondet WHERE promocion.promocion_id=promociondet.promocion_id AND promocion.promocion_id=2 AND activado=1 ORDER BY descuento DESC";
 
 									$results = $database->get_results( $query );
-									foreach ($results as $row ) 
+									foreach ($results as $row )
 									{
 											//echo round($total_contado)." - ".$row['limite']." <br> ";
 										if (ceil($total_contado)>$row['limite'])
@@ -501,6 +501,221 @@ $database = new DB();
 											}
 									}
 	return $descuento;
+}
+
+
+
+
+
+
+
+
+function getticket_pedido($peid)
+{
+$database = new DB();
+
+	if($peid)
+	{
+					$query = "SELECT nombre, telefono,pedido_id,fecha_orden,fecha_entrega,status,total,anticipo
+                             FROM pedido_nombre,pedido,status
+						WHERE  pedido_nombre.pedido_nombre_id=pedido.pedido_nombre_id AND pedido.status_id=status.status_id AND pedido.pedido_id=".$peid;
+					list( $nombre,$telefono,$pedido_id,$fecha_orden,$fecha_entrga,$status,$total,$anticipo  ) = $database->get_row( $query );
+	 					$cliente= $apellidop." ".$apellidom." ".$nombre;
+	 }
+
+				echo "<table  width=100% >
+						<tr>
+							<td style='text-align:center;border-bottom:1px dotted black;' colspan=3>
+								<a href=\"/index.php\"><img width=300 src=/img/logo-tiendas-alberto.jpg></a>
+								<br>R.F.C QUCR750708PM7
+								<center>NOTA DE VENTA</center>";
+
+				echo "<font size=-1>";
+
+				echo "Cliente: ". strtoupper($cliente)."<br>";
+				if ($tipomov_id==3)
+					echo "Tipo de Venta: <span class=\"label label-inverse\">Credito</span><br>";
+				else
+					echo "<br>"; //Tipo de Venta: <span class=\"label label-inverse\">Contado</span><br><br>";
+							$no_ticket=sprintf('%06d', $pedido_id);
+
+				echo "No.: $no_ticket [$cliente_id.345]<br>";
+				echo "Fecha y Hora: <br>".$fecha_orden;    //date("d-m-Y  H:m:s");
+				echo "<br>";
+
+
+				echo "</font></td></tr>";
+				echo "<tr><td>&nbsp;</td></tr>";
+
+
+				if ($tipomov_id==3)
+
+				{
+					$query = "SELECT  pedido_det_id,pedido_det.producto_id,pedido_det.pedido_id,pedido_det.producto,
+                        pedido_det.precio_contado,pedido_det.iva,producto.codigo,color,talla,pedido_det.sku FROM pedido_det,producto
+					WHERE  pedido_det.producto_id=producto.producto_id AND pedido_det.pedido_id=".$peid;
+
+					$results = $database->get_results( $query );
+
+					$n=0;
+					$total=0;
+
+
+					foreach( $results as $item )
+					{
+
+						echo "<tr><td>&nbsp;</td><td>".$itemaaaaa['facturadet_id']." ".$item['sku']."<br>
+							". substr($item['producto'],0,26)."...</a>
+							<br>".$item['color']." ".$item['talla']."</td>
+							<td style='text-align:right;vertical-align:text-top'>";
+						if ($tipomov_id==3) echo dinero($item['precio_credito']*1.16); else echo dinero($item['precio_contado']*1.16);
+
+						echo "&nbsp;&nbsp;</td></tr>";
+
+						$total_credito+=$item['precio_credito'];
+						$total_contado+=$item['precio_contado'];
+
+						$n++;
+					}
+				}
+
+
+				if ($total_credito AND $cliente_id>0)
+				{
+					$total_iva_credito=$total_credito*.16;
+					$disponible=$credito-$saldo-$total_credito-$total_iva_credito;
+
+					//$saldo_total=$saldo+$total_credito+$total_iva_credito;
+
+
+					echo "<tr><td>&nbsp;</td></tr>";
+					echo "<tr style=\"border-top:1px dotted black\"><td style=\"border-top:1px dotted black\">&nbsp;</td><td style='text-align:right;border-top:1px dotted black'>Total</td>
+					      	  <td style='text-align:right;border-top:1px dotted;'>$". dinero($total_credito*1.16)."&nbsp;&nbsp;</td></tr>";
+					echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;Incluye IVA(16%) por</td><td style='text-align:right;border-bottom:2px solid;'>+&nbsp;".dinero($total_iva_credito)."&nbsp;&nbsp;</td></tr>";
+					echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;<strong>Total</strong></td><td style='text-align:right;'><strong>".dinero($total_iva_credito+$total_credito)."</strong>&nbsp;&nbsp;</td></tr>";
+					echo "<tr><td>&nbsp;</td><td>&nbsp;</td></tr>";
+					echo "<tr><td>&nbsp;</td><td style='text-align:right'>Saldo Actual</td><td style='text-align:right'>+  $ ".dinero($saldo_actual)."&nbsp;&nbsp;</td></tr>";
+					echo "<tr><td>&nbsp;</td><td style='text-align:right;'><strong>Saldo Total</strong></td><td style='text-align:right;border-top:2px solid;'><strong>$ ".dinero($saldo_total)."</strong>&nbsp;&nbsp;</td></tr>";
+					echo "<tr><td>&nbsp;</td><td style='text-align:right'>Abono</td>";
+
+					$query = "SELECT abono,limite FROM abono ORDER BY limite ASC";
+					$results = $database->get_results( $query );
+					foreach ($results as $row )
+					{
+							//echo $total_credito." ".$row['limite']." <br> ";
+						if ($saldo_total<=$row['limite'])
+						{
+							$abono=$row['abono'];
+							break;
+						}
+					}
+
+					echo "<td style='text-align:right;border-top:2px solid;'>$". dinero($abono)."&nbsp;&nbsp;</td>";
+					echo "</tr>";
+				}
+				else
+					if ($cliente_id==0)
+					{
+
+					$query = "SELECT  pedido_det.producto_id,pedido_det.pedido_id,pedido_det.producto,
+                        pedido_det.precio_contado,pedido_det.iva,producto.codigo,color,talla,pedido_det.sku FROM pedido_det,producto
+					WHERE  pedido_det.producto_id=producto.producto_id AND pedido_det.pedido_id=".$peid;
+					$results = $database->get_results( $query );
+
+					$n=0;
+					$total=0;
+
+
+					foreach( $results as $item )
+					{
+
+						echo "<tr><td>&nbsp;</td><td>".$itemaaaaaa['facturadet_id']." ".$item['sku']."<br>
+							". substr($item['producto'],0,26)."</a>
+							<br>".$item['color']." ".$item['talla']."</td>
+							<td style='text-align:right;vertical-align:text-top'>";
+
+                                echo dinero($item['precio_contado']);
+						echo "&nbsp;&nbsp;</td></tr>";
+
+						$total_contado+=$item['precio_contado'];
+
+						$n++;
+					}
+
+
+
+						$total_iva_contado=$total_contado-($total_contado/1.16);
+						//echo "<tr><td></td><td>&nbsp;</td></tr>";"
+						echo "<tr><td>&nbsp;</td></tr>";
+					echo "<tr style=\"border-top:1px dotted black\"><td style=\"border-top:1px dotted black\">&nbsp;</td><td style='text-align:right;border-top:1px dotted black'>Total</td>
+					      	  <td style='text-align:right;border-top:1px dotted;'>$". dinero($total_contado)."&nbsp;&nbsp;</td></tr>";
+				  			// echo "<tr style=\"border-top:1px dotted black\"><td></td><td style='text-align:right'>Total</td><td style='text-align:right'>$". dinero($total_contado+$total_iva_contado)."</td></tr>";
+						echo "<tr><td></td><td style='text-align:right'>Incluye IVA(16%) por</td>
+							<td style='text-align:right'>$". dinero($total_iva_contado)."&nbsp;&nbsp;</td></tr>";
+						echo "<tr><td></td><td style='text-align:right'>&nbsp;<strong>Total</strong></td>
+							<td style='text-align:right;text-align:right;border-top:2px solid;'><strong>".dinero($total_contado)."</strong>&nbsp;&nbsp;</td></tr>";
+                        echo "<tr><td></td><td style='text-align:right'>Anticipo</td>
+							<td style='text-align:right'>- $". dinero($anticipo)."&nbsp;&nbsp;</td></tr>";
+                       	echo "<tr><td></td><td style='text-align:right'>&nbsp;<strong>Anticipo</strong></td>
+							<td style='text-align:right;text-align:right;border-top:2px solid;'><strong>".dinero($total_contado-$anticipo)."</strong>&nbsp;&nbsp;</td></tr>";
+
+
+							$fecha_hoy=date("Y-m-d");
+									 $query = "SELECT  promocion_id,promocion,tipodesc from promocion where \"$fecha_hoy\">=fecha_inicio AND \"$fecha_hoy\"<=fecha_fin";
+									list( $promocion_id,$promocion,$tipodesc ) = $database->get_row( $query );
+												$promociones= $database->num_rows( $query );
+
+									if ($promociones)
+									{
+
+										switch ($tipodesc) {
+											case '1':
+												$promo=get_promo($total_contado);
+												break;
+											case '2':
+												$promo=get_promo_porcentaje($total_contado);
+												break;
+
+											default:
+												# code...
+												break;
+										}
+
+										echo "<tr><td></td><td style='text-align:right'>&nbsp;<font size=+1>$promocion</font></td>
+											<td style='text-align:right;text-align:right;color:black;border-bottom:1px solid black;'>
+											<b>- ".dinero($promo)."</b>&nbsp;&nbsp;</td></tr>";
+
+										echo "<tr><td></td><td style='text-align:right'>&nbsp;<font size=+1>Ud. Pag&oacute;</font></td>
+											<td width=100 style='text-align:right;text-align:right;color:black;border:1px solid black;'>
+											<b> $ ".dinero($total_contado-$promo)."</b>&nbsp;&nbsp;</td></tr>";
+									}
+
+
+						if ($efectivo){
+						echo "<tr><td></td><td style='text-align:right'>&nbsp;Efectivo</td>
+							<td style='text-align:right;text-align:right;'>".dinero($efectivo)."&nbsp;&nbsp;</td></tr>";
+						echo "<tr><td></td><td style='text-align:right'>&nbsp;Cambio</td>
+							<td style='text-align:right;text-align:right;border-top:2px solid;'>".dinero($efectivo-$total_contado+$promo)."&nbsp;&nbsp;</td></tr>";
+						}
+
+
+									}
+
+
+						// if ($promociones)
+						// {
+						// echo "<tr><td colspan=3><br><br>RECUERDE:  En Promociones no hay cambios ni devoluciones</td></tr>";
+
+						// }
+
+				echo "</table>";
+
+
+
+
+
+
+
 }
 
 
