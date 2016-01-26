@@ -140,7 +140,7 @@ $where_clause = array(
 // //Output errors if they exist for the update query
 //$database->display( $updated );
 
-  	header("Location: /index.php?data=$data&op=detalles&prid=$prid&eed=1");
+   header("Location: /index.php?data=$data&op=detalles&prid=$prid&eed=1");
 
 
 

@@ -14,9 +14,9 @@
 	 if ($prid>0)
 	 {
 		$query = "SELECT producto_id,proveedor_id,producto,detalle,talla_id,precio_credito,precio_contado,precio_promocion,precio_compra,descuento,
-				subcategoria_id,categoria_id,unidad_id,marca_id,estilo,color_id,codigo,stock,up,activo,consultas,inventariable,up,temporada_id
+				subcategoria_id,categoria_id,unidad_id,marca_id,estilo,color_id,codigo,stock,up,activo,consultas,inventariable,temporada_id
 			 FROM producto WHERE producto_id=$prid";
-		list( $producto_id,$proveedor_id,$producto,$detalle,$talla_id,$precio_credito,$precio_contado,$precio_promocion,$precio_compra,$descuento,
+		list(        $producto_id,$proveedor_id,$producto,$detalle,$talla_id,$precio_credito,$precio_contado,$precio_promocion,$precio_compra,$descuento,
 				$subcategoria_id,$categoria_id,$unidad_id,$marca_id,$estilo,$color_id,$codigo,$stock,$up,$activo,$consultas,$inventariable,$temporada_id) = $database->get_row( $query );
 		if (!$activo) $checado="";
 		if (!$inventariable) $checado_inv="";
@@ -75,15 +75,15 @@
 								<!-- <label class="control-label" for="activo">Activo</label> -->
 
 								 <div class="controls">
-								  <label class="checkbox inline">Activo 
-									<input type="checkbox" id="activo" name="activo"    <?php if ($activo) echo "value=1 checked"?>>
+								  <label class="checkbox inline">Activo
+									<input type="checkbox" id="activo" name="activo"    <?php if ($activo) echo "value=1 checked";else echo "value=0";?>>
 								  </label>
 
 								  <label class="checkbox inline">Inventariable
-									<input type="checkbox" id="inventariable" name="inventariable" <?php if ($inventariable) echo "value=1 checked"?>>
+									<input type="checkbox" id="inventariable" name="inventariable" <?php if ($inventariable) echo "value=1 checked";else echo "value=0";?>>
 								  </label>
                                   <label class="checkbox inline">OnLine
-									<input type="checkbox" id="up" name="up" <?php if ($up) echo "value=1 checked"?>>
+									<input type="checkbox" id="up" name="up" <?php if ($up) echo "value=1 checked";else echo "value=0";?>>
 								  </label>
 								 </div>
 								</div>
@@ -136,7 +136,7 @@ function pulsar(e) {
 								  if ($_GET['f']<>"editar") echo "onkeyup='showUser(this.value)' ";
 								  ?>
 								  value="<?php echo strtoupper(stripslashes($producto))?>">
-								 <div id='txtHint'><ul><b> </b></ul></div>
+								 <div id='txtHint'><ul><b></b></ul></div>
 
 
 								</div>
@@ -164,7 +164,7 @@ function pulsar(e) {
 								</div>
 							  </div>
 							   -->
-							 
+
 
 
 							  <div class="control-group">
@@ -173,7 +173,7 @@ function pulsar(e) {
 								  <input class="input-small" id="precio_compra" name="precio_compra" type="text" value="<?php echo $precio_compra?>"> <?php echo dinero($precio_compra/1.16)?>
 								</div>
 							  </div>
-							  
+
 
 							<div class="control-group">
 							  <label class="control-label" for="precio_contado">Precio Contado</label>
@@ -188,14 +188,14 @@ function pulsar(e) {
 								  <input class="input-small" id="precio_credito" name="precio_credito" type="text" value="<?php echo $precio_credito?>"> <?php echo dinero($precio_credito/1.16)?>
 								</div>
 							  </div>
-							  
+
 							  <div class="control-group">
 								<label class="control-label" >Precio Promocion</label>
 								<div class="controls">
 								  <input class="input-small" id="precio_promocion" name="precio_promocion" type="text" value="<?php echo $precio_promocion?>">
 								</div>
 							  </div>
-							 
+
 							  <div class="control-group">
 								<label class="control-label" >Descuento</label>
 								<div class="controls">
@@ -203,7 +203,7 @@ function pulsar(e) {
 								</div>
 							  </div>
 
-							 
+
 
 
 
@@ -212,7 +212,7 @@ function pulsar(e) {
 
 					</div>
 		</div><!--/span-->
-			
+
 
 		<div class="box span6">
 					<div class="box-header">
@@ -222,7 +222,7 @@ function pulsar(e) {
 						</div>
 					</div>
 					<div class="box-content">
-						
+
 
 						<?php combobox("proveedor",$proveedor_id)?>
 
@@ -238,10 +238,10 @@ function pulsar(e) {
 						</div>
 					</div>
 					<div class="box-content">
-						
+
 						<?php combobox("marca",$marca_id)?>
 						<?php combobox("unidad",$unidad_id)?>
-						
+
 						 <div class="control-group">
 								<label class="control-label" >Estilo</label>
 								<div class="controls">
