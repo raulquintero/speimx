@@ -656,7 +656,7 @@ $database = new DB();
 							<td style='text-align:right;text-align:right;border-top:2px solid;'><strong>".dinero($total_contado)."</strong>&nbsp;&nbsp;</td></tr>";
                         echo "<tr><td></td><td style='text-align:right'>Anticipo</td>
 							<td style='text-align:right'>- $". dinero($anticipo)."&nbsp;&nbsp;</td></tr>";
-                       	echo "<tr><td></td><td style='text-align:right'>&nbsp;<strong>Anticipo</strong></td>
+                       	echo "<tr><td></td><td style='text-align:right'>&nbsp;<strong>Saldo</strong></td>
 							<td style='text-align:right;text-align:right;border-top:2px solid;'><strong>".dinero($total_contado-$anticipo)."</strong>&nbsp;&nbsp;</td></tr>";
 
 

@@ -490,33 +490,41 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
 						 echo "<li><a href=\"index.php?data=productos&op=checarprecio\"><i class=\"icon-barcode hidden-print\" ></i><span class=\"hidden-tablet hidden-print\"> Checar Precio</span></a></li>";
 						//if ($nid<=8) echo "<li><a href=\"index.php?data=clientes&op=devoluciones\"><i class=\"icon-book\"    ></i><span class=\"hidden-tablet\"> Devoluciones</span></a></li>";
 
+
+
+						if ($nid<=8) echo "<li><a class=\"dropmenu\" href=\"#\"><i class=\"icon-chevron-right hidden-print\"></i><span class=\"hidden-tablet hidden-print\"> Adminsitracion </span></a>";
+						echo "<ul>";
+								if ($nid<=6) echo "<li><a href=\"index.php?data=catalogo\"><i class=\"icon-barcode\"></i><span class=\"hidden-tablet\"> Catalogo</span></a></li>";
 						 if ($nid<=8) echo "<li><a class=\"dropmenu\" href=\"#\"><i class=\"icon-chevron-right hidden-print\"></i><span class=\"hidden-tablet hidden-print\"> Compras </span></a>";
 							echo "<ul>";
-								
+
 								if ($nid<=6) echo "<li><a href=\"index.php?data=compras\"><i class=\"icon-book\"    ></i><span class=\"hidden-tablet\"> Compras </span></a></li>";
 								if ($nid<=8) echo "<li><a href=\"index.php?data=compras&op=ordendecompra\"><i class=\"icon-book\"    ></i><span class=\"hidden-tablet\"> Orden de Compra</span></a></li>";
 								if ($nid<=6) echo "<li><a href=\"index.php?data=compras&op=proveedores\"><i class=\"icon-barcode\"></i><span class=\"hidden-tablet\"> Proveedores</span></a></li>";
 							echo "</ul>";
-
+								if ($nid<=6) echo "<li><a href=\"index.php?data=promociones\"><i class=\"icon-book\"    ></i><span class=\"hidden-tablet\"> Promociones </span></a></li>";
+                    
+                        echo "</ul>";
 
 
 						if ($nid<=8) echo "<li><a class=\"dropmenu\" href=\"#\"><i class=\"icon-chevron-right hidden-print\"></i><span class=\"hidden-tablet hidden-print\"> Nomina </span></a>";
 							echo "<ul>";
-								
+
 								if ($nid<=6) echo "<li><a href=\"index.php?data=nomina&op=cobronomina\"><i class=\"icon-book\"    ></i><span class=\"hidden-tablet\"> Cobro x Nomina</span></a></li>";
 							echo "</ul>";
 						echo "</li>";
-						
+
 
 						echo "<li>";
 							if ($nid<=6) echo "<a class=\"dropmenu\" href=\"#\"><i class=\"icon-chevron-right hidden-print\">   </i><span class=\"hidden-tablet hidden-print\"> Catalogos </span></a>";
 							echo "<ul>";
-								if ($nid<=6) echo "<li><a href=\"index.php?data=catalogo\"><i class=\"icon-barcode\"></i><span class=\"hidden-tablet\"> Catalogo</span></a></li>";
+
 								if ($nid<=6) echo "<li><a href=\"index.php?data=clientes\"><i class=\"icon-group\"></i><span class=\"hidden-tablet\"> Clientes</span></a></li>";
 								if ($nid<=6) echo "<li><a href=\"index.php?data=empresas\"><i class=\"icon-road\"></i><span class=\"hidden-tablet\"> Empresas Nomina</span></a></li>";
 								if ($nid<=6) echo "<li><a href=\"index.php?data=proveedores\"><i class=\"icon-road\"></i><span class=\"hidden-tablet\"> Proveedores</span></a></li>";
 								if ($nid<=6) echo "<li><a href=\"index.php?data=productos\"><i class=\"icon-barcode\"></i><span class=\"hidden-tablet\"> Productos</span></a></li>";
 								if ($nid<=6) echo "<li><a href=\"index.php?data=tallas\"><i class=\"icon-barcode\"></i><span class=\"hidden-tablet\"> Tallas</span></a></li>";
+								if ($nid<=6) echo "<li><a href=\"index.php?data=temporadas\"><i class=\"icon-barcode\"></i><span class=\"hidden-tablet\"> Temporadas</span></a></li>";
 							echo "</ul>";
 
 						if ($nid<=8) echo "<li><a class=\"dropmenu\" href=\"#\"><i class=\"icon-chevron-right hidden-print\"></i><span class=\"hidden-tablet hidden-print\"> Reportes </span></a>";

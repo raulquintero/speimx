@@ -29,7 +29,7 @@ foreach ($item as $row => $value)
 
 										$n--;
 
-
+                                     }
 
 
 ?>
@@ -54,7 +54,7 @@ foreach ($item as $row => $value)
                                 <input type="hidden" name="fecha_entrega" value="<?php echo $fecha_entrega?>">
 								<input type="hidden" name="pnid" value="<?php echo $pnid?>">
 
-    <script type="text/javascript">
+<script type="text/javascript">
 function showUser(str)
 {
 if (str=="")
@@ -81,7 +81,6 @@ xmlhttp.open("GET","/functions/getpedido_cliente.php?q="+str,true);
 xmlhttp.send();
 }
 </script>
-
 <script type="text/javascript">
 function pulsar(e) {
   tecla = (document.all) ? e.keyCode : e.which;
@@ -94,11 +93,8 @@ function pulsar(e) {
 							  <label class="control-label" for="telefono"><b>Telefono</b></label>
 							  <div class="controls">
 								<input type="text" onkeypress="return pulsar(event)"
-                                <?php
-								  if ($_GET['f']<>"editar") echo " onkeyup='showUser(this.value)' ";
-								  ?>
+                                <?php  if ($_GET['f']<>"editar") echo " onkeyup='showUser(this.value)' ";  ?>
                                 class="input-small" id="telefono" name="telefono" value="<?php echo $telefono?>" autocomplete="off">
-
                               <div id='txtHint'><ul><b> </b></ul></div>
                               </div>
 					</div>
@@ -202,11 +198,7 @@ function pulsar(e) {
 
 							  <tbody>
 
-                                    <?php
 
-                                    	//$fecha_inicio=fechaustomysql($fecha_inicio);
-                                    	//$fecha_final =fechaustomysql($fecha_final);
-                                   // mostrar_transacciones($fecha_inicio,$fecha_final,$user);?>
 
 
 
@@ -214,7 +206,7 @@ function pulsar(e) {
 
 
 
-												}
+
                                   	//if ($total_contado)
 									{
 								$total_iva_contado=$total_contado*.16;

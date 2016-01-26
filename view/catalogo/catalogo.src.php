@@ -81,20 +81,25 @@ echo "<div class=\"box-header\">
 									  <th>Producto</th>
 									  <th>P. Compra</th>
 									  <th>Stock</th>
+                                      <th>Desc</th>
+                                      <th>Season</th>
 								  </tr>
-							  </thead>   
+							  </thead>
 							  <tbody>";
-					$query = "SELECT producto_id,codigo,producto,precio_compra,stock  FROM producto where subcategoria_id=$subcat";
+					$query = "SELECT producto_id,codigo,producto,precio_compra,stock,producto.descuento,temporada
+                        FROM producto,temporada where producto.temporada_id=temporada.temporada_id AND subcategoria_id=$subcat";
 					$subs = $database->get_results( $query );
-	
+
 					foreach( $subs as $sub )
-						{		
+						{
 							echo "<tr>
 							<td>".$sub['codigo']."</td>
 							<td>".$sub['producto']."</td>
-							<td style='text-align:right'>".$sub['precio_compra']."</td>
+							<td style='text-align:right'>".dinero($sub['precio_compra']*1.16)."</td>
 							<td style='text-align:right'>".$sub['stock']."</td>
-							</tr>";	
+                            <td style='text-align:right'>".$sub['descuento']."%</td>
+                            <td style='text-align:right'>".strtoupper($sub['temporada'])."</td>
+							</tr>";
 							
 						}
 

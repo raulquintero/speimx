@@ -71,7 +71,7 @@ foreach( $_GET as $key => $value )
 						<?php
 						if ($pedido_id)
 						{
-							$no_ticket=sprintf('T%06d', $pedido_id);
+							$no_ticket=sprintf('P%06d', $pedido_id);
 
 							echo "<table width=350><tr><td>";
 							getticket_pedido($pedido_id);      // formato.php

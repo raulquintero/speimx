@@ -96,15 +96,16 @@ foreach( $_GET as $key => $value )
 										'producto_id'      => $item[$n]['id'],
 										'tipomov_id'      => 14,
                 						'cantidad'     => 1,
-                						'precio_compra'   => $item[$n]['precio_compra'],
-                                        'precio_contado'   => ($item[$n]['precio_contado']),
-                                        'precio_credito'   => $item[$n]['precio_credito'],
+                						'precio_compra'   => $item[$n]['precio_compra']*1.16,
+                                        'precio_contado'   => ($item[$n]['precio_contado']*1.16),
+                                        'precio_credito'   => $item[$n]['precio_credito']*1.16,
                 						'iva'   => 0,
                                         'sku'     => $item[$n]['sku'],
                                         'codigo'     => $item[$n]['codigo'],
                 						'producto'    => addslashes($item[$n]['producto']),
                 						'color'    => $item[$n]['color'],
                 						'talla'    => $item[$n]['talla']
+
                 						);
 
 
@@ -114,7 +115,7 @@ foreach( $_GET as $key => $value )
 									//$factura_id = $database->lastid();
 
 										//$total_contado+=$item[$n]['precio_contado'];
-										//$n++;
+										$n++;
 
 									}
 

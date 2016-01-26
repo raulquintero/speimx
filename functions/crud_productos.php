@@ -51,9 +51,11 @@ $eed=1;
 	'marca_id'=>$_GET['marca_id'],
 	'talla_id'=>$_GET['talla_id'],
 	'unidad_id'=>$_GET['unidad_id'],
-	'estilo'=>$_GET['estilo']
+	'inventariable'=>$_GET['inventariable'],
+	'up'=>$_GET['up'],
+	'estilo'=>$_GET['estilo'],
+	'temporada_id'=>$_GET['temporada_id']
 
-    	
 		);
 
 
@@ -91,13 +93,13 @@ header($location);
 
 
 
-}				
-	
-//************************************************************			
+}
+
+//************************************************************
 if ($_GET['func']=="u")
 {
 
-// echo "<br><br>";          // ********DEBUG**********
+ //echo "<br><br>";          // ********DEBUG**********
  //foreach ($_GET as $k => $v) { echo "<br>[$k] => $v \n";}
 
 
@@ -121,9 +123,11 @@ $update = array(
 	'talla_id'=>$_GET['talla_id'],
 	'unidad_id'=>$_GET['unidad_id'],
 	'inventariable'=>$_GET['inventariable'],
-	'estilo'=>$_GET['estilo']
+	'up'=>$_GET['up'],
+	'estilo'=>$_GET['estilo'],
+	'temporada_id'=>$_GET['temporada_id']
 
-	
+
 	);
 
 //Add the WHERE clauses
@@ -136,7 +140,7 @@ $where_clause = array(
 // //Output errors if they exist for the update query
 //$database->display( $updated );
 
-	header("Location: /index.php?data=$data&op=detalles&prid=$prid&eed=1");
+  	header("Location: /index.php?data=$data&op=detalles&prid=$prid&eed=1");
 
 
 
