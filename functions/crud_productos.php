@@ -15,6 +15,12 @@ foreach( $_GET as $key => $value )
     $_GET[$key] = $database->filter( $value );
 }
 
+if ($_GET['activo']=="on") $_GET['activo']=1;
+if ($_GET['inventariable']=="on") $_GET['inventariable']=1;
+if ($_GET['up']=="on") $_GET['up']=1;
+if ($_GET['activo']=="") $_GET['activo']=0;
+if ($_GET['inventariable']=="") $_GET['inventariable']=0;
+if ($_GET['up']=="") $_GET['up']=0;
 
 $data=$_GET['data'];
 $op=$_GET['op'];

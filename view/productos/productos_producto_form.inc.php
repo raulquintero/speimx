@@ -76,14 +76,14 @@
 
 								 <div class="controls">
 								  <label class="checkbox inline">Activo
-									<input type="checkbox" id="activo" name="activo"    <?php if ($activo) echo "value=1 checked";else echo "value=0";?>>
+									<input type="checkbox" id="activo" name="activo"    <?php if ($activo) echo "value=1 checked";?>>
 								  </label>
 
 								  <label class="checkbox inline">Inventariable
-									<input type="checkbox" id="inventariable" name="inventariable" <?php if ($inventariable) echo "value=1 checked";else echo "value=0";?>>
+									<input type="checkbox" id="inventariable" name="inventariable" <?php if ($inventariable) echo " checked";?>>
 								  </label>
                                   <label class="checkbox inline">OnLine
-									<input type="checkbox" id="up" name="up" <?php if ($up) echo "value=1 checked";else echo "value=0";?>>
+									<input type="checkbox" id="up" name="up" <?php if ($up) echo " checked";?>>
 								  </label>
 								 </div>
 								</div>
