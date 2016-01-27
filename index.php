@@ -216,8 +216,8 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
                             	<li>
                                     <a href="/index.php?data=pos&op=servicio">
 										<span class="icon blue"><i class="icon-user"></i></span>
-										<span class="message">Servicio</span>
-										<span class="time">1 min</span> 
+										<span class="message">Venta Varios</span>
+										<span class="time">1 min</span>
                                     </a>
                                 </li>
 								<li>
@@ -228,9 +228,9 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
                                     </a>
                                 </li>
 								<li>
-                                    <a href="#">
+                                    <a href="/index.php?data=pos&op=andrea">
 										<span class="icon green"><i class="icon-comment-alt"></i></span>
-										<span class="message">New comment</span>
+										<span class="message">Pedido Andrea</span>
 										<span class="time">8 min</span> 
                                     </a>
                                 </li>

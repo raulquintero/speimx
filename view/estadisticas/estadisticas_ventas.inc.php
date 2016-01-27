@@ -103,11 +103,14 @@ $query = "SELECT sum(cantidad) as total from movimiento
 							  <tbody>
 
                                   <tr><td>Ingresos Netos</td><td style="text-align:right"><?php echo dinero($total)?></td></tr>
-                                  <tr><td>Devoluciones</td><td style="text-align:right"><?php echo dinero($devoluciones)?></td></tr>
-                                  <tr><td>Ventas Contado</td><td style="text-align:right"><?php echo dinero($ventas_contado)?></td></tr>
+
+
                                   <tr><td>Ventas Credito</td><td style="text-align:right"><?php echo dinero($ventas_credito)?></td></tr>
-                                  <tr><td>Abonos</td><td style="text-align:right"><?php echo dinero($abonos)?></td></tr>
                                   <tr><td>Enganche</td><td style="text-align:right"><?php echo dinero($enganche)?></td></tr>
+                                  <tr><td>Ventas Contado</td><td style="text-align:right"><?php echo dinero($ventas_contado)?></td></tr>
+                                  <tr><td>Abonos</td><td style="text-align:right"><?php echo dinero($abonos)?></td></tr>
+                                  <tr><td>Devoluciones</td><td style="text-align:right"><?php if($devoluciones>0)echo "<font color=red><b> -"; echo dinero($devoluciones)?></td></tr>
+
                                 <tr bgcolor=gray><td style="color:white;border-top:2px solid"><b>Total</b></td><td style="text-align:right;color:white;border-top:2px solid"><b><?php echo dinero($total-$devoluciones)?></b></td></tr>
                               </tbody>
 						 </table>

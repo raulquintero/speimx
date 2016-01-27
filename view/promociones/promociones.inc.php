@@ -72,10 +72,16 @@
                     </div>
 
                     </div>
-
+<?php
+    $query = "SELECT temporada from temporada where temporada_id=".$tid;
+    list( $temporada ) = $database->get_row( $query );
+    if ($_GET['i']) $seccion="<span class='label green label-inverse'>Incluidos</span>";
+        else $seccion="<span class='label red label-inverse'>Excluidos</span>"
+?>
                     <div class="box span8">
                      <div class="box-header">
-						<h2><i class="halflings-icon align-justify"></i><span class="break"></span>Temporada > Regular <span style='color:green'>[Incluidos]</span> </h2>
+						<h2><i class="halflings-icon align-justify"></i><span class="break"></span>Temporada > <?php echo strtoupper($temporada)." ".$seccion?>
+                         </h2>
 						<div class="box-icon">
 							<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
 							<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>

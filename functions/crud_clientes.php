@@ -54,7 +54,7 @@ $codigo_cliente.=date("mdHis");
 	'telefono_casa'=>$_GET['telefono_casa'],
 	'antiguedad_empleo'=>$_GET['antiguedad_empleo'],
 	'observaciones'=>$_GET['observaciones'],
-
+    'observaciones'=>$_GET['tipocredito_id'],
 	'credito'=>3000,
 	'total_ultimo'=>$_GET['total_ultimo'],
 	'fecha_total_inicio'=>fechaustomysql($_GET['fecha_total_inicio']),
@@ -110,7 +110,7 @@ $update = array(
 	'telefono_casa'=>$_GET['telefono_casa'],
 	'antiguedad_empleo'=>$_GET['antiguedad_empleo'],
 	'observaciones'=>$_GET['observaciones'],
-
+     'tipocredito_id'=>$_GET['tipocredito_id'],
 	'credito'=>$_GET['credito'],
 	'total_ultimo'=>$_GET['total_ultimo'],
 	'fecha_total_inicio'=>fechaustomysql($_GET['fecha_total_inicio']),

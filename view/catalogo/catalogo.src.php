@@ -74,19 +74,20 @@ echo "<div class=\"box-header\">
 						</div>
 					</div>
 					<div class=\"box-content\">
-						<table class=\"table table-striped table-bordered bootstrap-datatable datatable\">
+						<table class=\"table table-striped table-bordered\">   <!-- bootstrap-datatable datatable -->
 							  <thead>
 								  <tr>
 									  <th>Id</th>
 									  <th>Producto</th>
 									  <th>P. Compra</th>
+                                      <th>P. Venta</th>
 									  <th>Stock</th>
                                       <th>Desc</th>
                                       <th>Season</th>
 								  </tr>
 							  </thead>
 							  <tbody>";
-					$query = "SELECT producto_id,codigo,producto,precio_compra,stock,producto.descuento,temporada
+					$query = "SELECT producto_id,codigo,producto,precio_compra,precio_contado,stock,producto.descuento,temporada
                         FROM producto,temporada where producto.temporada_id=temporada.temporada_id AND subcategoria_id=$subcat";
 					$subs = $database->get_results( $query );
 
@@ -94,20 +95,22 @@ echo "<div class=\"box-header\">
 						{
 							echo "<tr>
 							<td>".$sub['codigo']."</td>
-							<td>".$sub['producto']."</td>
+							<td><a href=\"#\" onclick='showProduct(". $sub['producto_id'].")'
+                            class=\"btn-setting\">".$sub['producto']."</a></td>
 							<td style='text-align:right'>".dinero($sub['precio_compra']*1.16)."</td>
+							<td style='text-align:right'>".dinero($sub['precio_contado']*1.16)."</td>
 							<td style='text-align:right'>".$sub['stock']."</td>
                             <td style='text-align:right'>".$sub['descuento']."%</td>
                             <td style='text-align:right'>".strtoupper($sub['temporada'])."</td>
 							</tr>";
-							
+
 						}
 
 
 
-								                                  
+
 			echo "				  </tbody>
-						 </table>     
+						 </table>
 					</div>
 				";
 }

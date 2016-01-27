@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 	 $cid=(htmlspecialchars($_GET["cid"]));
 	 $f=(htmlspecialchars($_GET["f"]));
 	 if ($f=="editar")
@@ -11,13 +12,13 @@
 
 	 if ($cid>0)
 	 {
-		$query = "SELECT activo, curp, cliente_id,cliente.gruponomina_id ,nombre, apellidop, apellidom, domicilio_casa,colonia_casa_id, credito, total_ultimo, fecha_total_ultimo,fecha_total_inicio, 
-			email,telefono_personal, telefono_casa, credito,saldo,abono,antiguedad_empleo,cliente.observaciones,cliente.empresa_id FROM cliente,gruponomina WHERE cliente.cliente_id=$cid  
+		$query = "SELECT activo, curp, cliente_id,cliente.gruponomina_id ,nombre, apellidop, apellidom, domicilio_casa,colonia_casa_id, credito,tipocredito_id, total_ultimo, fecha_total_ultimo,fecha_total_inicio,
+			email,telefono_personal, telefono_casa, credito,saldo,abono,antiguedad_empleo,cliente.observaciones,cliente.empresa_id FROM cliente,gruponomina WHERE cliente.cliente_id=$cid
 			AND cliente.gruponomina_id=gruponomina.gruponomina_id";
 		//$results = $database->get_results( $query );
 		//$query = "SELECT group_id, group_name, group_parent FROM your_table WHERE group_name LIKE '%production%'";
-		list( $activo, $curp, $cliente_id, $gruponomina_id,  $nombre, $apellidop,$apellidom,$domicilio_casa,$colonia_casa_id,$credito, $total_ultimo, $fecha_total_ultimo,$fecha_total_inicio, 
-			$email, $telefono_personal,$telefono_casa, 
+		list( $activo, $curp, $cliente_id, $gruponomina_id,  $nombre, $apellidop,$apellidom,$domicilio_casa,$colonia_casa_id,$credito,$tipocredito_id, $total_ultimo, $fecha_total_ultimo,$fecha_total_inicio,
+			$email, $telefono_personal,$telefono_casa,
 			$credito,$saldo,$abono,$antiguedad_empleo,$observaciones, $empresa_id ) = $database->get_row( $query );
 		if (!$activo) $checado="";
 
@@ -26,19 +27,19 @@
 	 }
 
 
+    if ($tipocredito_id==0) $tipocredito_id=4; 
 
-	 	
 
 ?>
 
-					<?php echo error($_GET['eed']);	?>	
+					<?php echo error($_GET['eed']);	?>
 
 			<div class="row-fluid">
 				<div class="box  span12">
 					<div class="box-header" data-original-title>
 						<h2><i class="halflings-icon edit"></i><span class="break"></span><?=$title?></h2>
 						<div class="box-icon">
-							
+
 							<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
 							<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
 							<a href='<?php echo "/index.php?data=clientes&op=detalles&cid=$cid"?>' ><i class="halflings-icon remove"></i></a>
@@ -62,12 +63,12 @@
 						<div class="alert alert-info">
 							<strong>Datos Personales</strong>
 						</div>
-							  
+
 								<div class="control-group">
 								<label class="control-label">Activo</label>
 								 <div class="controls">
 								  <label class="checkbox inline">
-									<input type="checkbox" id="inlineCheckbox1" name="activo"  value="1"  <?php echo $checado?>> 
+									<input type="checkbox" id="inlineCheckbox1" name="activo"  value="1"  <?php echo $checado?>>
 								  </label>
 								 </div>
 								</div>
@@ -137,11 +138,13 @@
 								  <input class="input-xlarge" id="email" name="email" type="email" value="<?php echo $email?>">
 								</div>
 							  </div>
-							 
+
+                              <?php combobox("tipocredito",$tipocredito_id)?>
+
 						<div class="alert alert-info">
 							<strong>Domicilio</strong>
 						</div>							  
-							 
+
 							  <div class="control-group">
 								<label class="control-label" >Domicilio</label>
 								<div class="controls">
