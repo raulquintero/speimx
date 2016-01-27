@@ -16,9 +16,12 @@ session_start();
 
 if ($func=="add_item")
 {
-    $precio_credito=$_GET['precio_credito'];
+
     $precio_contado=$_GET['precio_contado'];
     $precio_compra=$_GET['precio_compra'];
+    $precio_credito=$_GET['precio_credito'];
+    if (!$precio_credito && $sku=="60056002")
+    $precio_credito=$precio_contado*1.3;
     $precio_venta=($precio_contado*$iva)-$descuento;
     //$precio_venta=$precio_contado*$iva;
 

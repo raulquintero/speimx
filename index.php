@@ -179,11 +179,11 @@ switch ($type) {
 		$('#cantidad').focus();
 		//document.getElementById('textcode').focus();
 	}
-	</script>	
+	</script>
 </head>
 
 <body onload='setFocusToTextBox()'>
-<?php 
+<?php
 if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
 	echo "<table width=100%><tr bgcolor=yellow><td>".$_SESSION['host'].".- Version  Desarrollo. $realpath</td></tr></table>";
 
@@ -200,97 +200,63 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
 					<span class="icon-bar"></span>
 				</a>
 				<span class="brand" >SPEI.MX 1.0.0.1 [Sucursal: <?php echo $_SESSION['sucursal'] ?>]</span>
-								
-				<!-- start: Header Menu -->
+
+                <!-- start: Header Menu -->
 				<div class="nav-no-collapse header-nav">
 					<ul class="nav pull-right">
-						<li class="dropdown hidden-phone">
+						<li class="dropdown">
 							<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
 								<i class="halflings-icon white th-list"></i>
 							</a>
 							<ul class="dropdown-menu notifications">
 								<li class="dropdown-menu-title">
- 									<span>You have 11 notifications</span>
-									<a href="#refresh"><i class="icon-repeat"></i></a>
-								</li>	
+ 									<span>Shortcuts</span>
+									<!--a href="#refresh"><i class="icon-repeat"></i></a-->
+								</li>
                             	<li>
                                     <a href="/index.php?data=pos&op=servicio">
-										<span class="icon blue"><i class="icon-user"></i></span>
-										<span class="message">Venta Varios</span>
+										<span class="icon yellow"><i class="icon-user"></i></span>
+										<span class="message">Venta Miscelaneos</span>
 										<span class="time">1 min</span>
                                     </a>
                                 </li>
 								<li>
                                     <a href="https://www.pagoexpress.com.mx/wpimmex/Login.aspx" target="tel">
-										<span class="icon green"><i class="icon-bullhorn"></i></span>
-										<span class="message">Recargas</span>
-										<span class="time">7 min</span> 
+										<span class="icon blue"><i class="icon-bullhorn"></i></span>
+										<span class="message">Recargas TELCEL</span>
+										<span class="time">7 min</span>
                                     </a>
                                 </li>
 								<li>
                                     <a href="/index.php?data=pos&op=andrea">
-										<span class="icon green"><i class="icon-comment-alt"></i></span>
-										<span class="message">Pedido Andrea</span>
-										<span class="time">8 min</span> 
-                                    </a>
-                                </li>
-								<li>
-                                    <a href="#">
-										<span class="icon green"><i class="icon-comment-alt"></i></span>
-										<span class="message">New comment</span>
-										<span class="time">16 min</span> 
-                                    </a>
-                                </li>
-								<li>
-                                    <a href="#">
-										<span class="icon blue"><i class="icon-user"></i></span>
-										<span class="message">New user registration</span>
-										<span class="time">36 min</span> 
-                                    </a>
-                                </li>
-								<li>
-                                    <a href="#">
-										<span class="icon yellow"><i class="icon-shopping-cart"></i></span>
-										<span class="message">2 items sold</span>
-										<span class="time">1 hour</span> 
+										<span class="icon red"><i class="icon-comment-alt"></i></span>
+										<span class="message">Pedido ANDREA</span>
+										<span class="time">8 min</span>
                                     </a>
                                 </li>
 								<li class="warning">
                                     <a href="#">
-										<span class="icon red"><i class="icon-user"></i></span>
-										<span class="message">User deleted account</span>
-										<span class="time">2 hour</span> 
+										<span class="icon red"><i class="icon-comment-alt"></i></span>
+										<span class="message">Pedido CKLASS</span>
+										<span class="time">16 min</span>
                                     </a>
                                 </li>
-								<li class="warning">
-                                    <a href="#">
-										<span class="icon red"><i class="icon-shopping-cart"></i></span>
-										<span class="message">New comment</span>
-										<span class="time">6 hour</span> 
-                                    </a>
-                                </li>
-								<li>
-                                    <a href="#">
-										<span class="icon green"><i class="icon-comment-alt"></i></span>
-										<span class="message">New comment</span>
-										<span class="time">yesterday</span> 
-                                    </a>
-                                </li>
+
 								<li>
                                     <a href="?data=pos&op=cortedecaja">
 										<span class="icon blue"><i class="icon-user"></i></span>
 										<span class="message">Corte de Caja</span>
-										<span class="time">yesterday</span> 
+										<span class="time">yesterday</span>
                                     </a>
                                 </li>
-                                <li class="dropdown-menu-sub-footer">
+                                <!--li class="dropdown-menu-sub-footer">
                             		<a>View all notifications</a>
-								</li>	
+								</li-->
 							</ul>
 						</li>
 						<!-- END: Notifications Dropdown -->
 
-						<!-- start: Message Dropdown -->
+                    	<!-- start: Message Dropdown -->
 						<li class="dropdown hidden-phone">
 							<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
 								<i class="halflings-icon white envelope"></i>
@@ -299,39 +265,7 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
 								<li class="dropdown-menu-title">
  									<span>You have 9 messages</span>
 									<a href="#refresh"><i class="icon-repeat"></i></a>
-								</li>	
-                            	<li>
-                                    <a href="#">
-										<span class="avatar"><img src="img/avatar.jpg" alt="Avatar"></span>
-										<span class="header">
-											<span class="from">
-										    	Dennis Ji
-										     </span>
-											<span class="time">
-										    	6 min
-										    </span>
-										</span>
-                                        <span class="message">
-                                            Lorem ipsum dolor sit amet consectetur adipiscing elit, et al commore
-                                        </span>  
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-										<span class="avatar"><img src="img/avatar.jpg" alt="Avatar"></span>
-										<span class="header">
-											<span class="from">
-										    	Dennis Ji
-										     </span>
-											<span class="time">
-										    	56 min
-										    </span>
-										</span>
-                                        <span class="message">
-                                            Lorem ipsum dolor sit amet consectetur adipiscing elit, et al commore
-                                        </span>  
-                                    </a>
-                                </li>
+								</li>
                                 <li>
                                     <a href="#">
 										<span class="avatar"><img src="img/avatar.jpg" alt="Avatar"></span>
@@ -345,68 +279,19 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
 										</span>
                                         <span class="message">
                                             Lorem ipsum dolor sit amet consectetur adipiscing elit, et al commore
-                                        </span>  
-                                    </a>
-                                </li>
-								<li>
-                                    <a href="#">
-										<span class="avatar"><img src="img/avatar.jpg" alt="Avatar"></span>
-										<span class="header">
-											<span class="from">
-										    	Dennis Ji
-										     </span>
-											<span class="time">
-										    	yesterday
-										    </span>
-										</span>
-                                        <span class="message">
-                                            Lorem ipsum dolor sit amet consectetur adipiscing elit, et al commore
-                                        </span>  
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-										<span class="avatar"><img src="img/avatar.jpg" alt="Avatar"></span>
-										<span class="header">
-											<span class="from">
-										    	Dennis Ji
-										     </span>
-											<span class="time">
-										    	Jul 25, 2012
-										    </span>
-										</span>
-                                        <span class="message">
-                                            Lorem ipsum dolor sit amet consectetur adipiscing elit, et al commore
-                                        </span>  
+                                        </span>
                                     </a>
                                 </li>
 								<li>
                             		<a class="dropdown-menu-sub-footer">View all messages</a>
-								</li>	
+								</li>
 							</ul>
 						</li>
 						<!-- end: Message Dropdown -->
-						<!-- <li>
-							<a class="btn" href="#">
-								<i class="halflings-icon white wrench"></i>
-							</a>
-						</li> -->
-						<!-- start: User Dropdown -->
-						<li class="dropdown">
-							<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-								<i class="halflings-icon white user"></i> <?php echo $_SESSION['administrador'];?>
-								<span class="caret"></span>
-							</a>
-							<ul class="dropdown-menu">
-								<li class="dropdown-menu-title">
- 									<span>Account Settings</span>
-								</li>
-								<li><a href="#"><i class="halflings-icon user"></i> Profile</a></li>
-								<li><a href="authmain.php?module=login&action=1"><i class="halflings-icon off"></i> Logout</a></li>
-							</ul>
-						</li>
-						<!-- end: User Dropdown -->
-				
+
+
+
+
 
 						<!-- start: Notifications Dropdown -->
 						<li class="dropdown ">
@@ -427,19 +312,19 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
 										</span>
                                     </a>
                                 </li>
-                               
+
 								<?php
 									$query = "SELECT abono,limite FROM abono where activado=1 ORDER BY limite ASC";
 
 									$results = $database->get_results( $query );
-									foreach ($results as $row ) 
+									foreach ($results as $row )
 									{
-										
+
 										echo "<li>
                                     		<a href=\"#\">
 											<span class=\"header\">
 												<span class=\"title\">".dinero($row['limite'])."</span>
-												<span class=\"percent\">".dinero($row['abono'])."</span> 
+												<span class=\"percent\">".dinero($row['abono'])."</span>
 											</span>
                                     		</a>
                                 		</li>";
@@ -451,10 +336,34 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
 
 								<li>
                             		<a class="dropdown-menu-sub-footer">Ver todos los planes</a>
-								</li>	
+								</li>
 							</ul>
 						</li>
 						<!-- end: Notifications Dropdown -->
+
+
+
+
+						<!-- start: User Dropdown -->
+						<li class="dropdown">
+							<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+								<i class="halflings-icon white user"></i> <?php echo $_SESSION['administrador'];?>
+								<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu">
+								<li class="dropdown-menu-title">
+ 									<span>Account Settings</span>
+								</li>
+								<li><a href="#"><i class="halflings-icon user"></i> Profile</a></li>
+								<li><a href="authmain.php?module=login&action=1"><i class="halflings-icon off"></i> Logout</a></li>
+							</ul>
+						</li>
+						<!-- end: User Dropdown -->
+
+
+
+
+
 
 
 					</ul>
@@ -499,6 +408,7 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
 							echo "<ul>";
 
 								if ($nid<=6) echo "<li><a href=\"index.php?data=compras\"><i class=\"icon-book\"    ></i><span class=\"hidden-tablet\"> Compras </span></a></li>";
+								if ($nid<=6) echo "<li><a href=\"index.php?data=inventarios\"><i class=\"icon-book\"    ></i><span class=\"hidden-tablet\"> Inventarios </span></a></li>";
 								if ($nid<=8) echo "<li><a href=\"index.php?data=compras&op=ordendecompra\"><i class=\"icon-book\"    ></i><span class=\"hidden-tablet\"> Orden de Compra</span></a></li>";
 								if ($nid<=6) echo "<li><a href=\"index.php?data=compras&op=proveedores\"><i class=\"icon-barcode\"></i><span class=\"hidden-tablet\"> Proveedores</span></a></li>";
 							echo "</ul>";

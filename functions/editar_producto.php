@@ -26,10 +26,10 @@ $data=$_GET['data'];
 $op=$_GET['op'];
 $f=$_GET['f'];
 $prid=$_GET['prid'];
-
+$subcat=$_GET['subcat'];
 
 //************************************************************
-if ($_GET['func']=="u")
+if ($f=="u")
 {
 
  //echo "<br><br>";          // ********DEBUG**********
@@ -44,14 +44,14 @@ if ($_GET['func']=="u")
 $update = array(
 
 	'activo'=>$_GET['activo'],
+    'up'=>$_GET['up'],
     'subcategoria_id'=>$_GET['subcategoria_id'],
+    'temporada_id'=>$_GET['temporada_id'],
 	'precio_compra'=>$precio_compra,
 	'precio_contado'=>$precio_contado,
 	'precio_credito'=>$precio_credito,
-	'precio_promocion'=>$_GET['precio_promocion'],
-	'descuento'=>$_GET['descuento'],
-	'up'=>$_GET['up'],
-    'temporada_id'=>$_GET['temporada_id']
+   	'descuento'=>$_GET['descuento'],
+	'precio_promocion'=>$_GET['precio_promocion']
 
 
 	);
@@ -66,7 +66,12 @@ $where_clause = array(
 // //Output errors if they exist for the update query
 //$database->display( $updated );
 
-   header("Location: /index.php?data=$data&op=detalles&prid=$prid&eed=1");
+    $location="/index.php?data=$data&subcat=$subcat&prid=$prid&eed=1";
+    if ($op)
+        $location.="&op=$op";
+
+
+header("Location: $location");
 
 
 

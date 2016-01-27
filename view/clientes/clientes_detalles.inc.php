@@ -36,7 +36,8 @@ if ($_GET['eed']==2)
 											
 											<b>
                                             <?php
-                                            echo "<a classa=\"btn btn-info blue btn-setting hidden-print\" data-toggle=\"modal\" data-target=\"#abonaracuenta\" >".
+                                            $cliente_id=sprintf('C%06d', $cliente_id);
+                                            echo "<a href=\"/functions/cart.php?func=sel_cliente&cid=". $cliente_id."\" classa=\"btn btn-primary\" data-dismiss=\"modal\">".
                                             strtoupper($nombre.' '.$apellidop.' '.$apellidom)."</b></a>   &nbsp;&nbsp;";
 
 											if (!$_GET['h'])
@@ -175,15 +176,16 @@ if ($_GET['eed']==2)
 
 <div style="text-align:center;"><h1>Saldo Actual: $ <?php echo $saldo?></h1> <br><br></div>
 			<form class="form-horizontal" action="./functions/abono.php" >
-				<input type="hidden" name="data" value="clientes">
+			  <fieldset>
+                <input type="hidden" name="data" value="clientes">
 				<input type="hidden" name="op" value="abono">
 				<input type="hidden" name="f" value="ab">
-				<input type="hidden" name="cid" value="<?php echo $cid?>">
+                <input type="hidden" name="cid" value="<?php echo $cid?>">
 
 
-			<fieldset>
 
-				<div class="control-group">	
+
+				<div class="control-group">
 								<label class="control-label" for="focusedInput">Cantidad: $</label>
 								<div class="controls">
 								  <input class="input-xlarge focused" id="focusedInput" name="cantidad" value="">

@@ -74,8 +74,8 @@ $prid=$_GET['q'];
 
 								<input type="hidden" name="data" value="<?php echo $_GET['data']?>" >
 								<input type="hidden" name="op" value="<?php echo $_GET['op']?>">
-								<input type="hidden" name="f" value="<?php echo $_GET['f']?>">
-								<?php echo "<input type=\"hidden\" name=\"func\" value=\"u\">";?>
+								<input type="hidden" name="f" value="u">
+                                <input type="hidden" name="subcat" value="<?php echo $_GET['subcat']?>">
 								<input type="hidden" name="prid" value=<?php echo $prid?> >
 
 

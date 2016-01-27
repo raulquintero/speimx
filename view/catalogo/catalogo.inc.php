@@ -59,7 +59,7 @@ if ($_GET['eed']==2)
 
 				<div class="box span4 hidden-print">
 					<div class="box-header">
-						<h2><i class="halflings-icon align-justify"></i><span class="break"></span>Categorias</h2>
+						<h2><i class="halflings-icon align-justify"></i><span class="break"></span>Categorias<?php echo $_GET['subcat']?></h2>
 						<div class="box-icon">
 							<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
 							<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
@@ -138,7 +138,7 @@ xmlhttp.onreadystatechange=function()
     document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
     }
   }
-xmlhttp.open("GET","/editar_producto.ajax.php?q="+str,true);
+xmlhttp.open("GET","/editar_producto.ajax.php?q="+str+"&data=<?php echo $_GET['data']?>"+"&subcat=<?php echo $_GET['subcat']?>",true);
 xmlhttp.send();
 }
 </script>
@@ -153,13 +153,12 @@ function pulsar(e) {
 
 
 
-
 	<div class="modal hide fade" id="myModal">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal">×</button>
 			<h3><span class=\"label label-inverse\">Editar Producto</span></h3>
 		</div>
-       <form class="form-vertical" action="/functions/crud_productos1.php">
+       <form class="form-vertical" action="/functions/editar_producto.php">
 		<div class="modal-body">
 
 
@@ -171,7 +170,7 @@ function pulsar(e) {
 
 			</div>
            	<div class="modal-footer">
-				    <button class="btn">Cancel</button>
+				    <button class="btn" data-dismiss="modal">Cancel</button>
 					<button type="submit" class="btn btn-primary">Grabar Cambios</button>
     		</div>
     </form>

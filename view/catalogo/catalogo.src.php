@@ -79,8 +79,8 @@ echo "<div class=\"box-header\">
 								  <tr>
 									  <th>Id</th>
 									  <th>Producto</th>
-									  <th>P. Compra</th>
-                                      <th>P. Venta</th>
+									  <th>PCM</th>
+                                      <th>PCN</th>
 									  <th>Stock</th>
                                       <th>Desc</th>
                                       <th>Season</th>
@@ -93,10 +93,15 @@ echo "<div class=\"box-header\">
 
 					foreach( $subs as $sub )
 						{
-							echo "<tr>
-							<td>".$sub['codigo']."</td>
+                            if ($_GET['prid']==$sub['producto_id'])
+                            echo "<tr bgcolor=green'>";
+                            else
+                            echo "<tr>";
+							echo "<td>".$sub['codigo']."</td>
 							<td><a href=\"#\" onclick='showProduct(". $sub['producto_id'].")'
-                            class=\"btn-setting\">".$sub['producto']."</a></td>
+                            class=\"btn-setting\">".$sub['producto']."</a>&nbsp;&nbsp;";
+                            if ($_GET['prid']==$sub['producto_id']) echo "<i class=\"halflings-icon ok \"></i>";
+                            echo "</td>
 							<td style='text-align:right'>".dinero($sub['precio_compra']*1.16)."</td>
 							<td style='text-align:right'>".dinero($sub['precio_contado']*1.16)."</td>
 							<td style='text-align:right'>".$sub['stock']."</td>

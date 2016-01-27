@@ -46,7 +46,7 @@ $porcentaje_clientes=ceil(($clientes_nodeben*100)/$clientes_deben);
 							<div class="bar" style="width:  <?php echo $porcentaje_credito?>%"></div>
 						</div>
 				    
-				             	<h5>Clientes sin deuda: <?php echo $clientes_deben.' ('.$porcentaje_clientes.'%)'?> )</h5>
+				             	<h5>Clientes sin deuda: <?php echo $clientes_nodeben.' ('.$porcentaje_clientes.'%)'?> )</h5>
 				        <div class="progress progress-success" style="margin-bottom: 9px;">
 							<div class="bar" style="width:  <?php echo $porcentaje_clientes?>%"></div>
 						</div>
@@ -72,7 +72,7 @@ $porcentaje_clientes=ceil(($clientes_nodeben*100)/$clientes_deben);
 								  <th>Nombre</th>
 								  <th>Abono</th>
 								   <th>Saldo</th>
-								 <th>Email</th> 
+								 <th>Mora</th>
 								  <th>Acciones</th> 
 							  </tr>
 						  </thead>   
@@ -90,11 +90,13 @@ foreach( $results as $row )
 	
 ?>
 							<tr>
-								<td><a href=/index.php?data=clientes&op=detalles&cid=<?php echo $row['cliente_id']?> >
-									<?php echo strtoupper($row['apellidop'].' '.$row['apellidom'].' '.$row['nombre'])?></a></td>
+								<td>
+                                <a href=/index.php?data=clientes&op=detalles&cid=<?php echo $row['cliente_id']?> >
+									<?php echo strtoupper($row['apellidop'].' '.$row['apellidom'].' '.$row['nombre'])?></a><br>
+                                    <?php echo $row['email']?></td>
 								<td class="center"><?php echo  dinero($row['abono'])?></td>
 								 <td class="center"><?php echo dinero($row['saldo'])?></td>
-								<td class="center"><?php echo $row['email']?></td>
+								<td class="center"><?php echo $row['pagos_atrazados']?></td>
 								 <td class="center">
 									<a class="btn btn-success" href="#">
 										<i class="halflings-icon white zoom-in"></i>  
@@ -184,3 +186,6 @@ foreach( $results as $row )
 </div><!--/span-->
 
 			<!--/div></row-->
+
+
+
