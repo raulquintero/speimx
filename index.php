@@ -23,8 +23,8 @@ $nid=$_SESSION['nid'];
 $code = isset($_GET['code']) ? $_GET['code'] : '';
 //$code = isset($code) ? $code : ' ';
 $producto_id = isset($_GET['producto_id']) ? $_GET['producto_id'] : '';
-$_GET['filtro'] = isset($_GET['filtro']) ? $_GET['filtro'] : ' ';
-$filtro = isset($filtro) ?  : ' ';
+$filtro = isset($_GET['filtro']) ? $_GET['filtro'] : ' ';
+//$filtro = isset($filtro) ?  : ' ';
 $location = isset($_GET['location']) ? $_GET['location'] : '';
 $subcat = isset($_GET['subcat']) ? $_GET['subcat'] : '';
 
@@ -213,7 +213,7 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</a>
-				<span class="brand" >SPEI.MX 1.0.0.1 [Sucursal: <?php echo $_SESSION['code'] ?>]</span>
+				<span class="brand" >SPEI.MX 1.0.0.1 [Sucursal: <?php echo $_SESSION['sucursal'] ?>]</span>
 
                 <!-- start: Header Menu -->
 				<div class="nav-no-collapse header-nav">
@@ -249,6 +249,22 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
  									<span>Shortcuts</span>
 									<!--a href="#refresh"><i class="icon-repeat"></i></a-->
 								</li>
+
+                              	<li>
+                                    <a href="/index.php?data=pos">
+										<span class="icon green"><i class="icon-barcode"></i></span>
+										<span class="message">Pos</span>
+										<span class="time">1 min</span>
+                                    </a>
+                                </li>
+								<li>
+                                    <a href="/index.php?data=productos&op=checarprecio">
+										<span class="icon green"><i class="icon-barcode"></i></span>
+										<span class="message">checar Precio</span>
+										<span class="time">1 min</span>
+                                    </a>
+                                </li>
+
                             	<li>
                                     <a href="/index.php?data=pos&op=servicio">
 										<span class="icon yellow"><i class="icon-user"></i></span>
@@ -416,8 +432,8 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
 
 						if ($nid<=6) echo "<li><a href=\"index.html\"><i class=\"icon-bar-chart hidden-print\"></i><span class=\"hidden-tablet hidden-print\"> Dashboard</span></a></li>";
 						if ($nid<5) echo "<li><a href=\"index.php?data=mensajes\"   ><i class=\"icon-envelope hidden-print\"></i><span class=\"hidden-tablet hidden-print\"> Messages</span></a></li>";
-						 echo "<li><a href=\"index.php?data=pos\"        ><i class=\"icon-shopping-cart hidden-print\" ></i><span class=\"hidden-tablet hidden-print\"> PoS</span></a></li>";
-						 echo "<li><a href=\"index.php?data=productos&op=checarprecio\"><i class=\"icon-barcode hidden-print\"       ></i><span class=\"hidden-tablet hidden-print\"> Checar Precio</span></a></li>";
+						 //echo "<li><a href=\"index.php?data=pos\"        ><i class=\"icon-shopping-cart hidden-print\" ></i><span class=\"hidden-tablet hidden-print\"> PoS</span></a></li>";
+						 //echo "<li><a href=\"index.php?data=productos&op=checarprecio\"><i class=\"icon-barcode hidden-print\"       ></i><span class=\"hidden-tablet hidden-print\"> Checar Precio</span></a></li>";
 						 echo "<li><a href=\"index.php?data=pedidos\"                  ><i class=\"icon-shopping-cart hidden-print\" ></i><span class=\"hidden-tablet hidden-print\"> Pedidos</span></a></li>";
 						//if ($nid<=8) echo "<li><a href=\"index.php?data=clientes&op=devoluciones\"><i class=\"icon-book\"    ></i><span class=\"hidden-tablet\"> Devoluciones</span></a></li>";
 
@@ -513,14 +529,18 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
 			<!-- start: Content -->
 			<div id="content" class="span10 ">
 
-
 			<ul class="breadcrumb hidden-print hidden-phone">
-				<li>
-					<i class="icon-home "></i>
-					<a href="/index.php" >Home</a>
+				<!--<li>
+					<i class=" fa-icon-tasks"></i>
+					<a href="/index.php" >Accesos Rapido</a>
 					<i class="icon-angle-right"></i>
-				</li>
-				<li><a  href="/index.php?data=<?php echo $data?>"><?php echo ucfirst($data)?></a></li>
+				</li>-->
+
+				<!--<li><a  href="/index.php?data=<?php echo $data?>"><?php echo ucfirst($data)?></a></li>-->
+				<li><a class="btn btn-info blue" href="/index.php?data=pos" ><i class="icon-barcode "></i>&nbsp;POS</a></li>
+				<li><a class="btn btn-info blue" href="/index.php?data=productos&op=checarprecio" ><i class="icon-barcode "></i>&nbsp;Checar Precio</a></li>
+                <li><a class="btn btn-info blue"  href="http://speimx.dev/index.php?data=pos&op=servicio" ><i class="icon-barcode " href="/index.php?data=pos&op=servicio"></i>&nbsp;Miscelaneos</a></li>
+                <li><a class="btn btn-info blue" href="/index.php?data=pos&op=andrea"><i class="halflings-icon inbox white "></i>&nbsp;Hacer Pedido</a></li>
 
 			</ul>
             <div id='show_messages'>

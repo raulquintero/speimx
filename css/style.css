@@ -711,13 +711,13 @@ ul.messages li .message {
 	line-height: 34px;
 	background: #eee;
 	border: 0px;
-	color: #aaa;
+	color: #fff;
 	-webkit-box-shadow: none;
 	   -moz-box-shadow: none;
 	   		box-shadow: none;
   	-webkit-border-radius: 0px;
        -moz-border-radius: 0px;
-	        border-radius: 0px; 	
+	        border-radius: 0px;
 }
 
 .breadcrumb span {
@@ -725,16 +725,44 @@ ul.messages li .message {
 }
 
 .breadcrumb a {
-	color: #aaa;
-	text-shadow: 0px 1px 1px #fff;	
+	color: #fff;
+	text-shadow: 0px 1px 1px #000;
 }
 
 .breadcrumb a:hover {
 	color: #646464;
 	text-shadow: 0px 1px 1px #fff;
-	text-decoration: none;	
+	text-decoration: none;
 }
 
+.breadcrumb_sub {
+	margin: -28px -28px 28px -28px;
+	line-height: 34px;
+	background: #ddd;
+	border: 0px;
+	color: #fff;
+	-webkit-box-shadow: none;
+	   -moz-box-shadow: none;
+	   		box-shadow: none;
+  	-webkit-border-radius: 0px;
+       -moz-border-radius: 0px;
+	        border-radius: 0px;
+}
+
+.breadcrumb_sub span {
+	text-shadow: 1px 1px 0px #fff;
+}
+
+.breadcrumb_sub a {
+	color: #fff;
+	text-shadow: 0px 1px 1px #000;
+}
+
+.breadcrumb_sub a:hover {
+	color: #646464;
+	text-shadow: 0px 1px 1px #fff;
+	text-decoration: none;
+}
 .dark {
 	background: #fdfdfd;
 	text-shadow: 0px 1px 1px #fff !important;
@@ -746,7 +774,7 @@ ul.messages li .message {
 	position: relative;
 	border-left: 2px solid #eee;
 	min-height: 100%;
-	overflow: hidden;		
+	overflow: hidden;
 }
 
 .well {
@@ -764,14 +792,14 @@ ul.messages li .message {
 	position: relative;
 	margin-bottom: 28px;
 }
-	
+
 	.statbox .number {
 		font-size: 40px;
 		position: absolute;
 		top: 10px;
 		right: 10px;
 	}
-	
+
 	.statbox .title {
 		font-size: 16px;
 		position: absolute;
@@ -787,11 +815,11 @@ ul.messages li .message {
 		left: 0px;
 		padding: 10px;
 	}
-	
+
 	.statbox .footer:hover {
 		background: rgba(0,0,0,.2);
 	}
-	
+
 	.statbox .footer a {
 		color: #fff;
 		text-decoration: none;

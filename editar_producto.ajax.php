@@ -164,12 +164,12 @@ $prid=$_GET['q'];
 
 					<div class="box-content">
 
-							  <div class="control-group">
+							  <!--<div class="control-group">
 								<label class="control-label" >Precio Compra</label>
 								<div class="controls">
 								  <input class="input-small" id="precio_compra" name="precio_compra" type="text" value="<?php echo $precio_compra?>"> <?php echo dinero($precio_compra/1.16)?>
 								</div>
-							  </div>
+							  </div>-->
 
 
 							<div class="control-group">

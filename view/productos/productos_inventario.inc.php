@@ -99,7 +99,7 @@
   								<?php
   								if (!$color_id){
 									$query = "SELECT color_id FROM color WHERE producto_id=$prid limit 1";
-									list( $color_id ) = $database->get_row( $query );	
+									list( $color_id ) = $database->get_row( $query );
 								}
 
 								$query = "SELECT color_id,color,codigo_color FROM color WHERE producto_id=$prid ORDER BY color ";

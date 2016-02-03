@@ -1,13 +1,20 @@
+<ul class="breadcrumb_sub hidden-print hidden-phone">
+
+					<i class=" fa-icon-tasks"></i>
+					&nbsp;&nbsp;&nbsp;&nbsp;<a href="/index.php" >Menu&nbsp;</a>
+					<i class="icon-angle-right"></i>&nbsp;&nbsp;&nbsp;
 
 
 
+				<a class="btn btn-small blue" href="index.php?data=clientes&op=cliente_form&f=agregar" ><i class="icon-barcode "></i>&nbsp;AGREGAR CLIENTE</a>
+				<a class="btn btn-small blue" href="index.php?data=nomina&op=cobronomina_form&f=agregar" ><i class="icon-barcode "></i>&nbsp;<b>+</b> AGREGAR GRUPO</a>
+                <a class="btn btn-small blue"  href="index.php?data=empresas&op=empresa_form&f=agregar" ><i class="icon-barcode "></i>&nbsp;<b>+</b> AGREGAR EMPRESA</a>
 
-<div class="box-content buttons">
-						<a href="index.php?data=clientes&op=cliente_form&f=agregar"><button class="btn btn-small btn-primary"><b>+</b> AGREGAR CLIENTE</button></a>
-						<a href="index.php?data=cobronomina&op=cobronomina_form&f=agregar"><button class="btn btn-small btn-primary"><b>+</b> AGREGAR GRUPO</button></a>
-						<a href="index.php?data=empresas&op=empresa_form&f=agregar"><button class="btn btn-small btn-primary"><b>+</b> AGREGAR EMPRESA</button></a>
-						
-</div>
+
+			</ul>
+
+
+       
 						
 <div class="box span12">
 					<div class="box-header" data-original-title>
