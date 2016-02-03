@@ -4,6 +4,7 @@
 		$_SESSION['display']="pos";
 			$cliente_id = $_SESSION['cliente_id'];
 
+            
 		?>				
 				
 
@@ -309,7 +310,7 @@ else {   ////////////////**************** descripcion del producto marcado******
 									}
 										echo "<tr><td colspan=3 style='text-align:center'><br>
 											<div  class='hidden-print' style='text-align:center;padding:10px;background:#dddddd;border:1px solid #bbbbbb;color:white;'>
-											<a href=\"#\" class=\"btn btn-info blue btn-setting\"  >Cerrar Venta</a>
+											<a href=\"#\" class=\"btn btn-info blue btn-setting\" >Cerrar Venta</a>
 										   &nbsp;&nbsp;<a href=\"?data=pos&op=pedido\" class=\"btn btn-info orange \"  >Pedido</a>
 										   &nbsp;&nbsp;<a href=\"?data=pos&op=apartado\" class=\"btn btn-info green\"  >Apartado</a>
 											</div>

@@ -15,9 +15,7 @@ $database = new DB();
 	{
 
 
-		echo "<tr >
-			<td colspan=3><a href=/index.php?data=catalogo&cat=".$row['categoria_id'].">".$row['categoria']."</a> </td>
-			</tr>";
+    		echo "<tr ><td colspan=3>".$row['categoria']." </td></tr>";
 
     $query="SELECT descuento from temporada where temporada_Id=$tid";
     list( $descuento ) = $database->get_row( $query );
@@ -38,7 +36,8 @@ $database = new DB();
 
                     if ($productos)
 					echo "<tr><td></td><td align=right>
-						<a href=/index.php?data=catalogo&subcat=".$sub['subcategoria_id'].">".$sub['subcategoria']."</a>&nbsp;&nbsp; </td>
+						<a href=/index.php?data=catalogo&subcat=".$sub['subcategoria_id']."&tid=$tid>".$sub['subcategoria']."</a>
+                        &nbsp;&nbsp; </td>
 						<td>$productos</td></tr>";
 					}
 

@@ -11,6 +11,7 @@ require_once( $realpath.'/../database.php' );
 require_once( $realpath.'/classes/class.db.php' );
 require_once( $realpath.'/classes/class_login.php' );
 
+require_once($realpath.'/functions/mensajes.php');  
 require_once($realpath.'/functions/ticket.php');
 require_once($realpath.'/functions/formato.php');
 require_once($realpath.'/functions/formas.php');

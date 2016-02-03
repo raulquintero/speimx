@@ -193,9 +193,11 @@ if ($_GET['eed']==2)
 							  </div>
 
 		</div>
-		<div class="modal-footer">
-			<a href="#" class="btn" data-dismiss="modal">Cancelar</a>
-			<button type="submit" class="btn btn-primary">Abonar</button>
-		</div>
+		<div id="botones" class="modal-footer">
+
+			<button type="button" class="btn" data-dismiss="modal">Cancelar</a>
+			<button type="submit" id="enviar" onclick="showData('botones','view/pedidos/pedidos.php','?var1=Registrando Abono ...')" class="btn btn-primary">Abonar</button>
+
+        </div>
 			</fieldset>
 	</div>

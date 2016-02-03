@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 //include '/config/config.php';
 
@@ -15,7 +15,7 @@ $campo_id=$campo."_id";
 								  <select id=".$campo."_id\" name=\"".$campo."_id\">";
 
 								$query = "SELECT ".$campo."_id,".$campo." FROM  ".$campo." ORDER BY  ".$campo;
-								//list( $colonia_casa ) = $database->get_row( $query );	
+								//list( $colonia_casa ) = $database->get_row( $query );
 								$results = $database->get_results( $query );
 								foreach( $results as $row )
 								{
@@ -32,12 +32,37 @@ $campo_id=$campo."_id";
 }
 
 
+function combobox_single($campo,$var)
+{
+
+$database = new DB();
+
+$campo_id=$campo."_id";
+  								echo "
+								  <select id=".$campo."_id\" name=\"".$campo."_id\">";
+
+								$query = "SELECT ".$campo."_id,".$campo." FROM  ".$campo." ORDER BY  ".$campo;
+								//list( $colonia_casa ) = $database->get_row( $query );
+								$results = $database->get_results( $query );
+								foreach( $results as $row )
+								{
+									if ($row[$campo_id]==$var)  $seleccionado="selected='true' "; else $seleccionado="";
+    								echo "<option $seleccionado value='".$row[$campo_id]."' >".ucfirst($row[$campo])."</option>";
+    							}
+
+								echo "  </select>";
+
+
+								//$results = $database->get_results( $query );
+}
 
 
 
- 
-/*! 
-  @function num2letras () 
+
+
+
+/*!
+  @function num2letras ()
   @abstract Dado un n?mero lo devuelve escrito. 
   @param $num number - N?mero a convertir. 
   @param $fem bool - Forma femenina (true) o no (false). 

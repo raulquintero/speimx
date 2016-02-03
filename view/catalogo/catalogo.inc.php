@@ -3,7 +3,7 @@
 <?php
 require_once 'catalogo.src.php';
 
-
+$tid=isset($_GET['tid']) ? $_GET['tid'] : "-1";
 ?>
 
 <?php
@@ -94,9 +94,8 @@ if ($_GET['eed']==2)
 
 
 				  		 <?php
-
 							  	if ($_GET['subcat'])
-							  		productos($_GET['subcat']);
+                                    productos($_GET['subcat'],$tid);
 							  	if ($_GET['cat'])
 							  		subcategorias($_GET['cat']);
 									 ?>

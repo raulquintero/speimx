@@ -4,7 +4,6 @@ require_once('config/config.php');
 $database = new DB();
 
 
-
  if (!$login->getUserActive())
  		header("location:/index.html");
 
@@ -21,10 +20,20 @@ foreach( $_GET as $key => $value )
 }
 
 $nid=$_SESSION['nid'];
+$_GET['code'] = isset($_GET['code']) ? $_GET['code'] : '';
+$code = isset($code) ? $code : ' ';
+$producto_id = isset($_GET['producto_id']) ? $_GET['producto_id'] : '';
+$_GET['filtro'] = isset($_GET['filtro']) ? $_GET['filtro'] : ' ';
+$filtro = isset($filtro) ?  : ' ';
+$location = isset($_GET['location']) ? $_GET['location'] : '';
+$subcat = isset($_GET['subcat']) ? $_GET['subcat'] : '';
 
-$code=strtoupper(htmlspecialchars($_GET["code"]));
+$total_contado = isset($total_contado) ? $total_contado : '0.00';
+$promociones = isset($promociones) ? $promociones : '';
+$promo = isset($promo) ? $promo : '';
 
-$type=(htmlspecialchars($_GET["type"]));
+$type = isset($_GET['type']) ? $_GET['type'] : '';
+//$code=strtoupper(htmlspecialchars($_GET["code"]));
 
 if ($code=="SERVICIO") header ("location: /index.php?data=pos&op=servicio");
 
@@ -111,7 +120,7 @@ switch ($type) {
 	   	if ($producto_id) 		header($location);
 		}
 		break;
-	
+
 	case 'dev':
 		# code...
 		break;
@@ -131,19 +140,19 @@ switch ($type) {
 <!DOCTYPE html>
 <html lang="es_MX">
 <head>
-	
+
 	<!-- start: Meta -->
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<title>SPEI.MX 1.0.0.1</title>
-	<meta name="description" content="Bootstrap Metro Dashboard">
-	<meta name="author" content="Dennis Ji">
+	<meta name="description" content="SPEIMX - POS Software">
+	<meta name="author" content="Raul Quintero">
 	<meta name="keyword" content="Metro, Metro UI, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 	<!-- end: Meta -->
-	
+
 	<!-- start: Mobile Specific -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- end: Mobile Specific -->
-	
+
 	<!-- start: CSS -->
 
 	<link id="bootstrap-style" href="css/bootstrap.min.css" rel="stylesheet">
@@ -152,24 +161,29 @@ switch ($type) {
 	<link id="base-style-responsive" href="css/style-responsive.css" rel="stylesheet">
 	<!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext' rel='stylesheet' type='text/css'> -->
 	<!-- end: CSS -->
-	
+
+    <!-- start: js -->
+    <script type="text/javascript" src="js/showdata.js"></script>
+    <!-- end: js -->
+
+
 
 	<!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
 	<!--[if lt IE 9]>
 	  	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<link id="ie-style" href="css/ie.css" rel="stylesheet">
 	<![endif]-->
-	
+
 	<!--[if IE 9]>
 		<link id="ie9style" href="css/ie9.css" rel="stylesheet">
 	<![endif]-->
-		
+
 	<!-- start: Favicon -->
 	<link rel="shortcut icon" href="img/favicon.ico">
 	<!-- end: Favicon -->
-	
-		
-		
+
+
+
 	<script type="text/javascript">
 	function setFocusToTextBox(){
 		$('#textcode').focus();
@@ -204,12 +218,34 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
                 <!-- start: Header Menu -->
 				<div class="nav-no-collapse header-nav">
 					<ul class="nav pull-right">
+
+                    	<!-- start: User Dropdown -->
 						<li class="dropdown">
+							<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+								<i class="halflings-icon white user"></i> <?php echo $_SESSION['administrador'];?>
+								<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu">
+								<li class="dropdown-menu-title">
+ 									<span>Account Settings</span>
+								</li>
+								<li><a href="#"><i class="halflings-icon user"></i> Profile</a></li>
+								<li><a href="authmain.php?module=login&action=1"><i class="halflings-icon off"></i> Logout</a></li>
+							</ul>
+						</li>
+						<!-- end: User Dropdown -->
+
+
+                    	<li class="dropdown">
 							<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
 								<i class="halflings-icon white th-list"></i>
 							</a>
 							<ul class="dropdown-menu notifications">
-								<li class="dropdown-menu-title">
+
+
+
+
+                    			<li class="dropdown-menu-title">
  									<span>Shortcuts</span>
 									<!--a href="#refresh"><i class="icon-repeat"></i></a-->
 								</li>
@@ -344,21 +380,6 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
 
 
 
-						<!-- start: User Dropdown -->
-						<li class="dropdown">
-							<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-								<i class="halflings-icon white user"></i> <?php echo $_SESSION['administrador'];?>
-								<span class="caret"></span>
-							</a>
-							<ul class="dropdown-menu">
-								<li class="dropdown-menu-title">
- 									<span>Account Settings</span>
-								</li>
-								<li><a href="#"><i class="halflings-icon user"></i> Profile</a></li>
-								<li><a href="authmain.php?module=login&action=1"><i class="halflings-icon off"></i> Logout</a></li>
-							</ul>
-						</li>
-						<!-- end: User Dropdown -->
 
 
 
@@ -367,23 +388,23 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
 
 
 					</ul>
-				
+
 
 
 				</div>
 				<!-- end: Header Menu -->
-				
+
 			</div>
 		</div>
 	</div>
 	<!-- start: Header -->
-	
+
 
 
 
 		<div class="container-fluid-full">
 		<div class="row-fluid ">
-				
+
 
 			<!-- start: Main Menu -->
 
@@ -396,7 +417,8 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
 						if ($nid<=6) echo "<li><a href=\"index.html\"><i class=\"icon-bar-chart hidden-print\"></i><span class=\"hidden-tablet hidden-print\"> Dashboard</span></a></li>";
 						if ($nid<5) echo "<li><a href=\"index.php?data=mensajes\"   ><i class=\"icon-envelope hidden-print\"></i><span class=\"hidden-tablet hidden-print\"> Messages</span></a></li>";
 						 echo "<li><a href=\"index.php?data=pos\"        ><i class=\"icon-shopping-cart hidden-print\" ></i><span class=\"hidden-tablet hidden-print\"> PoS</span></a></li>";
-						 echo "<li><a href=\"index.php?data=productos&op=checarprecio\"><i class=\"icon-barcode hidden-print\" ></i><span class=\"hidden-tablet hidden-print\"> Checar Precio</span></a></li>";
+						 echo "<li><a href=\"index.php?data=productos&op=checarprecio\"><i class=\"icon-barcode hidden-print\"       ></i><span class=\"hidden-tablet hidden-print\"> Checar Precio</span></a></li>";
+						 echo "<li><a href=\"index.php?data=pedidos\"                  ><i class=\"icon-shopping-cart hidden-print\" ></i><span class=\"hidden-tablet hidden-print\"> Pedidos</span></a></li>";
 						//if ($nid<=8) echo "<li><a href=\"index.php?data=clientes&op=devoluciones\"><i class=\"icon-book\"    ></i><span class=\"hidden-tablet\"> Devoluciones</span></a></li>";
 
 
@@ -413,7 +435,7 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
 								if ($nid<=6) echo "<li><a href=\"index.php?data=compras&op=proveedores\"><i class=\"icon-barcode\"></i><span class=\"hidden-tablet\"> Proveedores</span></a></li>";
 							echo "</ul>";
 								if ($nid<=6) echo "<li><a href=\"index.php?data=promociones\"><i class=\"icon-book\"    ></i><span class=\"hidden-tablet\"> Promociones </span></a></li>";
-                    
+
                         echo "</ul>";
 
 
@@ -448,7 +470,7 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
 						echo "</li>";
 						if ($nid<=8) echo "<li><a class=\"dropmenu\" href=\"#\"><i class=\"icon-chevron-right hidden-print\"></i><span class=\"hidden-tablet hidden-print\"> Sistema </span></a>";
 							echo "<ul>";
-								
+
 								if ($nid<=6) echo "<li><a href=\"index.php?data=catalogo\"><i class=\"icon-barcode\"></i><span class=\"hidden-tablet\"> Usuarios</span></a></li>";
 								if ($nid<=8) echo "<li><a href=\"index.php?data=mantenimiento&op=db\"><i class=\"icon-book\"    ></i><span class=\"hidden-tablet\"> Base de Datos</span></a></li>";
 								if ($nid<=6) echo "<li><a href=\"index.php?data=mantenimiento&op=impuestos\"><i class=\"icon-book\"    ></i><span class=\"hidden-tablet\"> Impuestos</span></a></li>";
@@ -458,7 +480,7 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
 						echo "</li>";
 
 						if ($nid<=6) echo "<li><a href=\"index.php?data=agenda\"><i class=\"icon-calendar hidden-print\"></i><span class=\"hidden-tablet hidden-print\"> Agenda</span></a></li>";
-					
+
 
 ?>
 
@@ -468,7 +490,7 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
 			</div>
 
 			<!-- end: Main Menu -->
-			
+
 			<noscript>
 				<div class="alert alert-block span10">
 					<h4 class="alert-heading">Warning!</h4>
@@ -476,68 +498,65 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
 				</div>
 			</noscript>
 			<!-- start: Content-->
-			
 
 
+<?php
+	//$data=(htmlspecialchars($_GET["data"]));
+    $data = isset($_GET['data']) ? $_GET['data'] :  "pos";
+    $op = isset($_GET['op']) ?  "_".$_GET['op'] : '';
+	//$op=(htmlspecialchars($_GET["op"]));
+	//$lnk=(htmlspecialchars($_GET["data"])).".inc.php";
+    $lnk = isset($_GET['lnk']) ? $_GET['lnk'] : '';
+?>
 
 
 			<!-- start: Content -->
-<?php
-	$data=(htmlspecialchars($_GET["data"]));
-	$op=(htmlspecialchars($_GET["op"]));
-	$lnk=(htmlspecialchars($_GET["data"])).".inc.php";
-?>
 			<div id="content" class="span10 ">
-			
-						
+
+
 			<ul class="breadcrumb hidden-print hidden-phone">
 				<li>
 					<i class="icon-home "></i>
-					<a href="/index.php" >Home</a> 
+					<a href="/index.php" >Home</a>
 					<i class="icon-angle-right"></i>
 				</li>
 				<li><a  href="/index.php?data=<?php echo $data?>"><?php echo ucfirst($data)?></a></li>
-				
+
 			</ul>
+            <div id='show_messages'>
 
-			<div class="row-fluid ">
-				
+            <?php
+              if (isset($_GET['eed']))
+              switch ($_GET['eed']){
+                case 1: alert_hecho("HECHO", "Registro Actualizado");
+                        break;
+                }
+            ?>
 
+             </div>
 
+            <div class="row-fluid ">
 
+            <?php
 
-				<?php
+			//	if (!isset($_GET["data"])) $data="pos";
+			//	if (!isset($_GET['op'])) $op="";
+			  //		else $op="_".$op;
 
-				if (!htmlspecialchars($_GET["data"])) $data="pos";
-				if (!htmlspecialchars($_GET["op"])) $op="";
-					else $op="_".$op;
-				
-				$lnk="view/".$data.$op.".inc.php";
+			 	$lnk="view/".$data.$op.".inc.php";
 					include "view/".$data."/".$data.$op.".inc.php";
-					
-// 					echo $lnk;
 
-// 					echo "<br><br>";          // ********DEBUG**********
+
+//                  echo "<br><br>";          // ********DEBUG**********
 // foreach ($_SESSION as $k => $v) { echo "<br>[$k] => $v \n";}
 
 //  echo  "<br>";
 // print_r($_SESSION['cart']);
-
-
-
-?>
-
-
-
-
-
-
-		
-
+            ?>
 
 			</div><!--/row-->
 	</div><!--/.fluid-container-->
-	
+
 
 
 
@@ -547,7 +566,7 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
 			<!-- end: Content -->
 		</div><!--/#content.span10-->
 		</div><!--/fluid-row-->
-<!-- 		
+<!--
 	<div class="modal hide fade" id="myModal">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal">×</button>
@@ -563,31 +582,31 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
 	</div>
 	 -->
 	<div class="clearfix"></div>
-	
+
 	<footer class="hidden-print">
 
 		<p>
 			<span style="text-align:left;float:left" class="hidden-print">&copy; 2010 Tienda de Ropa Alberto's</span>
-			
+
 		</p>
 
 	</footer>
-	
+
 	<!-- start: JavaScript-->
 
 		<script src="js/jquery-1.9.1.min.js"></script>
 	<script src="js/jquery-migrate-1.0.0.min.js"></script>
-	
+
 		<script src="js/jquery-ui-1.10.0.custom.min.js"></script>
-	
+
 		<script src="js/jquery.ui.touch-punch.js"></script>
-	
+
 		<script src="js/modernizr.js"></script>
-	
+
 		<script src="js/bootstrap.min.js"></script>
-	
+
 		<script src="js/jquery.cookie.js"></script>
-	
+
 		<script src='js/fullcalendar.min.js'></script>
 	
 		<script src='js/jquery.dataTables.min.js'></script>
@@ -611,7 +630,7 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
 		<script src="js/jquery.raty.min.js"></script>
 	
 		<script src="js/jquery.iphone.toggle.js"></script>
-	
+
 		<script src="js/jquery.uploadify-3.1.min.js"></script>
 	
 		<script src="js/jquery.gritter.min.js"></script>

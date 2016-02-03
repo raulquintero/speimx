@@ -92,6 +92,15 @@ $query = "SELECT sum(cantidad) as total from movimiento
 	where movimiento.tipomov_id=13 AND fecha>='".fechaustomysql($fecha_inicio)."' AND fecha<='".fechaustomysql($fecha_final)." 23:59:59'";
 		list( $enganche ) = $database->get_row( $query );
 
+ $query = "SELECT sum(total) as total from pedido
+	where fecha_orden>='".fechaustomysql($fecha_inicio)."' AND fecha_orden<='".fechaustomysql($fecha_final)." 23:59:59'";
+		list( $pedidos_andrea ) = $database->get_row( $query );
+
+$query = "SELECT sum(cantidad) as total from pedido_movimiento
+	where pedido_movimiento.tipomov_id=14 AND fecha>='".fechaustomysql($fecha_inicio)."' AND fecha<='".fechaustomysql($fecha_final)." 23:59:59'";
+		list( $anticipos_andrea ) = $database->get_row( $query );
+
+
 ?>
 
 						<table class="table table-condensed">
@@ -112,6 +121,10 @@ $query = "SELECT sum(cantidad) as total from movimiento
                                   <tr><td>Devoluciones</td><td style="text-align:right"><?php if($devoluciones>0)echo "<font color=red><b> -"; echo dinero($devoluciones)?></td></tr>
 
                                 <tr bgcolor=gray><td style="color:white;border-top:2px solid"><b>Total</b></td><td style="text-align:right;color:white;border-top:2px solid"><b><?php echo dinero($total-$devoluciones)?></b></td></tr>
+                                  <tr><td>Pedidos Andrea</td><td style="text-align:right"><?php echo dinero($pedidos_andrea)?></td></tr>
+                                  <tr><td>Anticipos</td><td style="text-align:right"><?php echo dinero($anticipos_andrea)?></td></tr>
+
+
                               </tbody>
 						 </table>
 

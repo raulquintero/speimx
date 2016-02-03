@@ -47,7 +47,8 @@
         list( $total_items ) = $database->get_row( $query );
 
         echo " <tr><td><b>".strtoupper($row['temporada'])."</b></td>
-        <td style='text-align:left'>".dinero($row['descuento'])."% [Editar]
+        <td style='text-align:left'><div id='editar_".strtolower($row['temporada'])."'>".dinero($row['descuento'])."%
+        <a  onclick=\"showData('editar_".strtolower($row['temporada'])."','promociones_f.php','data=promociones&case=editar_porcentaje&temporada_id=".$row['temporada_id']."')\">[Editar]</a></div>
         <td style='text-align:left'>".$total_items."</td></tr>";
 
 
@@ -57,10 +58,27 @@
         $query = "SELECT count(producto_id) as total from producto where temporada_id=".$row['temporada_id']." AND descuento<>".$row['descuento'];
         list( $excluidos ) = $database->get_row( $query );
         echo " <tr><td>&nbsp;&nbsp;&nbsp;
-                <a href='/index.php?data=promociones&tid=".$row['temporada_id']."&i=1'>Incluidos</a></td><td style='text-align:left'>".$incluidos."</td></tr>";
+                <a href='/index.php?data=promociones&tid=".$row['temporada_id']."&i=1'>Incluidos</a></td><td style='text-align:left'>".$incluidos."</td>";
+        echo " <td>";
+            echo "<form action='/functions/crud_promociones.php' method=post>";
+            echo "<input type='hidden' name='data' value='$data' />";
+            echo "<input type='hidden' name='func' value='a' />";
+            echo "<input type='hidden' name='i' value='1' />";
+            echo "<input type='hidden' name='temporada_id' value='".$row['temporada_id']."' />";
+            echo "<input type=\"submit\" value='Aplicar' />";
+            echo "</form>";
+            echo "</td></tr>";
         echo " <tr><td>&nbsp;&nbsp;&nbsp;
                 <a href='/index.php?data=promociones&tid=".$row['temporada_id']."&i=0'>excluidos</a></td><td style='text-align:left'>".$excluidos."</td>
-                <td><input type='button' value='Aplicar'/></td></tr>";
+                <td>";
+            echo "<form action='/functions/crud_promociones.php' method=post>";
+            echo "<input type='hidden' name='data' value='$data' />";
+            echo "<input type='hidden' name='func' value='a' />";
+            echo "<input type='hidden' name='i' value='0' />";
+            echo "<input type='hidden' name='temporada_id' value='".$row['temporada_id']."' />";
+            echo "<input type=\"submit\" value='Aplicar' />";
+            echo "</form>";
+            echo "</td></tr>";
 
         }
 ?>

@@ -23,19 +23,19 @@ function n_pagos_restantes($total_ultimo,$saldo,$abono)
 function catalogo()
 {
 $database = new DB();
-	
-	$query = "SELECT categoria_id,categoria  FROM categoria 
+
+	$query = "SELECT categoria_id,categoria  FROM categoria
 		where 1 ";
 
-	
+
 	$results = $database->get_results( $query );
-	
-	
-	
+
+
+
 	foreach( $results as $row )
 	{
-		
-		
+
+
 		echo "<tr >
 			<td colspan=3><a href=/index.php?data=catalogo&cat=".$row['categoria_id'].">".$row['categoria']."</a> </td>
 			</tr>";
@@ -43,26 +43,26 @@ $database = new DB();
 
 	$query = "SELECT subcategoria_id,subcategoria  FROM subcategoria where categoria_id=".$row['categoria_id'];
 	$subs = $database->get_results( $query );
-	
+
 				foreach( $subs as $sub )
-					{		
+					{
 
 
-					$query = "SELECT count(producto_id) as productos FROM producto 
+					$query = "SELECT count(producto_id) as productos FROM producto
 					where subcategoria_id=".$sub['subcategoria_id'];
 					list($productos)= $database->get_row($query);
 
-					echo "<tr><td></td><td align=right> 
+					echo "<tr><td></td><td align=right>
 						<a href=/index.php?data=catalogo&subcat=".$sub['subcategoria_id'].">".$sub['subcategoria']."</a>&nbsp;&nbsp; </td>
 						<td>$productos</td></tr>";
 					}
-	
-	}						  	
+
+	}
 
 
 }
 
-function productos($subcat)
+function productos($subcat,$tid)
 {
 $database = new DB();
 echo "<div class=\"box-header\">
@@ -89,6 +89,8 @@ echo "<div class=\"box-header\">
 							  <tbody>";
 					$query = "SELECT producto_id,codigo,producto,precio_compra,precio_contado,stock,producto.descuento,temporada
                         FROM producto,temporada where producto.temporada_id=temporada.temporada_id AND subcategoria_id=$subcat";
+                        if($tid>=0)
+                        $query.=" AND producto.temporada_id=$tid";
 					$subs = $database->get_results( $query );
 
 					foreach( $subs as $sub )
@@ -128,7 +130,7 @@ $query = "SELECT categoria  FROM categoria where categoria_id=$categoria_id ";
 list( $categoria ) = $database->get_row( $query );
 
 
-			
+
 
 echo "<div class=\"box-header\">
 						<h2><i class=\"halflings-icon align-justify\"></i><span class=\"break\"></span>Subcategorias de: ".strtoupper($categoria)." </h2>
