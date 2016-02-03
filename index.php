@@ -20,8 +20,8 @@ foreach( $_GET as $key => $value )
 }
 
 $nid=$_SESSION['nid'];
-$_GET['code'] = isset($_GET['code']) ? $_GET['code'] : '';
-$code = isset($code) ? $code : ' ';
+$code = isset($_GET['code']) ? $_GET['code'] : '';
+//$code = isset($code) ? $code : ' ';
 $producto_id = isset($_GET['producto_id']) ? $_GET['producto_id'] : '';
 $_GET['filtro'] = isset($_GET['filtro']) ? $_GET['filtro'] : ' ';
 $filtro = isset($filtro) ?  : ' ';
@@ -213,7 +213,7 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</a>
-				<span class="brand" >SPEI.MX 1.0.0.1 [Sucursal: <?php echo $_SESSION['sucursal'] ?>]</span>
+				<span class="brand" >SPEI.MX 1.0.0.1 [Sucursal: <?php echo $_SESSION['code'] ?>]</span>
 
                 <!-- start: Header Menu -->
 				<div class="nav-no-collapse header-nav">
