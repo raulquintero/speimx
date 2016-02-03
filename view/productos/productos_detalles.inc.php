@@ -137,43 +137,183 @@ if ($_GET['eed']==2)
 					<div class="box-content">
 
 
-                    Total Vendidos : <?php echo $productos_vendidos?>
 
 
-						<table class="table table-condensed">
-							  <thead>
-								  <tr>
-									  <th>ID</th>
-									  <th>Fecha</th>
-									  <th>Cargo</th>
-									  <th>Abono</th>
-									  <th>Saldo</th>
-									  <th>Mov</th>
-									  <th>Agente</th>                                          
-								  </tr>
-							  </thead>   
-							  <tbody>
+                    <div class="widget blue span12" onTablet="span12" onDesktop="span12">
 
-							  	<?php //movimientos($cid,$saldo);?>
+					<h2><span class="glyphicons globe"><i></i></span> Total Vendidos : <?php echo $productos_vendidos?></h2>
 
-							
- 							 </tbody>
-						 </table>  
-						 <div class="pagination pagination-centered">
-						  <ul>
-							<li><a href="#">Prev</a></li>
-							<li class="active">
-							  <a href="#">1</a>
-							</li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">Next</a></li>
-						  </ul>
-						</div>     
+					<hr>
+
+					<div class="content">
+
+						<div class="verticalChart">
+
+							<div class="singleBar">
+
+								<div class="bar">
+
+									<div class="value">
+										<span>37%</span>
+									</div>
+
+								</div>
+
+								<div class="title">May</div>
+
+							</div>
+
+							<div class="singleBar">
+
+								<div class="bar">
+
+									<div class="value">
+										<span>16%</span>
+									</div>
+
+								</div>
+
+								<div class="title">Jun</div>
+
+							</div>
+
+							<div class="singleBar">
+
+								<div class="bar">
+
+									<div class="value">
+										<span>12%</span>
+									</div>
+
+								</div>
+
+								<div class="title">Jul</div>
+
+							</div>
+
+							<div class="singleBar">
+
+								<div class="bar">
+
+									<div class="value">
+										<span>9%</span>
+									</div>
+
+								</div>
+
+								<div class="title">Ago</div>
+
+							</div>
+
+							<div class="singleBar">
+
+								<div class="bar">
+
+									<div class="value">
+										<span>7%</span>
+									</div>
+
+								</div>
+
+								<div class="title">Sep</div>
+
+							</div>
+
+							<div class="singleBar">
+
+								<div class="bar">
+
+									<div class="value">
+										<span>6%</span>
+									</div>
+
+								</div>
+
+								<div class="title">Oct</div>
+
+							</div>
+
+							<div class="singleBar">
+
+								<div class="bar">
+
+									<div class="value">
+										<span>5%</span>
+									</div>
+
+								</div>
+
+								<div class="title">Nov</div>
+
+							</div>
+
+							<div class="singleBar">
+
+								<div class="bar">
+
+									<div class="value">
+										<span>50%</span>
+									</div>
+
+								</div>
+
+								<div class="title">Dic</div>
+
+							</div>
+
+							<div class="singleBar">
+
+								<div class="bar">
+
+									<div class="value">
+										<span>3%</span>
+									</div>
+
+								</div>
+
+								<div class="title">Ene</div>
+
+							</div>
+
+							<div class="singleBar">
+
+								<div class="bar">
+
+									<div class="value">
+										<span>1%</span>
+									</div>
+
+								</div>
+
+								<div class="title">Feb</div>
+
+							</div>
+
+							<div class="clearfix"></div>
+
+						</div>
+
+					</div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 					</div>
 				</div><!--/span-->
-			
+
 
 				<div class="box span6">
 					<div class="box-header">

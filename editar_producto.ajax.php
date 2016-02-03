@@ -55,7 +55,8 @@ $prid=$_GET['q'];
 			<div class="row-fluid">
 				<div class="box  span12">
 					<div class="box-header" data-original-title>
-						<h2><i class="halflings-icon edit"></i><span class="break"></span><?php echo strtoupper(stripslashes($producto))?> [Edicion Compl.]</h2>
+						<h2><i class="halflings-icon edit"></i><span class="break"></span><?php echo strtoupper(stripslashes($producto))?>
+                        <a href="/index.php?data=productos&op=detalles&prid=<?php echo $prid?>"> [Edicion Compl.]</a></h2>
 						<div class="box-icon">
 
 							<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
@@ -99,6 +100,54 @@ $prid=$_GET['q'];
 						        <?php //combobox("talla",$talla_id)?>
 
                                 <?php combobox("temporada",$temporada_id)?>
+
+
+
+
+
+		<div class="box">
+					<div class="box-header">
+						<h2><i class="halflings-icon align-justify"></i><span class="break"></span>Imagenes <?php echo $prid.$color_id?></h2>
+
+					</div>
+					<div class="box-content">
+
+                      <?php
+                      	if (!$color_id){
+									$query = "SELECT color_id FROM color WHERE producto_id=$prid limit 1";
+									list( $color_id ) = $database->get_row( $query );
+						}
+               	$query = "SELECT producto,subcategoria,color from producto,subcategoria,color
+                    where producto.subcategoria_id=subcategoria.subcategoria_id
+                    AND $color_id=color.color_id
+                    AND producto.producto_id=".$prid;
+				list( $producto,$subcategoria,$color) = $database->get_row( $query );
+                $nombre_producto=ucwords(strtolower($producto));
+            $nombre_producto = str_replace(" ", "-", $nombre_producto);
+            $nombre_subcategoria = ucwords(str_replace(" ", "-", $subcategoria));
+            $nombre_color=ucwords(strtolower($color));
+
+            $nombre_archivo=$nombre_subcategoria."-".$nombre_producto."-".$nombre_color."-".$prid."_p.jpg";
+                                ?>
+
+						  	<table class="table table-condensed">
+
+							  <tbody>
+							  	<tr><td align=center>
+
+							  		<img src='/productos/<?php echo $nombre_archivo?>' width=150>
+							  	</td>
+							  	</tr>
+ 							 </tbody>
+						 </table>
+						No hay imagenes por el momento
+
+					</div>
+		</div><!--/span-->
+
+
+
+
 
                         </div>
                     </div>

@@ -190,7 +190,7 @@
 		</div><!--/span-->
 			
 
-		
+
 		<div class="box span6">
 					<div class="box-header">
 						<h2><i class="halflings-icon align-justify"></i><span class="break"></span>Imagenes <?php echo $_GET['prid'].$color_id?></h2>
@@ -218,7 +218,7 @@
 							  <tbody>
 							  	<tr><td align=center>
 
-							  		<img src=/productos/<?php echo $nombre_archivo?> width=200>
+							  		<img src='/productos/<?php echo $nombre_archivo?>' width=200>
 							  	</td>
 							  	<td>
 
@@ -233,13 +233,15 @@
                                         <input type="hidden" name="nombre_archivo" value="<?php echo $nombre_archivo?>"/>
                                         <input type="hidden" name="f" value="a"/>
 									</form>
+                                </td>
+                                </tr>
  							 </tbody>
 						 </table>
 						No hay imagenes por el momento
 
 					</div>
 		</div><!--/span-->
-			
+
 </div><!--/row-->
 
 
