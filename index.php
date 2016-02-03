@@ -539,7 +539,7 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
 				<!--<li><a  href="/index.php?data=<?php echo $data?>"><?php echo ucfirst($data)?></a></li>-->
 				<li><a class="btn btn-info blue" href="/index.php?data=pos" ><i class="icon-barcode "></i>&nbsp;POS</a></li>
 				<li><a class="btn btn-info blue" href="/index.php?data=productos&op=checarprecio" ><i class="icon-barcode "></i>&nbsp;Checar Precio</a></li>
-                <li><a class="btn btn-info blue"  href="http://speimx.dev/index.php?data=pos&op=servicio" ><i class="icon-barcode " href="/index.php?data=pos&op=servicio"></i>&nbsp;Miscelaneos</a></li>
+                <li><a class="btn btn-info blue"  href="/index.php?data=pos&op=servicio" ><i class="icon-barcode " href="/index.php?data=pos&op=servicio"></i>&nbsp;Miscelaneos</a></li>
                 <li><a class="btn btn-info blue" href="/index.php?data=pos&op=andrea"><i class="halflings-icon inbox white "></i>&nbsp;Hacer Pedido</a></li>
 
 			</ul>
