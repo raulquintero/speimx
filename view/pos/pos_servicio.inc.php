@@ -1,6 +1,6 @@
 <div class="box yellow span12">
 					<div class="box-header">
-						<h2><i class="halflings-icon hand-top"></i><span class="break"><font color=black>Miscelaneos</span></h2>
+						<h2><i class="halflings-icon hand-top"></i><span class="break"><font color=black>Miscelaneos [70006139]</span></h2>
 					</div>
 					<div class="box-content">
 <form class="form-horizontal" action="/functions/cart.php">
@@ -31,7 +31,7 @@
 							  </div>
 
                               <div class="control-group">
-								<label class="control-label" >Precio Credito</label>
+								<label class="control-label" >PCR</label>
 								<div class="controls">
 								  <input class="input-small" id="precio_credito" name="precio_credito" type="text" value="">
 								</div>

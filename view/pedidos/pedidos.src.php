@@ -40,7 +40,7 @@ $database = new DB();
                             echo "<tr>";
 
                             echo "<td>".$sub['nombre']."</td>
-							<td><a href=\"#\" onclick=\"showData('pedidos','pedidos_f.php','case=pedidos')\"
+							<td><a href=\"#\" onclick=\"showData('pedidos','view/pedidos/pedidos.php','case=pedidos')\"
                             class=\"btn-setting\">".$sub['fecha_orden']."</a>&nbsp;&nbsp;</td>
 							<td style='text-align:left'>".$sub['fecha_entrega']."</td>
 							<td style='text-align:left'>".$sub['status'];

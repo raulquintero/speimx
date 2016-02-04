@@ -5,7 +5,7 @@
 			$cliente_id = $_SESSION['cliente_id'];
 
             
-		?>				
+		?>
 				
 
 
@@ -308,11 +308,30 @@ else {   ////////////////**************** descripcion del producto marcado******
 											<td width=180 style='text-align:right;text-align:right;color:black;border:1px solid black;'>
 											<font size=+3><b> $ ".dinero($total_contado-$promo)."</b></font></td></tr>";
 									}
-										echo "<tr><td colspan=3 style='text-align:center'><br>
-											<div  class='hidden-print' style='text-align:center;padding:10px;background:#dddddd;border:1px solid #bbbbbb;color:white;'>
-											<a href=\"#\" class=\"btn btn-info blue btn-setting\" >Cerrar Venta</a>
-										   &nbsp;&nbsp;<a href=\"?data=pos&op=pedido\" class=\"btn btn-info orange \"  >Pedido</a>
-										   &nbsp;&nbsp;<a href=\"?data=pos&op=apartado\" class=\"btn btn-info green\"  >Apartado</a>
+
+$pedido = searchSKU('60056002', $_SESSION['cart']);
+$producto = notsearchSKU('60056002', $_SESSION['cart']);
+if ($pedido)
+    {
+        $boton_cerrarventa="";
+        $boton_pedido="&nbsp;&nbsp;<a href=\"?data=pos&op=pedido\" class=\"btn btn-info orange \"  >Cobrar Pedido</a>";
+    }
+    else
+    {
+        $boton_cerrarventa="<a href=\"#\" class=\"btn btn-info blue btn-setting\">Cerrar Venta </a>";
+        $boton_apartado="&nbsp;&nbsp;<a href=\"?data=pos&op=apartado\" class=\"btn btn-info green\">Hacer Apartado</a>";
+    }
+if ($pedido AND $producto) $boton_pedido=" <div class='alert alert-error'>
+
+							<strong>Error.</strong> No Combinar Productos y Pedidos.
+						</div>";
+                                    //if (in_array("60056002", $_SESSION['cart']))
+										echo "<tr>";
+                                        echo "<td colspan=3 style='text-align:center'><br>
+											    <div  class='hidden-print' style='text-align:center;padding:10px;background:#dddddd;border:1px solid #bbbbbb;color:white;'>
+                                                    $boton_cerrarventa
+										            $boton_pedido
+										            $boton_apartado
 											</div>
                                             </td</tr>";
 
@@ -351,7 +370,7 @@ else {   ////////////////**************** descripcion del producto marcado******
 									{
 										echo "<tr><td style='border-top:1px dotted gray;'> ".($n+1)."</td> <td style='border-top:1px dotted gray;'>
 											".$item[$n]['sku']."<br>". substr($item[$n]['producto'],0,30)."...
-											<br><i><font size=-1>".strtolower($item[$n]['color'])." ".strtoupper($item[$n]['talla'])."</font></i></td> 
+											<br><i><font size=-1>".strtolower($item[$n]['color'])." ".strtoupper($item[$n]['talla'])."</font></i></td>
 											<td valign=top style='text-align:right;border-top:1px dotted gray;'>";
 											if ($cliente_id) echo dinero($item[$n]['precio_credito']+($item[$n]['precio_credito']*.16));
                                              else
@@ -361,19 +380,19 @@ else {   ////////////////**************** descripcion del producto marcado******
                                                  }
                                                  else
                                                        echo dinero($item[$n]['precio_contado']*1.16);
-											echo "</td><td class='hidden-print'><a href=\"/functions/cart.php?func=del_item&i=$n\" class=\"\">
-											<i class=\"halflings-icon trash\"></i></i></a></td></tr>";
+											echo "</td><td class='hidden-print' valign=top><a href=\"/functions/cart.php?func=del_item&i=$n\" class=\"\">
+											<i class=\"halflings-icon trash\"></i></a></td></tr>";
 										//<a href=\"/index.php?data=pos&op=detalles&prid=".$item[$n]['id']."\"></a>
 										//$total_credito+=$item[$n]['precio_credito'];
 										//$total_contado+=$item[$n]['precio_contado'];
-										
+
 										$n--;
 
 									}
 								}
 							?>
 
-						<?php	
+						<?php
 						// 	if ($total_credito AND $cliente_id)
 						// 	{
 						// 		$total_iva_credito=$total_credito*.16;
@@ -384,19 +403,19 @@ else {   ////////////////**************** descripcion del producto marcado******
 
 
 
-						// 		echo "<tr><td><br></td></td>";									
+						// 		echo "<tr><td><br></td></td>";
 						// 		// echo "<tr><td colspan=4 style=\"border-bottom:1px dotted black\">&nbsp;</td></tr><tr><td></td><td style='text-align:right'>Total</td><td style='text-align:right;boarder-top:2px solid;'>$". dinero($total_credito+$total_iva_credito)."</td></tr>";
-						// 		// echo "<tr><td></td><td style='text-align:right'>&nbsp;Incluye IVA(16%) por</td><td style='text-align:right;border-bottom:2px solid;'>".dinero($total_iva_credito)."</td></tr>";	
-						// 		echo "<tr><td></td><td style='text-align:right'>&nbsp;<strong>Total</strong></td><td style='text-align:right;border-top:1px solid black;'><strong>".dinero($total_iva_credito+$total_credito)."</strong></td></tr>";	
+						// 		// echo "<tr><td></td><td style='text-align:right'>&nbsp;Incluye IVA(16%) por</td><td style='text-align:right;border-bottom:2px solid;'>".dinero($total_iva_credito)."</td></tr>";
+						// 		echo "<tr><td></td><td style='text-align:right'>&nbsp;<strong>Total</strong></td><td style='text-align:right;border-top:1px solid black;'><strong>".dinero($total_iva_credito+$total_credito)."</strong></td></tr>";
 						// 		echo "<tr><td>&nbsp;</td></tr>";
-						// 		echo "<tr><td></td><td style='text-align:right'>Saldo Actual</td><td style='text-align:right'>+ &nbsp;&nbsp; $ ".dinero($saldo)."</td></tr>";	
-						// 		echo "<tr><td></td><td style='text-align:right;'>Saldo Total</td><td style='text-align:right;border-top:2px solid;'>$ ".dinero($saldo_total)."</td></tr>";	
+						// 		echo "<tr><td></td><td style='text-align:right'>Saldo Actual</td><td style='text-align:right'>+ &nbsp;&nbsp; $ ".dinero($saldo)."</td></tr>";
+						// 		echo "<tr><td></td><td style='text-align:right;'>Saldo Total</td><td style='text-align:right;border-top:2px solid;'>$ ".dinero($saldo_total)."</td></tr>";
 						// 		echo "<tr><td></td><td style='text-align:right'>Abono</td>";
 
 						// 			$query = "SELECT abono,limite FROM abono where activado=TRUE ORDER BY limite ASC";
 
 						// 			$results = $database->get_results( $query );
-						// 			foreach ($results as $row ) 
+						// 			foreach ($results as $row )
 						// 			{
 						// 					//echo $total_credito." ".$row['limite']." <br> ";
 						// 				if ($saldo_total<=$row['limite'])
@@ -407,7 +426,7 @@ else {   ////////////////**************** descripcion del producto marcado******
 						// 			}
 
 						// 				echo "<td style='text-align:right;border-top:2px solid;'>$". dinero($abono)."</td>";
-									
+
 						// 			echo "</tr>";
 						// 			echo "<tr><td colspan=3><br><br>Credito Actual Disponible: $ ".dinero($disponible)."</td></tr>";
 
@@ -419,15 +438,15 @@ else {   ////////////////**************** descripcion del producto marcado******
 						// 			// echo "<tr><td>&nbsp;</td></tr><tr><td></td><td style='text-align:right'>Subtotal</td><td style='text-align:right'>$". dinero($total_contado+$total_iva_contado)."</td></tr>";
 						// 			// echo "<tr><td></td><td style='text-align:right'>Incluye IVA(16%) por</td><td style='text-align:right'>$". dinero($total_iva_contado)."</td></tr>";
 						// 			echo "<tr><td></td><td style='text-align:right'>&nbsp;<strong>Total</strong></td>
-						// 					<td style='text-align:right;text-align:right;border-top:2px solid;'><strong>".dinero($total_iva_contado+$total_contado)."</strong></td></tr>";	
-									
+						// 					<td style='text-align:right;text-align:right;border-top:2px solid;'><strong>".dinero($total_iva_contado+$total_contado)."</strong></td></tr>";
+
 						// 			}
 						// ?>
 					</table>
 						<?php
 						// echo "<div class="form-actions">";
 						// 		if ($_SESSION['cliente_id'])
-						// 		{ 
+						// 		{
 						// 		$disponible=$credito-$saldo-($total_credito*1.16);
 						// 		if($disponible>=0 AND $total_credito>0 AND $cliente_id)
 						// 			echo "<a href=\"#\" class=\"btn btn-info blue btn-setting\">Cerrar Venta a Credito</a>
@@ -438,14 +457,14 @@ else {   ////////////////**************** descripcion del producto marcado******
 						// 				</div>";
 						// 		}
 						// 	else{
-						
+
 						// 			if ($total_contado)
 						// echo "<a href=\"#\" class=\"btn btn-info blue btn-setting\">Cerrar Venta</a>";
-						// 		}					
+						// 		}
 	    	// 			echo "</div>";
 						// ?>
-						
-				
+
+
 
 						<div class='visible-print'>
 							<br><br><font size=-1>
@@ -461,9 +480,9 @@ else {   ////////////////**************** descripcion del producto marcado******
 						<div class="clearfix">
 						</div>
 				</div>
-<br><br><br><br><br><br><br><br>	
+<br><br><br><br><br><br><br><br>
 			</div><!--/row-->
-		
+
 
 	<div class="modal hide fade" id="myModal">
 		<div class="modal-header">

@@ -424,8 +424,8 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
 
 			<!-- start: Main Menu -->
 
-			<div id="sidebar-left" class="span2 hidden-print">
-				<div class="nav nav-collapse  sidebar-nav">
+			<div id="sidebar-left" class="span2 hidden-print ">
+				<div class="nav nav-collapse  sidebar-nav <?php if ($nid>=6) echo "hidden-desktop"?>">
 					<ul class="nav nav-tabs nav-stacked main-menu">
 
 <?php

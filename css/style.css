@@ -726,16 +726,18 @@ ul.messages li .message {
 
 .breadcrumb a {
 	color: #fff;
-	text-shadow: 0px 1px 1px #000;
+    background: #000;
+	text-shadow: 1px 1px 1px #000;
 }
 
 .breadcrumb a:hover {
-	color: #646464;
-	text-shadow: 0px 1px 1px #fff;
+	color: #eee;
+    background: black;
+	/*text-shadow: 0px 1px 1px #fff;*/
 	text-decoration: none;
 }
 
-.breadcrumb_sub {    
+.breadcrumb_sub {
 	margin: -28px -28px 28px -28px;
 	line-height: 34px;
 	background: #ddd;

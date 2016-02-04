@@ -1,6 +1,6 @@
 <div class="box red span12">
 					<div class="box-header">
-						<h2><i class="halflings-icon hand-top"></i><span class="break"></span><font color=white>Pedido CATALOGO ANDREA</font></h2>
+						<h2><i class="halflings-icon hand-top"></i><span class="break"></span><font color=white>Pedido CATALOGO ANDREA [60056002]</font></h2>
 					</div>
 					<div class="box-content">
 

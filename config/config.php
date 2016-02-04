@@ -1,23 +1,26 @@
 <?php
 setlocale(LC_MONETARY, 'es_MX');
-
+$relative_path=isset($relative_path) ? $relative_path : "";
 
 $realpath=getcwd();
 $pos = strpos($realpath, "/functions");
 
+//$relative_path  --  para inclusiones de funciones desde view
+
 
 if ($pos) $realpath = substr($realpath, 0, -10);  // devuelve "abcde"
-require_once( $realpath.'/../database.php' );
-require_once( $realpath.'/classes/class.db.php' );
-require_once( $realpath.'/classes/class_login.php' );
+require_once( $realpath.$relative_path.'/../database.php' );
+require_once( $realpath.$relative_path.'/classes/class.db.php' );
+require_once( $realpath.$relative_path.'/classes/class_login.php' );
 
-require_once($realpath.'/functions/mensajes.php');  
-require_once($realpath.'/functions/ticket.php');
-require_once($realpath.'/functions/formato.php');
-require_once($realpath.'/functions/formas.php');
-require_once($realpath.'/functions/error.php');
-require_once($realpath.'/functions/estadisticas.php');
-require_once($realpath.'/functions/pos_cortedecaja.php');
+require_once($realpath.$relative_path.'/functions/mensajes.php');
+require_once($realpath.$relative_path.'/functions/busquedas.php'); 
+require_once($realpath.$relative_path.'/functions/ticket.php');
+require_once($realpath.$relative_path.'/functions/formato.php');
+require_once($realpath.$relative_path.'/functions/formas.php');
+require_once($realpath.$relative_path.'/functions/error.php');
+require_once($realpath.$relative_path.'/functions/estadisticas.php');
+require_once($realpath.$relative_path.'/functions/pos_cortedecaja.php');
 
 
 
