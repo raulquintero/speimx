@@ -11,10 +11,10 @@
                 <a class="btn btn-small blue"  href="index.php?data=empresas&op=empresa_form&f=agregar" ><i class="icon-barcode "></i>&nbsp;<b>+</b> AGREGAR EMPRESA</a>
 
 
-			</ul>
+</ul>
 
 
-       
+
 						
 <div class="box span12">
 					<div class="box-header" data-original-title>

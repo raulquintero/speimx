@@ -14,7 +14,7 @@ require_once( $realpath.$relative_path.'/classes/class.db.php' );
 require_once( $realpath.$relative_path.'/classes/class_login.php' );
 
 require_once($realpath.$relative_path.'/functions/mensajes.php');
-require_once($realpath.$relative_path.'/functions/busquedas.php'); 
+require_once($realpath.$relative_path.'/functions/busquedas.php');
 require_once($realpath.$relative_path.'/functions/ticket.php');
 require_once($realpath.$relative_path.'/functions/formato.php');
 require_once($realpath.$relative_path.'/functions/formas.php');
