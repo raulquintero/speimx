@@ -42,6 +42,58 @@ $cuantos=strlen($code);
 
 
 
+switch ($cuantos) {
+    case 16:  //clientes
+            $location="Location: /index.php?data=clientes&op=verificar&cid=$code";
+        break;
+    case 14:  // ticket
+
+        break;
+    case 12: //  cupon
+
+	    break;
+	case 8: // producto sku
+        switch($type){
+            case "item":  //agregar al carrito  de compra
+	 	        $query = "SELECT color.color,producto.producto_id,producto,proveedor,precio_compra,precio_contado,precio_credito,
+     		        precio_promocion,descuento, marca,producto.codigo,inventariodet.codigo as codigo_inventario,producto.talla_id,talladet.talladet,unidad,estilo,subcategoria
+                    FROM producto,proveedor,marca,talla,
+    		        unidad,subcategoria,color,inventariodet,talladet WHERE producto.proveedor_id=proveedor.proveedor_id AND producto.marca_id=marca.marca_id
+	    	        AND producto.talla_id=talla.talla_id AND producto.unidad_id=unidad.unidad_id AND producto.subcategoria_id=subcategoria.subcategoria_id
+		            AND producto.producto_id=color.producto_id AND color.color_id=inventariodet.color_id AND inventariodet.talladet_id=talladet.talladet_id
+		            AND inventariodet.codigo='$code'";
+		        list( $color,$producto_id,$producto,$proveedor,$precio_compra,$precio_contado,$precio_credito,$precio_promocion,$descuento,
+			        $marca,$codigo,$codigo_inventario ,$talla_id, $talla,$unidad,$estilo,$subcategoria  ) = $database->get_row( $query );
+		        $producto=htmlspecialchars($producto);
+	   	        if ($producto_id)
+                    $location="Location: /functions/cart.php?func=add_item&prid=$producto_id&producto=$producto&marca=$marca&codigo=$codigo&codigo_inventario=$codigo_inventario&talla=$talla&color=$color&precio_compra=$precio_compra&precio_credito=$precio_credito&precio_contado=$precio_contado&precio_promocion=$precio_promocion&descuento=$descuento&iva=$iva";
+                break;
+			case 'dev': //agregar al carrito de devoluciones
+					//$fid_dev=$_SESSION['fid_dev'];
+					$query="SELECT saldo from cliente,factura where cliente.cliente_id=factura.cliente_id AND factura.factura_id=".$_SESSION['fid_dev']." limit 1";
+					list( $dev_saldo  ) = $database->get_row( $query );
+					$_SESSION['dev_saldo']=$dev_saldo;
+					$fdid=get_fiddev($code);
+					$location="Location: /functions/cart_dev.php?facturadet_id=$facturadet_id&func=add_dev_item&facturadet_id=$fdid";
+			    break;
+			case 'checarprecio':  //checar precio
+				$location="Location: /index.php?data=productos&op=checarprecio&code=$code";
+				// $location="Location: /functions/cart.php?func=sel_cliente&cid=$code";
+				break;
+        }
+
+    break;
+
+	default:
+	# code...
+	break;
+}
+
+if ($location)
+header($location);
+
+
+
 //if ($cuantos==7 )
 		{
 			switch ($code[0]) {
@@ -68,7 +120,7 @@ $cuantos=strlen($code);
 			header($location);
 		}
 
-
+/*
 if ($cuantos==8)
 		{
 			switch ($type) {
@@ -94,9 +146,10 @@ if ($cuantos==8)
 
 			header($location);
 		}
+*/
 
 //exit();
-
+/*
 switch ($type) {
 	case 'item':
 		$cuantos=strlen($code);
@@ -131,7 +184,7 @@ switch ($type) {
 }
 
 //exit();
-
+*/
 
 
 
@@ -158,14 +211,10 @@ switch ($type) {
 	<link id="bootstrap-style" href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
 	<link id="base-style" href="css/style.css" rel="stylesheet">
+   	<link id="base-style" href="css/style_local.css" rel="stylesheet">
 	<link id="base-style-responsive" href="css/style-responsive.css" rel="stylesheet">
 	<!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext' rel='stylesheet' type='text/css'> -->
 	<!-- end: CSS -->
-
-    <!-- start: js -->
-    <script type="text/javascript" src="js/showdata.js"></script>
-    <!-- end: js -->
-
 
 
 	<!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -444,6 +493,7 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
 								if ($nid<=6) echo "<li><a href=\"index.php?data=catalogo\"><i class=\"icon-barcode\"></i><span class=\"hidden-tablet\"> Catalogo</span></a></li>";
 
    						   	if ($nid<=6) echo "<li><a href=\"index.php?data=compras\"><i class=\"icon-book\"    ></i><span class=\"hidden-tablet\"> Compras </span></a></li>";
+						   	if ($nid<=6) echo "<li><a href=\"index.php?data=cupones\"><i class=\"icon-book\"    ></i><span class=\"hidden-tablet\"> Cupones </span></a></li>";
 						   	if ($nid<=6) echo "<li><a href=\"index.php?data=promociones\"><i class=\"icon-book\"    ></i><span class=\"hidden-tablet\"> Promociones </span></a></li>";
 
                         echo "</ul>";
@@ -531,25 +581,16 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
 				</li>-->
 
 				<!--<li><a  href="/index.php?data=<?php echo $data?>"><?php echo ucfirst($data)?></a></li>-->
-				<li><a class="btn btn-info blue" href="/index.php?data=pos" ><i class="icon-barcode "></i>&nbsp;POS</a></li>
-				<li><a class="btn btn-info blue" href="/index.php?data=productos&op=checarprecio" ><i class="icon-barcode "></i>&nbsp;Checar Precio</a></li>
-                <li><a class="btn btn-info blue"  href="/index.php?data=pos&op=servicio" ><i class="icon-barcode " href="/index.php?data=pos&op=servicio"></i>&nbsp;Miscelaneos</a></li>
-                <li><a class="btn btn-info blue" href="/index.php?data=pos&op=andrea"><i class="halflings-icon inbox white "></i>&nbsp;Hacer Pedido</a></li>
+				<li><a href="/index.php?data=pos"><button class="btn-primary" ><i class="icon-barcode "></i>&nbsp;POS</button></a></li>
+				<li><a href="/index.php?data=productos&op=checarprecio"><button class="btn-primary" ><i class="icon-barcode "></i>&nbsp;Checar Precio</button></a></li>
+                <li><a href="/index.php?data=pos&op=servicio"><button class="btn-primary"  ><i class="icon-barcode " ></i>&nbsp;Miscelaneos</button></a></li>
+                <li><a href="/index.php?data=pos&op=andrea"><button class="btn-primary" ><i class="halflings-icon inbox white "></i>&nbsp;Hacer Pedido</button></a></li>
 
 			</ul>
-            <div id='show_messages'>
 
-            <?php
-              if (isset($_GET['eed']))
-              switch ($_GET['eed']){
-                case 1: alert_hecho("HECHO", "Registro Actualizado");
-                        break;
-                }
-            ?>
 
-             </div>
+            <div class="row-fluid">
 
-            <div class="row-fluid ">
 
             <?php
 
@@ -569,6 +610,18 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
             ?>
 
 			</div><!--/row-->
+
+            <div id='show_messages'>
+
+            <?php
+              if (isset($_GET['eed']))
+              switch ($_GET['eed']){
+                case 1: alert_hecho("HECHO", "Registro Actualizado");
+                        break;
+                }
+            ?>
+
+             </div>
 	</div><!--/.fluid-container-->
 
 
@@ -580,8 +633,36 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
 			<!-- end: Content -->
 		</div><!--/#content.span10-->
 		</div><!--/fluid-row-->
+
+
+        	<div class="modal hide fade" id="myModal">
+    	<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">×</button>
+			<h3><span class=\"label label-inverse\">Editar Producto</span></h3>
+		</div>
+       <form class="form-vertical" action="/functions/editar_producto.php">
+		<div class="modal-body">
+
+
+
+        <div id='txtHint'><ul><b></b></ul></div>
+
+
+
+
+			</div>
+           	<div class="modal-footer">
+				    <button class="btn" data-dismiss="modal">Cancel</button>
+					<button type="submit" class="btn btn-primary">Grabar Cambios</button>
+    		</div>
+    </form>
+			</div>
+
+
+
+
 <!--
-	<div class="modal hide fade" id="myModal">
+	<div class="modal hide fade" id="mymodal">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal">×</button>
 			<h3>Settings</h3>
@@ -622,7 +703,7 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
 		<script src="js/jquery.cookie.js"></script>
 
 		<script src='js/fullcalendar.min.js'></script>
-	
+
 		<script src='js/jquery.dataTables.min.js'></script>
 
 		<script src="js/excanvas.js"></script>
@@ -630,40 +711,44 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
 	<script src="js/jquery.flot.pie.js"></script>
 	<script src="js/jquery.flot.stack.js"></script>
 	<script src="js/jquery.flot.resize.min.js"></script>
-	
+
 		<script src="js/jquery.chosen.min.js"></script>
-	
+
 		<script src="js/jquery.uniform.min.js"></script>
-		
+
 		<script src="js/jquery.cleditor.min.js"></script>
-	
+
 		<script src="js/jquery.noty.js"></script>
 	
 		<script src="js/jquery.elfinder.min.js"></script>
-	
+
 		<script src="js/jquery.raty.min.js"></script>
-	
+
 		<script src="js/jquery.iphone.toggle.js"></script>
 
 		<script src="js/jquery.uploadify-3.1.min.js"></script>
-	
+
 		<script src="js/jquery.gritter.min.js"></script>
-	
+
 		<script src="js/jquery.imagesloaded.js"></script>
-	
+
 		<script src="js/jquery.masonry.min.js"></script>
-	
+
 		<script src="js/jquery.knob.modified.js"></script>
-	
+
 		<script src="js/jquery.sparkline.min.js"></script>
-	
+
 		<script src="js/counter.js"></script>
-	
+
 		<script src="js/retina.js"></script>
 
 		<script src="js/custom.js"></script>
+
+        <script src="js/showdata.js"></script>
+
+
 	<!-- end: JavaScript-->
-	
+
 <script>
 function mostrar_carta(carta) {
     window.open(carta);

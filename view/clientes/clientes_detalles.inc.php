@@ -3,10 +3,10 @@
 <?php
 include 'clientes_detalles.scr.php';
 
-$cid=htmlspecialchars($_GET['cid']);
+$cid=isset($_GET['cid']) ? htmlspecialchars($_GET['cid']) : "";
 ?>
 
-<?php 
+<?php
 if ($_GET['eed']==2)
 	 			echo	"<div class=\"alert alert-success\">
 							<button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
@@ -14,7 +14,7 @@ if ($_GET['eed']==2)
 						</div>";
 
 	$cliente=$nombre.' '.$apellidop.' '.$apellidom;
-?>						
+?>
 
 
 <div class="box span12">
@@ -27,23 +27,23 @@ if ($_GET['eed']==2)
 							<li><a href="#custom">Credito</a></li>
 							<li><a href="#messages">Notas</a></li>
 						</ul>
-						 
+
 						<div id="myTabContent" class="tab-content">
 							<div class="tab-pane active" id="info">
 								<p>
-											
-											<img class="grayscale hidden-print" src=fotos/images.jpeg width=150 align=right></img>									
-											
+
+											<img class="grayscale hidden-print" src=fotos/images.jpeg width=150 align=right></img>
+
 											<b>
                                             <?php
-                                            $cliente_id=sprintf('C%06d', $cliente_id);
+                                            //$cliente_id=sprintf('C%06d', $cliente_id);
                                             echo "<a href=\"/functions/cart.php?func=sel_cliente&cid=". $cliente_id."\" classa=\"btn btn-primary\" data-dismiss=\"modal\">".
                                             strtoupper($nombre.' '.$apellidop.' '.$apellidom)."</b></a>   &nbsp;&nbsp;";
 
 											if (!$_GET['h'])
 											{
 												echo "<br>Direccion: $domicilio_casa
-												<br>Telefono:  $telefono_personal											
+												<br>Telefono:  $telefono_personal
 												<br>Trabajo:  $empresa
 												<br>Grupo Nomina: <a class=\"visible-print\" >". strtoupper($gruponomina)."</a>";
 												echo  "	<a class=\"hidden-print\" href='index.php?data=cobronomina&op=empresas&nid=$gruponomina_id' >". strtoupper($gruponomina)."</a>";
@@ -54,7 +54,7 @@ if ($_GET['eed']==2)
 
 											?>
 
-											
+
 											<br><br>
 											<div class="hidden-print">
 											<?php
@@ -62,22 +62,22 @@ if ($_GET['eed']==2)
 											{
 												echo "<a href=\"index.php?data=clientes&op=cliente_form&f=editar&cid=$cliente_id\">
 													<button class=\"btn btn-primary\"><i class=\"halflings-icon white edit\"></i></button></a>
-												
+
 												<a href=\"index.php?data=clientes&op=subirfoto&cid=$cliente_id\">
 												<button class=\"btn btn-primary\"><i class=\"halflings-icon white camera\"></i></button></a>";
-												
+
 												echo " <a href=\"/index.php?data=clientes&op=cartainvitacion&cid=$cid\" class=\"btn btn-primary hidden-print\">*</a>";
 												echo " <a href=\"/index.php?data=clientes&op=credencial&cid=$cid\" class=\"btn btn-primary hidden-print\">CRED</a>";
 												echo " <a href=\"/index.php?data=clientes&op=contrato&cid=$cid\" class=\"btn btn-primary hidden-print\">Contrato</a>";
 											}
 
-											?>											
-											<!-- <a href="index.php?data=clientes&op=cliente_form&f=editar&cid=<?=$cliente_id?>"><button 
-													class="btn btn-mini btn-primary">Editar Cliente</button></a> 
+											?>
+											<!-- <a href="index.php?data=clientes&op=cliente_form&f=editar&cid=<?=$cliente_id?>"><button
+													class="btn btn-mini btn-primary">Editar Cliente</button></a>
 											<br>
-											<a href="index.php?data=clientes&op=cliente_form&f=editar&cid=<?=$cliente_id?>"><button 
-													class="btn btn-mini btn-primary">Cambiar Imagen</button></a> 
-											 -->	
+											<a href="index.php?data=clientes&op=cliente_form&f=editar&cid=<?=$cliente_id?>"><button
+													class="btn btn-mini btn-primary">Cambiar Imagen</button></a>
+											 -->
 										</div>
 								</p>
 
@@ -85,7 +85,7 @@ if ($_GET['eed']==2)
 							<div class="tab-pane" id="custom">
 								<img class="grayscale hidden-print" src=fotos/images.jpeg width=150 align=right></img>
 									<p><b><?php echo $nombre.' '.$apellidop.' '.$apellidom?></b> &nbsp;&nbsp;</p>
-									<table><tr><td valign=top align=right>																			
+									<table><tr><td valign=top align=right>
 									<p>Limite de Credito:<b> <?php echo dinero($credito)?></b></p>
 									<p>Total Financiado:<b>	<?php echo dinero($total_ultimo)?></b>	</p>
 								</td>
@@ -100,7 +100,7 @@ if ($_GET['eed']==2)
 							</div>
 							<div class="tab-pane" id="messages">
 								<p>
-									<?php echo "Notas:". $obsevarciones?>									
+									<?php echo "Notas:". $obsevarciones?>
 								</p>
 								
 							</div>

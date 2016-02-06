@@ -1,9 +1,9 @@
 
 <?php
 
-$cliente_id = $_GET['cid'];
-$cliente_id=substr($cliente_id,1,6);
-$codigo_cliente=substr($_GET['cid'],1);
+$codigo_cliente = isset($_GET['cid']) ? $_GET['cid'] : "";
+//$cliente_id=substr($cliente_id,1,6);
+//$codigo_cliente=substr($_GET['cid'],1);
 
 ?>
 <html>
@@ -63,21 +63,21 @@ $codigo_cliente=substr($_GET['cid'],1);
 	width:700px;
 }
 
-</style>	
+</style>
 </head>
 <body>
-<?php 
-if($cliente_id)
+<?php
+if($codigo_cliente)
 	{
 		$query = "SELECT cliente_id,apellidop, apellidom, nombre, empresa  FROM cliente,empresa
 			WHERE  cliente.empresa_id=empresa.empresa_id AND codigo_cliente='".$codigo_cliente."'";
 		list( $cliente_id,$apellidop,$apellidom,$nombre,$empresa ) = $database->get_row( $query );
 			$apellidos= $apellidop." ".$apellidom;
 
-						
-						
-		$cliente_id=sprintf('C%06d', $cliente_id);
-	} 
+
+
+		$cliente_id=$codigo_cliente; //sprintf('C%06d', $cliente_id);
+	}
 
 if ($nombre)
 {

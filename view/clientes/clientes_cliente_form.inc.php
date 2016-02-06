@@ -1,7 +1,8 @@
 <?php
+require_once 'header.inc.php';
 
-	 $cid=(htmlspecialchars($_GET["cid"]));
-	 $f=(htmlspecialchars($_GET["f"]));
+	 $cid=isset($_GET['cid']) ? htmlspecialchars($_GET["cid"]) : "";
+	 $f=isset($_GET['f']) ? htmlspecialchars($_GET["f"]) : "";
 	 if ($f=="editar")
 	 	$title="Editar Cliente [$cid]";
 	 		else
@@ -27,7 +28,7 @@
 	 }
 
 
-    if ($tipocredito_id==0) $tipocredito_id=4; 
+    if ($tipocredito_id==0) $tipocredito_id=4;
 
 
 ?>

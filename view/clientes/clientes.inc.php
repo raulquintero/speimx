@@ -1,26 +1,11 @@
-<ul class="breadcrumb_sub hidden-print hidden-phone">
-
-					<i class=" fa-icon-tasks"></i>
-					&nbsp;&nbsp;&nbsp;&nbsp;<a href="/index.php" >Menu&nbsp;</a>
-					<i class="icon-angle-right"></i>&nbsp;&nbsp;&nbsp;
+<?php require_once 'header.inc.php' ?>
 
 
-
-				<a class="btn btn-small blue" href="index.php?data=clientes&op=cliente_form&f=agregar" ><i class="icon-barcode "></i>&nbsp;AGREGAR CLIENTE</a>
-				<a class="btn btn-small blue" href="index.php?data=nomina&op=cobronomina_form&f=agregar" ><i class="icon-barcode "></i>&nbsp;<b>+</b> AGREGAR GRUPO</a>
-                <a class="btn btn-small blue"  href="index.php?data=empresas&op=empresa_form&f=agregar" ><i class="icon-barcode "></i>&nbsp;<b>+</b> AGREGAR EMPRESA</a>
-
-
-</ul>
-
-
-
-						
 <div class="box span12">
 					<div class="box-header" data-original-title>
 						<h2><i class="halflings-icon user"></i><span class="break"></span>Clientes</h2>
 						<div class="box-icon">
-							<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
+							<a href="index.php?data=clientes&op=cliente_form&f=agregar" classa="btn-setting"><i class="halflings-icon plus"></i></a>
 							<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
 							<a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
 						</div>
@@ -36,7 +21,7 @@
 								  <th>Lugar de Trabajo</th>
 								  <th>Acciones</th>
 							  </tr>
-						  </thead>   
+						  </thead>
 						  <tbody>
 
 <?php

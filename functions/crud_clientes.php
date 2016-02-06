@@ -5,6 +5,7 @@ $data=$_GET['data'];
 $op=$_GET['op'];
 $f=$_GET['f'];
 $cid=$_GET['cid'];
+$func=$_GET['func'];
 //echo "func: ".$func=htmlspecialchars($_GET["func"]);
 
 
@@ -24,15 +25,15 @@ foreach( $_GET as $key => $value )
 }
 
 
-if ($_GET['func']=="c")
+if ($func=="c")
 {
-	
+
 
 // echo "<br><br>";          // ********DEBUG**********
 // foreach ($_GET as $k => $v) { echo "<br>[$k] => $v \n";}
 
-
-$codigo_cliente=1000+date("y");
+$codigo_cliente="54";
+$codigo_cliente.=1000+date("y");
 $codigo_cliente.=date("mdHis");
 
 
@@ -62,7 +63,7 @@ $codigo_cliente.=date("mdHis");
 	'saldo'=>$_GET['saldo'],
 	'abono'=>$_GET['abono'],
 	'empresa_id'=>$_GET['empresa_id']
-    	
+
 		);
 	if ($_GET['nombre'] && $_GET['curp'])
 	{
@@ -71,18 +72,16 @@ $codigo_cliente.=date("mdHis");
 		$location="Location: /index.php?data=$data&op=detalles&cid=$last_id&eed=2";
 	}
 		else
-		$location="Location: /index.php?data=$data&op=cliente_form&func=agregar&eed=3";	
-
-header($location);
+		$location="Location: /index.php?data=$data&op=cliente_form&func=agregar&eed=3";
 
 
 
 
+}
 
 
-}				
-				
-if ($_GET['func']=="u")
+
+if ($func=="u")
 {
 
 // echo "<br><br>";          // ********DEBUG**********
@@ -134,13 +133,7 @@ $where_clause = array(
 //$database->display( $updated );
 
 
-	header("Location: /index.php?data=$data&op=detalles&cid=$cid&eed=1");
-
-
-
-
-
-
+	$location="Location: /index.php?data=$data&op=detalles&cid=$cid&eed=1";
 
 }
 
@@ -148,7 +141,8 @@ $where_clause = array(
 
 
 
-
+if ($location)
+header($location);
 
 
 ?>

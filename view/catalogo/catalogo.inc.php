@@ -152,32 +152,9 @@ function pulsar(e) {
 
 
 
-	<div class="modal hide fade" id="myModal">
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal">×</button>
-			<h3><span class=\"label label-inverse\">Editar Producto</span></h3>
-		</div>
-       <form class="form-vertical" action="/functions/editar_producto.php">
-		<div class="modal-body">
-
-
-
-        <div id='txtHint'><ul><b></b></ul></div>
-
-
-
-
-			</div>
-           	<div class="modal-footer">
-				    <button class="btn" data-dismiss="modal">Cancel</button>
-					<button type="submit" class="btn btn-primary">Grabar Cambios</button>
-    		</div>
-    </form>
-			</div>
+ 
 
 
 
 
 
-</div>
-</div>

@@ -73,7 +73,7 @@ if($cliente_id)
 
 						
 						
-		$codigo_cliente="C".$codigo_cliente;
+	   //	$codigo_cliente="C".$codigo_cliente;
 	} 
 
 
