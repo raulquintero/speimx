@@ -8,7 +8,6 @@ $database_selection=mysql_select_db("speimx", $database_connection);
 
 
 
-
 if(isset($_GET['module']) && ($_GET['module']=="login"))
 {
 
@@ -50,10 +49,10 @@ if(isset($_GET['module']) && ($_GET['module']=="login"))
 	}
 
 	
-	if ($login->getUserActive())
-		header("Location: /index.php");
-    else 
-        header("Location: /index.html");
+    if ($login->getUserActive())
+   		header("Location: /index.php");
+    else
+       header("Location: /index.html");
 
 }
 

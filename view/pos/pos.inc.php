@@ -1,6 +1,6 @@
 
 		<!-- start: Content **************************************************************************************************************************                  -->
-		<?php 
+		<?php
 		$_SESSION['display']="pos";
 			$cliente_id = $_SESSION['cliente_id'];
 
@@ -48,13 +48,13 @@
 					<div class="hidden-print ">
 					<form action="/index.php" method="get">
 							<table  width=100%  >
-				 			<tr bgcolor=#dddddd>
+				 			<tr bgcolor=#0E3540>
 				  			<td style="padding:10px">
 
 							<input type=hidden name=data value=pos>
 							<input type=hidden name=op value=detalles>
 							<input type=hidden name=type value=item>
-				  			 &nbsp;&nbsp;Codigo: <input class="input-large" id="textcode" name="code" >
+				  			 &nbsp;&nbsp;<font color=white>Codigo:</font> <input class="input-large" onkeypress="return enfocarPos(event)" id="textcode" name="code" >
 				  			</td>
 				  		</tr>
 				  		</table>

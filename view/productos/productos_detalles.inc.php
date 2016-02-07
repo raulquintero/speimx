@@ -29,14 +29,33 @@ if ($_GET['eed']==2)
 						<div id="myTabContent" class="tab-content">
 							<div class="tab-pane active" id="info">
 								<p>
-											<img class=grayscale src=fotos/images.jpeg width=150 align=right></img>									
-											
-											<b><?php echo $producto?> </b> &nbsp;&nbsp;											
+                                <?php
+                                if (!$color_id){
+									$query = "SELECT color_id FROM color WHERE producto_id=$prid limit 1";
+									list( $color_id ) = $database->get_row( $query );
+						}
+                                  	$query = "SELECT producto,subcategoria,color from producto,subcategoria,color
+                    where producto.subcategoria_id=subcategoria.subcategoria_id
+                    AND $color_id=color.color_id
+                    AND producto.producto_id=".$prid;
+				list( $producto,$subcategoria,$color) = $database->get_row( $query );
+                $nombre_producto=ucwords(strtolower($producto));
+            $nombre_producto = str_replace(" ", "-", $nombre_producto);
+            $nombre_subcategoria = ucwords(str_replace(" ", "-", $subcategoria));
+            $nombre_color=ucwords(strtolower($color));
+
+            $nombre_archivo=$nombre_subcategoria."-".$nombre_producto."-".$nombre_color."-".$prid."_p.jpg"
+
+                                ?>
+
+											<img class=grayscale src='productos/<?php echo $nombre_archivo?>' width=200 align=right></img>
+
+											<b><?php echo $producto?> </b> &nbsp;&nbsp;
 											<br>Marca: <?php echo $marca?>
 											<br>Proveedor: <?php echo $proveedor?>
-											<br>Subcategoria: <?php echo $subcategoria?>											
-											<br>Codigo: <?php echo $codigo?>											
-											
+											<br>Subcategoria: <?php echo $subcategoria?>
+											<br>Codigo: <?php echo $codigo?>
+
 											<br><br>
 											<a href="index.php?data=productos&op=producto_form&f=editar&prid=<?=$prid?>">
 													<button class="btn btn-primary"><i class="halflings-icon white edit"></i></button></a>
@@ -54,9 +73,9 @@ if ($_GET['eed']==2)
 
 							</div>
 							<div class="tab-pane" id="custom">
-								<img class=grayscale src=fotos/images.jpeg width=150 align=right></img>
+							   <img class=grayscale src='productos/<?php echo $nombre_archivo?>' width=200 align=right></img>
 									<p><b><?php echo $nombre.' '.$apellidop.' '.$apellidom?></b> &nbsp;&nbsp;</p>
-									<table><tr><td valign=top align=right>				
+									<table><tr><td valign=top align=right>
 											<?php printf('<p>Precio Compra: <strong>%0.2f</strong><p>', $precio_compra);
 											 	  printf('<p>Precio Promocion: <strong>%0.2f</strong><p>', $precio_promocion);
 											?>

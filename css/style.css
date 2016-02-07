@@ -721,7 +721,16 @@ ul.messages li .message {
 }
 
 .breadcrumb span {
-	text-shadow: 1px 1px 0px #fff;
+   text-shadow: 1px 1px 0px #fff;
+    border:1px;
+    display:box;
+   	margin-left: -10px;
+    margin-top: -20px;
+    color: #112E5A;
+    font-weight:bold;
+  	padding: 10px 30px 17px 20px;
+    background: white;
+
 }
 
 .breadcrumb a {

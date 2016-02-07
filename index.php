@@ -232,7 +232,6 @@ switch ($type) {
 	<!-- end: Favicon -->
 
 
-
 	<script type="text/javascript">
 	function setFocusToTextBox(){
 		$('#textcode').focus();
@@ -242,6 +241,15 @@ switch ($type) {
 		$('#cantidad').focus();
 		//document.getElementById('textcode').focus();
 	}
+ window.onkeyup = compruebaTecla;
+function compruebaTecla(){
+    var e = window.event;
+    var tecla = (document.all) ? e.keyCode : e.which;
+    if(tecla == 27){
+        this.document.location.href = "/index.php";
+        	/*$('#textcode').focus(); */
+    }
+}
 	</script>
 </head>
 
@@ -483,18 +491,19 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
 						if ($nid<5) echo "<li><a href=\"index.php?data=mensajes\"   ><i class=\"icon-envelope hidden-print\"></i><span class=\"hidden-tablet hidden-print\"> Messages</span></a></li>";
 						 //echo "<li><a href=\"index.php?data=pos\"        ><i class=\"icon-shopping-cart hidden-print\" ></i><span class=\"hidden-tablet hidden-print\"> PoS</span></a></li>";
 						 //echo "<li><a href=\"index.php?data=productos&op=checarprecio\"><i class=\"icon-barcode hidden-print\"       ></i><span class=\"hidden-tablet hidden-print\"> Checar Precio</span></a></li>";
-						 echo "<li><a href=\"index.php?data=pedidos\"                  ><i class=\"icon-shopping-cart hidden-print\" ></i><span class=\"hidden-tablet hidden-print\"> Pedidos</span></a></li>";
+
 						//if ($nid<=8) echo "<li><a href=\"index.php?data=clientes&op=devoluciones\"><i class=\"icon-book\"    ></i><span class=\"hidden-tablet\"> Devoluciones</span></a></li>";
 
 
 
-						if ($nid<=8) echo "<li><a class=\"dropmenu\" href=\"#\"><i class=\"icon-chevron-right hidden-print\"></i><span class=\"hidden-tablet hidden-print\"> Adminsitracion </span></a>";
+						if ($nid<=8) echo "<li><a class=\"dropmenu\" href=\"#\"><i class=\"icon-chevron-right hidden-print\"></i><span class=\"hidden-tablet hidden-print\"> Administracion </span></a>";
 						echo "<ul>";
 								if ($nid<=6) echo "<li><a href=\"index.php?data=catalogo\"><i class=\"icon-barcode\"></i><span class=\"hidden-tablet\"> Catalogo</span></a></li>";
 
    						   	if ($nid<=6) echo "<li><a href=\"index.php?data=compras\"><i class=\"icon-book\"    ></i><span class=\"hidden-tablet\"> Compras </span></a></li>";
 						   	if ($nid<=6) echo "<li><a href=\"index.php?data=cupones\"><i class=\"icon-book\"    ></i><span class=\"hidden-tablet\"> Cupones </span></a></li>";
 						   	if ($nid<=6) echo "<li><a href=\"index.php?data=promociones\"><i class=\"icon-book\"    ></i><span class=\"hidden-tablet\"> Promociones </span></a></li>";
+						    echo "<li><a href=\"index.php?data=pedidos\"                  ><i class=\"icon-shopping-cart hidden-print\" ></i><span class=\"hidden-tablet hidden-print\"> Pedidos</span></a></li>";
 
                         echo "</ul>";
 
@@ -579,13 +588,20 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
 					<a href="/index.php" >Accesos Rapido</a>
 					<i class="icon-angle-right"></i>
 				</li>-->
-
+                <li>
+                	<i class=" fa-icon-tasks"></i>
+					&nbsp;&nbsp;&nbsp;&nbsp;<a href="/index.php?data=<?php echo $data?>"><span><?php echo strtoupper($data) ?></span></a>&nbsp;
+					&nbsp;&nbsp;&nbsp;
+                 </li>
 				<!--<li><a  href="/index.php?data=<?php echo $data?>"><?php echo ucfirst($data)?></a></li>-->
-				<li><a href="/index.php?data=pos"><button class="btn-primary" ><i class="icon-barcode "></i>&nbsp;POS</button></a></li>
-				<li><a href="/index.php?data=productos&op=checarprecio"><button class="btn-primary" ><i class="icon-barcode "></i>&nbsp;Checar Precio</button></a></li>
-                <li><a href="/index.php?data=pos&op=servicio"><button class="btn-primary"  ><i class="icon-barcode " ></i>&nbsp;Miscelaneos</button></a></li>
-                <li><a href="/index.php?data=pos&op=andrea"><button class="btn-primary" ><i class="halflings-icon inbox white "></i>&nbsp;Hacer Pedido</button></a></li>
-
+                <?php
+                if ($data=="pos")
+                {?>
+                <li><a href="/index.php?data=pos"><button class="btn-primary" ><i class="icon-barcode "></i>&nbsp;POS</button></a></li>
+				<li><a href="/index.php?data=pos&op=checarprecio"><button class="btn-primary yellow" ><i class="icon-barcode "></i>&nbsp;Checar Precio</button></a></li>
+                <li><a href="/index.php?data=pos&op=servicio"><button class="btn-primary orange"  ><i class="icon-barcode " ></i>&nbsp;Miscelaneos</button></a></li>
+                <li><a href="/index.php?data=pos&op=andrea"><button class="btn-danger" ><i class="halflings-icon inbox white "></i>&nbsp;Hacer Pedido</button></a></li>
+                <?php } ?>
 			</ul>
 
 

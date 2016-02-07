@@ -1,5 +1,5 @@
 <?php
-require_once 'header.inc.php';
+
 
 	 $cid=isset($_GET['cid']) ? htmlspecialchars($_GET["cid"]) : "";
 	 $f=isset($_GET['f']) ? htmlspecialchars($_GET["f"]) : "";

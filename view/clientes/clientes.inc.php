@@ -1,11 +1,10 @@
-<?php require_once 'header.inc.php' ?>
-
+<a href="index.php?data=clientes&op=cliente_form&f=agregar" class="btn btn-small btn-primary hidden-print"><b>+</b> AGREGAR CLIENTE</a>
 
 <div class="box span12">
 					<div class="box-header" data-original-title>
 						<h2><i class="halflings-icon user"></i><span class="break"></span>Clientes</h2>
 						<div class="box-icon">
-							<a href="index.php?data=clientes&op=cliente_form&f=agregar" classa="btn-setting"><i class="halflings-icon plus"></i></a>
+							<a href="index.php?data=clientes&op=cliente_form&f=agregar" ><i class="halflings-icon plus"></i></a>
 							<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
 							<a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
 						</div>
@@ -65,7 +64,7 @@ $nombre_cliente=$row['apellidop'].' '.$row['apellidom'].' '.$row['nombre'];
 
 
 						  </tbody>
-					  </table>            
+					  </table>
 					</div>
 				</div><!--/span-->
 			

@@ -1,7 +1,7 @@
 
 <form action="/index.php" method="get">
 <table  width=100%  >
-				 			<tr bgcolor=#dddddd>
+				 			<tr bgcolor=#FFE104>
 				  			<td style="padding:10px">
 
 							<input type=hidden name=data value=pos>
@@ -101,8 +101,8 @@ if ($producto_id)
 	$query="SELECT color from color where  producto_id=$producto_id ";
 
 	$results = $database->get_results( $query );
-	
-	
+
+
 	$i=0;
 	foreach( $results as $row )
 	{

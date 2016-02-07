@@ -1,5 +1,5 @@
 <?php
-require_once 'header.inc.php';
+
 require_once 'cupones.src.php';
  ?>
 <ul>

@@ -8,7 +8,7 @@
 	 		else
 	 	$title="Agregar Producto";
 
-
+     if ($f=="agregar") $activo=1;
 
 
 	 if ($prid>0)

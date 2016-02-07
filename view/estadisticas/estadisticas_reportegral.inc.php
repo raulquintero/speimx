@@ -39,7 +39,7 @@ $query = "SELECT sum(cantidad) as total from pedido_movimiento
 
 
 
-                <div class="span2 statbox blue" onTablet="span6" onDesktop="span2">
+                <div class="span3 statbox blue" onTablet="span6" onDesktop="span3">
 					<div class="boxchart">4000,3000,2000,3000,5000,2000</div>
 					<div class="number"><?php echo round($total)?><i class="icon-arrow-up"></i></div>
 					<div class="title">ingresos netos</div>
@@ -47,7 +47,7 @@ $query = "SELECT sum(cantidad) as total from pedido_movimiento
 						<a href="/index.php?data=estadisticas&op=ingresosnetos"> read full report</a>
 					</div>
 				</div>
-				<div class="span2 statbox blue" onTablet="span6" onDesktop="span2">
+				<div class="span3 statbox blue" onTablet="span6" onDesktop="span3">
 					<div class="boxchart">1,2,6,4,0,8,2,4,5,3,1,7,5</div>
 					<div class="number">0<i class="icon-arrow-down"></i></div>
 					<div class="title">proveedores</div>
@@ -55,7 +55,7 @@ $query = "SELECT sum(cantidad) as total from pedido_movimiento
 						<a href="#"> read full report</a>
 					</div>
 				</div>
-				<div class="span2 statbox blue noMargin" onTablet="span6" onDesktop="span2">
+				<div class="span3 statbox blue noMargin" onTablet="span6" onDesktop="span3">
 					<div class="boxchart">5,6,7,2,0,-4,-2,4,8,2,3,3,2</div>
 					<div class="number">0<i class="icon-arrow-up"></i></div>
 					<div class="title">otras deudas</div>
@@ -63,9 +63,9 @@ $query = "SELECT sum(cantidad) as total from pedido_movimiento
 						<a href="#"> read full report</a>
 					</div>
 				</div>
-                
-				</div>
-				<div class="span4 statbox orange noMargin" onTablet="span6" onDesktop="span4">
+
+
+				<div class="span3 statbox orange noMargin" onTablet="span6" onDesktop="span3">
 					<div class="boxchart">5,6,7,2,0,-4,-2,4,8,2,3,3,2</div>
 					<div class="number">982<i class="icon-arrow-up"></i></div>
 					<div class="title">gasto operativo</div>
@@ -74,10 +74,8 @@ $query = "SELECT sum(cantidad) as total from pedido_movimiento
 					</div>
 				</div>
 
-
-
-
-	<div class="box-header ">
+                 <br><br>
+    <div class="box-header ">
 						<h2><i class="halflings-icon align-justify"></i><span class="break"></span>Empresas Nomina</h2>
 
                         <div class="clearfix"></div>
