@@ -76,7 +76,7 @@ if($codigo_cliente)
 
 
 
-		$cliente_id=$codigo_cliente; //sprintf('C%06d', $cliente_id);
+		$cliente_id=$cliente_id;  //sprintf('C%06d', $cliente_id);
 	}
 
 if ($nombre)

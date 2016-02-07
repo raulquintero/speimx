@@ -76,10 +76,9 @@ if ($func=="del_item")
 
 if ($func=="sel_cliente")
 {
-    $cid=$_GET['cid'];
-    $cid=substr($cid,1,6);
-    $_SESSION['cliente_id']=$cid;
-
+     $cid=$_GET['cid'];
+    //$cid=substr($cid,1,6);
+     $_SESSION['cliente_id']=$cid;
 
 
 }
