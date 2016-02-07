@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 function mostrar_transacciones($fecha_inicio,$fecha_fin,$user)
 {
@@ -26,8 +26,9 @@ $database = new DB();
 
 $fecha_inicio_bd=fechaustomysql($fecha_inicio);
 $fecha_fin_bd=fechaustomysql($fecha_fin);
-	$query = "SELECT  * from movimiento,tipomov,admin 
-		where movimiento.tipomov_id=tipomov.tipomov_id AND movimiento.admin_id=admin.admin_id  AND (movimiento.tipomov_id=1 OR movimiento.tipomov_id=13 or movimiento.tipomov_id=14)";
+	$query = "SELECT  * from movimiento,tipomov,admin,cliente
+		where movimiento.tipomov_id=tipomov.tipomov_id AND movimiento.admin_id=admin.admin_id  AND (movimiento.tipomov_id=1 OR movimiento.tipomov_id=13 or movimiento.tipomov_id=14)
+         AND movimiento.cliente_id=cliente.cliente_id AND cliente.empresa_id=0";
 
 		if ($fecha_inicio)
 			$query.=" AND fecha>='$fecha_inicio_bd' AND fecha<='$fecha_fin_bd 23:59:59' ";
