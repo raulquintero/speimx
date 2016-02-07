@@ -87,6 +87,8 @@ if ($producto_id)
 					</div>
 
 <?php
+
+echo "<a href='/functions/cart.php?func=add_item&prid=$producto_id&producto=$producto&marca=$marca&codigo=$codigo&codigo_inventario=$codigo_inventario&talla=$talla&color=$color&precio_compra=$precio_compra&precio_credito=$precio_credito&precio_contado=$precio_contado&precio_promocion=$precio_promocion&descuento=$descuento&iva=$iva'><button class=\"btn btn-large btn-primary\">Agregar al carrito</button></a>";
 	// echo "<br> $code";
 	// echo "<br> <h2>$producto</h2>";
 	// echo "<br> $subcategoria";

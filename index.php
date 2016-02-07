@@ -77,7 +77,7 @@ switch ($cuantos) {
 					$location="Location: /functions/cart_dev.php?facturadet_id=$facturadet_id&func=add_dev_item&facturadet_id=$fdid";
 			    break;
 			case 'checarprecio':  //checar precio
-				$location="Location: /index.php?data=productos&op=checarprecio&code=$code";
+				$location="Location: /index.php?data=pos&op=checarprecio&code=$code";
 				// $location="Location: /functions/cart.php?func=sel_cliente&cid=$code";
 				break;
         }
