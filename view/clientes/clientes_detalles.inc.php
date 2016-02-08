@@ -49,7 +49,7 @@ if ($_GET['eed']==2)
 												echo  "	<a class=\"hidden-print\" href='index.php?data=cobronomina&op=empresas&nid=$gruponomina_id' >". strtoupper($gruponomina)."</a>";
 											}
 											else
-												echo "<br><a class=\"btn btn-info blue btn-setting hidden-print\" data-toggle=\"modal\" data-target=\"#abonaracuenta\">Abonar a Cuenta</a>";
+												echo "<br><a class=\"btn btn-info blue  hidden-print\" data-toggle=\"modal\" data-target=\"#abonaracuenta\">Abonar a Cuenta</a>";
 
 
 											?>

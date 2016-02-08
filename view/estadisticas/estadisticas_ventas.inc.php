@@ -72,8 +72,9 @@
 
 
 <?php
- $query = "SELECT sum(cantidad) as total from movimiento
- where fecha>='".fechaustomysql($fecha_inicio)."' AND fecha<='".fechaustomysql($fecha_final)." 23:59:59' AND (movimiento.tipomov_id=1 OR movimiento.tipomov_id=13 or movimiento.tipomov_id=14)";
+ $query = "SELECT sum(cantidad) as total from movimiento,cliente
+ where fecha>='".fechaustomysql($fecha_inicio)."' AND fecha<='".fechaustomysql($fecha_final)." 23:59:59' AND (movimiento.tipomov_id=1 OR movimiento.tipomov_id=13 or movimiento.tipomov_id=14)
+ AND movimiento.cliente_id=cliente.cliente_id  AND cliente.empresa_id<>2";
 		list( $total ) = $database->get_row( $query );
 $query = "SELECT sum(cantidad) as total from movimiento
 	where movimiento.tipomov_id=2 AND fecha>='".fechaustomysql($fecha_inicio)."' AND fecha<='".fechaustomysql($fecha_final)." 23:59:59'";
@@ -82,8 +83,9 @@ $query = "SELECT sum(cantidad) as total from movimiento
 $query = "SELECT sum(cantidad) as total from movimiento
 	where movimiento.tipomov_id=14 AND fecha>='".fechaustomysql($fecha_inicio)."' AND fecha<='".fechaustomysql($fecha_final)." 23:59:59'";
 		list( $ventas_contado ) = $database->get_row( $query );
-$query = "SELECT sum(cantidad) as total from movimiento
-	where movimiento.tipomov_id=3 AND fecha>='".fechaustomysql($fecha_inicio)."' AND fecha<='".fechaustomysql($fecha_final)." 23:59:59'";
+$query = "SELECT sum(cantidad) as total from movimiento,cliente
+	where movimiento.tipomov_id=3 AND fecha>='".fechaustomysql($fecha_inicio)."' AND fecha<='".fechaustomysql($fecha_final)." 23:59:59'
+    AND movimiento.cliente_id=cliente.cliente_id AND cliente.empresa_id<>2";
 		list( $ventas_credito ) = $database->get_row( $query );
 $query = "SELECT sum(cantidad) as total from movimiento,cliente
 	where movimiento.tipomov_id=1 AND fecha>='".fechaustomysql($fecha_inicio)."' AND fecha<='".fechaustomysql($fecha_final)." 23:59:59'

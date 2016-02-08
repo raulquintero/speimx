@@ -1,5 +1,5 @@
 <?php
-require_once 'header.inc.php';
+
 $activo=isset($_GET['activo']) ? $_GET['activo'] : "";
 
 

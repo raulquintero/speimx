@@ -19,9 +19,9 @@ $database = new DB();
 									  <th style='text-align:center'>Fecha</th>
 									  <th style='text-align:center'>Movimiento</th>
 									  <th style='text-align:center'>Total</th>
-									  <th style='text-align:center'>Vendedor</th>
+									  <th style='text-align:center'>Cliente</th>
 								  </tr>
-							  </thead>   
+							  </thead>
 							  <tbody>";
 
 $fecha_inicio_bd=fechaustomysql($fecha_inicio);
@@ -46,10 +46,10 @@ $fecha_fin_bd=fechaustomysql($fecha_fin);
 						echo "<tr><td style='text-align:right' width=30 >".$item['movimiento_id']."</td>
 						<td style='text-align:center'><span class='hidden-desktop'>".$item['fecha']."</span><a class='hidden-print' href=/index.php?data=estadisticas&op=ventas&fi=$fecha_inicio&hi=$hi&ff=".$fecha_fin."&hf=$hf&fid=".$item['factura_id'].">".$item['fecha']."</a></td>
 							<td style='text-align:center'>".$item['tipomov']."
-							<br></td> 
+							<br></td>
 							<td style='text-align:right'>$ ".dinero($item['cantidad']+$item['iva'])."</td>
 							<td style='text-align:right'>".$vendedor;
-							echo " - ".$_ENV["COMPUTERNAME"];
+
 					
 						echo "&nbsp;&nbsp;</td></tr>";
 										

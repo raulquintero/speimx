@@ -47,7 +47,7 @@ switch ($cuantos) {
             $location="Location: /index.php?data=clientes&op=verificar&cid=$code";
         break;
     case 14:  // ticket
-
+            $location="Location: /index.php?data=cupones&op=verificar&sku=$code";
         break;
     case 12: //  cupon
 
@@ -595,7 +595,7 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
                  </li>
 				<!--<li><a  href="/index.php?data=<?php echo $data?>"><?php echo ucfirst($data)?></a></li>-->
                 <?php
-                if ($data=="pos")
+                //if ($data=="pos")
                 {?>
                 <li><a href="/index.php?data=pos"><button class="btn-primary" ><i class="icon-barcode "></i>&nbsp;POS</button></a></li>
 				<li><a href="/index.php?data=pos&op=checarprecio"><button class="btn-primary yellow" ><i class="icon-barcode "></i>&nbsp;Checar Precio</button></a></li>
