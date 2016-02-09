@@ -39,7 +39,7 @@ $query = "SELECT * from cupon,cupontipo
 		$i+=1;
 		echo "<tr>
 			    <td align=right><font >&nbsp;$i&nbsp;</td>
-			    <td><a href=\"/index.php?data=cupones&op=activados\" ><b>".($row['cupon'])."</b><a>
+			    <td><a href=\"/index.php?data=cupones&op=generados&bulk=".$row['bulk']."\" ><b>".($row['cupon'])."</b><a>
 				    <a class=\"visible-print\" ><b>".strtoupper($row['cupon'])."</b><a>
 			    </td>";
 

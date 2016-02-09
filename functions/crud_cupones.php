@@ -20,11 +20,12 @@ foreach( $_GET as $key => $value )
 $data= isset($_GET['data']) ? $_GET['data'] : "";
 $op= isset($_GET['op']) ? $_GET['op'] : "";
 
+$bulk= isset($_GET['bulk']) ? $_GET['bulk'] : "";
 $func= isset($_GET['func']) ? $_GET['func'] : "";
 $cuid= isset($_GET['cuid']) ? $_GET['cuid'] : "";
 $cupon= isset($_GET['cupon']) ? $_GET['cupon'] : "";
-$fecha_ini= isset($_GET['fecha_ini']) ? $_GET['fecha_ini'] : "";
-$fecha_fin= isset($_GET['fecha_fin']) ? $_GET['fecha_fin'] : "";
+$fecha_ini= isset($_GET['fecha_ini']) ? fechaustomysql($_GET['fecha_ini']) : "";
+$fecha_fin= isset($_GET['fecha_fin']) ? fechaustomysql($_GET['fecha_fin']) : "";
 $cantidad=isset($_GET['cantidad']) ? $_GET['cantidad'] : "";
 $cuantos=isset($_GET['cuantos']) ? $_GET['cuantos'] : "";
 $cupontipo_id= isset($_GET['cupontipo_id']) ? $_GET['cupontipo_id'] : "";
@@ -39,8 +40,8 @@ if ($func=="c")
 
 $cliente = array(
 	'cupon'=>$cupon,
-	'fecha_ini'=>fechaustomysql($fecha_ini),
-	'fecha_fin'=>fechaustomysql($fecha_fin),
+	'fecha_ini'=>$fecha_ini,
+	'fecha_fin'=>$fecha_fin,
     'cantidad'=>$cantidad,
 	'cupontipo_id'=>$cupontipo_id
 	);
@@ -62,8 +63,8 @@ if ($func=="u")
 
 $update = array(
 	'cupon'=>$cupon,
-	'fecha_ini'=>fechaustomysql($fecha_ini),
-	'fecha_fin'=>fechaustomysql($fecha_fin),
+	'fecha_ini'=>$fecha_ini,
+	'fecha_fin'=>$fecha_fin,
     'cantidad'=>$cantidad,
 	'cupontipo_id'=>$cupontipo_id
 	);
@@ -84,11 +85,11 @@ $updated = $database->update( 'cupon', $update, $where_clause, 1 );
 if ($func=="g")
 {
 
-$cupones=generar_cupones($cuid,$cuantos,$_SESSION['user_id']);
-//echo $data."cuid".$cuid;
+$cupones=generar_cupones($cuid,$cuantos,$_SESSION['user_id'],$fecha_ini,$fecha_fin);
+ //echo  $fecha_ini;
 
-$query="insert into cupones (cupon_id,fecha_ini,fecha_fin,cantidad,cupontipo_id,activo,admin_id)
-    values $cupon_generado ";
+//$query="insert into cupones (cupon_id,fecha_ini,fecha_fin,cantidad,cupontipo_id,activo,admin_id)
+    //values $cupon_generado ";
 $location="Location: /index.php?data=cupones&op=generados&activo=0";
 }
 
@@ -115,18 +116,48 @@ $updated = $database->update( 'cupones', $update, $where_clause );
 $location="Location: /index.php?data=cupones&op=generados&activo=0";
 }
 
-if ($location)
-header($location);
+if ($func=="csv")
+{
+
+$query="select * from cupones where activo=0 ";
+
+if ($bulk)
+    $query.=" AND bulk=$bulk";
+
+
+ 	$results = $database->get_results( $query );
+
+	        echo "<table>";
+
+					foreach ($results as $row )
+					{
+
+						echo "<tr><td>";
+
+						switch ($row['cupontipo_id']){
+                            case 1: echo "$ ".dinero($row['cantidad'])." MX";break;
+                            case 2: echo $row['cantidad']." %";break;
+                            }
+
+						echo ",".strtoupper($row['sku']).",".fechamysqltomx($row['fecha_ini'],"letra").",".fechamysqltomx($row['fecha_fin'],"letra")."</td></tr>";
+					}
+           	echo "</table>";
+
+
+
+}
+
+if ($location)  header($location);
 
 
 
 
-function generar_cupones( $cuid,$cuantos,$admin_id)
+function generar_cupones( $cuid,$cuantos,$admin_id,$fecha_ini,$fecha_fin)
 {
 $array=isset($array) ? $array : "";
 $database = new DB();
-$query = "SELECT cupon_id,cupon,fecha_ini,fecha_fin,cantidad,cupontipo_id FROM cupon WHERE cupon_id='$cuid' limit 1";
-list( $cupon_id,$cupon, $fecha_ini,$fecha_fin,$cantidad,$cupontipo_id ) = $database->get_row( $query );
+$query = "SELECT cupon_id,cupon,cantidad,cupontipo_id FROM cupon WHERE cupon_id='$cuid' limit 1";
+list( $cupon_id,$cupon, $cantidad,$cupontipo_id ) = $database->get_row( $query );
 $query = "SELECT sku FROM cupones  ORDER BY sku DESC limit 1";
 list( $sku ) = $database->get_row( $query );
 $query = "SELECT bulk FROM cupones  ORDER BY sku DESC limit 1";

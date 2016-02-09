@@ -12,7 +12,7 @@ function fechamysqltous($fecha,$letra)
 
 	$fecha=explode(" ",$fecha);
 	$values=preg_split('/(\/|-)/',$fecha[0]);
-	
+
 
 	if ($letra)
 		{
@@ -30,10 +30,44 @@ function fechamysqltous($fecha,$letra)
     					case 11: $mes="Nov"; break;
     					case 12: $mes="Dic"; break;
 				}
-			
 
-		 
+
+
 		$fecha =  $mes.'/'.$values[2].'/'.$values[0];
+		return $fecha;
+	}
+			else
+		return date("m/d/Y",mktime(0,0,0,$values[1],$values[2],$values[0]));
+
+}
+
+function fechamysqltomx($fecha,$letra)
+{
+
+	$fecha=explode(" ",$fecha);
+	$values=preg_split('/(\/|-)/',$fecha[0]);
+
+
+	if ($letra)
+		{
+				switch ($values[1]) {
+  					  	case 1:	$mes="Ene"; break;
+    					case 2:	$mes="Feb"; break;
+    					case 3: $mes="Mar"; break;
+  					  	case 4:	$mes="Abr"; break;
+    					case 5:	$mes="May"; break;
+    					case 6: $mes="Jun"; break;
+  					  	case 7:	$mes="Jul"; break;
+    					case 8:	$mes="Ago"; break;
+    					case 9: $mes="Sep"; break;
+  					  	case 10: $mes="Oct"; break;
+    					case 11: $mes="Nov"; break;
+    					case 12: $mes="Dic"; break;
+				}
+
+
+
+		$fecha =  $values[2].'/'.$mes.'/'.$values[0];
 		return $fecha;
 	}
 			else

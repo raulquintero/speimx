@@ -1,11 +1,12 @@
 
-<?php 
-	if(!$_GET['fi'])
-		$fecha_inicio=date("m/d/Y"); else $fecha_inicio=$_GET['fi'];
-	if(!$_GET['ff'])
-		$fecha_final=date("m/d/Y");else $fecha_final=$_GET['ff'];
-?>
+<?php
 
+	echo$fecha_inicio=isset($_GET['fi']) ? fechaustomysql($_GET['fi']) : date("Y-m-d");
+
+    $fecha_final=isset($_GET['ff']) ? fechaustomysql($_GET['ff']) : date("Y-m-d");
+
+?>
+      <br><bR>
 
 
 
@@ -36,7 +37,7 @@
                     <div class="control-group">
 							  <label class="control-label" for="date01"><b>Fecha Inicio</b> (m/d/A)</label>
 							  <div class="controls">
-								<input type="text" class="input-small datepicker" id="fi" name="fi" value="<?php echo $fecha_inicio?>">
+								<input type="text" class="input-small datepicker" id="fi" name="fi" value="<?php echo fechamysqltous($fecha_inicio)?>">
 								<input type="text" class="input-small datepicker" id="hi" name="hi" value="8:00:00">
 							  </div>
 					</div>
@@ -44,7 +45,7 @@
                     <div class="control-group">
 							  <label class="control-label" for="date02"><b>Fecha Fin</b> (m/d/A)</label>
 							  <div class="controls">
-								<input type="text" class="input-small datepicker" id="ff" name="ff" value="<?php echo $fecha_final?>">
+								<input type="text" class="input-small datepicker" id="ff" name="ff" value="<?php echo fechamysqltous($fecha_final)?>">
 								<input type="text" class="input-small datepicker" id="hf" name="hf" value="<?php echo date("G:i:s")?>">
 							  </div>
 					</div>
@@ -72,40 +73,40 @@
 
 
 <?php
- $query = "SELECT sum(cantidad) as total from movimiento,cliente
- where fecha>='".fechaustomysql($fecha_inicio)."' AND fecha<='".fechaustomysql($fecha_final)." 23:59:59' AND (movimiento.tipomov_id=1 OR movimiento.tipomov_id=13 or movimiento.tipomov_id=14)
+  $query = "SELECT sum(cantidad) as total from movimiento,cliente
+ where fecha>='".$fecha_inicio."' AND fecha<='".$fecha_final." 23:59:59' AND (movimiento.tipomov_id=1 OR movimiento.tipomov_id=13 or movimiento.tipomov_id=14)
  AND movimiento.cliente_id=cliente.cliente_id  AND cliente.empresa_id<>2";
 		list( $total ) = $database->get_row( $query );
 $query = "SELECT sum(cantidad) as total from movimiento
-	where movimiento.tipomov_id=2 AND fecha>='".fechaustomysql($fecha_inicio)."' AND fecha<='".fechaustomysql($fecha_final)." 23:59:59'";
+	where movimiento.tipomov_id=2 AND fecha>='".$fecha_inicio."' AND fecha<='".$fecha_final." 23:59:59'";
 		list( $devoluciones ) = $database->get_row( $query );
 
 $query = "SELECT sum(cantidad) as total from movimiento
-	where movimiento.tipomov_id=14 AND fecha>='".fechaustomysql($fecha_inicio)."' AND fecha<='".fechaustomysql($fecha_final)." 23:59:59'";
+	where movimiento.tipomov_id=14 AND fecha>='".$fecha_inicio."' AND fecha<='".$fecha_final." 23:59:59'";
 		list( $ventas_contado ) = $database->get_row( $query );
 $query = "SELECT sum(cantidad) as total from movimiento,cliente
-	where movimiento.tipomov_id=3 AND fecha>='".fechaustomysql($fecha_inicio)."' AND fecha<='".fechaustomysql($fecha_final)." 23:59:59'
+	where movimiento.tipomov_id=3 AND fecha>='".$fecha_inicio."' AND fecha<='".$fecha_final." 23:59:59'
     AND movimiento.cliente_id=cliente.cliente_id AND cliente.empresa_id<>2";
 		list( $ventas_credito ) = $database->get_row( $query );
 $query = "SELECT sum(cantidad) as total from movimiento,cliente
-	where movimiento.tipomov_id=1 AND fecha>='".fechaustomysql($fecha_inicio)."' AND fecha<='".fechaustomysql($fecha_final)." 23:59:59'
+	where movimiento.tipomov_id=1 AND fecha>='".$fecha_inicio."' AND fecha<='".$fecha_final." 23:59:59'
     AND movimiento.cliente_id=cliente.cliente_id AND cliente.empresa_id=0";
 		list( $abonos ) = $database->get_row( $query );
 $query = "SELECT sum(cantidad) as total from movimiento,cliente
-	where movimiento.tipomov_id=1 AND fecha>='".fechaustomysql($fecha_inicio)."' AND fecha<='".fechaustomysql($fecha_final)." 23:59:59'
+	where movimiento.tipomov_id=1 AND fecha>='".$fecha_inicio."' AND fecha<='".$fecha_final." 23:59:59'
     AND movimiento.cliente_id=cliente.cliente_id AND cliente.empresa_id<>0 AND cliente.empresa_id<>2";
 		list( $abonos_nomina ) = $database->get_row( $query );
 
 $query = "SELECT sum(cantidad) as total from movimiento
-	where movimiento.tipomov_id=13 AND fecha>='".fechaustomysql($fecha_inicio)."' AND fecha<='".fechaustomysql($fecha_final)." 23:59:59'";
+	where movimiento.tipomov_id=13 AND fecha>='".$fecha_inicio."' AND fecha<='".$fecha_final." 23:59:59'";
 		list( $enganche ) = $database->get_row( $query );
 
  $query = "SELECT sum(total) as total from pedido
-	where fecha_orden>='".fechaustomysql($fecha_inicio)."' AND fecha_orden<='".fechaustomysql($fecha_final)." 23:59:59'";
+	where fecha_orden>='".$fecha_inicio."' AND fecha_orden<='".$fecha_final." 23:59:59'";
 		list( $pedidos_andrea ) = $database->get_row( $query );
 
-$query = "SELECT sum(cantidad) as total from pedido_movimiento
-	where pedido_movimiento.tipomov_id=14 AND fecha>='".fechaustomysql($fecha_inicio)."' AND fecha<='".fechaustomysql($fecha_final)." 23:59:59'";
+ $query = "SELECT sum(cantidad) as total from pedido_movimiento
+	where pedido_movimiento.tipomov_id=14 AND fecha>='".$fecha_inicio."' AND fecha<='".$fecha_final." 23:59:59'";
 		list( $anticipos_andrea ) = $database->get_row( $query );
 
 
@@ -114,7 +115,7 @@ $query = "SELECT sum(cantidad) as total from pedido_movimiento
 						<table class="table table-condensed">
 							  <thead>
 								  <tr>
-									  <th  colspan=2 style="text-align:center">Periodo <?php echo  $fecha_inicio." - ".$fecha_final?> </th>
+									  <th  colspan=2 style="text-align:center">Periodo <?php echo  fechamysqltomx($fecha_inicio,"letra")." - ".fechamysqltomx($fecha_final,"letra")?> </th>
 								  </tr>
 							  </thead>
 							  <tbody>

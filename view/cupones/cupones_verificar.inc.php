@@ -14,27 +14,31 @@ if($sku)
 
 if ($cupon_id)
 {
-    echo "<h2 ><b>CUPON</b></h2>";
+    echo "<center>";
 
-    echo "<table width=100% style=\"border:1px dotted\">";
+    echo "<table width=400 style=\"border:2px dotted\">";
+    echo "<tr><td bgcolor=black><center><h2 ><b><font color=white> CUPON </font></b></h2></center></td></tr>";
 
     switch ($cupontipo_id){
-        case '1': echo "<tr><td><center><h1 ><b>$ ".dinero($cantidad)." MX </b></h1></center></td></tr>";
+        case '1': echo "<tr><td><br><center><h1 ><b>$ ".dinero($cantidad)." MX </b></h1></center></td></tr>";
         break;
     }
+         echo "<tr><td><center><b>Valido: ".fechamysqltomx($fecha_ini,"letra")." - ".fechamysqltomx($fecha_fin,"letra")."</B></center></td></tr>";
+
+		if ($fecha_fin<date("Y-m-d")) echo "<tr><td><br><center><span class=\"label label-important\">EXPIRADO</span></B></center></td></tr>";
+          //  else echo "<tr><td><center><b>Valido: ".fechamysqltomx($fecha_ini,"letra")." - ".fechamysqltomx($fecha_fin,"letra")."</B></center></td></tr>";
+if (strtotime(date("Y-m-d"))<strtotime($fecha_ini)) echo "<tr bgcolor=yellow><td ><center>Error Fecha: Todavia no se puede usar</center></td></tr>";
+		if (!$activo) echo "<tr bgcolor=yellow><td ><center>Status: Sin Activar</center></td></tr>";
+		if ($usado) echo "<tr><td> <center>Usado el: <center></td></tr>";
+
+	    echo "<tr><td><center>$fecha_ini <".date("Y-m-d")."</td></tr>";
+	    echo "</table><br><br>";
 
 
-		echo "<tr><td><center><b>Expira: $fecha_fin</B></center></td></tr>";
-		if (!$activo) echo "<tr bgcolor=yellow><td >Status:</td><td>Sin Activar</td></tr>";
-		if ($usado) echo "<tr><td >Usado el:</td><td></td></tr>";
+echo "<a href='/index.php?data=pos' class='btn' data-dismiss='modal'>CANCELAR</a>&nbsp;&nbsp;&nbsp;";
+if ($fecha_fin>=date("Y-m-d") && strtotime(date("Y-m-d"))<=strtotime($fecha_ini)) echo "<a href='/functions/crud_cupones.php?func=sel_cliente&cid=$cliente_id' class=\"btn btn-primary\" >APLICAR</a>";
 
-	    echo "<tr><td colspan=4><center><br></td></tr>";
-	    echo "</table>";
-
-
-echo "<a href='/index.php?data=pos' class='btn' data-dismiss='modal'>CANCELAR</a>";
-echo "<a href='/functions/crud_cupones.php?func=sel_cliente&cid=$cliente_id' class=\"btn btn-primary\" >APLICAR</a>";
-
+echo "</center>";
 
 }
 

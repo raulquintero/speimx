@@ -30,15 +30,15 @@ $n=count($producto);
 
 						$query.=" Limit 30";
 					$results = $database->get_results( $query );
-					
+
 					echo "<table width=400>";
 
-					foreach ($results as $row ) 
+					foreach ($results as $row )
 					{
 
 						echo "<tr><td>
 						<a href='index.php?data=productos&op=producto_form&f=editar&prid=".$row['producto_id']."'>".
-						strtoupper($row['producto'])."</a></td><td align=right>".dinero($row['$precio_compra'])."</td>
+						strtoupper($row['producto'])."</a></td><td align=right>".dinero($row['precio_compra'])."</td>
 						<td align=right>".dinero($row['precio_contado'])."</td>
 						<td align=right>".dinero($row['precio_credito'])."</td></tr>";
 					}
