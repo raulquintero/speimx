@@ -22,8 +22,8 @@ $fecha_ini=$fecha_fin="";
  $database = new DB();
 
 if ($cuid){
-     $query="select * from cupon where cupon_id=$cuid limit 1";
- 	list( $cupon_id,$cupon,$fecha_ini,$fecha_fin,$cantidad,$cupontipo_id  ) = $database->get_row( $query );
+     $query="select cupon_id,cantidad,cupontipo_id,compra_minima from cupon where cupon_id=$cuid limit 1";
+ 	list( $cupon_id,$cantidad,$cupontipo_id,$compra_minima  ) = $database->get_row( $query );
 }
 else
     $fecha_ini=$fecha_fin=date("Y/m/d");
@@ -61,36 +61,27 @@ else
 								 </div>
 								</div>
 
-
-
-							  <div class="control-group ">
-								<label class="control-label" for="cupon">Nombre Cupon</label>
-								<div class="controls">
-								  <input class="input-xlarge" id="cupon" name="cupon" type="text" value="<?php echo $cupon?>">
-								</div>
-							  </div>
-
-							<div class="control-group">
-							  <label class="control-label" for="fecha_ini">Fecha Inicio (m/d/A)</label>
-							  <div class="controls">
-								<input type="text" class="input-xlarge datepicker" id="fecha_ini" name="fecha_ini" value="<?php echo fechamysqltous($fecha_ini)?>">
-							  </div>
-							</div>
-
-							<div class="control-group">
-							  <label class="control-label" for="fecha_fin">Fecha Fin (m/d/A)</label>
-							  <div class="controls">
-								<input type="text" class="input-xlarge datepicker" id="fecha_fin" name="fecha_fin" value="<?php echo fechamysqltous($fecha_fin)?>">
-							  </div>
-							</div>
-
-
-							  <div class="control-group ">
+                              <div class="control-group ">
 								<label class="control-label" for="cantidad">Cantidad</label>
 								<div class="controls">
-								  <input class="input-xlarge" id="cantidad" name="cantidad" type="text" value="<?php echo $cantidad?>">
+								  <input class="input-xlarge" id="cantidad" name="cantidad" type="text" value="<?php echo dinero($cantidad)?>">
 								</div>
 							  </div>
+
+                               <?php combobox("cupontipo",$cupontipo_id)?>
+
+
+                               <div class="control-group ">
+								<label class="control-label" for="compra_minima">Compra Minima</label>
+								<div class="controls">
+								  <input class="input-xlarge" id="compra_minima" name="compra_minima" type="text" value="<?php echo dinero($compra_minima)?>">
+								</div>
+							  </div>
+
+
+
+
+
 
 							<!--<div class="control-group">
 								<label class="control-label">Sexo</label>
@@ -108,7 +99,7 @@ else
 							  </div>
                               -->
 
-                              <?php combobox("cupontipo",$cupontipo_id)?>
+
 
 
 

@@ -36,6 +36,17 @@ foreach( $_GET as $key => $value )
 	}
 
 	</style>
+    <script  type="text/javascript">
+     window.onkeyup = compruebaTecla;
+function compruebaTecla(){
+    var e = window.event;
+    var tecla = (document.all) ? e.keyCode : e.which;
+    if(tecla == 27){
+        this.document.location.href = "/index.php";
+        	/*$('#textcode').focus(); */
+    }
+}
+</script>
 </head>
 <body onloaded="window.print()">
 

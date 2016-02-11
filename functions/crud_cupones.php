@@ -1,5 +1,5 @@
 <?php
-include '../config/config.php';
+require_once  '../config/config.php';
 $database = new DB();
 
 
@@ -29,6 +29,7 @@ $fecha_fin= isset($_GET['fecha_fin']) ? fechaustomysql($_GET['fecha_fin']) : "";
 $cantidad=isset($_GET['cantidad']) ? $_GET['cantidad'] : "";
 $cuantos=isset($_GET['cuantos']) ? $_GET['cuantos'] : "";
 $cupontipo_id= isset($_GET['cupontipo_id']) ? $_GET['cupontipo_id'] : "";
+$compra_minima=isset($_GET['compra_minima']) ? $_GET['compra_minima'] : "";
 $location= isset($_GET['location']) ? $_GET['location'] : "";
 
 
@@ -40,10 +41,9 @@ if ($func=="c")
 
 $cliente = array(
 	'cupon'=>$cupon,
-	'fecha_ini'=>$fecha_ini,
-	'fecha_fin'=>$fecha_fin,
     'cantidad'=>$cantidad,
-	'cupontipo_id'=>$cupontipo_id
+	'cupontipo_id'=>$cupontipo_id,
+    'compra_minima'=>$compra_minima
 	);
 
     if ($cupon)
@@ -62,11 +62,9 @@ if ($func=="u")
 {
 
 $update = array(
-	'cupon'=>$cupon,
-	'fecha_ini'=>$fecha_ini,
-	'fecha_fin'=>$fecha_fin,
     'cantidad'=>$cantidad,
-	'cupontipo_id'=>$cupontipo_id
+	'cupontipo_id'=>$cupontipo_id,
+    'compra_minima'=>$compra_minima
 	);
 
 
@@ -132,14 +130,15 @@ if ($bulk)
 					foreach ($results as $row )
 					{
 
-						echo "<tr><td>";
+	 				echo "<tr><td>";
 
 						switch ($row['cupontipo_id']){
                             case 1: echo "$ ".dinero($row['cantidad'])." MX";break;
                             case 2: echo $row['cantidad']." %";break;
                             }
 
-						echo ",".strtoupper($row['sku']).",".fechamysqltomx($row['fecha_ini'],"letra").",".fechamysqltomx($row['fecha_fin'],"letra")."</td></tr>";
+						echo ",".strtoupper($row['sku']).",".fechamysqltomx($row['fecha_ini'],"letra").",".fechamysqltomx($row['fecha_fin'],"letra");
+                        echo ",$ ".dinero($row['compra_minima'])." MX<td><tr>";
 					}
            	echo "</table>";
 
@@ -152,12 +151,13 @@ if ($location)  header($location);
 
 
 
+
 function generar_cupones( $cuid,$cuantos,$admin_id,$fecha_ini,$fecha_fin)
 {
 $array=isset($array) ? $array : "";
 $database = new DB();
-$query = "SELECT cupon_id,cupon,cantidad,cupontipo_id FROM cupon WHERE cupon_id='$cuid' limit 1";
-list( $cupon_id,$cupon, $cantidad,$cupontipo_id ) = $database->get_row( $query );
+echo $query = "SELECT cupon_id,cantidad,cupontipo_id,compra_minima FROM cupon WHERE cupon_id='$cuid' limit 1";
+list( $cupon_id, $cantidad,$cupontipo_id,$compra_minima) = $database->get_row( $query );
 $query = "SELECT sku FROM cupones  ORDER BY sku DESC limit 1";
 list( $sku ) = $database->get_row( $query );
 $query = "SELECT bulk FROM cupones  ORDER BY sku DESC limit 1";
@@ -174,7 +174,7 @@ $cuantos=floor($cuantos/5);
 while ($m<$cuantos){
     do {
         $sku=$sku+$i;
-        $values.="('$cupon_id','$sku','$fecha_ini','$fecha_fin','$cantidad','$cupontipo_id','0','$admin_id','$bulk'),";
+        $values.="('$cupon_id','$sku','$fecha_ini','$fecha_fin','$cantidad','$cupontipo_id','$compra_minima','0','$admin_id','$bulk'),";
         $k++;
     } while ($k < 5);
     $k=0;
@@ -182,7 +182,7 @@ while ($m<$cuantos){
     //echo $values."<br>";
     $longitud=strlen($values);
     $values[$longitud-1]=' ';
-    $query="insert into cupones (cupon_id,sku,fecha_ini,fecha_fin,cantidad,cupontipo_id,activo,admin_id,bulk) values $values";
+    $query="insert into cupones (cupon_id,sku,fecha_ini,fecha_fin,cantidad,cupontipo_id,compra_minima,activo,admin_id,bulk) values $values";
      $database->query($query);
     $values="";
  };
@@ -191,13 +191,13 @@ while ($m<$cuantos){
 if ($residuo){
     do {
         $sku=$sku+$i;
-        $values.="('$cupon_id','$sku','$fecha_ini','$fecha_fin','$cantidad','$cupontipo_id','0','$admin_id','$bulk'),";
+        $values.="('$cupon_id','$sku','$fecha_ini','$fecha_fin','$cantidad','$cupontipo_id','$compra_minima','0','$admin_id','$bulk'),";
         $k++;
     } while ($k < $residuo);
       //echo $values;
      $longitud=strlen($values);
     $values[$longitud-1]=' ';
-    $query="insert into cupones (cupon_id,sku,fecha_ini,fecha_fin,cantidad,cupontipo_id,activo,admin_id,bulk) values $values";
+    $query="insert into cupones (cupon_id,sku,fecha_ini,fecha_fin,cantidad,cupontipo_id,compra_minima,activo,admin_id,bulk) values $values";
     $database->query($query);
 };
 

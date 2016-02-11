@@ -13,9 +13,8 @@ $database = new DB();
 			<tr>
                 <th>&nbsp;</th>
 			  <th>Cupon</th>
-			  <th>Cantidad</th>
-			  <th>Fecha Inicio</th>
-              <th>Fecha Fin</th>
+			  <th>Compra Minima</th>
+
 			  <th>Tipo</th>
 			  <th>Opciones</th>
 			</tr>
@@ -39,16 +38,18 @@ $query = "SELECT * from cupon,cupontipo
 		$i+=1;
 		echo "<tr>
 			    <td align=right><font >&nbsp;$i&nbsp;</td>
-			    <td><a href=\"/index.php?data=cupones&op=generados&bulk=".$row['bulk']."\" ><b>".($row['cupon'])."</b><a>
-				    <a class=\"visible-print\" ><b>".strtoupper($row['cupon'])."</b><a>
+			    <td ><a href=\"/index.php?data=cupones&op=generados&bulk=".$row['bulk']."\" >";
+                switch ($row['cupontipo_id']) {
+                    case 1: echo "$ ".dinero($row['cantidad'])." MX";break;
+                    case 2: echo $row['cantidad']." %";break;
+                    }
+                echo "</b><a>
 			    </td>";
 
 
 
-		echo "<td align=right> <font >".dinero($row['cantidad'])."&nbsp;&nbsp; </td>";
+		echo "<td><font >".dinero($row['compra_minima'])."</td>
 
-		echo "<td><font >".fechamysqltous($row['fecha_ini'])."</td>
-			<td><font >".fechamysqltous($row['fecha_fin'])."</td>
 			<td> <font >".strtoupper($row['cupontipo'])."</td>";
         echo "<td><button class=\"btn-primary btn-setting hidden-print\" onclick=\"showData('myModal',
                         'view/cupones/cupones_agregar.inc.php',
@@ -56,7 +57,7 @@ $query = "SELECT * from cupon,cupontipo
 
                   <button class=\"btn-info    btn-setting hidden-print\" onclick=\"showData('myModal',
                         'view/cupones/cupones.php',
-                        'f=generar&cuid=".$row['cupon_id']."&cupon=".$row['cupon']."&monto=".$row['cantidad']."')\">Generar</button></td>";
+                        'f=generar&cuid=".$row['cupon_id']."&cupon=".$row['cupon']."&monto=".$row['cantidad']."&compra_minima=".$row['compra_minima']."')\">Generar</button></td>";
 		echo "</tr>";
 
 

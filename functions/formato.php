@@ -71,7 +71,7 @@ function fechamysqltomx($fecha,$letra)
 		return $fecha;
 	}
 			else
-		return date("m/d/Y",mktime(0,0,0,$values[1],$values[2],$values[0]));
+		return date("d/m/Y",mktime(0,0,0,$values[1],$values[2],$values[0]));
 
 }
 

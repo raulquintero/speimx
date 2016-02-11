@@ -20,7 +20,7 @@ echo "</ul>"
 ?>
 <div class="box span12">
 					<div class="box-header" data-original-title>
-						<h2><i class="halflings-icon user"></i><span class="break"></span>Clientes</h2>
+						<h2><i class="halflings-icon user"></i><span class="break"></span>Cupones</h2>
 						<div class="box-icon">
 							<a href="index.php?data=clientes&op=cliente_form&f=agregar" classa="btn-setting"><i class="halflings-icon check"></i></a>
 							<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
@@ -30,9 +30,9 @@ echo "</ul>"
 					<div class="box-content">
 
 
-            <div class="box span4 hidden-print">
+            <div class="box span6 hidden-print">
 					<div class="box-header">
-						<h2><i class="halflings-icon align-justify"></i><span class="break"></span>Corte de Caja</h2>
+						<h2><i class="halflings-icon align-justify"></i><span class="break"></span>Esquema</h2>
 						<div class="box-icon">
 							<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
 							<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
@@ -47,16 +47,15 @@ echo "</ul>"
 							  <tr>
                                   <th>B</th>
                                   <th>Cupon</th>
-                                  <th>Fecha Fin</th>
                                   <th>Usuario</th>
-                                  <th>Cantidad</th>
+                                  <th>Cant.</th>
 							  </tr>
 						  </thead>
 						  <tbody>
 <?php
-$query = "SELECT cupon.cupon,cupones.sku,cupones.fecha_ini,cupones.fecha_fin,cupones.cantidad,cupontipo.cupontipo,admin.nombre,admin.apellidop,cupones.bulk
-    FROM cupon,cupones,cupontipo,admin
-    where cupones.cupon_id=cupon.cupon_id AND cupones.cupontipo_id=cupontipo.cupontipo_id AND cupones.admin_id=admin.admin_id AND cupones.activo=$activo GROUP BY bulk DESC";
+$query = "SELECT sku,fecha_ini,fecha_fin,cantidad,cupontipo.cupontipo_id,cupontipo,compra_minima,admin.nombre,admin.apellidop,bulk
+    FROM cupones,cupontipo,admin
+    where cupones.cupontipo_id=cupontipo.cupontipo_id AND cupones.admin_id=admin.admin_id AND cupones.activo=$activo GROUP BY bulk DESC";
 $results = $database->get_results( $query );
 
 foreach( $results as $row )
@@ -67,10 +66,14 @@ foreach( $results as $row )
 ?>
 							<tr>
                                 <td class="center"><?php echo $row['bulk']?></td>
-								<td><a href=index.php?data=cupones&op=generados&activo=<?php echo $activo?>&bulk=<?php echo $row['bulk']?>><?php echo strtoupper($row['cupon'])?></a></td>
-                               <td class="center"><?php echo $row['fecha_fin']?></td>
-
-							    <td class="center"><?php echo $nombre_admin?></td>
+								<td><a href=index.php?data=cupones&op=generados&activo=<?php echo $activo?>&bulk=<?php echo $row['bulk']?>><b>
+                                <?php
+                                    switch($row['cupontipo_id']){
+                                        case 1: echo "$ ".dinero($row['cantidad'])." MX";break;
+                                        case 2: echo $row['cantidad']." %";
+                                        }
+                                        ?></b></a><br><?php echo "CM: $ ".dinero($row['compra_minima'])." MX"?></td>
+                                <td class="center"><?php echo $nombre_admin?></td>
 							    <td class="center"><?php echo $cuantos?></td>
 							</tr>
 
@@ -90,9 +93,9 @@ foreach( $results as $row )
 
 
 
-                    <div class="box span8">
+                    <div class="box span6">
                      <div class="box-header">
-						<h2><i class="halflings-icon align-justify"></i><span class="break"></span>Reporte Global </h2>
+						<h2><i class="halflings-icon align-justify"></i><span class="break"></span>Cupones </h2>
 						<div class="box-icon">
 							<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
 							<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
@@ -104,10 +107,9 @@ foreach( $results as $row )
 						  <thead>
 							  <tr>
                                   <th>Bulk</th>
-                                  <th>Cupon</th>
+
                                   <th>sku</th>
-								  <th>Fecha Inicio</th>
-								  <th>Fecha Fin</th>
+								  <th>Vigencia</th>
 								  <th>Cantidad</th>
 
 
@@ -118,9 +120,9 @@ foreach( $results as $row )
 
                           <?php
 
-$query = "SELECT cupon.cupon,cupones.sku,cupones.fecha_ini,cupones.fecha_fin,cupones.cantidad,cupontipo.cupontipo_id,admin.nombre,admin.apellidop,cupones.bulk
-    FROM cupon,cupones,cupontipo,admin
-    where cupones.cupon_id=cupon.cupon_id AND cupones.cupontipo_id=cupontipo.cupontipo_id AND cupones.admin_id=admin.admin_id AND cupones.activo=$activo ";
+$query = "SELECT cupones.sku,cupones.fecha_ini,cupones.fecha_fin,cupones.cantidad,cupontipo.cupontipo_id,compra_minima,admin.nombre,admin.apellidop,cupones.bulk
+    FROM cupones,cupontipo,admin
+    where cupones.cupontipo_id=cupontipo.cupontipo_id AND cupones.admin_id=admin.admin_id AND cupones.activo=$activo ";
     if ($bulk) $query.=" AND bulk=$bulk ";
     $query .=" ORDER BY cupones_id DESC";
 $results = $database->get_results( $query );
@@ -131,21 +133,21 @@ $nombre_admin=$row['apellidop'].' '.$row['nombre'];
 ?>
 							<tr>
                                 <td class="center"><?php echo $row['bulk']?></td>
-								<td><a href=index.php?data=clientes&op=detalles&cid=<?php echo $row['cupon']?>><?php echo strtoupper($row['cupon'])?></a></td>
+								<!--td><a href=index.php?data=clientes&op=detalles&cid=<?php echo $row['cupon']?>><?php echo strtoupper($row['cupon'])?></a></td-->
                                 <td class="center"><?php echo $row['sku']?></td>
-								<td class="center"><?php echo $row['fecha_ini']?></td>
-								<td class="center"><?php echo $row['fecha_fin']?></td>
+								<td class="center"><?php echo fechamysqltomx($row['fecha_ini'],"letra")?><br><?php echo fechamysqltomx($row['fecha_fin'],"letra")?></td>
 
 
 
                                 <?php
                                  if ($row['cupontipo_id']==1)
-								    echo "<td class=\"center\">$ ".dinero($row['cantidad'])." MX</td>";
+								    echo "<td class=\"center\">$ ".dinero($row['cantidad'])." MX";
 
                                 else
-								    echo "<td class=\"center\"> ".dinero($row['cantidad'])." %</td>";
-                                ?>
-                                <?php
+								    echo "<td class=\"center\"> ".dinero($row['cantidad'])." %";
+
+                                echo "<br>CM: $ ".dinero($row['compra_minima'])." </td>";
+
                                  if ($activo)
                                  echo "<td><i class=\"icon-check\"></i></td>";
                                 else echo "<td><i class=\"icon-check-empty\"></i></td>";

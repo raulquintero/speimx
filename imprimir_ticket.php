@@ -29,13 +29,24 @@ foreach( $_GET as $key => $value )
 	<style type="text/css">
 	body{
 		font-family: arial, helvetica;
-		font-size: small; 
+		font-size: small;
 	}
 	table{
 		font-size: medium;
 	}
 
 	</style>
+<script  type="text/javascript">
+     window.onkeyup = compruebaTecla;
+function compruebaTecla(){
+    var e = window.event;
+    var tecla = (document.all) ? e.keyCode : e.which;
+    if(tecla == 27){
+        this.document.location.href = "/index.php";
+        	/*$('#textcode').focus(); */
+    }
+}
+</script>
 </head>
 <body onload="window.print()">
 

@@ -47,7 +47,7 @@ switch ($cuantos) {
             $location="Location: /index.php?data=clientes&op=verificar&cid=$code";
         break;
     case 14:  // ticket
-            $location="Location: /index.php?data=cupones&op=verificar&sku=$code";
+            $location="Location: /index.php?data=pos&sku=$code";
         break;
     case 12: //  cupon
 

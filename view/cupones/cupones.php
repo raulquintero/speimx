@@ -50,6 +50,7 @@ $f=isset($_GET['f']) ? $_GET['f'] : "";
 $fecha_ini=$fecha_fin=date("Y/m/d");
 $cupon=isset($_GET['cupon']) ? $_GET['cupon'] : "";
 $monto=isset($_GET['monto']) ? $_GET['monto'] : "";
+$compra_minima=isset($_GET['compra_minima']) ? $_GET['compra_minima'] : "";
 
 
 
@@ -65,7 +66,7 @@ if ($f=="generar")
 
 <div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal">x</button>
-			<h3><?php echo strtoupper($f)?> CUPON [<?php echo $cupon?>]</h3>
+			<h3><?php echo strtoupper($f)?> CUPON [<?php echo $monto?>]</h3>
 		</div>
 		<div class="modal-body">
 
@@ -79,6 +80,12 @@ if ($f=="generar")
 								<label class="control-label" for="cupon">Bueno por $</label>
 								<div class="controls">
 								  <input class="input-xlarge" id="cupon" name="cupon" type="text" value="<?php echo dinero($monto)?>" disabled>
+								</div>
+							  </div>
+                              <div class="control-group ">
+								<label class="control-label" for="compra_minima">Compra Minima $</label>
+								<div class="controls">
+								  <input class="input-xlarge" id="compra_minima" name="compra_minima" type="text" value="<?php echo dinero($compra_minima)?>" disabled>
 								</div>
 							  </div>
 
@@ -98,7 +105,7 @@ if ($f=="generar")
 
 
 							  <div class="control-group ">
-								<label class="control-label" for="cuantos">Cantidad</label>
+								<label class="control-label" for="cuantos">Cuantos Cupones</label>
 								<div class="controls">
 								  <input class="input-xlarge" id="cuantos" name="cuantos" type="text" value="<?php echo $cantidad?>">
 								</div>
