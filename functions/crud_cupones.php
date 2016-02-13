@@ -163,7 +163,7 @@ $query = "SELECT bulk FROM cupones  ORDER BY sku DESC limit 1";
 list( $bulk ) = $database->get_row( $query );
 $bulk=$bulk+1;
 
-$sku=isset($sku) ? $sku : "10102000320000";
+if ($sku==0) $sku="10102000320000";
 $i=isset($i) ? $i : 30000;
 $k=isset($k) ? : 0;
 
@@ -208,11 +208,7 @@ if ($residuo){
 
 
 
-function autocupon($compra){
 
-
-
-}
 
 
 

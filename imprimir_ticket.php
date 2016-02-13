@@ -74,7 +74,7 @@ function compruebaTecla(){
 					// <br><strong>Credito: </strong>$ ".dinero($credito)."<strong> Credito Total Disponible: </strong>$ ".dinero($credito-$saldo)."</div> ";
 
 				}
-				
+
 
 		?>
 
@@ -82,7 +82,7 @@ function compruebaTecla(){
 <div class="box-content span12" >
 
 					<div class=" span4" styles='border:1px dotted'>
-						
+
 
 						<?php
 						if ($factura_id)
@@ -91,9 +91,6 @@ function compruebaTecla(){
 
 							echo "<table width=350><tr><td>";
 							getticket($factura_id);      // formato.php
-
-                            if ($cupones_sku) echo "<br>Cupon ID: <b>$cupones_sku</b>";
-                            else echo "cupon_gratis";
 
 
                             echo "<center>";
@@ -108,17 +105,24 @@ function compruebaTecla(){
 							echo "<br><br>";
 
 							echo " <img width=200 src=\"barcode.php?text=".$no_ticket."\" alt=\"barcode\" />";
-							
-							echo "<br><br>
-						 	http://tiendasalberto.com<br>";
-						 
-						 	echo $ticket;
-						 	echo "<br>
+
+							echo "<br><br>";
+
+                            echo "<br>http://tiendasalberto.com<br>";
+                            echo $ticket;
+                            echo "<bR><br>";
+
+                            //if ($cupones_sku) echo "<br>Cupon ID: <b>$cupones_sku</b>";
+                            //else
+                            //autocupon("12345678901234");
+
+
+						 	echo " <br>
 							</center>
 							<br><Br>";
 							echo "</td><td>&nbsp;</td></tr></table>";
 						}
-					
+
 
 
 

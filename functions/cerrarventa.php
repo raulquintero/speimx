@@ -378,7 +378,13 @@ unset($_SESSION['cliente_id']);
 $_SESSION['cupon_sku']="0" ;
 
 header("Location: /imprimir_ticket.php?fid=$factura_id");
-						?>
+
+
+
+
+
+
+					?>
 
 
 				<!-- **********************************endd  ticket********************* -->

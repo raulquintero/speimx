@@ -241,7 +241,7 @@ $database = new DB();
 				   	$query = "SELECT cliente.cliente_id,apellidop, apellidom, nombre, credito, saldo,total_ultimo,fecha_total_ultimo, abono,factura_id,
 							tipomov_id,fecha,saldo_actual,saldo_total,ticket,efectivo,cupones.sku,cupones.cantidad,cupones.cupontipo_id
                             FROM cliente,factura,cupones
-						WHERE  factura.cliente_id=cliente.cliente_id AND factura.factura_id=".$fid;
+						WHERE  factura.cupones_id=cupones.sku AND factura.cliente_id=cliente.cliente_id AND factura.factura_id=".$fid;
 					list( $cliente_id,$apellidop,$apellidom,$nombre,$credito, $saldo, $total_ultimo, $fecha_total_ultimo,$abono, $factura_id,
 							 $tipomov_id,$fecha_factura,$saldo_actual,$saldo_total,$ticket,$efectivo,$cupones_sku,$cupones_cantidad,$cupontipo_id  ) = $database->get_row( $query );
 	 					$cliente= $apellidop." ".$apellidom." ".$nombre;
@@ -266,7 +266,7 @@ $database = new DB();
 				echo "No.: $no_ticket [$cliente_id.345]<br>";
 				echo "Fecha y Hora: <br>".$fecha_factura;    //date("d-m-Y  H:m:s");
 				echo "<br>";
-				
+
 
 				echo "</font></td></tr>";
 				echo "<tr><td>&nbsp;</td></tr>";
@@ -294,7 +294,7 @@ $database = new DB();
 						if ($tipomov_id==3) echo dinero($item['precio_credito']*1.16); else echo dinero($item['precio_contado']*1.16);
 					
 						echo "&nbsp;&nbsp;</td></tr>";
-										
+
 						$total_credito+=$item['precio_credito'];
 						$total_contado+=$item['precio_contado'];
 
@@ -314,16 +314,16 @@ $database = new DB();
 					echo "<tr><td>&nbsp;</td></tr>";
 					echo "<tr style=\"border-top:1px dotted black\"><td style=\"border-top:1px dotted black\">&nbsp;</td><td style='text-align:right;border-top:1px dotted black'>Total</td>
 					      	  <td style='text-align:right;border-top:1px dotted;'>$". dinero($total_credito*1.16)."&nbsp;&nbsp;</td></tr>";
-					echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;Incluye IVA(16%) por</td><td style='text-align:right;border-bottom:2px solid;'>+&nbsp;".dinero($total_iva_credito)."&nbsp;&nbsp;</td></tr>";	
-					echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;<strong>Total</strong></td><td style='text-align:right;'><strong>".dinero($total_iva_credito+$total_credito)."</strong>&nbsp;&nbsp;</td></tr>";	
+					echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;Incluye IVA(16%) por</td><td style='text-align:right;border-bottom:2px solid;'>+&nbsp;".dinero($total_iva_credito)."&nbsp;&nbsp;</td></tr>";
+					echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;<strong>Total</strong></td><td style='text-align:right;'><strong>".dinero($total_iva_credito+$total_credito)."</strong>&nbsp;&nbsp;</td></tr>";
 					echo "<tr><td>&nbsp;</td><td>&nbsp;</td></tr>";
-					echo "<tr><td>&nbsp;</td><td style='text-align:right'>Saldo Actual</td><td style='text-align:right'>+  $ ".dinero($saldo_actual)."&nbsp;&nbsp;</td></tr>";	
-					echo "<tr><td>&nbsp;</td><td style='text-align:right;'><strong>Saldo Total</strong></td><td style='text-align:right;border-top:2px solid;'><strong>$ ".dinero($saldo_total)."</strong>&nbsp;&nbsp;</td></tr>";	
+					echo "<tr><td>&nbsp;</td><td style='text-align:right'>Saldo Actual</td><td style='text-align:right'>+  $ ".dinero($saldo_actual)."&nbsp;&nbsp;</td></tr>";
+					echo "<tr><td>&nbsp;</td><td style='text-align:right;'><strong>Saldo Total</strong></td><td style='text-align:right;border-top:2px solid;'><strong>$ ".dinero($saldo_total)."</strong>&nbsp;&nbsp;</td></tr>";
 					echo "<tr><td>&nbsp;</td><td style='text-align:right'>Abono</td>";
 
 					$query = "SELECT abono,limite FROM abono ORDER BY limite ASC";
 					$results = $database->get_results( $query );
-					foreach ($results as $row ) 
+					foreach ($results as $row )
 					{
 							//echo $total_credito." ".$row['limite']." <br> ";
 						if ($saldo_total<=$row['limite'])
@@ -345,17 +345,17 @@ $database = new DB();
 					WHERE  facturadet.producto_id=producto.producto_id AND facturadet.factura_id=".$fid;
 
 					$results = $database->get_results( $query );
-								
+
 					$n=0;
 					$total=0;
-	
+
 
 					foreach( $results as $item )
 					{
-		
+
 						echo "<tr><td>&nbsp;</td><td>".$itemaaaaaa['facturadet_id']." ".$item['sku']."<br>
 							". substr($item['producto'],0,26)."...</a>
-							<br>".$item['color']." ".$item['talla']."</td> 
+							<br>".$item['color']." ".$item['talla']."</td>
 							<td style='text-align:right;vertical-align:text-top'>";
                             if ($item['descuento'])
                             {
@@ -365,13 +365,13 @@ $database = new DB();
                             else
                                 echo dinero($item['precio_venta']);
 						echo "&nbsp;&nbsp;</td></tr>";
-										
+
 						$total_credito+=$item['precio_credito'];
 						$total_contado+=$item['precio_venta'];
-										
+
 						$n++;
 					}
-					
+
 
 
 						$total_iva_contado=$total_contado-($total_contado/1.16);
@@ -391,7 +391,8 @@ $database = new DB();
 
                                     if ($cupones_sku)
                                     {
-                                         $query = "SELECT cupones_id,cupon_id,sku,fecha_ini,fecha_fin,cantidad,cupontipo_id,compra_minima,activo  FROM cupones WHERE  sku='".$_SESSION['cupon_sku']."'";
+                                         $query = "SELECT cupones_id,cupon_id,sku,fecha_ini,fecha_fin,cantidad,cupontipo_id,compra_minima,activo
+                                            FROM cupones WHERE  sku='".$_SESSION['cupon_sku']."'";
                                 		list( $cupones_id,$cupon_id,$sku,$fecha_ini,$fecha_fin,$cantidad,$cupontipo_id,$compra_minima,$activo ) = $database->get_row( $query );
                                         switch($cupontipo_id){
                                             case 1://echo "<tr><td>".$_SESSION['cupon_sku']."</td></tr>";
@@ -402,14 +403,14 @@ $database = new DB();
                                             case 2:
                                                 echo "<tr><td></td><td style='text-align:right'>&nbsp;<font size=+1>Cupon ($cantidad %)</font></td>
 											        <td width=180 style='text-align:right;text-align:right;color:black;border-bottom:1px solid black;'>";
-                                                $cantidad=$total_contado*$cantidad/100;
-                                                echo "<font size=+3><b>- ".dinero($cantidad)."</b></font></td></tr>";
+                                                $cupones_cantidad=$total_contado*$cantidad/100;
+                                                echo "<font size=+3><b>- ".dinero($cupones_cantidad)."</b></font></td></tr>";
 
                                                 break;
                                         }
                                          echo "<tr><td></td><td style='text-align:right'>&nbsp;<font size=+1>Ud. Paga</font></td>
 											        <td width=180 style='text-align:right;text-align:right;color:black;border:1px solid black;'>
-											        <font size=+3><b> $ ".dinero($total_contado-$cantidad)."</b></font></td></tr>";
+											        <font size=+3><b> $ ".dinero($total_contado-$cupones_cantidad)."</b></font></td></tr>";
 
                                    }
 

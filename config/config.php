@@ -19,6 +19,7 @@ require_once($realpath.$relative_path.'/functions/ticket.php');
 require_once($realpath.$relative_path.'/functions/formato.php');
 require_once($realpath.$relative_path.'/functions/formas.php');
 require_once($realpath.$relative_path.'/functions/error.php');
+require_once($realpath.$relative_path.'/functions/cupones.php');   
 require_once($realpath.$relative_path.'/functions/estadisticas.php');
 require_once($realpath.$relative_path.'/functions/pos_cortedecaja.php');
 
