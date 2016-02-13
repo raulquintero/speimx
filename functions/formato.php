@@ -238,7 +238,7 @@ $database = new DB();
 
 	if($fid)
 	{
-					$query = "SELECT cliente.cliente_id,apellidop, apellidom, nombre, credito, saldo,total_ultimo,fecha_total_ultimo, abono,factura_id,
+				   	$query = "SELECT cliente.cliente_id,apellidop, apellidom, nombre, credito, saldo,total_ultimo,fecha_total_ultimo, abono,factura_id,
 							tipomov_id,fecha,saldo_actual,saldo_total,ticket,efectivo,cupones.sku,cupones.cantidad,cupones.cupontipo_id
                             FROM cliente,factura,cupones
 						WHERE  factura.cliente_id=cliente.cliente_id AND factura.factura_id=".$fid;
@@ -279,7 +279,7 @@ $database = new DB();
 					WHERE  facturadet.producto_id=producto.producto_id AND facturadet.factura_id=".$fid;
 
 					$results = $database->get_results( $query );
-								
+
 					$n=0;
 					$total=0;
 	
@@ -509,7 +509,7 @@ $database = new DB();
 				echo "<tr><td>Saldo Anterior</td><td style=\"text-align:right\">$ ". dinero($saldo_abono+$cantidad)."</td><td>&nbsp;</td></tr>";				
 				echo "<tr><td>Cantidad a Abonada</td><td style=\"text-align:right\">$ ". dinero($cantidad)."</td></tr>";				
 				echo "<tr><td>Saldo Actual</td><td style=\"text-align:right;border-top:1px solid black;\">$ ". dinero($saldo_abono)."</td></tr>";				
- 
+
 				echo "<tr><td style=\"border-bottom:1px dotted black\" colspan=3>&nbsp;&nbsp;</td></tr>";	
 				echo "</table>";
 

@@ -1,6 +1,7 @@
 
 		<!-- start: Content **************************************************************************************************************************                  -->
 <?php
+
 $_SESSION['display']="pos";
 $cliente_id = $_SESSION['cliente_id'];
 $sku=isset($_GET['sku']) ? $_GET['sku'] : "";
@@ -427,7 +428,7 @@ if ($pedido AND $producto) $boton_pedido=" <div class='alert alert-error'>
 							<strong>Error.</strong> No Combinar Productos y Pedidos.
 						</div>";
 
-if ($temporada) {
+if ($temporada && $_SESSION['cupon_sku']) {
     $boton_pedido=" <div class='alert alert-error'>
 							<strong>Cupones.</strong> No aplica en Productos de Liquidacion.
 						</div>";

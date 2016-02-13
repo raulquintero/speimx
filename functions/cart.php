@@ -82,7 +82,7 @@ if ($func=="sel_cliente")
      $cid=$_GET['cid'];
     //$cid=substr($cid,1,6);
      $_SESSION['cliente_id']=$cid;
-     $_SESSION['cupon_sku']="";
+     $_SESSION['cupon_sku']="0";
 
 
 }
@@ -90,7 +90,7 @@ if ($func=="sel_cliente")
 if ($func=="del_cliente")
 {
     $_SESSION['cliente_id']=FALSE;
-
+         $_SESSION['cupon_sku']="0";
 
 
 }
@@ -107,7 +107,7 @@ if ($func=="apply_cupon")
 if ($func=="unset_cupon")
 {
 
-    $_SESSION['cupon_sku']="";
+    $_SESSION['cupon_sku']="0";
 
 
 

@@ -338,7 +338,7 @@ class Login
 
                 $_SESSION['cart_dev']=$item;
 
-                $_SESSION['cupon_sku']="";
+                $_SESSION['cupon_sku']="0";
 
                 $_SESSION['cliente_id']=0;
 

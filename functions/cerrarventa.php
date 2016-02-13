@@ -93,6 +93,7 @@ foreach( $_GET as $key => $value )
     								'iva' => $total_iva_credito,
     								'comision' => 5,
     								'tipomov_id' => 3,
+                                    'cupones_id'=>$_SESSION['cupon_sku'],
     								'saldo_actual' => $saldo,
     								'saldo_total' => $saldo_total
 
@@ -149,6 +150,7 @@ foreach( $_GET as $key => $value )
 
 									$n=0;
 									$total=0;
+
 									foreach ($item as $row => $value)
 									{
 
@@ -373,7 +375,7 @@ foreach( $_GET as $key => $value )
      // print_r($_SESSION['cart']);
 unset($_SESSION['cart']);
 unset($_SESSION['cliente_id']);
-unset($_SESSION['cupon_sku']) ;
+$_SESSION['cupon_sku']="0" ;
 
 header("Location: /imprimir_ticket.php?fid=$factura_id");
 						?>
