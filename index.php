@@ -56,17 +56,17 @@ switch ($cuantos) {
         switch($type){
             case "item":  //agregar al carrito  de compra
 	 	        $query = "SELECT color.color,producto.producto_id,producto,proveedor,precio_compra,precio_contado,precio_credito,
-     		        precio_promocion,descuento, marca,producto.codigo,inventariodet.codigo as codigo_inventario,producto.talla_id,talladet.talladet,unidad,estilo,subcategoria
+     		        precio_promocion,descuento, marca,producto.codigo,inventariodet.codigo as codigo_inventario,producto.talla_id,talladet.talladet,unidad,estilo,subcategoria,producto.temporada_id
                     FROM producto,proveedor,marca,talla,
     		        unidad,subcategoria,color,inventariodet,talladet WHERE producto.proveedor_id=proveedor.proveedor_id AND producto.marca_id=marca.marca_id
 	    	        AND producto.talla_id=talla.talla_id AND producto.unidad_id=unidad.unidad_id AND producto.subcategoria_id=subcategoria.subcategoria_id
 		            AND producto.producto_id=color.producto_id AND color.color_id=inventariodet.color_id AND inventariodet.talladet_id=talladet.talladet_id
 		            AND inventariodet.codigo='$code'";
 		        list( $color,$producto_id,$producto,$proveedor,$precio_compra,$precio_contado,$precio_credito,$precio_promocion,$descuento,
-			        $marca,$codigo,$codigo_inventario ,$talla_id, $talla,$unidad,$estilo,$subcategoria  ) = $database->get_row( $query );
+			        $marca,$codigo,$codigo_inventario ,$talla_id, $talla,$unidad,$estilo,$subcategoria,$temporada_id ) = $database->get_row( $query );
 		        $producto=htmlspecialchars($producto);
 	   	        if ($producto_id)
-                    $location="Location: /functions/cart.php?func=add_item&prid=$producto_id&producto=$producto&marca=$marca&codigo=$codigo&codigo_inventario=$codigo_inventario&talla=$talla&color=$color&precio_compra=$precio_compra&precio_credito=$precio_credito&precio_contado=$precio_contado&precio_promocion=$precio_promocion&descuento=$descuento&iva=$iva";
+                    $location="Location: /functions/cart.php?func=add_item&prid=$producto_id&producto=$producto&marca=$marca&codigo=$codigo&codigo_inventario=$codigo_inventario&talla=$talla&color=$color&precio_compra=$precio_compra&precio_credito=$precio_credito&precio_contado=$precio_contado&precio_promocion=$precio_promocion&descuento=$descuento&iva=$iva&temporada_id=$temporada_id";
                 break;
 			case 'dev': //agregar al carrito de devoluciones
 					//$fid_dev=$_SESSION['fid_dev'];

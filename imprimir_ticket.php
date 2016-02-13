@@ -60,10 +60,10 @@ function compruebaTecla(){
 			if($fid)
 				{
 					$query = "SELECT cliente.cliente_id,apellidop, apellidom, nombre, credito, saldo,total_ultimo,factura.fecha, abono,factura_id,
-							tipomov_id,fecha,saldo_actual,saldo_total,ticket  FROM cliente,factura 
-						WHERE  factura.cliente_id=cliente.cliente_id AND factura.factura_id='".$fid."'";
+							tipomov_id,fecha,saldo_actual,saldo_total,ticket,cupones.sku,cupones.cantidad,cupones.cupontipo_id  FROM cliente,factura,cupones
+						WHERE  factura.cupones_id=cupones.sku AND factura.cliente_id=cliente.cliente_id AND factura.factura_id='".$fid."'";
 					list( $cliente_id,$apellidop,$apellidom,$nombre,$credito, $saldo, $total_ultimo, $fecha_factura,$abono, $factura_id,
-							 $tipomov_id,$fecha_factura,$saldo_actual,$saldo_total,$ticket  ) = $database->get_row( $query );
+							 $tipomov_id,$fecha_factura,$saldo_actual,$saldo_total,$ticket,$cupones_sku,$cupones_cantidad,$cupontipo_id  ) = $database->get_row( $query );
 	 					$cliente= $apellidop." ".$apellidom." ".$nombre;
 	 				$nombre_completo = $apellidop." ".$apellidom." ".$nombre;
 						
@@ -90,8 +90,8 @@ function compruebaTecla(){
 
 							echo "<table width=350><tr><td>";
 							getticket($factura_id);      // formato.php
-				
-							
+
+                            if ($cupones_sku) echo "<br>Cupon ID: <b>$cupones_sku</b>";
 							echo "<center>";
 
 							if ($cliente_id)
@@ -101,7 +101,7 @@ function compruebaTecla(){
 							_______________________<br>";
 							echo strtoupper($nombre_completo);
 							}
-							echo "<br><br><br>";
+							echo "<br><br>";
 
 							echo " <img width=200 src=\"barcode.php?text=".$no_ticket."\" alt=\"barcode\" />";
 							

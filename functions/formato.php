@@ -239,10 +239,11 @@ $database = new DB();
 	if($fid)
 	{
 					$query = "SELECT cliente.cliente_id,apellidop, apellidom, nombre, credito, saldo,total_ultimo,fecha_total_ultimo, abono,factura_id,
-							tipomov_id,fecha,saldo_actual,saldo_total,ticket,efectivo  FROM cliente,factura
+							tipomov_id,fecha,saldo_actual,saldo_total,ticket,efectivo,cupones.sku,cupones.cantidad,cupones.cupontipo_id
+                            FROM cliente,factura,cupones
 						WHERE  factura.cliente_id=cliente.cliente_id AND factura.factura_id=".$fid;
 					list( $cliente_id,$apellidop,$apellidom,$nombre,$credito, $saldo, $total_ultimo, $fecha_total_ultimo,$abono, $factura_id,
-							 $tipomov_id,$fecha_factura,$saldo_actual,$saldo_total,$ticket,$efectivo  ) = $database->get_row( $query );
+							 $tipomov_id,$fecha_factura,$saldo_actual,$saldo_total,$ticket,$efectivo,$cupones_sku,$cupones_cantidad,$cupontipo_id  ) = $database->get_row( $query );
 	 					$cliente= $apellidop." ".$apellidom." ".$nombre;
 	 }
 
@@ -383,7 +384,34 @@ $database = new DB();
 							<td style='text-align:right'>$". dinero($total_iva_contado)."&nbsp;&nbsp;</td></tr>";
 						echo "<tr><td></td><td style='text-align:right'>&nbsp;<strong>Total</strong></td>
 							<td style='text-align:right;text-align:right;border-top:2px solid;'><strong>".dinero($total_contado)."</strong>&nbsp;&nbsp;</td></tr>";
-						
+
+
+
+
+
+                                    if ($cupones_sku)
+                                    {
+                                         $query = "SELECT cupones_id,cupon_id,sku,fecha_ini,fecha_fin,cantidad,cupontipo_id,compra_minima,activo  FROM cupones WHERE  sku='".$_SESSION['cupon_sku']."'";
+                                		list( $cupones_id,$cupon_id,$sku,$fecha_ini,$fecha_fin,$cantidad,$cupontipo_id,$compra_minima,$activo ) = $database->get_row( $query );
+                                        switch($cupontipo_id){
+                                            case 1://echo "<tr><td>".$_SESSION['cupon_sku']."</td></tr>";
+                                        	    echo "<tr><td></td><td style='text-align:right'>&nbsp;<font size=+1>Cupon</font></td>
+											        <td width=180 style='text-align:right;text-align:right;color:black;border-bottom:1px solid black;'>
+											        <font size=+3><b>- ".dinero($cupones_cantidad)."</b></font></td></tr>";
+										       break;
+                                            case 2:
+                                                echo "<tr><td></td><td style='text-align:right'>&nbsp;<font size=+1>Cupon ($cantidad %)</font></td>
+											        <td width=180 style='text-align:right;text-align:right;color:black;border-bottom:1px solid black;'>";
+                                                $cantidad=$total_contado*$cantidad/100;
+                                                echo "<font size=+3><b>- ".dinero($cantidad)."</b></font></td></tr>";
+
+                                                break;
+                                        }
+                                         echo "<tr><td></td><td style='text-align:right'>&nbsp;<font size=+1>Ud. Paga</font></td>
+											        <td width=180 style='text-align:right;text-align:right;color:black;border:1px solid black;'>
+											        <font size=+3><b> $ ".dinero($total_contado-$cantidad)."</b></font></td></tr>";
+
+                                   }
 
 
 							$fecha_hoy=date("Y-m-d");
@@ -401,12 +429,12 @@ $database = new DB();
 											case '2':
 												$promo=get_promo_porcentaje($total_contado);
 												break;
-											
+
 											default:
 												# code...
 												break;
 										}
-										
+
 										echo "<tr><td></td><td style='text-align:right'>&nbsp;<font size=+1>$promocion</font></td>
 											<td style='text-align:right;text-align:right;color:black;border-bottom:1px solid black;'>
 											<b>- ".dinero($promo)."</b>&nbsp;&nbsp;</td></tr>";
@@ -419,18 +447,18 @@ $database = new DB();
 
 						if ($efectivo){
 						echo "<tr><td></td><td style='text-align:right'>&nbsp;Efectivo</td>
-							<td style='text-align:right;text-align:right;'>".dinero($efectivo)."&nbsp;&nbsp;</td></tr>";	
+							<td style='text-align:right;text-align:right;'>".dinero($efectivo)."&nbsp;&nbsp;</td></tr>";
 						echo "<tr><td></td><td style='text-align:right'>&nbsp;Cambio</td>
-							<td style='text-align:right;text-align:right;border-top:2px solid;'>".dinero($efectivo-$total_contado+$promo)."&nbsp;&nbsp;</td></tr>";
-						}			
+							<td style='text-align:right;text-align:right;border-top:2px solid;'>".dinero($efectivo-$total_contado+$promo+$cupones_cantidad)."&nbsp;&nbsp;</td></tr>";
+						}
 
-									
+
 									}
 
 
 						// if ($promociones)
 						// {
-						// echo "<tr><td colspan=3><br><br>RECUERDE:  En Promociones no hay cambios ni devoluciones</td></tr>";	
+						// echo "<tr><td colspan=3><br><br>RECUERDE:  En Promociones no hay cambios ni devoluciones</td></tr>";
 						
 						// }
 					

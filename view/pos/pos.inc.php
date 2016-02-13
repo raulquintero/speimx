@@ -75,7 +75,7 @@ if (!$_SESSION['cart']){
 ?>	                        <br><br><br><br>
 					  		<center><span style="font-size:40px;color:blue;">
 					  			<b>ENCONTRO TODO LO <br><br>QUE BUSCABA?</b></span>
-                                </center>
+         <p>                       </center>
 <?php  }
 else
     switch($cuantos){
@@ -85,7 +85,7 @@ else
 
 if($sku)
 	{
-		 $query = "SELECT cupones_id,cupon_id,sku,fecha_ini,fecha_fin,cantidad,cupontipo_id,compra_minima,activo,fecha_uso,usado,admin_id,bulk  FROM cupones
+	   $query = "SELECT cupones_id,cupon_id,sku,fecha_ini,fecha_fin,cantidad,cupontipo_id,compra_minima,activo,fecha_uso,usado,admin_id,bulk  FROM cupones
 			WHERE  sku='".$sku."'";
 		list( $cupones_id,$cupon_id,$sku,$fecha_ini,$fecha_fin,$cantidad,$cupontipo_id,$compra_minima,$activo,$fecha_uso,$usado,$admin_id,$bulk ) = $database->get_row( $query );
 			$apellidos= $apellidop." ".$apellidom;
@@ -97,7 +97,7 @@ if ($cupon_id)
 
     echo "<center>";
     echo "<table width=400 class='table' style=\"border:2px dotted\">";
-    echo "<tr><td bgcolor=black><center><h2 ><b><font color=white> CUPON  [ ".fechamysqltomx(date("Y-m-d"),"letra")." ]</font></b></h2></center></td></tr>";
+    echo "<tr><td bgcolor=black><center><h2 ><b><font color=white> CUPON [ ".fechamysqltomx(date("Y-m-d"),"letra")." ]</font></b></h2></center></td></tr>";
 
     switch ($cupontipo_id){
         case '1': echo "<tr><td><br><center><h1><b>$ ".dinero($cantidad)." MX </b></h1></center></td></tr>";break;
@@ -110,14 +110,16 @@ if ($cupon_id)
           //  else echo "<tr><td><center><b>Valido: ".fechamysqltomx($fecha_ini,"letra")." - ".fechamysqltomx($fecha_fin,"letra")."</B></center></td></tr>";
 if (strtotime(date("Y-m-d"))<strtotime($fecha_ini)) echo "<tr bgcolor=yellow><td ><center>Error Fecha: Todavia no se puede usar</center></td></tr>";
 		if (!$activo) echo "<tr bgcolor=yellow><td ><center>Status: Sin Activar</center></td></tr>";
-		if ($usado) echo "<tr><td> <center>$cupontipo_id Usado el: <center></td></tr>";
+
+        if ($usado) echo "<tr><td > <center><span class=\"label label-important\">Usado el: ".fechamysqltomx($fecha_uso,"letra")."</span><center></td></tr>";
 
 
 	    echo "</table><br>";
 
 
 echo "<a href='/index.php?data=pos' class='btn' data-dismiss='modal'>CANCELAR</a>&nbsp;&nbsp;&nbsp;";
-if ($fecha_fin>=date("Y-m-d") && strtotime(date("Y-m-d"))<=strtotime($fecha_ini)) echo "<a href='/functions/cart.php?func=apply_cupon&cupon_sku=$sku' class=\"btn btn-primary\" >APLICAR</a>";
+if (strtotime($fecha_fin)>=strtotime(date("Y-m-d")) && strtotime(date("Y-m-d"))>=strtotime($fecha_ini)
+    && !$cliente_id && !$usado) echo "<a href='/functions/cart.php?func=apply_cupon&cupon_sku=$sku' class=\"btn btn-primary\" >APLICAR</a>";
 
 echo "</center>";
 
@@ -341,15 +343,17 @@ else
 											<td width=180 style='text-align:right;text-align:right;background:yellow;color:black;'>
 											<font size=+3><b>$ ".dinero($total_contado)."</b></font></td></tr>";
 
-										$fecha_hoy=date("Y-m-d");
-										$query = "SELECT  promocion_id,promocion,tipodesc from promocion where \"$fecha_hoy\">=fecha_inicio AND \"$fecha_hoy\"<=fecha_fin";
-										list( $promocion_id,$promocion,$tipodesc ) = $database->get_row( $query );
-												$promociones= $database->num_rows( $query );
 
-                                    if ($_SESSION['cupon_sku'])
+
+
+                                $query = "SELECT  compra_minima from cupones where sku='".$_SESSION['cupon_sku']."'";
+                                list( $compra_minima,$cupontipo_id ) = $database->get_row( $query );
+
+
+                                    if ($_SESSION['cupon_sku'] && dinero($total_contado)>=$compra_minima)
                                     {
-                                         $query = "SELECT cupones_id,cupon_id,sku,fecha_ini,fecha_fin,cantidad,cupontipo_id,activo  FROM cupones WHERE  sku='".$_SESSION['cupon_sku']."'";
-                                		list( $cupones_id,$cupon_id,$sku,$fecha_ini,$fecha_fin,$cantidad,$cupontipo_id,$activo ) = $database->get_row( $query );
+                                         $query = "SELECT cupones_id,cupon_id,sku,fecha_ini,fecha_fin,cantidad,cupontipo_id,compra_minima,activo  FROM cupones WHERE  sku='".$_SESSION['cupon_sku']."'";
+                                		list( $cupones_id,$cupon_id,$sku,$fecha_ini,$fecha_fin,$cantidad,$cupontipo_id,$compra_minima,$activo ) = $database->get_row( $query );
                                         switch($cupontipo_id){
                                             case 1://echo "<tr><td>".$_SESSION['cupon_sku']."</td></tr>";
                                         	    echo "<tr><td></td><td style='text-align:right'>&nbsp;<font size=+1>Cupon</font></td>
@@ -369,6 +373,13 @@ else
 											        <font size=+3><b> $ ".dinero($total_contado-$cantidad)."</b></font></td></tr>";
 
                                    }
+
+                                   	$fecha_hoy=date("Y-m-d");
+										$query = "SELECT  promocion_id,promocion,tipodesc from promocion where \"$fecha_hoy\">=fecha_inicio AND \"$fecha_hoy\"<=fecha_fin";
+										list( $promocion_id,$promocion,$tipodesc ) = $database->get_row( $query );
+												$promociones= $database->num_rows( $query );
+
+
 
 									if ($promociones)
 									{
@@ -401,6 +412,7 @@ else
 
 $pedido = searchSKU('60056002', $_SESSION['cart']);
 $producto = notsearchSKU('60056002', $_SESSION['cart']);
+$temporada = searchCATEGORIA('7',$_SESSION['cart']);
 if ($pedido)
     {
         $boton_cerrarventa="";
@@ -412,16 +424,22 @@ if ($pedido)
         $boton_apartado="&nbsp;&nbsp;<a href=\"?data=pos&op=apartado\" class=\"btn btn-info green\">Hacer Apartado</a>";
     }
 if ($pedido AND $producto) $boton_pedido=" <div class='alert alert-error'>
-
 							<strong>Error.</strong> No Combinar Productos y Pedidos.
 						</div>";
+
+if ($temporada) {
+    $boton_pedido=" <div class='alert alert-error'>
+							<strong>Cupones.</strong> No aplica en Productos de Liquidacion.
+						</div>";
+    $boton_apartado=$boton_cerrarventa="";
+    }
                                     //if (in_array("60056002", $_SESSION['cart']))
 										echo "<tr>";
                                         echo "<td colspan=3 style='text-align:center'><br>
 											    <div  class='hidden-print' style='text-align:center;padding:10px;background:#dddddd;border:1px solid #bbbbbb;color:white;'>
-                                                    $boton_cerrarventa
 										            $boton_pedido
 										            $boton_apartado
+                                                    $boton_cerrarventa
 											</div>
                                             </td</tr>";
 
@@ -448,7 +466,12 @@ if ($pedido AND $producto) $boton_pedido=" <div class='alert alert-error'>
 
 
 
-if ($_SESSION['cupon_sku']) echo "Cupon: ".$_SESSION['cupon_sku'];
+if ($_SESSION['cupon_sku']){
+    echo "<div class='alert alert-info'>";
+    echo "<a href='/functions/cart.php?func=unset_cupon' type=\"button\" class=\"close\" data-dismiss=\"alert\">×</a>";
+    echo "<b>Cupon: ".$_SESSION['cupon_sku']."<br>Bueno por: $".$cantidad." MX<br>Compra Minima: $ ".dinero($compra_minima)." MX</b>";
+    echo "</div>";
+    }
     else "<br>";
 							echo "<table width=100%>";
 
@@ -617,7 +640,7 @@ if ($_SESSION['cupon_sku']) echo "Cupon: ".$_SESSION['cupon_sku'];
 									// echo "<tr><td>&nbsp;</td><td style='text-align:right'>Total</td><td style='text-align:right'>$". dinero($total_contado+$total_iva_contado)."</td></tr>";
 									// echo "<tr><td>&nbsp;</td><td style='text-align:right'>Incluye IVA(16%) por</td><td style='text-align:right'>$". dinero($total_iva_contado)."</td></tr>";
 									echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;<strong>Total</strong></td>
-											<td width=190 style='text-align:right;text-align:right;border-top:0px solid;'><h1> $ ".dinero($total_contado)."</h1></td></tr>";
+											<td width=190 style='text-align:right;text-align:right;border-top:0px solid;'><h1> $ ".dinero($total_contado-$cantidad)."</h1></td></tr>";
 
 									if ($promociones)
 									{
@@ -625,7 +648,7 @@ if ($_SESSION['cupon_sku']) echo "Cupon: ".$_SESSION['cupon_sku'];
 											<td width=190 style='text-align:right;text-align:right;border-top:0px solid;'><h1> - ".dinero($promo)."</h1></td></tr>";
 
 										echo "<tr><td>&nbsp;</td><td style='text-align:right'>&nbsp;<strong>Ud. Paga</strong></td>
-											<td width=190 style='text-align:right;text-align:right;border:1px solid;'><h1> $ ".dinero($total_contado-$promo)."</h1></td></tr>";
+											<td width=190 style='text-align:right;text-align:right;border:1px solid;'><h1> $ ".dinero($total_contado-$promo-$cantidad)."</h1></td></tr>";
 
 									}
 
@@ -637,7 +660,7 @@ if ($_SESSION['cupon_sku']) echo "Cupon: ".$_SESSION['cupon_sku'];
 			echo "<table width=100%><tr><td>&nbsp;</td><td style='text-align:right;text-align:right;border-top:0px solid;'>
 									<div class=\"control-group\"><label class=control-label>Pagar con:</label></td>
 									<td style=\"text-align:right\" width=120>
-									<div class=controls> <input class=\"input-small\" style=\"text-align:right\" id=cantidad name=efectivo type=text value='".dinero($total_contado-$promo)."'></div>
+									<div class=controls> <input class=\"input-small\" style=\"text-align:right\" id=cantidad name=efectivo type=text value='".dinero($total_contado-$promo-$cantidad)."'></div>
 									</div>
 									</td></tr>";
 									echo"</table>";

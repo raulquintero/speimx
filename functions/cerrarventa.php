@@ -19,33 +19,33 @@ foreach( $_GET as $key => $value )
 
 			if($cid)
 				{
-					$query = "SELECT apellidop, apellidom, nombre, credito, saldo,total_ultimo,fecha_total_ultimo, abono  FROM cliente 
+					$query = "SELECT apellidop, apellidom, nombre, credito, saldo,total_ultimo,fecha_total_ultimo, abono  FROM cliente
 						WHERE  cliente_id=".$cid;
 					list( $apellidop,$apellidom,$nombre,$credito, $saldo, $total_ultimo, $fecha_total_ultimo,$abono  ) = $database->get_row( $query );
 	 					$cliente= $apellidop." ".$apellidom." ".$nombre;
 
-						
-						
-				} 
-				
+
+
+				}
+
 
 
 
 									$item=$_SESSION['cart'];
-								
+
 									$n=0;
 									$total=0;
-									foreach ($item as $row => $value) 
-									{	
-										
+									foreach ($item as $row => $value)
+									{
+
 										$total_credito+=$item[$n]['precio_credito'];
 										$total_contado+=$item[$n]['precio_contado'];
-										
+
 										$n++;
 
 									}
-								
-						
+
+
 
 							if ($total_credito AND $cid)
 							{
@@ -57,17 +57,17 @@ foreach( $_GET as $key => $value )
 
 
 
-									
+
 								// echo "<tr>SubTotal</td>$". dinero($total_credito)."</td></tr>";
-								// echo "IVA(16%)</td>".dinero($total_iva_credito)."</td></tr>";	
-								// echo "Total".dinero($total_iva_credito+$total_credito)."</strong></td></tr>";	
-								// echo "Saldo Actual</td>".dinero($saldo)."</td></tr>";	
-								// echo "Saldo Total>$ ".dinero($saldo_total)."</td></tr>";	
+								// echo "IVA(16%)</td>".dinero($total_iva_credito)."</td></tr>";
+								// echo "Total".dinero($total_iva_credito+$total_credito)."</strong></td></tr>";
+								// echo "Saldo Actual</td>".dinero($saldo)."</td></tr>";
+								// echo "Saldo Total>$ ".dinero($saldo_total)."</td></tr>";
 
 									 $query = "SELECT abono,limite FROM abono WHERE activado=1 ORDER BY limite ASC";
 
 									$results = $database->get_results( $query );
-									foreach ($results as $row ) 
+									foreach ($results as $row )
 									{
 											//echo $total_credito." ".$row['limite']." <br> ";
 										if ($saldo_total<=$row['limite'])
@@ -78,7 +78,7 @@ foreach( $_GET as $key => $value )
 									}
 
 										// echo "ABONO$". dinero($abono)."</td>";
-									
+
 
 									//////////////////////////////////////////////////////////////factura
 									$fecha_hoy=date("Y-m-d H:i:s");
@@ -101,7 +101,7 @@ foreach( $_GET as $key => $value )
 									$factura_id = $database->lastid();
 
 					$cadena2=num_ticket16($factura_id);
-									
+
 									//Fields and values to update
 					$update = array(
     				'ticket' => $cadena2
@@ -140,20 +140,20 @@ foreach( $_GET as $key => $value )
 			);
 									$add_query = $database->insert( 'movimiento', $names );
 
- 
+
 
 ////////////////////////////////////////////////////////////////creating details for facturadet////////////////////////////////
 
 
 									$item=$_SESSION['cart'];
-								
+
 									$n=0;
 									$total=0;
-									foreach ($item as $row => $value) 
+									foreach ($item as $row => $value)
 									{
 
 										$codigo=substr(num_ticket16($item['id']),0,13);
-								
+
 
 										$names= array(
 										'factura_id'      => $factura_id,
@@ -177,13 +177,13 @@ foreach( $_GET as $key => $value )
                 						);
 
 
-								
+
  									$add_query = $database->insert( 'facturadet', $names );
 
 
 										$total_credito+=$item[$n]['precio_credito'];
 										$total_contado+=$item[$n]['precio_contado'];
-										
+
 										$n++;
 
 									}
@@ -191,7 +191,7 @@ foreach( $_GET as $key => $value )
 
 /////////////////////////////////////////////////////////////end details ////////////////////////////////////////////
 
-							} 
+							}
 
 							else
 
@@ -199,14 +199,12 @@ foreach( $_GET as $key => $value )
 									{
 									$total_iva_contado=$total_contado*.16;
 									$saldo_total=$total_contado+$total_iva_contado;
-									
+
 									$promo=0;
 
 											$fecha_hoy=date("Y-m-d");
 										$query = "SELECT  promocion_id,promocion,tipodesc from promocion where \"$fecha_hoy\">=fecha_inicio AND \"$fecha_hoy\"<=fecha_fin";
-									
-
-list( $promocion_id,$promocion,$tipodesc ) = $database->get_row( $query );
+                                        list( $promocion_id,$promocion,$tipodesc ) = $database->get_row( $query );
 												$promociones= $database->num_rows( $query );
 
 									if ($promociones)
@@ -219,13 +217,18 @@ list( $promocion_id,$promocion,$tipodesc ) = $database->get_row( $query );
 											case '2':
 												$promo=get_promo_porcentaje($total_contado+$total_iva_contado);
 												break;
-											
+
 											default:
 												# code...
 												break;
 										}
 									}
 
+                                //$query = "SELECT  cantidad,cupontipo_id from cupones where sku='".$_SESSION['cupon_sku']."'";
+                               // list( $cupon,$cupontipo_id ) = $database->get_row( $query );
+
+
+                                //if ($cupontipo_id==1) $efectivo-=$cupon;
 
 									//////////////////////////////////////////////////////////////factura
 									$fecha_hoy=date("Y-m-d H:i:s");
@@ -241,15 +244,28 @@ list( $promocion_id,$promocion,$tipodesc ) = $database->get_row( $query );
     								'tipomov_id' => 14,
     								'saldo_actual' => $saldo,
     								'saldo_total' => $saldo_total,
-    								'efectivo' => $efectivo,
+    								'efectivo' => dinero($efectivo),
+                                    'cupones_id'=>$_SESSION['cupon_sku'],
     								'bono' => $promo
 									);
 
-	
-	  
+
+
   									$add_query = $database->insert( 'factura', $names );
 									$factura_id = $database->lastid();
-									
+
+                                    		//Fields and values to update
+									$update = array(
+    								'fecha_uso' => $fecha_hoy,
+                                    'usado' => 1
+									);
+
+									//Add the WHERE clauses
+									$where_clause = array(
+    								'sku' => $_SESSION['cupon_sku']
+									);
+									$updated = $database->update( 'cupones', $update, $where_clause, 1 );
+
 									if ($promociones && $promo>0)
 									{
 										$names = array(
@@ -265,7 +281,7 @@ list( $promocion_id,$promocion,$tipodesc ) = $database->get_row( $query );
 									}
 
 
-									$cadena2=num_ticket16($factura_id);							
+									$cadena2=num_ticket16($factura_id);
 									//Fields and values to update
 									$update = array(
     								'ticket' => $cadena2
@@ -278,10 +294,10 @@ list( $promocion_id,$promocion,$tipodesc ) = $database->get_row( $query );
 									$updated = $database->update( 'factura', $update, $where_clause, 1 );
 
 								$item=$_SESSION['cart'];
-								
+
 									$n=0;
 									$total=0;
-									foreach ($item as $row => $value) 
+									foreach ($item as $row => $value)
 									{
 
 										$codigo=substr(num_ticket16($item['id']),0,13);
@@ -357,6 +373,7 @@ list( $promocion_id,$promocion,$tipodesc ) = $database->get_row( $query );
      // print_r($_SESSION['cart']);
 unset($_SESSION['cart']);
 unset($_SESSION['cliente_id']);
+unset($_SESSION['cupon_sku']) ;
 
 header("Location: /imprimir_ticket.php?fid=$factura_id");
 						?>
@@ -364,4 +381,3 @@ header("Location: /imprimir_ticket.php?fid=$factura_id");
 
 				<!-- **********************************endd  ticket********************* -->
 
-				

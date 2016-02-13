@@ -40,13 +40,12 @@ if ($func=="c")
 {
 
 $cliente = array(
-	'cupon'=>$cupon,
     'cantidad'=>$cantidad,
 	'cupontipo_id'=>$cupontipo_id,
     'compra_minima'=>$compra_minima
 	);
 
-    if ($cupon)
+    if ($cantidad)
 	{
 		$add_query = $database->insert( 'cupon', $cliente );
 		$last_id = $database->lastid();

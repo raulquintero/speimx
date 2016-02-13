@@ -15,6 +15,14 @@ function notsearchSKU($id, $array) {
    }
    return false;
 }
+function searchCATEGORIA($id, $array) {
+   foreach ($array as $key => $val) {
+       if ($val['temporada_id'] === $id) {
+           return true;
+       }
+   }
+   return false;
+}
 
 
 function searchMultiarray($value,$key, $array) {

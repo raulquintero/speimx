@@ -24,6 +24,7 @@ if ($func=="add_item")
     if (!$precio_credito && $sku=="60056002")
     $precio_credito=$precio_contado*1.3;
     $precio_venta=($precio_contado*$iva)-$descuento;
+    $temporada_id=isset($_GET['temporada_id']) ? $_GET['temporada_id'] : "";
     //$precio_venta=$precio_contado*$iva;
 
     if ($_GET['servicio'])
@@ -47,6 +48,7 @@ if ($func=="add_item")
                                 'descuento'    => $_GET['descuento'],
                 'codigo' => $_GET['codigo'],
                 'sku' => $sku,
+                'temporada_id' => $temporada_id,
                 'color'    => $_GET['color'],
                 'talla'    => $_GET['talla']
             );
@@ -67,7 +69,7 @@ if ($func=="del_item")
     $item = $_SESSION['cart'];
     unset($item[$i]);
     $item  = array_values($item);
-    
+
     $_SESSION['cart']=$item;
 
 
@@ -80,6 +82,7 @@ if ($func=="sel_cliente")
      $cid=$_GET['cid'];
     //$cid=substr($cid,1,6);
      $_SESSION['cliente_id']=$cid;
+     $_SESSION['cupon_sku']="";
 
 
 }
@@ -94,7 +97,17 @@ if ($func=="del_cliente")
 
 if ($func=="apply_cupon")
 {
+
     $_SESSION['cupon_sku']=$cupon_sku;
+
+
+
+}
+
+if ($func=="unset_cupon")
+{
+
+    $_SESSION['cupon_sku']="";
 
 
 
@@ -127,6 +140,9 @@ if ($func=="apply_cupon")
 
  //echo "<br><br>";          // ********DEBUG**********
  //foreach ($_SESSION as $k => $v) { echo "<br>[$k] => $v \n";}
+
+
+
 
 
 ?>
