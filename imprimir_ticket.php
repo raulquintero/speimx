@@ -59,7 +59,7 @@ function compruebaTecla(){
 
 			if($fid)
 				{
-					$query = "SELECT cliente.cliente_id,apellidop, apellidom, nombre, credito, saldo,total_ultimo,factura.fecha, abono,factura_id,
+					$query = "SELECT cliente.cliente_id,apellidop, apellidom, nombre, credito, saldo,total_ultimo,factura.fecha, abono,factura.factura_id,
 							tipomov_id,fecha,saldo_actual,saldo_total,ticket,cupones.sku,cupones.cantidad,cupones.cupontipo_id
                             FROM cliente,factura,cupones
 						WHERE  factura.cupones_id=cupones.sku AND factura.cliente_id=cliente.cliente_id AND factura.factura_id='".$fid."'";
@@ -112,10 +112,10 @@ function compruebaTecla(){
                             echo $ticket;
                             echo "<bR><br>";
 
-                            //if ($cupones_sku) echo "<br>Cupon ID: <b>$cupones_sku</b>";
-                            //else
-                            //autocupon("12345678901234");
-
+                            if ($cupones_sku) echo "<br>Cupon ID: <b>$cupones_sku</b>";
+                            else
+                            $cupon_sku=autocupon($factura_id);
+                            echo $cupon_sku;
 
 						 	echo " <br>
 							</center>
@@ -129,7 +129,7 @@ function compruebaTecla(){
 						else
 							echo "<div class=\"alert alert-error \">
 							AVISO: No se genero la nota de venta.</div> ";
-						
+
 						;?>
 
 
@@ -139,22 +139,22 @@ function compruebaTecla(){
 
 
 				<!-- **********************************endd  ticket********************* -->
-			<div class="row-fluid condensed">	
+			<div class="row-fluid condensed">
 
 				<div class="box-content span6">
 				<table cellpadding=5 width=350>
-					<tr><td>	
+					<tr><td>
 					<?php if ($tipomov_id==3) plandepagos($saldo_total,$fecha_factura,$abono,$saldo);?>
 					</td><td>&nbsp;</td></tr>
 				</table>
 					</div>
 			</div>
 
-			<div class="row-fluid condensed">	
+			<div class="row-fluid condensed">
 
 				<div class="box-content span6">
 				<table width=350>
-					<tr><td>	
+					<tr><td>
 						
 						Recuerde que:<br>
 						Todas las ventas son VENTAS FINALES, <br>

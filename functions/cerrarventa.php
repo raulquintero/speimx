@@ -341,6 +341,13 @@ foreach( $_GET as $key => $value )
 									}
 
 
+
+                                $query = "SELECT  cantidad,cupontipo_id from cupones where sku='".$_SESSION['cupon_sku']."'";
+                                list( $cupon,$cupontipo_id ) = $database->get_row( $query );
+
+
+                                if ($cupontipo_id==1) $total_precio_venta-=$cupon;
+
 									$names = array(
     								'cliente_id' => 0,
     								'fecha_actual' => $fecha_hoy,
@@ -357,15 +364,31 @@ foreach( $_GET as $key => $value )
 
 
 
-									echo "<tr><td></td><td>&nbsp;</td></tr>
-									<tr><td></td><td style='text-align:right'>Subtotal</td>
-									<td class=\"span3\" style='text-align:right'>$". dinero($total_contado)."</td></tr>";
-									echo "<tr><td></td><td style='text-align:right'>IVA(16%)</td>
-									<td style='text-align:right'>$". dinero($total_iva_contado)."</td></tr>";
-									echo "<tr><td></td><td style='text-align:right'>&nbsp;<strong>Total</strong></td>
-											<td style='text-align:right;text-align:right;border-top:2px solid;'><strong>".dinero($total_iva_contado+$total_contado)."</strong></td></tr>";
 
+                                    // autocupon
 
+                                    $cantidad=100;
+                                    $compraminima=500;
+                                    $query = "SELECT sku FROM cupones  ORDER BY sku DESC limit 1";
+                                    list( $sku ) = $database->get_row( $query );
+                                    if ($sku==0) $sku="10102000320000";
+                                        else $sku+=30000;
+
+                                    $names = array(
+    								'cupon_id' => '1',
+                                    'sku' => $sku,
+    								'fecha_ini' => $fecha_hoy,
+    								'fecha_fin' => fechaplusmonth($fecha_hoy),
+                                    'cantidad' => $cantidad,
+                                    'compra_minima' => $compraminima,
+    								'admin_id' => $_SESSION['user_id'],
+    								'cupontipo_id' => '1',
+    								'bulk' => '1',
+                                    'factura_id' => $factura_id
+									);
+
+									$add_query = $database->insert( 'cupones', $names );
+   									echo "cupon".$cupon_id = $database->lastid();
 
 									}
 
