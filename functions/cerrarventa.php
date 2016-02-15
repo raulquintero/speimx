@@ -388,7 +388,7 @@ foreach( $_GET as $key => $value )
                                     'factura_id' => $factura_id
 									);
 
-									if (dinero($total_precio_venta)>=500)
+									if (dinero($total_precio_venta)>=500 && dinero($total_precio_venta)>=$compra_minima)
                                         $add_query = $database->insert( 'cupones', $names );
 
 
