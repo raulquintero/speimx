@@ -387,8 +387,9 @@ foreach( $_GET as $key => $value )
                                     'factura_id' => $factura_id
 									);
 
-									$add_query = $database->insert( 'cupones', $names );
-   									echo "cupon".$cupon_id = $database->lastid();
+									if ($total_precio_venta>=500)
+                                        $add_query = $database->insert( 'cupones', $names );
+
 
 									}
 
