@@ -383,11 +383,12 @@ foreach( $_GET as $key => $value )
                                     'compra_minima' => $compraminima,
     								'admin_id' => $_SESSION['user_id'],
     								'cupontipo_id' => '1',
+                                    'activo' => '1',
     								'bulk' => '1',
                                     'factura_id' => $factura_id
 									);
 
-									if ($total_precio_venta>=500)
+									if (dinero($total_precio_venta)>=500)
                                         $add_query = $database->insert( 'cupones', $names );
 
 
