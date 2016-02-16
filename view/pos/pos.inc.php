@@ -120,7 +120,7 @@ if (strtotime(date("Y-m-d"))<strtotime($fecha_ini)) echo "<tr bgcolor=yellow><td
 
 echo "<a href='/index.php?data=pos' class='btn' data-dismiss='modal'>CANCELAR</a>&nbsp;&nbsp;&nbsp;";
 if (strtotime($fecha_fin)>=strtotime(date("Y-m-d")) && strtotime(date("Y-m-d"))>=strtotime($fecha_ini)
-    && !$cliente_id && !$usado) echo "<a href='/functions/cart.php?func=apply_cupon&cupon_sku=$sku' class=\"btn btn-primary\" >APLICAR</a>";
+    && !$cliente_id && !$usado && $activo) echo "<a href='/functions/cart.php?func=apply_cupon&cupon_sku=$sku' class=\"btn btn-primary\" >APLICAR</a>";
 
 echo "</center>";
 

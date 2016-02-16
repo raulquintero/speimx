@@ -136,7 +136,7 @@ if ($bulk)
                             case 2: echo $row['cantidad']." %";break;
                             }
 
-						echo ",".strtoupper($row['sku']).",".fechamysqltomx($row['fecha_ini'],"letra").",".fechamysqltomx($row['fecha_fin'],"letra");
+						echo ",*".strtoupper($row['sku'])."*,".fechamysqltomx($row['fecha_ini'],"letra").",".fechamysqltomx($row['fecha_fin'],"letra");
                         echo ",$ ".dinero($row['compra_minima'])." MX<td><tr>";
 					}
            	echo "</table>";
