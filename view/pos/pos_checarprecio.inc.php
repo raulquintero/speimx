@@ -1,3 +1,14 @@
+<script type="text/javascript">
+function imprimir(){
+var w = window.open();
+w.document.write($('#precio').html()); //only part of the page to print, using jquery
+w.document.close(); //this seems to be the thing doing the trick
+w.focus();
+w.print();
+w.close();
+}
+</script>
+
 
 <form action="/index.php" method="get">
 <table  width=100%  >
@@ -13,6 +24,7 @@
 				  		</table>
 </form>
 
+<a onclick="imprimir()">imprimir</a>
 <?php
 
 $code=$_GET['code'];
@@ -32,8 +44,8 @@ if ($code)
 if ($producto_id)
 {
 
-?>
-	<div class="priority low"><span><?php echo $code?></span></div>
+?><div id="precio">
+	<div  class="priority low"><span><?php echo $code?></span></div>
 
 					<div class="task low">
 						<div class="desc">
@@ -85,7 +97,7 @@ if ($producto_id)
 							<div> 1 day</div>
 						</div>
 					</div>
-
+</div>
 <?php
 
 echo "<a href='/functions/cart.php?func=add_item&prid=$producto_id&producto=$producto&marca=$marca&codigo=$codigo&codigo_inventario=$codigo_inventario&talla=$talla&color=$color&precio_compra=$precio_compra&precio_credito=$precio_credito&precio_contado=$precio_contado&precio_promocion=$precio_promocion&descuento=$descuento&iva=$iva'><button class=\"btn btn-large btn-primary\">Agregar al carrito</button></a>";

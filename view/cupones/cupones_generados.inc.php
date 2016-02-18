@@ -15,7 +15,7 @@ if (!$activo){
     echo "<a href=\"/index.php?data=cupones&op=generados&activo=0\"><button class=\"btn-danger\"><i class=\"halflings-icon inbox white \"></i>&nbsp;Ver Sin Activar</button></a>";
 
     }
-
+    echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"/imprimir_cupones_back.php\"><button class=\"btn-primary\"><i class=\"halflings-icon print white \"></i>&nbsp;Imprimir Reverso</button></a>";
 echo "</ul>"
 ?>
 <div class="box span12">
@@ -72,7 +72,9 @@ foreach( $results as $row )
                                         case 1: echo "$ ".dinero($row['cantidad'])." MX";break;
                                         case 2: echo $row['cantidad']." %";
                                         }
-                                        ?></b></a><br><?php echo "CM: $ ".dinero($row['compra_minima'])." MX"?></td>
+                                        ?></b></a>&nbsp;&nbsp;
+                                        <a href="imprimir_cupones.php?bulk=<?php echo $row['bulk']?>"><i class="halflings-icon print "></i></a>
+                                        <br><?php echo "CM: $ ".dinero($row['compra_minima'])." MX"?></td>
                                 <td class="center"><?php echo $nombre_admin?></td>
 							    <td class="center"><?php echo $cuantos?></td>
 							</tr>

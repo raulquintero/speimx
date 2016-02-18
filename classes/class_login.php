@@ -342,6 +342,8 @@ class Login
 
                 $_SESSION['cliente_id']=0;
 
+                $_SESSION['tipocredito_id']=0;
+
                 $_SESSION['nid']=$fetch['nivel_id'];
 
                 $_SESSION['fdid_tipomov_id']=0;

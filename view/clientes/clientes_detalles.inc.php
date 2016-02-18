@@ -37,7 +37,7 @@ if ($_GET['eed']==2)
 											<b>
                                             <?php
                                             //$cliente_id=sprintf('C%06d', $cliente_id);
-                                            echo "<a href=\"/functions/cart.php?func=sel_cliente&cid=". $cliente_id."\" classa=\"btn btn-primary\" data-dismiss=\"modal\">".
+                                            echo "<a href=\"/functions/cart.php?func=sel_cliente&cid=". $cliente_id."&tipocredito_id=$tipocredito_id\" classa=\"btn btn-primary\" data-dismiss=\"modal\">".
                                             strtoupper($nombre.' '.$apellidop.' '.$apellidom)."</b></a>   &nbsp;&nbsp;";
 
 											if (!$_GET['h'])

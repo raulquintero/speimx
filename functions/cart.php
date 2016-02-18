@@ -79,10 +79,12 @@ if ($func=="del_item")
 
 if ($func=="sel_cliente")
 {
-     $cid=$_GET['cid'];
+     $cid=isset($_GET['cid']) ? $_GET['cid'] : "0";
+     $tipocredito_id=isset($_GET['tipocredito_id']) ? $_GET['tipocredito_id'] : "0";
     //$cid=substr($cid,1,6);
      $_SESSION['cliente_id']=$cid;
      $_SESSION['cupon_sku']="0";
+     $_SESSION['tipocredito_id']="a".$tipocredito_id;
 
 
 }

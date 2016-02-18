@@ -43,8 +43,8 @@ $sku=isset($_GET['sku']) ? $_GET['sku'] : "";
 				}
 				 // else
 				 //echo "<a href=\"/index.php?data=pos&op=clientes\" class=\"btn btn-success blue  hidden-print\">Seleccionar Cliente</a>";
-
- ?>
+					
+ ?>		
 
 					<div class="hidden-print ">
 					<form action="/index.php" method="get">

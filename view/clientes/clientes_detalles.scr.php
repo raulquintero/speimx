@@ -3,12 +3,12 @@
 $cid=(htmlspecialchars($_GET["cid"]));
 $query = "SELECT cliente_id,gruponomina.gruponomina_id,gruponomina,empresa, curp,nombre, apellidop, apellidom, domicilio_casa, 
 	telefono_personal, credito,saldo,abono,fecha_total_inicio,fecha_total_ultimo,
-	total_ultimo,cliente.observaciones FROM cliente,gruponomina, empresa WHERE cliente.cliente_id=$cid  
+	total_ultimo,cliente.observaciones,tipocredito_id FROM cliente,gruponomina, empresa WHERE cliente.cliente_id=$cid  
 	AND empresa.gruponomina_id=gruponomina.gruponomina_id AND cliente.empresa_id=empresa.empresa_id";
 //$results = $database->get_results( $query );
 //$query = "SELECT group_id, group_name, group_parent FROM your_table WHERE group_name LIKE '%production%'";
 list( $cliente_id,$gruponomina_id, $gruponomina, $empresa, $curp,$nombre, $apellidop,$apellidom,$domicilio_casa, 
-	$telefono_personal,$credito,$saldo,	$abono,$fecha_total_inicio,$fecha_total_ultimo,$total_ultimo, $observaciones) = $database->get_row( $query );
+	$telefono_personal,$credito,$saldo,	$abono,$fecha_total_inicio,$fecha_total_ultimo,$total_ultimo, $observaciones,$tipocredito_id) = $database->get_row( $query );
 
 function n_pagos_total($total_ultimo,$abono)
 {
