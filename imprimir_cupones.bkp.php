@@ -26,13 +26,7 @@ foreach( $_GET as $key => $value )
 
 <style type="text/css">
 
-div{
-	margin:0px;
-	padding:0px;
-}
-
 div.back{
-
 	width:343;
 	height:207;
 	margin:16px 11px;
@@ -42,8 +36,8 @@ div.back{
 
 
 div.image{
-	width:341;
-	height:216;
+	width:343;
+	height:215;
 	margin:10px 11px;
 	border: 3px dashed #555;
 	background-size: 350px 140px;
@@ -73,24 +67,14 @@ div.text{
 	text-align:center;
 	font-weight:bold;
 	color:black;
-	font-size:14px;
 	font-family: verdana,arial;
 }
 
 div.text span{
 	text-align:center;
 	color:black;
-	font-size: 44px;
+	font-size: 48px;
 	background-color:white;
-
-	
-}
-
-div.text h2{
-	text-align:center;
-	color:white;
-	font-size: 14px;
-	background-color:#ff2826;
 
 	
 }
@@ -115,22 +99,32 @@ div.footer{
 
 
 
-<div>
+
+<table cellpadding=0 cellspacing=3>
 <?php 
 
 $bulk=isset ($_GET['bulk']) ? $_GET['bulk'] : "0";
+
+
+
 	$query = "SELECT sku,fecha_ini,fecha_fin,cantidad,cupontipo.cupontipo_id,cupontipo,compra_minima,bulk
     FROM cupones,cupontipo
     where cupones.cupontipo_id=cupontipo.cupontipo_id AND cupones.bulk=$bulk ";
-	$results = $database->get_results( $query );
+$results = $database->get_results( $query );
 
 foreach( $results as $row )
-{
-?>
+	foreach ($row as $k => $v)
 
+{
+    
+    
+?>
+	
+<tr>
+	<td style="border-bottom:1px dotted gray;">
 <div class="image">
 		<div class="header">
-			AHORRA
+			DESCUENTO
 		</div>
 	<div class="box">
 		<div class="text"><br>
@@ -138,12 +132,7 @@ foreach( $results as $row )
 			<br>
 			COMPRA MINIMA: $ <?php echo dinero($row['compra_minima'])?> MX
 			<br>
-			<?php 
-			if ($row['fecha_ini']<=date("Y-m-d"))
-				echo "<h2>Vence: ".fechamysqltomx($row['fecha_fin'],"letra")."</h2>";
-			else
-				echo "<h2>Vigencia ".fechamysqltomx($row['fecha_ini'],"letra")." al ".fechamysqltomx($row['fecha_fin'],"letra")."</h2>";
-			?>
+			<font color=red>Vence: <?php fechamysqltomx($row['fecha_fin'],"letra")?></font>
 		</div>
 			<div class="footer">
 			<?php echo "<img width=320 src=\"barcode_cupon.php?text=".$row['sku']."\" alt=\"barcode\" />";?>
@@ -153,7 +142,49 @@ foreach( $results as $row )
 		</div>
 	</div>
 	</div>
+</td>
+<td style="border-bottom:1px dotted gray;">
+<div class="image">
+		<div class="header">
+			DESCUENTO
+		</div>
+	<div class="box">
+		<div class="text"><br>
+		<span>$100.00 MX</span>
+			<br>
+			COMPRA MINIMA: $ 500.00 MX
+			<br>
+			<font color=red>Vence: 02-Feb-2016</font>
+		</div>
+			<div class="footer">
+			<?php echo "<img width=320 src=\"barcode_cupon.php?text=12345678901234\" alt=\"barcode\" />";?>
+			
+			Terminos y condiciones al reverso.
+		
+		</div>
+	</div>
+	</div>
+</td>
+</tr>
 
 <?php } ?>
 
+
+</table>
+
+
+
+
 </div>
+<?php
+
+foreach ($results as  $c) { 
+	//foreach ($c as $k=>$v )
+	{
+	echo "<br>[$ko] => $vo \n";
+	echo "<br>--".$v;
+	}
+echo "<br>";
+}
+
+?>

@@ -81,7 +81,7 @@ $codigo_cliente.=date("mdHis");
 
 
 
-if ($func=="u")
+if ($func==="u")
 {
 
 // echo "<br><br>";          // ********DEBUG**********
@@ -127,14 +127,16 @@ $where_clause = array(
     'cliente_id' => $_GET['cid']
 );
 
-	$updated = $database->update( 'cliente', $update, $where_clause, 1 );
+	if ($_GET['cid']>0) 
+		$updated = $database->update( 'cliente', $update, $where_clause, 1 );
 
 // //Output errors if they exist for the update query
 //$database->display( $updated );
 
-
-	$location="Location: /index.php?data=$data&op=detalles&cid=$cid&eed=1";
-
+	if ($_GET['cid']>0) 
+	 $location="Location: /index.php?data=$data&op=detalles&cid=$cid&eed=1";
+	else
+	 $location="Location: /index.php?data=clientes&op=cliente_form&func=agregar&eed=3";
 }
 
 

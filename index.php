@@ -249,6 +249,13 @@ function compruebaTecla(){
         this.document.location.href = "/index.php";
         	/*$('#textcode').focus(); */
     }
+    if(tecla == 113){
+        showClientes(20);
+        $('#clientesModal').modal('show')    ;
+        	/*$('#textcode').focus(); */
+    }
+
+
 }
 	</script>
 </head>
@@ -675,6 +682,28 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
 			</div>
 
 
+	<div class="modal hide fade" id="clientesModal">
+    	<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">×</button>
+			<h3><span class=\"label label-inverse\">Cartera de Clientes</span></h3>
+		</div>
+       <form class="form-vertical" action="/functions/editar_producto.php">
+		<div class="modal-body">
+
+
+
+        <div id='clientesHint'><ul><b></b></ul></div>
+
+
+
+
+			</div>
+           	<div class="modal-footer">
+				    <button class="btn" data-dismiss="modal">Cancel</button>
+					<!-- <button type="submit" class="btn btn-primary">Grabar Cambios</button> -->
+    		</div>
+    </form>
+			</div>
 
 
 <!--
@@ -769,6 +798,43 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
 function mostrar_carta(carta) {
     window.open(carta);
 }
+
+
+
+  
+function showClientes(str)
+{
+if (str=="")
+  {
+  document.getElementById("clientesHint").innerHTML="";
+  return;
+  }
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("clientesHint").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","/show_clientes.ajax.php?q="+str+"&data=<?php echo $_GET['data']?>"+"&subcat=<?php echo $_GET['subcat']?>",true);
+xmlhttp.send();
+}
+
+function pulsar(e) {
+  tecla = (document.all) ? e.keyCode : e.which;
+  return (tecla != 13);
+}
+
+
+
 </script>
 
 </body>
