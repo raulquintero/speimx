@@ -11,16 +11,22 @@ foreach( $_GET as $key => $value )
 {
     $_GET[$key] = $database->filter( $value );
 }
-$prid=$_GET['q'];
+$q = isset($_GET['q']) ? $_GET['q'] : "";
 
-
+	 $query = "SELECT nombre,apellidop,apellidom,codigo_cliente,tipocredito_id from cliente 
+	 where 
+	 CONCAT(nombre,' ',apellidop,' ',apellidom) like '%".$q."%' OR
+	 CONCAT(apellidop,' ',apellidom,' ',nombre) like '%".$q."%' AND
+	 cliente_id>0 order by apellidop limit 50";
+	 if ($q) 
+	 	{$subs = $database->get_results( $query );
+	 	 $cuantos=count ($subs);}
 ?>
-
 
 		<div class="row-fluid">
 				<div class="box  span12">
 					<div class="box-header" data-original-title>
-						<h2><i class="halflings-icon edit"></i><span class="break"></span>Seleccione un cliente</h2>
+						<h2><i class="halflings-icon edit"></i><span class="break"></span>Seleccione un cliente de <?php echo $cuantos?></h2>
 						<div class="box-icon">
 
 							<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
@@ -29,7 +35,7 @@ $prid=$_GET['q'];
 						</div>
 					</div>
 					<div class="box-content">
-					<table class="table table-striped table-bordered bootstrap-datatable datatable">
+					<table class="table table-striped table-bordered">
 						  <thead>
 							  <tr>
 								  <th>Nombre</th>
@@ -40,16 +46,16 @@ $prid=$_GET['q'];
 
 
 <?php
-	 $query = "SELECT nombre,apellidop,apellidom,cliente_id,tipocredito_id from cliente";
-	 $subs = $database->get_results( $query );
 
 					foreach( $subs as $sub )
 						{
 						$fullname=$sub['apellidop']." ".$sub['apellidom']." ".$sub['nombre'];
-						$cid=$sub['cliente_id'];
+						$codigo_cliente=$sub['codigo_cliente'];
 						$tcid=$sub['tipocredito_id'];	
-                         echo "<tr><td><a 
-                         href='/functions/cart.php?func=sel_cliente&cid=$cid&tipocredito_id=$tcid'>".strtoupper($fullname)."</a></td><td class='center'	>0</td></tr>";  
+                         echo "<tr>
+                         <td><a href='/index.php?data=clientes&op=verificar&cid=$codigo_cliente'>".strtoupper($fullname)."</a></td>
+                         <td class='center'	>0</td>
+                         </tr>";  
                         }
 ?>
 					</tbody>

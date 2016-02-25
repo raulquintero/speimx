@@ -687,10 +687,16 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
 			<button type="button" class="close" data-dismiss="modal">×</button>
 			<h3><span class=\"label label-inverse\">Cartera de Clientes</span></h3>
 		</div>
-       <form class="form-vertical" action="/functions/editar_producto.php">
+   
 		<div class="modal-body">
 
+			<div class="alert alert-success">
+				Nombre: <input class='input-xlarge focused' type=text name=q onkeypress="return pulsar(event)" id="text" 
+							onkeyup='showClientes(this.value)' ";
 
+
+>
+				</div>
 
         <div id='clientesHint'><ul><b></b></ul></div>
 
@@ -702,7 +708,7 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
 				    <button class="btn" data-dismiss="modal">Cancel</button>
 					<!-- <button type="submit" class="btn btn-primary">Grabar Cambios</button> -->
     		</div>
-    </form>
+
 			</div>
 
 
@@ -824,7 +830,7 @@ xmlhttp.onreadystatechange=function()
     document.getElementById("clientesHint").innerHTML=xmlhttp.responseText;
     }
   }
-xmlhttp.open("GET","/show_clientes.ajax.php?q="+str+"&data=<?php echo $_GET['data']?>"+"&subcat=<?php echo $_GET['subcat']?>",true);
+xmlhttp.open("GET","/show_clientes.ajax.php?q="+str,true);
 xmlhttp.send();
 }
 

@@ -111,6 +111,7 @@ if ($cupon_id)
           //  else echo "<tr><td><center><b>Valido: ".fechamysqltomx($fecha_ini,"letra")." - ".fechamysqltomx($fecha_fin,"letra")."</B></center></td></tr>";
 if (strtotime(date("Y-m-d"))<strtotime($fecha_ini)) echo "<tr bgcolor=yellow><td ><center>Error Fecha: Todavia no se puede usar</center></td></tr>";
 		if (!$activo) echo "<tr bgcolor=yellow><td ><center>Status: Sin Activar</center></td></tr>";
+	if ($cliente_id) echo "<tr bgcolor=yellow><td ><center>Solo Aplica en VENTAS DE CONTADO</center></td></tr>";
 
         if ($usado) echo "<tr><td > <center><span class=\"label label-important\">Usado el: ".fechamysqltomx($fecha_uso,"letra")."</span><center></td></tr>";
 
@@ -482,7 +483,7 @@ if ($_SESSION['cupon_sku']){
 									//$total=0;
 									foreach ($item as $row => $value)
 									{
-										echo "<tr><td style='border-top:1px dotted gray;'> ".($n+1)."</td> <td style='border-top:1px dotted gray;'>
+										echo "<tr><td style='border-top:1px dotted gray;'> ".($nn)."</td> <td style='border-top:1px dotted gray;'>
 											".$item[$n]['sku']."<br>". substr($item[$n]['producto'],0,30)."...
 											<br><i><font size=-1>".strtolower($item[$n]['color'])." ".strtoupper($item[$n]['talla'])."</font></i></td>
 											<td valign=top style='text-align:right;border-top:1px dotted gray;'>";
