@@ -550,7 +550,7 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
 								if ($nid<=6) echo "<li><a href=\"index.php?data=catalogo\"><i class=\"icon-barcode\"></i><span class=\"hidden-tablet\"> Usuarios</span></a></li>";
 								if ($nid<=8) echo "<li><a href=\"index.php?data=mantenimiento&op=db\"><i class=\"icon-book\"    ></i><span class=\"hidden-tablet\"> Base de Datos</span></a></li>";
 								if ($nid<=6) echo "<li><a href=\"index.php?data=mantenimiento&op=impuestos\"><i class=\"icon-book\"    ></i><span class=\"hidden-tablet\"> Impuestos</span></a></li>";
-								if ($nid<=6) echo "<li><a href=\"index.php?data=catalogo\"><i class=\"icon-barcode\"></i><span class=\"hidden-tablet\"> Temas</span></a></li>";
+								if ($nid<=6) echo "<li><a href=\"index.php?data=inventarios\"><i class=\"icon-barcode\"></i><span class=\"hidden-tablet\"> Inventarios</span></a></li>";
 								if ($nid<=6) echo "<li><a href=\"index.php?data=catalogo\"><i class=\"icon-barcode\"></i><span class=\"hidden-tablet\"> Temas</span></a></li>";
 								if ($nid<=8) echo "<li><a href=\"index.php?data=appliances\"><i class=\"icon-book\"    ></i><span class=\"hidden-tablet\"> Appliances</span></a></li>";
 							echo "</ul>";

@@ -1,3 +1,8 @@
+<!-- <object type="text/html" data="/view/appliances/appliances_switch.php" width="800" border=1 height="400"> </object> -->
+
+<iframe width="800" height="200" scrolling="no" frameborder="0" src="/view/appliances/appliances_switch.php" target="_top"> </iframe>
+<br>
+
 <?php
 
 $q=isset($_GET['q']) ? $_GET['q'] : "";
@@ -8,9 +13,9 @@ switch($q){
 	case "status": $salida = shell_exec('./wemo 192.168.1.4 GETSTATE'); break;
 }
 
-if (!$q) header("Location: /index.php?data=appliances");
+//if (!$q) header("Location: /index.php?data=appliances");
 
-
+$salida=3;
 $salida = shell_exec('./wemo 192.168.1.4 GETSTATE'); 
 $salida= str_replace("\n", "", $salida);
 
