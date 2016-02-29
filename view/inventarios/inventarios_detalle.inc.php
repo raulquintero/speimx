@@ -124,7 +124,7 @@ if (isset($code)) list($producto,$producto_id,$codigo,$color,$color_id,$talladet
 					
 
 						<div class="box-content">
-						<table class="table table-striped table-bordered"> <temp="bootstrap-datatable datatable">
+						<table class="table  table-bordered"> <temp="bootstrap-datatable datatable">
 						  <thead>
 							  <tr>
 								  <th>Talla</th>

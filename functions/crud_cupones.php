@@ -159,7 +159,7 @@ echo $query = "SELECT cupon_id,cantidad,cupontipo_id,compra_minima FROM cupon WH
 list( $cupon_id, $cantidad,$cupontipo_id,$compra_minima) = $database->get_row( $query );
 $query = "SELECT sku FROM cupones  ORDER BY sku DESC limit 1";
 list( $sku ) = $database->get_row( $query );
-$query = "SELECT bulk FROM cupones  ORDER BY sku DESC limit 1";
+$query = "SELECT bulk FROM cupones GROUP BY bulk ORDER BY bulk DESC limit 1";
 list( $bulk ) = $database->get_row( $query );
 $bulk=$bulk+1;
 
