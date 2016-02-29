@@ -78,6 +78,7 @@ $query="insert into inventariosdet (inventarios_id,producto_id,sistema,inventari
                          if ($n>=$ciclos) {
                           $n=0;
                             mysqli_query($con,$query);
+                            $query;
                              $query="insert into inventariosdet (inventarios_id,producto_id,sistema,inventario,talladet_id,color_id,codigo) values ";
 
                           }
@@ -101,14 +102,15 @@ $location="Location: /index.php?data=inventarios";
 
 if ($func=="i")
 {
- $query="SELECT inventario from inventariosdet where codigo=$code";
+ $query="SELECT inventario from inventariosdet where inventarios_id='$isid' AND codigo=$code";
   list($inventario)=$database->get_row($query);
   $update = array(
     'inventario'=>$inventario+1  
   );
 //Add the WHERE clauses
 $where_clause = array(
-    'codigo' => $code
+    'codigo' => $code,
+    'inventarios_id'=> $isid
 );
 
 $updated = $database->update( 'inventariosdet', $update, $where_clause, 1 );

@@ -1,4 +1,8 @@
 <?php
+$isid=isset($_POST['isid']) ? $_POST['isid'] : "";
+$data=isset($_POST['data']) ? $_POST['data'] : "";
+$op=isset($_POST['op']) ? $_POST['op'] : "";
+$code=isset($_POST['code']) ? $_POST['code'] : "";
 
 
 if( $_POST['f']=="a"){
@@ -14,7 +18,10 @@ $target_path = "../../productos/";
 $target_path = $target_path . basename( $nombre);
 if(move_uploaded_file($_FILES['uploadedfile']['tmp_name'], $target_path))
     {
-          header("location: /index.php?data=productos&op=inventario&err=1&prid=".$_POST['prid']."&coid=".$_POST['color']);
+          if($isid)
+          $location="location: /index.php?data=$data&op=$op&isid=$isid&code=$code";
+          else  
+          $location="location: /index.php?data=productos&op=inventario&err=1&prid=".$_POST['prid']."&coid=".$_POST['color'];
         //echo "El archivo ". basename( $_FILES['uploadedfile']['name']). " ha sido subido";
     }
     else
@@ -23,4 +30,5 @@ if(move_uploaded_file($_FILES['uploadedfile']['tmp_name'], $target_path))
     }
 }
 
+header($location);
 ?>

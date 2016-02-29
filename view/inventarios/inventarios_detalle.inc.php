@@ -1,5 +1,7 @@
 <?php 
-$code=isset($_GET['code']) ? $_GET['code'] :"";
+$code=isset($_GET['code']) ? $_GET['code'] :"0";
+$isid=isset($_GET['isid']) ? $_GET['isid'] :"0";
+
 ?>
 <form action='/functions/crud_inventarios.php' method='GET'>
 <table width="100%">
@@ -21,15 +23,16 @@ $query = "SELECT producto,producto.producto_id as prid,inventariosdet.codigo,col
 	from producto,inventariosdet,color,talladet 
 	where producto.producto_id=inventariosdet.producto_id AND inventariosdet.color_id=color.color_id 
 	AND inventariosdet.talladet_id=talladet.talladet_id
-	AND inventariosdet.codigo=$code";
-list($producto,$producto_id,$codigo,$color,$color_id,$talladet,$inventario,$global) = $database->get_row($query);
+	AND inventariosdet.codigo='$code'";
+
+if (isset($code)) list($producto,$producto_id,$codigo,$color,$color_id,$talladet,$inventario,$global) = $database->get_row($query);
 
 
  ?>
 <div class="row-fluid condensed">
 					<div class="box span6 hidden-print">
 					<div class="box-header " data-original-title >
-						<h2><i class="halflings-icon barcode"></i><span class="break"></span>Inventario</h2>
+						<h2><i class="halflings-icon barcode"></i><span class="break"></span>Inventario [<?php echo $isid?>]</h2>
 						<div class="box-icon">
 							<a href="index.php?data=clientes&op=cliente_form&f=agregar" ><i class="halflings-icon plus"></i></a>
 							<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
@@ -41,7 +44,7 @@ list($producto,$producto_id,$codigo,$color,$color_id,$talladet,$inventario,$glob
 						echo "<table class='table'>";
 						echo "<tr><td><h2>$producto</h2></td><td><h2>$code</h2></td><td><h2>GlobaL: $global</h2></td></tr>";
 						echo "<tr><td><h2>Color: $color </h2></td><td><h2>Talla: $talladet</h2></td>
-								<td><h2>Total: $inventario</h2></td></tr>";
+								<td><h2>Total: <button>-</button> $inventario <button>+</button></h2></td></tr>";
 						echo "</table>";
 						?>
 						</div>
@@ -57,17 +60,17 @@ list($producto,$producto_id,$codigo,$color,$color_id,$talladet,$inventario,$glob
 					<div class="box-content">
 
                       <?php
-               	$query = "SELECT producto,subcategoria,color from producto,subcategoria,color
+               	$query = "SELECT producto.producto_id,producto,subcategoria,color from producto,subcategoria,color
                     where producto.subcategoria_id=subcategoria.subcategoria_id
-                    AND $color_id=color.color_id
-                    AND producto.producto_id=".$producto_id;
-				list( $producto,$subcategoria,$color) = $database->get_row( $query );
+                    AND '$color_id'=color.color_id
+                    AND producto.producto_id='".$producto_id."'";
+				list( $producto_id,$producto,$subcategoria,$color) = $database->get_row( $query );
                 $nombre_producto=ucwords(strtolower($producto));
             $nombre_producto = str_replace(" ", "-", $nombre_producto);
             $nombre_subcategoria = ucwords(str_replace(" ", "-", $subcategoria));
             $nombre_color=ucwords(strtolower($color));
 
-            $nombre_archivo=$nombre_subcategoria."-".$nombre_producto."-".$nombre_color."-".$_GET['prid']."_p.jpg";
+            $nombre_archivo=$nombre_subcategoria."-".$nombre_producto."-".$nombre_color."-".$producto_id."_p.jpg";
                                 ?>
 						  	<table class="table table-condensed">
 
@@ -87,6 +90,10 @@ list($producto,$producto_id,$codigo,$color,$color_id,$talladet,$inventario,$glob
                                         <input type="hidden" name="prid" value="<?php echo $_GET['prid']?>"/>
                                         <input type="hidden" name="color" value="<?php echo $color_id?>"/>
                                         <input type="hidden" name="nombre_archivo" value="<?php echo $nombre_archivo?>"/>
+                                        <input type="hidden" name="isid" value="<?php echo $isid?>" />
+                                        <input type="hidden" name="code" value="<?php echo $code?>" />
+                                        <input type="hidden" name="data" value="<?php echo $_GET['data']?>" />
+                                        <input type="hidden" name="op" value="<?php echo $_GET['op']?>" />
                                         <input type="hidden" name="f" value="a"/>
 									</form>
                                 </td>
@@ -129,10 +136,11 @@ list($producto,$producto_id,$codigo,$color,$color_id,$talladet,$inventario,$glob
 						  <tbody>
 <?php 
 
-$query="SELECT producto_id,color_id from inventariosdet WHERE codigo='$code'";
+$query="SELECT producto_id,color_id from inventariosdet WHERE inventarios_id='$isid' AND codigo='$code'";
 list($producto_id,$color_id)=$database->get_row($query);
 $query ="SELECT talladet,sistema,inventario,(sistema-inventario) as diferencia FROM inventariosdet,talladet 
-	where inventariosdet.talladet_id=talladet.talladet_id AND inventariosdet.color_id='$color_id' AND inventariosdet.producto_id='$producto_id'";
+	where inventariosdet.talladet_id=talladet.talladet_id AND inventariosdet.color_id='$color_id' 
+	AND inventariosdet.producto_id='$producto_id' AND inventarios_id='$isid' ORDER BY orden";
 $results=$database->get_results($query);
 
 foreach ($results as $row)
