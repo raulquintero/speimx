@@ -20,9 +20,9 @@ $salida = shell_exec('./wemo 192.168.1.4 GETSTATE');
 $salida= str_replace("\n", "", $salida);
 
 if ($salida=="OFF")
-		echo "SWITCH 1 <a href='/index.php?data=appliances&q=on' onclick='' class=\"btn btn-success\">ON ($salida)</a>";
+		echo "SWITCH 1 is OFF <a href='/index.php?data=appliances&q=on' onclick='' class=\"btn btn-success\">ON</a>";
 if ($salida=="ON" || $salida==1)
-    	echo "SWITCH 1 <a href='/index.php?data=appliances&q=off' onclick='' class=\"btn btn-warning\">OFF ($salida)</a>";
+    	echo "SWITCH 1 is ON <a href='/index.php?data=appliances&q=off' onclick='' class=\"btn btn-warning\">OFF</a>";
 
 
 

@@ -159,7 +159,8 @@ function compruebaTecla(){
 						Recuerde que:<br>
 						Todas las ventas son VENTAS FINALES, <br>
 						NO se regresa dinero, solo se cambia por mercancia dentro de los primeros 7 dias, 
-						es requisito indispensable presentar este ticket, y la mercancia con sus etiquetas
+						es requisito indispensable presentar este ticket, y la mercancia con sus etiquetas.
+						Ropa intima no tiene garantia
 						
 						<?php if ($tipomov_id==3)
 						echo "Recuerde ser puntual en sus pagos, el no cumplir a tiempo con sus pagos

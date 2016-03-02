@@ -30,9 +30,10 @@ if ($_GET['eed']==2)
 
 						<div id="myTabContent" class="tab-content">
 							<div class="tab-pane active" id="info">
+								<table width=100%><tr><td>
 								<p>
 
-											<img class="grayscale hidden-print" src=fotos/images.jpeg width=150 align=right></img>
+											<!-- <img class="grayscale hidden-print" src=fotos/images.jpeg width=150 align=right></img> -->
 
 											<b>
                                             <?php
@@ -56,6 +57,7 @@ if ($_GET['eed']==2)
 
 
 											<br><br>
+
 											<div class="hidden-print">
 											<?php
 											if (!$_GET['h'])
@@ -79,7 +81,7 @@ if ($_GET['eed']==2)
 													class="btn btn-mini btn-primary">Cambiar Imagen</button></a>
 											 -->
 										</div>
-								</p>
+								</p></td><td align=right ><button class='btn green'><h1><?php echo "$ ".dinero($saldo) ?> MX</h1></button></td></tr></table>
 
 							</div>
 							<div class="tab-pane" id="custom">
@@ -111,8 +113,13 @@ if ($_GET['eed']==2)
 
 			<div class="row-fluid condensed">	
 
+
+				
+
+
+
 				<div class="box span6">
-					<div class="box-header hidden-print">
+					<div class="box-header">
 						<h2><i class="halflings-icon align-justify"></i><span class="break"></span>Movimientos</h2>
 						<div class="box-icon">
 							<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
@@ -120,7 +127,8 @@ if ($_GET['eed']==2)
 							<a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
 						</div>
 					</div>
-					<div class="box-content hidden-print">
+					<div class="box-content">
+
 						<table class="table table-striped">
 							  <thead>
 								  <tr>
@@ -134,13 +142,12 @@ if ($_GET['eed']==2)
 								  </tr>
 							  </thead>   
 							  <tbody>
-
-
 							  	<?php movimientos($cid,$saldo);?>
-
-							
  							 </tbody>
 						 </table>  
+
+						
+
 						 <div class="pagination pagination-centered hidden-print">
 						  <ul>
 							<li><a href="#">Prev</a></li>

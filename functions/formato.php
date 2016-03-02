@@ -133,6 +133,15 @@ return $final;
 
 }
 
+function fechaminusmonth($fecha,$cuantos)
+{
+	$cuantos= isset($cuantos) ? $cuantos : "1";
+
+	$time = strtotime($fecha);
+	$final = date("Y-m-d", strtotime("-".$cuantos." month", $time));
+return $final;
+
+}
 function fechaplus_onesecond($fecha)
 
 {
