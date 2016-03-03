@@ -35,11 +35,12 @@ if ($_GET['eed']==2)
 
 											<!-- <img class="grayscale hidden-print" src=fotos/images.jpeg width=150 align=right></img> -->
 
-											<b>
+											
                                             <?php
                                             //$cliente_id=sprintf('C%06d', $cliente_id);
-                                            echo "<a href=\"/functions/cart.php?func=sel_cliente&cid=". $cliente_id."&tipocredito_id=$tipocredito_id\" classa=\"btn btn-primary\" data-dismiss=\"modal\">".
-                                            strtoupper($nombre.' '.$apellidop.' '.$apellidom)."</b></a>   &nbsp;&nbsp;";
+                                            echo "<a class='hidden-print hidden-phone' href=\"/functions/cart.php?func=sel_cliente&cid=". $cliente_id."&tipocredito_id=$tipocredito_id\" classa=\"btn btn-primary\" data-dismiss=\"modal\">".  
+                                            "<b>".strtoupper($nombre.' '.$apellidop.' '.$apellidom)."</b></a> ";
+                                            echo "<span class='hidden-desktop '>".strtoupper($nombre.' '.$apellidop.' '.$apellidom)."</span>";
 
 											if (!$_GET['h'])
 											{
@@ -56,7 +57,9 @@ if ($_GET['eed']==2)
 											?>
 
 
-											<br><br>
+												
+
+								</p></td><td align=right ><button class="btn btn-info green  hidden-print" data-toggle="modal" data-target="#abonaracuenta"><h1><?php echo "$ ".dinero($saldo) ?> MX</h1></button></td></tr></table>
 
 											<div class="hidden-print">
 											<?php
@@ -81,7 +84,7 @@ if ($_GET['eed']==2)
 													class="btn btn-mini btn-primary">Cambiar Imagen</button></a>
 											 -->
 										</div>
-								</p></td><td align=right ><button class='btn green'><h1><?php echo "$ ".dinero($saldo) ?> MX</h1></button></td></tr></table>
+
 
 							</div>
 							<div class="tab-pane" id="custom">
@@ -115,12 +118,14 @@ if ($_GET['eed']==2)
 
 
 				
-
+<?php 
+$fecha_limite=fechaminusmonth(date("Y-m-d"),3);
+ ?>
 
 
 				<div class="box span6">
 					<div class="box-header">
-						<h2><i class="halflings-icon align-justify"></i><span class="break"></span>Movimientos</h2>
+						<h2><i class="halflings-icon align-justify"></i><span class="break"></span>Movimientos desde <?php echo fechamysqltomx($fecha_limite,"letra") ?></h2>
 						<div class="box-icon">
 							<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
 							<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
@@ -195,9 +200,15 @@ if ($_GET['eed']==2)
 				<div class="control-group">
 								<label class="control-label" for="focusedInput">Cantidad: $</label>
 								<div class="controls">
-								  <input class="input-xlarge focused" id="focusedInput" name="cantidad" value="">
+								  <input class="input-medium" id="focusedInput" name="cantidad" autofocus value="">
 								</div>
 							  </div>
+			<div style='text-align:center;'>
+			<button class="btn btn-info yellow  hidden-print">$50.00</button>
+			<button class="btn btn-info yellow  hidden-print">$100.00</button>
+			<button class="btn btn-info yellow  hidden-print">$150.00</button>
+			<button class="btn btn-info yellow  hidden-print">$200.00</button>
+		</div>
 
 		</div>
 		<div id="botones" class="modal-footer">

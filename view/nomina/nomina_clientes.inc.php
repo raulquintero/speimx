@@ -66,12 +66,20 @@ $porcentaje_clientes=ceil(($clientes_nodeben*100)/$clientes_deben);
 						</div>
 					</div>
 					<div class="box-content">
+<?php 
+$query = "SELECT sum(abono), count(abono) FROM cliente WHERE  empresa_id=$empresa_id  AND saldo>0 ";
+list($pago,$nclientes) = $database->get_row($query);
+ ?>
+ <div class="alert alert-success span12">
+					<h4 class="alert-heading">Total a Pagar: $ <?php echo dinero($pago) ?> de <?php echo $nclientes ?> clientes</h4>
+						<button>Generar Pago</button>					
+				</div>
 						<table class="table table-striped table-bordered bootstrap-datatable datatable">
 						  <thead>
 							  <tr>
 								  <th>Nombre</th>
-								  <th>Abono</th>
 								   <th>Saldo</th>
+								  <th>Abono</th>
 								 <th>Mora</th>
 								  <th>Acciones</th> 
 							  </tr>
@@ -87,15 +95,14 @@ $results = $database->get_results( $query );
 foreach( $results as $row )
 {
 
-	
 ?>
 							<tr>
 								<td>
                                 <a href=/index.php?data=clientes&op=detalles&cid=<?php echo $row['cliente_id']?> >
 									<?php echo strtoupper($row['apellidop'].' '.$row['apellidom'].' '.$row['nombre'])?></a><br>
                                     <?php echo $row['email']?></td>
-								<td class="center"><?php echo  dinero($row['abono'])?></td>
 								 <td class="center"><?php echo dinero($row['saldo'])?></td>
+								<td class="center"><?php echo  dinero($row['abono'])?></td>
 								<td class="center"><?php echo $row['pagos_atrazados']?></td>
 								 <td class="center">
 									<a class="btn btn-success" href="#">
@@ -112,6 +119,7 @@ foreach( $results as $row )
 
 <?php 
 	}
+
 ?>
 
 

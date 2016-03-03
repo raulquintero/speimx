@@ -181,7 +181,7 @@ function plandepagos($total,$fecha,$abono,$saldo)
 							  </thead>   
 							  <tbody>";
 echo "<tr ><td style='text-align:right'>".($c)."</td>
-			<td  style='text-align:center'> ".fechamysqltous($fecha,1)."</td>
+			<td  style='text-align:center'> ".fechamysqltomx($fecha,1)."</td>
 			<td style='text-align:right'>----</td>
 			<td  style='text-align:right'>".dinero($total)."</td>
 			<td  style='text-align:right'><font color=gray> &nbsp;</td></tr>";
@@ -212,7 +212,7 @@ echo "<tr ><td style='text-align:right'>".($c)."</td>
 				}
 			
 			echo "<tr><td  style='text-align:right'>".($c)."</td>
-			<td style='text-align:center'>$atributo_begin".fechamysqltous($fecha,1)."$atributo_end</td>
+			<td style='text-align:center'>$atributo_begin".fechamysqltomx($fecha,1)."$atributo_end</td>
 			<td  style='text-align:right'> $atributo_begin".dinero($abono)."$atributo_end </td>
 			<td  style='text-align:right'>".dinero($total-$abono)."</td>
 			<td  style='text-align:right'><font color=gray>$atributo_begin".dinero($ultimo)."$atributo_end</font>&nbsp;</td></tr>";
@@ -229,7 +229,7 @@ echo "<tr ><td style='text-align:right'>".($c)."</td>
 
 
 			echo "<tr ><td style='text-align:right'>".($c)."</td>
-			<td  style='text-align:center'> ".fechamysqltous(fechaplusweek($fecha),1)."</td>
+			<td  style='text-align:center'> ".fechamysqltomx(fechaplusweek($fecha),1)."</td>
 			<td style='text-align:right'>".dinero($abono)."</td>
 			<td  style='text-align:right'>".dinero($total)."</td>
 			<td  style='text-align:right'><font color=gray> ".dinero($ultimo)."&nbsp;</td></tr>";

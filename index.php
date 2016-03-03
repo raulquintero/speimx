@@ -251,7 +251,9 @@ function compruebaTecla(){
     }
     if(tecla == 113){
         showClientes(20);
-        $('#clientesModal').modal('show')    ;
+        $('#clientesModal').modal('show') ;
+    	// $('#text').focus();
+
         	/*$('#textcode').focus(); */
     }
 
@@ -693,7 +695,7 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
 
 			<div class="alert alert-success">
 				Nombre: <input class='input-xlarge focused' type=text name=q onkeypress="return pulsar(event)" id="text" 
-							onkeyup='showClientes(this.value)' >
+							onkeyup='showClientes(this.value)' autofocus>
 				</div>
 
         <div id='clientesHint'><ul><b></b></ul></div>

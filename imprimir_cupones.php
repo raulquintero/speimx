@@ -48,7 +48,7 @@ div.image{
 	border: 3px dashed #555;
 	background-size: 350px 140px;
     background-repeat: no-repeat;
-background-image: url("http://speimx.dev/logo.jpg");
+background-image: url("/img/logo.jpg");
 background-position: 0px 18px; 	
 display: inline-block;
 z-index: -2;
