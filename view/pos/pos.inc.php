@@ -5,8 +5,6 @@
 $_SESSION['display']="pos";
 $cliente_id = $_SESSION['cliente_id'];
 $sku=isset($_GET['sku']) ? $_GET['sku'] : "";
-
-
 $item=$_SESSION['cart'];
 							$items = count($item);
 							$n=$items-1;
@@ -20,6 +18,14 @@ $item=$_SESSION['cart'];
 										$n--;
 
 									}
+
+//quitar cupon si se remueve un producto y queda por debajo de la compra minima dle cupon
+$query="Select compra_minima from cupones where sku='".$_SESSION['cupon_sku']."'";
+list($compra_minima)=$database->get_row($query);
+if (dinero($total_contado)<dinero($compra_minima) )
+{
+	unset($_SESSION['cupon_sku']);	
+}
 		?>
 
 
@@ -164,8 +170,9 @@ else
 
     default:    {   ////////////////**************** descripcion del producto marcado***************//////////////////
 
-    		if (count($_SESSION['cart']))
+    		if (count($_SESSION['cart'])>0)
     		{
+
                 echo "    <br><br><br><br>
 					  		<center><span style=\"font-size:40px;color:blue;\">";
 		$ultimo_producto=end($_SESSION['cart']);

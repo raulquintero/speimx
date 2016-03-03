@@ -314,7 +314,7 @@ class Login
 
 // );
 
-                $item="";
+                $item='';
 
                 $_SESSION['user_id']=$fetch['admin_id'];
 
@@ -355,7 +355,7 @@ class Login
                 $_SESSION['display']="pos";
 
                 $_SESSION['host'] = $_SERVER['HTTP_HOST'];
-
+                unset($_SESSION['cart']);
             }
 
             else
