@@ -49,6 +49,7 @@ echo "</ul>"
                                   <th>Cupon</th>
                                   <th>Usuario</th>
                                   <th>Cant.</th>
+                                  <th>Used</th>
 							  </tr>
 						  </thead>
 						  <tbody>
@@ -61,8 +62,10 @@ $results = $database->get_results( $query );
 foreach( $results as $row )
 {
     $nombre_admin=$row['apellidop'].' '.$row['nombre'];
-    $query="SELECT count(cupones_id) as total from cupones where bulk=".$row['bulk'];
+    $query="SELECT count(cupones_id) from cupones where bulk=".$row['bulk'];
     list($cuantos)=$database->get_row($query);
+    $query="SELECT count(usado) from cupones where usado='1' AND bulk=".$row['bulk'];
+    list($usados)=$database->get_row($query);
 ?>
 							<tr>
                                 <td class="center"><?php echo $row['bulk']?></td>
@@ -76,7 +79,8 @@ foreach( $results as $row )
                                         <a href="imprimir_cupones.php?bulk=<?php echo $row['bulk']?>"><i class="halflings-icon print "></i></a>
                                         <br><?php echo "CM: $ ".dinero($row['compra_minima'])." MX"?></td>
                                 <td class="center"><?php echo $nombre_admin?></td>
-							    <td class="center"><?php echo $cuantos?></td>
+                  <td class="center"><?php echo $cuantos?></td>
+							    <td class="center"><?php echo $usados?></td>
 							</tr>
 
 <?php
@@ -116,13 +120,14 @@ foreach( $results as $row )
 
 
                                   <th>Act</th>
+                                  <th>Used</th>
 							  </tr>
 						  </thead>
 						  <tbody>
 
                           <?php
 
-$query = "SELECT cupones.sku,cupones.fecha_ini,cupones.fecha_fin,cupones.cantidad,cupontipo.cupontipo_id,compra_minima,admin.nombre,admin.apellidop,cupones.bulk
+$query = "SELECT cupones.sku,cupones.fecha_ini,cupones.fecha_fin,cupones.cantidad,cupontipo.cupontipo_id,usado,compra_minima,admin.nombre,admin.apellidop,cupones.bulk
     FROM cupones,cupontipo,admin
     where cupones.cupontipo_id=cupontipo.cupontipo_id AND cupones.admin_id=admin.admin_id AND cupones.activo=$activo ";
     if ($bulk) $query.=" AND bulk=$bulk ";
@@ -151,6 +156,9 @@ $nombre_admin=$row['apellidop'].' '.$row['nombre'];
                                 echo "<br>CM: $ ".dinero($row['compra_minima'])." </td>";
 
                                  if ($activo)
+                                 echo "<td><i class=\"icon-check\"></i></td>";
+                                else echo "<td><i class=\"icon-check-empty\"></i></td>";
+                                 if ($row['usado'])
                                  echo "<td><i class=\"icon-check\"></i></td>";
                                 else echo "<td><i class=\"icon-check-empty\"></i></td>";
                                 ?>

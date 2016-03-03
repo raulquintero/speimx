@@ -6,6 +6,20 @@ $_SESSION['display']="pos";
 $cliente_id = $_SESSION['cliente_id'];
 $sku=isset($_GET['sku']) ? $_GET['sku'] : "";
 
+
+$item=$_SESSION['cart'];
+							$items = count($item);
+							$n=$items-1;
+							$total=0;
+							foreach ($item as $row => $value) 
+									{
+										
+										$total_credito+=$item[$n]['precio_credito'];
+										$total_contado+=$item[$n]['precio_venta'];
+										
+										$n--;
+
+									}
 		?>
 
 
@@ -72,13 +86,22 @@ $sku=isset($_GET['sku']) ? $_GET['sku'] : "";
 
 <?php
 $cuantos=strlen($sku);
-if (!$_SESSION['cart']){
+if (!$_SESSION['cart'] && !$cuantos){
 ?>	                        <br><br><br><br>
 					  		<center><span style="font-size:40px;color:blue;">
 					  			<b>ENCONTRO TODO LO <br><br>QUE BUSCABA?</b></span>
          <p>                       </center>
-<?php  }
-else
+<?php 
+ }
+if (!count($_SESSION['cart']) && $cuantos)
+{
+?>	                        <br><br>
+					  		<center><span style="font-size:20px;color:blue;">
+					  			<b>No se puede aplicar, Carrito Vacio</b></span>
+         <p>                       </center>
+<?php
+}
+//if  ($cuantos)	
     switch($cuantos){
 
     case 14:
@@ -118,11 +141,12 @@ if (strtotime(date("Y-m-d"))<strtotime($fecha_ini)) echo "<tr bgcolor=yellow><td
 
 	    echo "</table><br>";
 
-
+if (count($_SESSION['cart'])>0 && dinero($total_contado)>=dinero($compra_minima) )
+{
 echo "<a href='/index.php?data=pos' class='btn' data-dismiss='modal'>CANCELAR</a>&nbsp;&nbsp;&nbsp;";
 if (strtotime($fecha_fin)>=strtotime(date("Y-m-d")) && strtotime(date("Y-m-d"))>=strtotime($fecha_ini)
     && !$cliente_id && !$usado && $activo) echo "<a href='/functions/cart.php?func=apply_cupon&cupon_sku=$sku' class=\"btn btn-primary\" >APLICAR</a>";
-
+}
 echo "</center>";
 
 }
@@ -140,7 +164,8 @@ else
 
     default:    {   ////////////////**************** descripcion del producto marcado***************//////////////////
 
-
+    		if (count($_SESSION['cart']))
+    		{
                 echo "    <br><br><br><br>
 					  		<center><span style=\"font-size:40px;color:blue;\">";
 		$ultimo_producto=end($_SESSION['cart']);
@@ -202,10 +227,14 @@ else
             }   else echo "<font size=-1 color=gray>No se encontraron imagenes.</font>";
 
 
-
+        }
     } ///////////////////////////////termina descripcion del producto capturado////////////////////////////////
     break;
 }
+
+	
+	$total_credito=0;
+	$total_contado=0;
 ?>
 					  		</center>
 					  	</div>
