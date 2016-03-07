@@ -32,15 +32,16 @@ $porcentaje_clientes=ceil(($clientes_nodeben*100)/$clientes_deben);
 						<a href="index.php?data=clientes&op=grupo_form"><button class="btn btn-small btn-primary"><b>+</b> AGREGAR GRUPO</button></a>
 						<a href="index.php?data=nominas"><button class="btn btn-small btn-primary"><b>+</b> AGREGAR nomina</button></a>
 						
+				            	<div class="meter green"><span style="width: <?php echo $porcentaje?>%"></span></div>
 </div> -->
 
 			<div class="row-fluid">	
-				<div class="box span12">
+
+ 				<div class="box span12">
 					
 							
 				             	<h5>Credito Flotante: <?php echo dinero($saldo_pendiente).' ('.$porcentaje_credito.'%)'?> </h5>
-				            <!--	<div class="meter green"><span style="width: <?php echo $porcentaje?>%"></span></div>
-				          		 -->		
+				          				
 
 						<div class="progress progress-success" style="margin-bottom: 9px;">
 							<div class="bar" style="width:  <?php echo $porcentaje_credito?>%"></div>
@@ -52,9 +53,9 @@ $porcentaje_clientes=ceil(($clientes_nodeben*100)/$clientes_deben);
 						</div>
 				    
 				</div>
-			</div>		
+</div> 					
 
-<div class="box span11">
+<div class="box span12">
 					<div class="box-header" data-original-title>
 						<h2><i class="halflings-icon user"></i><span class="break"></span>Nomina:
 								<a href=index.php?data=nomina&op=empresas&nid=<?php echo $gid?> ><u><?php echo strtoupper($gruponomina)?></u></a>

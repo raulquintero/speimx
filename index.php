@@ -521,6 +521,7 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
 							echo "<ul>";
 
 								if ($nid<=6) echo "<li><a href=\"index.php?data=nomina&op=cobronomina\"><i class=\"icon-book\"    ></i><span class=\"hidden-tablet\"> Cobro x Nomina</span></a></li>";
+								if ($nid<=6) echo "<li><a href=\"index.php?data=nomina&op=nominasxcobrar\"><i class=\"icon-book\"    ></i><span class=\"hidden-tablet\"> Nominas x Cobrar</span></a></li>";
 							echo "</ul>";
 						echo "</li>";
 
