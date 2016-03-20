@@ -149,9 +149,9 @@ echo"			<form class=\"form-horizontal\" action=\"/functions/crud_proveedores.php
 								
 								<div class=\"control-group \">
 								
-								<label class=\"control-label\" for=\"categoria\">SubCategoria</label>
+								<label class=\"control-label\" for=\"subcategoria\">SubCategoria</label>
 								<div class=\"controls\">
-								  <input class=\"input-large\" id=\"categoria\" name=\"categoria\" type=\"text\" value=\"".strtoupper($rfc)."\"> 
+								  <input class=\"input-large\" id=\"subcategoria\" name=\"subcategoria\" type=\"text\" value=\"".strtoupper($rfc)."\"> 
 								<button type=\"submit\" class=\"btn btn-primary\">Agregar SubCategoria</button>
 								</div>
 							  </div>

@@ -88,10 +88,16 @@ $query = "SELECT sum(cantidad) as total from movimiento,cliente
 	where movimiento.tipomov_id=3 AND fecha>='".$fecha_inicio."' AND fecha<='".$fecha_final." 23:59:59'
     AND movimiento.cliente_id=cliente.cliente_id AND cliente.empresa_id<>2";
 		list( $ventas_credito ) = $database->get_row( $query );
+
+if ($_SESSION['user_id']==2)
+		$eid=2;
+		else $eid=0;
+
 $query = "SELECT sum(cantidad) as total from movimiento,cliente
 	where movimiento.tipomov_id=1 AND fecha>='".$fecha_inicio."' AND fecha<='".$fecha_final." 23:59:59'
-    AND movimiento.cliente_id=cliente.cliente_id AND cliente.empresa_id=0";
+    AND movimiento.cliente_id=cliente.cliente_id AND cliente.empresa_id='$eid'";
 		list( $abonos ) = $database->get_row( $query );
+
 $query = "SELECT sum(cantidad) as total from movimiento,cliente
 	where movimiento.tipomov_id=1 AND fecha>='".$fecha_inicio."' AND fecha<='".$fecha_final." 23:59:59'
     AND movimiento.cliente_id=cliente.cliente_id AND cliente.empresa_id<>0 AND cliente.empresa_id<>2";

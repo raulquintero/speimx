@@ -241,6 +241,11 @@ switch ($type) {
 		$('#cantidad').focus();
 		//document.getElementById('textcode').focus();
 	}
+	function mostrarClientes(){
+		showClientes(20);
+        $('#clientesModal').modal('show') ;
+    	
+	}
  window.onkeyup = compruebaTecla;
 function compruebaTecla(){
     var e = window.event;
@@ -330,7 +335,6 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
 										<span class="time">1 min</span>
                                     </a>
                                 </li>
-
                             	<li>
                                     <a href="/index.php?data=pos&op=servicio">
 										<span class="icon yellow"><i class="icon-user"></i></span>
@@ -345,6 +349,16 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
 										<span class="time">7 min</span>
                                     </a>
                                 </li>
+                                <li>
+                                    <a onclick='mostrarClientes()`'>
+										<span class="icon blue"><i class="icon-bullhorn"></i></span>
+										<span class="message">Clientes</span>
+										<span class="time">7 min</span>
+                                    </a>
+                                </li>
+
+
+                                 
 								<li>
                                     <a href="/index.php?data=pos&op=andrea">
 										<span class="icon red"><i class="icon-comment-alt"></i></span>
