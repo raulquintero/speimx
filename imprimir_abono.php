@@ -1,4 +1,3 @@
-
 <?php
 require_once('config/config.php');
 
@@ -25,10 +24,19 @@ foreach( $_GET as $key => $value )
 
 <html>
 <head>
+	<meta name="MobileOptimized" content="width" />
+	<meta name="HandheldFriendly" content="true" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title></title>
 	<style type="text/css">
 	body {
 		font-family: verdana,arial;
+	}
+	.saldo{
+		color:white;
+		font-weight:bold;
+		background:green;
+		font-size: 18px;
 	}
 	</style>
     <script  type="text/javascript">

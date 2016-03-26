@@ -517,7 +517,7 @@ $database = new DB();
 								<a href=\"/index.php\"><img width=350 src=/img/tiendasalberto.png></a>
 								<br>R.F.C QUCR750708PM7";
 								
-				echo "Cliente: ". strtoupper($cliente)."<br>";
+				echo "<br>Cliente: ". strtoupper($cliente)."<br>";
 
 				echo "Abono a Cuenta: [$cliente_id]<br>";
 				echo "Fecha y Hora: <br>".$fecha;    //date("d-m-Y  H:m:s");
@@ -529,7 +529,8 @@ $database = new DB();
 
 				echo "<tr><td>Saldo Anterior</td><td style=\"text-align:right\">$ ". dinero($saldo_abono+$cantidad)."</td><td>&nbsp;</td></tr>";				
 				echo "<tr><td>Cantidad a Abonada</td><td style=\"text-align:right\">$ ". dinero($cantidad)."</td></tr>";				
-				echo "<tr><td>Saldo Actual</td><td style=\"text-align:right;border-top:1px solid black;\">$ ". dinero($saldo_abono)."</td></tr>";				
+				echo "<tr><td>Saldo Actual</td><td style=\"text-align:right;border-top:1px solid black;\" class='saldo'>
+				<span classs=\"saldo\">$ ". dinero($saldo_abono)."</span></td></tr>";				
 
 				echo "<tr><td style=\"border-bottom:1px dotted black\" colspan=3>&nbsp;&nbsp;</td></tr>";	
 				echo "</table>";

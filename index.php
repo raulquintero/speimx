@@ -269,7 +269,7 @@ function compruebaTecla(){
 
 <body onload='setFocusToTextBox()'>
 <?php
-if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" )
+if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" || $_SESSION['host']=="speimxdev.tiendasalberto.com:82" )
 	echo "<table width=100%><tr bgcolor=yellow><td>".$_SESSION['host'].".- Version  Desarrollo. $realpath</td></tr></table>";
 
 
