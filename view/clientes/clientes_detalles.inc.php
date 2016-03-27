@@ -45,7 +45,7 @@ if ($_GET['eed']==2)
 											if (!$_GET['h'])
 											{
 												echo "<br>Direccion: $domicilio_casa
-												<br>Telefono:  $telefono_personal
+												<br>Telefono:  <a href='tel:$telefono_personal'>$telefono_personal</a>
 												<br>Trabajo:  $empresa
 												<br>Grupo Nomina: <a class=\"visible-print\" >". strtoupper($gruponomina)."</a>";
 												echo  "	<a class=\"hidden-print\" href='index.php?data=cobronomina&op=empresas&nid=$gruponomina_id' >". strtoupper($gruponomina)."</a>";

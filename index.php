@@ -350,7 +350,7 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" || $_SE
                                     </a>
                                 </li>
                                 <li>
-                                    <a onclick='mostrarClientes()`'>
+                                    <a onclick='mostrarClientes()'>
 										<span class="icon blue"><i class="icon-bullhorn"></i></span>
 										<span class="message">Clientes</span>
 										<span class="time">7 min</span>
