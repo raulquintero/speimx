@@ -5,10 +5,17 @@
 $_SESSION['display']="pos";
 $cliente_id = $_SESSION['cliente_id'];
 $sku=isset($_GET['sku']) ? $_GET['sku'] : "";
-$item=$_SESSION['cart'];
+$boton_pedido= isset($boton_pedido) ? $boton_pedido : "";
+$total_credito= isset($total_credito) ? $total_credito : "";
+$nn= isset($nn) ? $nn : "";
+
+$item=isset($_SESSION['cart']) ? $_SESSION['cart'] : "";
+if ($item)
+{
 							$items = count($item);
 							$n=$items-1;
 							$total=0;
+
 							foreach ($item as $row => $value) 
 									{
 										
@@ -18,6 +25,7 @@ $item=$_SESSION['cart'];
 										$n--;
 
 									}
+	}
 
 //quitar cupon si se remueve un producto y queda por debajo de la compra minima dle cupon
 $query="Select compra_minima from cupones where sku='".$_SESSION['cupon_sku']."'";
@@ -92,14 +100,14 @@ if (dinero($total_contado)<dinero($compra_minima) )
 
 <?php
 $cuantos=strlen($sku);
-if (!$_SESSION['cart'] && !$cuantos){
+if (!isset($_SESSION['cart']) && !$cuantos){
 ?>	                        <br><br><br><br>
 					  		<center><span style="font-size:40px;color:blue;">
 					  			<b>ENCONTRO TODO LO <br><br>QUE BUSCABA?</b></span>
          <p>                       </center>
 <?php 
  }
-if (!count($_SESSION['cart']) && $cuantos)
+if (!isset($_SESSION['cart']) && $cuantos)
 {
 ?>	                        <br><br>
 					  		<center><span style="font-size:20px;color:blue;">
@@ -170,7 +178,7 @@ else
 
     default:    {   ////////////////**************** descripcion del producto marcado***************//////////////////
 
-    		if (count($_SESSION['cart'])>0)
+    		if (isset($_SESSION['cart']))
     		{
 
                 echo "    <br><br><br><br>
@@ -217,7 +225,7 @@ else
 
 
             	$query = "SELECT subcategoria from producto,subcategoria
-                    where producto.subcategoria_id=subcategoria.subcategoria_id AND producto.producto_id=".$ultimo_producto['id'];
+                    where producto.subcategoria_id=subcategoria.subcategoria_id AND producto.producto_id='".$ultimo_producto['id']."'";
 				list( $subcategoria) = $database->get_row( $query );
                 $nombre_producto=ucwords(strtolower($ultimo_producto['producto']));
             $nombre_producto = str_replace(" ", "-", $nombre_producto);
@@ -289,7 +297,7 @@ else
 
 
 							<?php 
-								if (!$_SESSION['cart'])
+								if (!isset($_SESSION['cart']))
 									echo "<tr><td style='text-align:center'><br>
 										<img src=/img/empty_cart.jpeg><br><strong>Carrito Vacio</strong><br><br><br></td></tr>";
 								else
@@ -385,7 +393,7 @@ else
 
 
                                 $query = "SELECT  compra_minima from cupones where sku='".$_SESSION['cupon_sku']."'";
-                                list( $compra_minima,$cupontipo_id ) = $database->get_row( $query );
+                                list( $compra_minima ) = $database->get_row( $query );
 
 
                                     if ($_SESSION['cupon_sku'] && dinero($total_contado)>=$compra_minima)

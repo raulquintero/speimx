@@ -3,11 +3,17 @@
 <?php
 require_once 'catalogo.src.php';
 
+
 $tid=isset($_GET['tid']) ? $_GET['tid'] : "-1";
+$eed=isset($_GET['eed']) ? $_GET['eed'] : '';
+$_GET['f']=isset($_GET['f']) ? $_GET['f'] : "";
+$pid=isset($pid) ? $pid : "";
+$rfc=isset($rfc) ? $rfc : "";
+
 ?>
 
 <?php
-if ($_GET['eed']==2)
+if ($eed==2)
 	 			echo	"<div class=\"alert alert-success\">
 							<button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
 							<strong>Registro Agregado!</strong> El Registro $cid esta listo para usarse.
@@ -31,7 +37,7 @@ if ($_GET['eed']==2)
 							<fieldset>
 
 								<input type="hidden" name="data" value="<?php echo $_GET['data']?>" >
-								<input type="hidden" name="op" value="<?php echo $_GET['op']?>">
+								<input type="hidden" name="op" value="<?php echo $op?>">
 								<input type="hidden" name="f" value="<?php echo $_GET['f']?>">
 								<input type="hidden" name="pid" value="<?php echo $pid?>" >
 

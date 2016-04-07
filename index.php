@@ -95,6 +95,7 @@ header($location);
 
 
 //if ($cuantos==7 )
+if (strlen($code))
 		{
 			switch ($code[0]) {
 				case 'T': //ticket devolucion

@@ -9,6 +9,7 @@ $pos = strpos($realpath, "/functions");
 
 
 if ($pos) $realpath = substr($realpath, 0, -10);  // devuelve "abcde"
+require_once ( $realpath.$relative_path.'/config/variables.php' ); 
 require_once( $realpath.$relative_path.'/../database.php' );
 require_once( $realpath.$relative_path.'/classes/class.db.php' );
 require_once( $realpath.$relative_path.'/classes/class_login.php' );

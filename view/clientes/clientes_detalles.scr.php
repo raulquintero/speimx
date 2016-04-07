@@ -78,10 +78,12 @@ $database = new DB();
 			}	
 
 
+				$row['admin_id']=isset($row['admin_id']) ? $row['admin_id'] : '';
 
 			echo "<td><font ><b>".dinero($saldo)."</td>
-			<td><font >".$row['tipomov']."</td>
-			<td hidden> <font >".$row['admin_id']."</td>";
+			<td><font >".$row['tipomov']."</td>";
+
+			"<td hidden> <font >".$row['admin_id']."</td>";
 
 		echo "</tr>";
 	

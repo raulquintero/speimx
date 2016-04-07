@@ -180,6 +180,8 @@ function plandepagos($total,$fecha,$abono,$saldo)
 								  </tr>
 							  </thead>   
 							  <tbody>";
+$c  = isset($c) ? $c : '0';
+
 echo "<tr ><td style='text-align:right'>".($c)."</td>
 			<td  style='text-align:center'> ".fechamysqltomx($fecha,1)."</td>
 			<td style='text-align:right'>----</td>
