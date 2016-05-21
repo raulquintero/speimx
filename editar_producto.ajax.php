@@ -125,7 +125,7 @@ $prid=$_GET['q'];
                 $nombre_producto=ucwords(strtolower($producto));
             $nombre_producto = str_replace(" ", "-", $nombre_producto);
             $nombre_subcategoria = ucwords(str_replace(" ", "-", $subcategoria));
-            $nombre_color=ucwords(strtolower($color));
+            $nombre_color=ucwords(str_replace(" ", "-", strtolower($color)));
 
             $nombre_archivo=$nombre_subcategoria."-".$nombre_producto."-".$nombre_color."-".$prid."_p.jpg";
                                 ?>

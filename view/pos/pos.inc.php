@@ -230,7 +230,7 @@ else
                 $nombre_producto=ucwords(strtolower($ultimo_producto['producto']));
             $nombre_producto = str_replace(" ", "-", $nombre_producto);
             $nombre_subcategoria = ucwords(str_replace(" ", "-", $subcategoria));
-            $nombre_color=ucwords(strtolower($ultimo_producto['color']));
+            $nombre_color=ucwords(str_replace(" ", "-", strtolower($ultimo_producto['color'])));
 
 
 
