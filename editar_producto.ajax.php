@@ -28,10 +28,10 @@ $prid=$_GET['q'];
 	 if ($prid>0)
 	 {
 		$query = "SELECT producto_id,proveedor_id,producto,detalle,talla_id,precio_credito,precio_contado,precio_promocion,precio_compra,descuento,
-				subcategoria_id,categoria_id,unidad_id,marca_id,estilo,color_id,codigo,stock,up,activo,consultas,inventariable,temporada_id
+				subcategoria_id,categoria_id,unidad_id,marca_id,estilo,color_id,codigo,stock,up,activo,consultas,inventariable,temporada_id,inventariable
 			 FROM producto WHERE producto_id=$prid";
 		list(        $producto_id,$proveedor_id,$producto,$detalle,$talla_id,$precio_credito,$precio_contado,$precio_promocion,$precio_compra,$descuento,
-				$subcategoria_id,$categoria_id,$unidad_id,$marca_id,$estilo,$color_id,$codigo,$stock,$up,$activo,$consultas,$inventariable,$temporada_id) = $database->get_row( $query );
+				$subcategoria_id,$categoria_id,$unidad_id,$marca_id,$estilo,$color_id,$codigo,$stock,$up,$activo,$consultas,$inventariable,$temporada_id,$inventariable) = $database->get_row( $query );
 		if (!$activo) $checado="";
 		if (!$inventariable) $checado_inv="";
 
@@ -91,6 +91,9 @@ $prid=$_GET['q'];
 								        </label>
                                         <label class="checkbox inline">OnLine
 									    <input type="checkbox" id="up" name="up" <?php if ($up) echo " checked";?>>
+								        </label>
+								        <label class="checkbox inline">inv.
+									    <input type="checkbox" id="up" name="inventariable" <?php if ($inventariable) echo " checked";?>>
 								        </label>
 								    </div>
 								</div>

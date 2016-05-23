@@ -212,7 +212,9 @@ else
         echo $ultimo_producto['producto'];
 		echo "<br><font size=+2> Color: ";
 		echo $ultimo_producto['color']." Talla:";
-		echo $ultimo_producto['talla']."</font><br><br>";
+		echo $ultimo_producto['talla'];
+		echo " In: ".$ultimo_producto['inventario'];
+		echo "</font><br><br>";
 			$precio_contado=($ultimo_producto['precio_contado']*1.16);
 
         if (!$cliente_id)

@@ -45,6 +45,7 @@ $update = array(
 
 	'activo'=>$_GET['activo'],
     'up'=>$_GET['up'],
+    'inventariable' => $_GET['inventariable'],
     'subcategoria_id'=>$_GET['subcategoria_id'],
     'temporada_id'=>$_GET['temporada_id'],
 	'precio_compra'=>$precio_compra,
@@ -55,6 +56,7 @@ $update = array(
 
 
 	);
+
 
 //Add the WHERE clauses
 $where_clause = array(

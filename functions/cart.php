@@ -50,7 +50,8 @@ if ($func=="add_item")
                 'sku' => $sku,
                 'temporada_id' => $temporada_id,
                 'color'    => $_GET['color'],
-                'talla'    => $_GET['talla']
+                'talla'    => $_GET['talla'],
+                'inventario' => $_GET['inventario']
             );
 
     // iva sin implementar todavia , solo esta indicado aqui arriba

@@ -24,7 +24,7 @@ function catalogo()
 {
 $database = new DB();
 
-	$query = "SELECT categoria_id,categoria  FROM categoria
+	$query = "SELECT categoria_id,categoria,online  FROM categoria
 		where 1 ";
 
 
@@ -35,13 +35,14 @@ $database = new DB();
 	foreach( $results as $row )
 	{
 
-
+		if ($row['online'])
+				$activo="*"; else $activo="";
 		echo "<tr >
-			<td colspan=3><a href=/index.php?data=catalogo&cat=".$row['categoria_id'].">".$row['categoria']."</a> </td>
+			<td colspan=3>$activo<a href=/index.php?data=catalogo&cat=".$row['categoria_id'].">".$row['categoria']."</a> </td>
 			</tr>";
 
 
-	$query = "SELECT subcategoria_id,subcategoria  FROM subcategoria where categoria_id=".$row['categoria_id'];
+	$query = "SELECT subcategoria_id,subcategoria,online  FROM subcategoria where categoria_id=".$row['categoria_id']." ORDER  BY position";
 	$subs = $database->get_results( $query );
 
 				foreach( $subs as $sub )
@@ -49,10 +50,11 @@ $database = new DB();
 
 
 					$query = "SELECT count(producto_id) as productos FROM producto
-					where subcategoria_id=".$sub['subcategoria_id'];
+					where up=1 AND subcategoria_id=".$sub['subcategoria_id'];
 					list($productos)= $database->get_row($query);
-
-					echo "<tr><td></td><td align=right>
+					if ($sub['online'])	
+						$activo="*"; else $activo="";
+					echo "<tr><td>&nbsp;&nbsp;&nbsp;$activo</td><td align=right>
 						<a href=/index.php?data=catalogo&subcat=".$sub['subcategoria_id'].">".$sub['subcategoria']."</a>&nbsp;&nbsp; </td>
 						<td>$productos</td></tr>";
 					}
@@ -78,6 +80,7 @@ echo "<div class=\"box-header\">
 							  <thead>
 								  <tr>
 									  <th>Id</th>
+									  <th></th>
 									  <th>Producto</th>
 									  <th>PCM</th>
                                       <th>PCN</th>
@@ -87,8 +90,8 @@ echo "<div class=\"box-header\">
 								  </tr>
 							  </thead>
 							  <tbody>";
-					$query = "SELECT producto_id,codigo,producto,precio_compra,precio_contado,stock,producto.descuento,temporada
-                        FROM producto,temporada where producto.temporada_id=temporada.temporada_id AND subcategoria_id=$subcat";
+					$query = "SELECT producto_id,codigo,producto,precio_compra,precio_contado,stock,producto.descuento,temporada,up
+                        FROM producto,temporada where producto.temporada_id=temporada.temporada_id AND subcategoria_id=$subcat AND up=1";
                         if($tid>=0)
                         $query.=" AND producto.temporada_id=$tid";
 					$subs = $database->get_results( $query );
@@ -99,8 +102,12 @@ echo "<div class=\"box-header\">
                             echo "<tr bgcolor=green'>";
                             else
                             echo "<tr>";
-							echo "<td>".$sub['codigo']."</td>
-							<td><a href=\"#\" onclick='showProduct(". $sub['producto_id'].")'
+
+                        	if ($sub['up'])
+                        		$activo="*"; else $activo="";
+							echo "<td>".$sub['codigo']."</td>";
+							echo "<td>".$activo."</td>";
+							echo  "<td><a href=\"#\" onclick='showProduct(". $sub['producto_id'].")'
                             class=\"btn-setting\">".$sub['producto']."</a>&nbsp;&nbsp;";
                             if ($_GET['prid']==$sub['producto_id']) echo "<i class=\"halflings-icon ok \"></i>";
                             echo "</td>
