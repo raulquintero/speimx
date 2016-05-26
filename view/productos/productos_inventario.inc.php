@@ -159,12 +159,13 @@
 							 else
 							 {
 							  	if (!$color_id) $color_id=0;
-								$query = "SELECT talladet.talladet_id,talladet,cantidad,codigo FROM talladet,inventariodet,color 
+								$query = "SELECT inventariodet_id,talladet.talladet_id,talladet,cantidad,codigo FROM talladet,inventariodet,color 
 									WHERE talladet.talladet_id=inventariodet.talladet_id AND inventariodet.color_id=color.color_id 
 										AND color.color_id='$color_id'
 									ORDER BY orden ";
 								//list( $colonia_casa ) = $database->get_row( $query );	
 								$results = $database->get_results( $query );
+								$enable_true=FALSE;
 								if (!$results)
 									echo "
 								<a href='/functions/crud_caracteristicas.php?data=productos&op=inventario&prid=$prid&codigo=$codigo&func=ct&color_id=$color_id&talla_id=$talla_id'>Generar Tallas y Codigos</a>";
@@ -174,18 +175,25 @@
 								 echo " <tr><td><label class=\"control-label\" >".$row['talladet']."</label></td>
 								 		<td>
 								<div class=\"controls\">
-								  <input class=\"input-small\" id=\"cantidad\" name=\"cantidad\" type=\"text\" value=\"".$row['cantidad']."\"> ".$row['codigo']." 
+								  <input class=\"input-small\" id=\"".$row['inventariodet_id']."\" name=\"".$row['inventariodet_id']."\" type=\"text\" value=\"".$row['cantidad']."\"> ".$row['codigo']." 
 								<img width=130 src=\"barcode.php?text=".$row['codigo']."\" alt=\"barcode\" /></div></td></tr> ";
 							  	else
 							  		echo "<tr><td><br>Es necesario asginar las tallas en la descripcion del producto.<br><br><br><br></td></tr>";
-
+							  	$enable_submit=true;
 
     							}
 							  
     						} //End if ($talla_id)
 							  ?>
 						</table>
-					</div>
+						<?php  
+						echo "<div class=\"form-actions hidden-print\">
+								<button type=\"submit\" class=\"btn btn-primary\">Save changes</button>
+								<button class=\"btn\">Cancel</button>
+							  </div>
+
+						</div>";
+						 ?>
 
 		</div><!--/span-->
 			
@@ -201,17 +209,14 @@
 					<div class="box-content">
 
                       <?php
-               	$query = "SELECT producto,subcategoria,color from producto,subcategoria,color
+               	$query = "SELECT producto.producto_id,subcategoria,color.color_id from producto,subcategoria,color
                     where producto.subcategoria_id=subcategoria.subcategoria_id
                     AND $color_id=color.color_id
                     AND producto.producto_id=".$_GET['prid'];
-				list( $producto,$subcategoria,$color) = $database->get_row( $query );
-                $nombre_producto=ucwords(strtolower($producto));
-            $nombre_producto = str_replace(" ", "-", $nombre_producto);
-            $nombre_subcategoria = ucwords(str_replace(" ", "-", $subcategoria));
-            $nombre_color=ucwords(str_replace(" ", "-",strtolower($color)));
-
-            $nombre_archivo=$nombre_subcategoria."-".$nombre_producto."-".$nombre_color."-".$_GET['prid']."_p.jpg";
+				list( $producto_id,$subcategoria,$color_id) = $database->get_row( $query );
+                
+            $name_image=$producto_id."-".$color_id;
+            $nombre_archivo=$name_image."p.jpg";
                                 ?>
 						  	<table class="table table-condensed">
 
@@ -249,17 +254,8 @@
 <div class="box-content">
 
                       <?php
-               	$query = "SELECT producto,subcategoria,color from producto,subcategoria,color
-                    where producto.subcategoria_id=subcategoria.subcategoria_id
-                    AND $color_id=color.color_id
-                    AND producto.producto_id=".$_GET['prid'];
-				list( $producto,$subcategoria,$color) = $database->get_row( $query );
-                $nombre_producto=ucwords(strtolower($producto));
-            $nombre_producto = str_replace(" ", "-", $nombre_producto);
-            $nombre_subcategoria = ucwords(str_replace(" ", "-", $subcategoria));
-            $nombre_color=ucwords(str_replace(" ", "-",strtolower($color)));
-
-            $nombre_archivo=$nombre_subcategoria."-".$nombre_producto."-".$nombre_color."-".$_GET['prid']."_p2.jpg";
+            $nombre_archivo=$name_image."p2.jpg";
+              
                                 ?>
 						  	<table class="table table-condensed">
 
@@ -293,17 +289,8 @@
 <div class="box-content">
 
                       <?php
-               	$query = "SELECT producto,subcategoria,color from producto,subcategoria,color
-                    where producto.subcategoria_id=subcategoria.subcategoria_id
-                    AND $color_id=color.color_id
-                    AND producto.producto_id=".$_GET['prid'];
-				list( $producto,$subcategoria,$color) = $database->get_row( $query );
-                $nombre_producto=ucwords(strtolower($producto));
-            $nombre_producto = str_replace(" ", "-", $nombre_producto);
-            $nombre_subcategoria = ucwords(str_replace(" ", "-", $subcategoria));
-            $nombre_color=ucwords(str_replace(" ", "-",strtolower($color)));
-
-            $nombre_archivo=$nombre_subcategoria."-".$nombre_producto."-".$nombre_color."-".$_GET['prid']."_p3.jpg";
+            $nombre_archivo=$name_image."p3.jpg";
+              
                                 ?>
 						  	<table class="table table-condensed">
 
@@ -334,17 +321,8 @@
 					</div><div class="box-content">
 
                       <?php
-               	$query = "SELECT producto,subcategoria,color from producto,subcategoria,color
-                    where producto.subcategoria_id=subcategoria.subcategoria_id
-                    AND $color_id=color.color_id
-                    AND producto.producto_id=".$_GET['prid'];
-				list( $producto,$subcategoria,$color) = $database->get_row( $query );
-                $nombre_producto=ucwords(strtolower($producto));
-            $nombre_producto = str_replace(" ", "-", $nombre_producto);
-            $nombre_subcategoria = ucwords(str_replace(" ", "-", $subcategoria));
-            $nombre_color=ucwords(str_replace(" ", "-",strtolower($color)));
+            $nombre_archivo=$name_image."p4.jpg";
 
-            $nombre_archivo=$nombre_subcategoria."-".$nombre_producto."-".$nombre_color."-".$_GET['prid']."_p4.jpg";
                                 ?>
 						  	<table class="table table-condensed">
 

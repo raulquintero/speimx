@@ -226,22 +226,17 @@ else
 			echo "$ ".dinero($ultimo_producto['precio_venta'])."<br><br>";
 
 
-            	$query = "SELECT subcategoria from producto,subcategoria
-                    where producto.subcategoria_id=subcategoria.subcategoria_id AND producto.producto_id='".$ultimo_producto['id']."'";
-				list( $subcategoria) = $database->get_row( $query );
-                $nombre_producto=ucwords(strtolower($ultimo_producto['producto']));
-            $nombre_producto = str_replace(" ", "-", $nombre_producto);
-            $nombre_subcategoria = ucwords(str_replace(" ", "-", $subcategoria));
-            $nombre_color=ucwords(str_replace(" ", "-", strtolower($ultimo_producto['color'])));
+            	$query = "SELECT color_id from inventariodet where  codigo = '".$ultimo_producto['sku']."'";
+				list( $color_id) = $database->get_row( $query );
+                
 
 
-
-             $nombre_archivo=$nombre_subcategoria."-".$nombre_producto."-".$nombre_color."-".$ultimo_producto['id']."_p.jpg";
+             $nombre_archivo=$ultimo_producto['id']."-".$color_id."p.jpg";
              $target_path=$realpath."/productos/".$nombre_archivo;
             if (file_exists($target_path))
             {
                 echo "<img src='/productos/$nombre_archivo' style='height:300px;' alt='$nombre_subcategoria $nombre_producto $nombre_color'/>";
-            }   else echo "<font size=-1 color=gray>No se encontraron imagenes.</font>";
+            }   else echo "$target_path<font size=-1 color=gray>No se encontraron imagenes.</font>";
 
 
         }
@@ -258,7 +253,6 @@ else
 
 
 					</div>
-
 
 					<div class="boxi span4" styles='border-left:1px dotted'>
 <!-- 						
