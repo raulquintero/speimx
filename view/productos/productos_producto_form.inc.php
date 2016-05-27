@@ -88,7 +88,34 @@
 								 </div>
 								</div>
 
-							<?php combobox("subcategoria",$subcategoria_id)?>
+							<?php 
+
+							//combobox("subcategoria",$subcategoria_id);
+
+
+
+							//$campo_id=$campo."_id";
+  								echo "<div class=\"control-group\">
+								<label class=\"control-label\" for='subcategoria_id'>Subcategoria</label>
+								<div class=\"controls\">
+								  <select id=\"subcategoria_id\" name=\"subcategoria_id\">";
+
+								$query = "SELECT subcategoria_id,categoria,subcategoria FROM  subcategoria,categoria where categoria.categoria_id=subcategoria.categoria_id ORDER BY  categoria";
+								//list( $colonia_casa ) = $database->get_row( $query );
+								$results = $database->get_results( $query );
+								foreach( $results as $row )
+								{
+									if ($row['subcategoria_id']==$subcategoria_id)  $seleccionado="selected='true' "; else $seleccionado="";
+    								echo "<option $seleccionado value='".$row['subcategoria_id']."' >".ucfirst($row['categoria'])." - ".ucfirst($row['subcategoria'])."</option>";
+    							}
+
+								echo "  </select>
+								</div>
+							  </div>";
+
+
+
+							?>
 
 <script type="text/javascript">
 function showUser(str)
