@@ -57,7 +57,7 @@ $prid=$_GET['q'];
 					<div class="box-header" data-original-title>
 						<h2><i class="halflings-icon edit"></i><span class="break"></span><?php echo strtoupper(stripslashes($producto))?>
                         <a href="/index.php?data=productos&op=detalles&prid=<?php echo $prid?>"> [E FULL.]</a>
-                        <a href='http://speimx.dev/index.php?data=productos&op=inventario&prid=<?php echo $producto_id ?>'>[INV]</a></h2>
+                        <a href='/index.php?data=productos&op=inventario&prid=<?php echo $producto_id ?>'>[INV]</a></h2>
 						<div class="box-icon">
 
 							<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
