@@ -40,8 +40,7 @@
 						<h2><i class="halflings-icon edit"></i><span class="break"></span>
 							<strong><a href="/index.php?data=productos&op=producto_form&f=editar&prid=<?php echo $prid?>"><?php echo strtoupper($producto)?> [<?php echo $codigo?>]</a></strong></h2>
 							<div class="box-icon">
-							
-							<a href="/index.php?data=productos" class="btn"><i class="halflings-icon barcode "></i></a>
+							<a href="/index.php?data=catalogo&subcate=<?php echo $subcategoria ?>" class="btn"><i class="halflings-icon barcode "></i></a>
 							<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
 							<a href='<?php echo "/index.php?data=clientes&op=detalles&cid=$cid"?>' ><i class="halflings-icon remove"></i></a>
 						</div>
@@ -102,18 +101,27 @@
 									list( $color_id ) = $database->get_row( $query );
 								}
 
-								$query = "SELECT color_id,color,codigo_color FROM color WHERE producto_id=$prid ORDER BY color ";
+								$query = "SELECT color_id,color,codigo_color,enabled FROM color WHERE producto_id=$prid ORDER BY color ";
 								//list( $colonia_casa ) = $database->get_row( $query );	
 								$results = $database->get_results( $query );
 								foreach( $results as $row )
 								{
-									if ($color_id==$row['color_id']) {
-										echo "<tr bgcolor=#dddddd><td><label class=\"control-label\" >".$row['codigo_color']."</label></td>
-											  <td>&nbsp;&nbsp;</td><td><a href=/index.php?data=productos&op=inventario&prid=$prid&coid=".$row['color_id'].">".$row['color']."</a></td></tr>";
-									}
-								 	else
-								 		echo "<tr><td><label class=\"control-label\" >".$row['codigo_color']."</label></td>
-											  <td>&nbsp;&nbsp;</td><td><a href=/index.php?data=productos&op=inventario&prid=$prid&coid=".$row['color_id'].">  ".$row['color']."</a></td></tr>";
+									if ($color_id==$row['color_id']) 
+										$bgcolor=" bgcolor='#dddddd' "; else $bgcolor="";
+									
+										echo "<tr $bgcolor><td><label class=\"control-label\" >".$row['codigo_color']."</label></td>
+											  <td>&nbsp;&nbsp;</td><td><a href='/index.php?data=productos&op=inventario&prid=$prid&coid=".$row['color_id']."'>".$row['']."</a></td>";
+										echo "<td>&nbsp;&nbsp;&nbsp;</td>";
+									if ($row['enabled'])
+										echo "<td><a href='functions/crud_productos.php?func=cenabled&data=productos&prid=".$prid."&coid=".$row['color_id']."&enabled=0'><i class=\"halflings-icon check \"></a></i></td>"; 
+									else 
+										echo "<td><a href='functions/crud_productos.php?func=cenabled&data=productos&prid=".$prid."&coid=".$row['color_id']."&enabled=1'><i class=\"halflings-icon unchecked \"></i></a></td>";
+										
+									echo "<td>".$row['color_id']."</td></tr>";
+									
+								 	// else
+								 	// 	echo "<tr><td><label class=\"control-label\" >".$row['codigo_color']."</label></td>
+										// 	  <td>&nbsp;&nbsp;</td><td><a href=/index.php?data=productos&op=inventario&prid=$prid&coid=".$row['color_id'].">  ".$row['color']."</a></td></tr>";
 								 	
 
 								 //echo " <label class=\"control-label\" >".$row['color']." - ".$row['codigo']."</label>";

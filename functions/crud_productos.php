@@ -27,6 +27,29 @@ $op=$_GET['op'];
 $f=$_GET['f'];
 $prid=$_GET['prid'];
 
+
+if ($_GET['func']=="cenabled")
+{
+// $_GET['enabled'];
+$coid = $_GET['coid'];
+$prid = $_GET['prid'];
+$update = array(
+
+	'enabled' => $_GET['enabled']
+	);
+
+//Add the WHERE clauses
+$where_clause = array(
+    'color_id' => $_GET['coid']
+);
+
+	$updated = $database->update( 'color', $update, $where_clause, 1 );
+
+
+header("Location: /index.php?data=$data&op=inventario&prid=$prid&coid=$coid");
+}
+
+
 if ($_GET['func']=="c")
 {
 	
