@@ -27,6 +27,39 @@ $op=$_GET['op'];
 $f=$_GET['f'];
 $prid=$_GET['prid'];
 
+print_r($_POST);
+if ($_POST['func']=="csize")
+{
+	echo $_POST['prid'];
+	echo $_POST['color_id'];
+	echo "<br>";
+
+	echo $query = "SELECT inventariodet_id from inventariodet where producto_id='".$_POST['prid']."' AND color_id='".$_POST['color_id']."'";
+	$results=$database->get_results($query);
+	print_r($results);
+	echo "<br><br>";
+	foreach ($results as $result) {
+		
+	
+	$update = array(
+
+	'cantidad' => $_POST[$result['inventariodet_id']]
+	);
+
+	//Add the WHERE clauses
+	$where_clause = array(
+    'inventariodet_id' => $result['inventariodet_id']
+	);
+
+	$updated = $database->update( 'inventariodet', $update, $where_clause, 1 );
+
+	}
+	header("Location: /index.php?data=productos&op=inventario&prid=".$_POST['prid']);
+
+					//  /index.php?data=productos&op=inventario&prid=468
+
+}
+
 
 if ($_GET['func']=="cenabled")
 {

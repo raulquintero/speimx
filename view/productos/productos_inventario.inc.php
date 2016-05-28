@@ -150,6 +150,11 @@
 				
 
 					<div class="box-content">
+						<form action="functions/crud_productos.php" method="post" >
+										
+                                        <input type="hidden" name="prid" value="<?php echo $_GET['prid']?>"/>
+                                        <input type="hidden" name="color_id" value="<?php echo $color_id?>"/>
+                                        <input type="hidden" name="func" value="csize"/>
 						<table>
 
 							  <?php
@@ -170,7 +175,7 @@
 								$query = "SELECT inventariodet_id,talladet.talladet_id,talladet,cantidad,codigo FROM talladet,inventariodet,color 
 									WHERE talladet.talladet_id=inventariodet.talladet_id AND inventariodet.color_id=color.color_id 
 										AND color.color_id='$color_id'
-									ORDER BY orden ";
+									ORDER BY orden ASC, talladet ASC ";
 								//list( $colonia_casa ) = $database->get_row( $query );	
 								$results = $database->get_results( $query );
 								$enable_true=FALSE;
@@ -202,7 +207,7 @@
 
 						</div>";
 						 ?>
-
+				</form>
 		</div><!--/span-->
 			
 
