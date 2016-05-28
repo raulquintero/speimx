@@ -128,7 +128,7 @@ $prid=$_GET['q'];
 
 
 
-							?>>
+							?>
 
 						        <?php //combobox("talla",$talla_id)?>
 

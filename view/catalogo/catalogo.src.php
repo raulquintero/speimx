@@ -42,7 +42,7 @@ $database = new DB();
 			</tr>";
 
 
-	$query = "SELECT subcategoria_id,subcategoria,online  FROM subcategoria where categoria_id=".$row['categoria_id']." ORDER  BY position";
+	$query = "SELECT subcategoria_id,subcategoria,online  FROM subcategoria where categoria_id=".$row['categoria_id']." AND subcategoria<>'div' ORDER  BY position";
 	$subs = $database->get_results( $query );
 
 				foreach( $subs as $sub )
