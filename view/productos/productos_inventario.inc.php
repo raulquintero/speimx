@@ -110,7 +110,7 @@
 										$bgcolor=" bgcolor='#dddddd' "; else $bgcolor="";
 									
 										echo "<tr $bgcolor><td><label class=\"control-label\" >".$row['codigo_color']."</label></td>
-											  <td>&nbsp;&nbsp;</td><td><a href='/index.php?data=productos&op=inventario&prid=$prid&coid=".$row['color_id']."'>".$row['']."</a></td>";
+											  <td>&nbsp;&nbsp;</td><td><a href='/index.php?data=productos&op=inventario&prid=$prid&coid=".$row['color_id']."'>".$row['color']."</a></td>";
 										echo "<td>&nbsp;&nbsp;&nbsp;</td>";
 									if ($row['enabled'])
 										echo "<td><a href='functions/crud_productos.php?func=cenabled&data=productos&prid=".$prid."&coid=".$row['color_id']."&enabled=0'><i class=\"halflings-icon check \"></a></i></td>"; 
