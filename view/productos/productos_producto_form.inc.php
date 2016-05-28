@@ -100,7 +100,9 @@
 								<div class=\"controls\">
 								  <select id=\"subcategoria_id\" name=\"subcategoria_id\">";
 
-								$query = "SELECT subcategoria_id,categoria,subcategoria FROM  subcategoria,categoria where categoria.categoria_id=subcategoria.categoria_id ORDER BY  categoria";
+								$query = "SELECT subcategoria_id,categoria,subcategoria 
+								FROM  subcategoria,categoria 
+								where categoria.categoria_id=subcategoria.categoria_id AND subcategoria<>'div' ORDER BY  categoria";
 								//list( $colonia_casa ) = $database->get_row( $query );
 								$results = $database->get_results( $query );
 								foreach( $results as $row )
