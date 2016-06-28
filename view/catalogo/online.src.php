@@ -50,7 +50,7 @@ $database = new DB();
 
 
 					$query = "SELECT count(producto_id) as productos FROM producto
-					where subcategoria_id=".$sub['subcategoria_id'];
+					where up=1 AND subcategoria_id=".$sub['subcategoria_id'];
 					list($productos)= $database->get_row($query);
 					if ($sub['online'])	
 						$activo="*"; else $activo="";
@@ -91,7 +91,7 @@ echo "<div class=\"box-header\">
 							  </thead>
 							  <tbody>";
 					$query = "SELECT producto_id,codigo,producto,precio_compra,precio_contado,stock,producto.descuento,temporada,up
-                        FROM producto,temporada where producto.temporada_id=temporada.temporada_id AND subcategoria_id=$subcat ";
+                        FROM producto,temporada where producto.temporada_id=temporada.temporada_id AND subcategoria_id=$subcat AND up=1";
                         if($tid>=0)
                         $query.=" AND producto.temporada_id=$tid";
 					$subs = $database->get_results( $query );

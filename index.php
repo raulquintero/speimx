@@ -400,6 +400,7 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" || $_SE
 						<li class="dropdown hidden-phone">
 							<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
 								<i class="halflings-icon white envelope"></i>
+								<span class="label label-lightred">3</span>
 							</a>
 							<ul class="dropdown-menu messages">
 								<li class="dropdown-menu-title">
@@ -530,6 +531,7 @@ if($_SESSION['host']=="speimx.dev" || $_SESSION['host']=="speimx.dev:82" || $_SE
 						if ($nid<=8) echo "<li><a class=\"dropmenu\" href=\"#\"><i class=\"icon-chevron-right hidden-print\"></i><span class=\"hidden-tablet hidden-print\"> Administracion </span></a>";
 						echo "<ul>";
 								if ($nid<=6) echo "<li><a href=\"index.php?data=catalogo\"><i class=\"icon-barcode\"></i><span class=\"hidden-tablet\"> Catalogo</span></a></li>";
+								if ($nid<=6) echo "<li><a href=\"index.php?data=catalogo&op=online\"><i class=\"icon-barcode\"></i><span class=\"hidden-tablet\"> Cat. Online</span></a></li>";
 
    						   	if ($nid<=6) echo "<li><a href=\"index.php?data=compras\"><i class=\"icon-book\"    ></i><span class=\"hidden-tablet\"> Compras </span></a></li>";
 						   	if ($nid<=6) echo "<li><a href=\"index.php?data=cupones\"><i class=\"icon-book\"    ></i><span class=\"hidden-tablet\"> Cupones </span></a></li>";

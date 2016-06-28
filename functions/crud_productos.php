@@ -27,7 +27,7 @@ $op=$_GET['op'];
 $f=$_GET['f'];
 $prid=$_GET['prid'];
 
-print_r($_POST);
+//print_r($_POST);
 if ($_POST['func']=="csize")
 {
 	echo $_POST['prid'];
@@ -54,7 +54,7 @@ if ($_POST['func']=="csize")
 	$updated = $database->update( 'inventariodet', $update, $where_clause, 1 );
 
 	}
-	header("Location: /index.php?data=productos&op=inventario&prid=".$_POST['prid']);
+	header("Location: /index.php?data=productos&op=inventario&coid=".$_POST['color_id']."&prid=".$_POST['prid']);
 
 					//  /index.php?data=productos&op=inventario&prid=468
 

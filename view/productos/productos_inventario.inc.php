@@ -17,8 +17,8 @@
 	 if ($prid>0)
 	 {
 		$query = "SELECT producto_id,proveedor_id,producto,detalle,talla_id,precio_credito,precio_contado,precio_promocion,precio_compra,descuento,
-				subcategoria_id,categoria_id,unidad_id,marca_id,estilo,codigo,stock,up,activo,consultas,inventariable
-			 FROM producto WHERE producto_id=$prid";
+				subcategoria_id,categoria_id,unidad_id,marca_id,estilo,codigo,stock,up,activo,consultas,inventariable, (SELECT sum(cantidad) from inventariodet where color_id=p.color_id) as inventario 
+			 FROM producto as p WHERE producto_id=$prid";
 		list( $producto_id,$proveedor_id,$producto,$detalle,$talla_id,$precio_credito,$precio_contado,$precio_promocion,$precio_compra,$descuento,
 				$subcategoria_id,$categoria_id,$unidad_id,$marca_id,$estilo,$codigo,$stock,$up,$activo,$consultas,$inventariable) = $database->get_row( $query );
 		if (!$activo) $checado="";
@@ -94,14 +94,15 @@
 								</div>
 							  </div>
 							  	<table>
-							  		<tr ><td align=right>Codigo</td><td></td><td>Color</td></tr>
+							  		<tr ><td align=right>Codigo</td><td></td><td>Color</td><td></td><td>online</td><td>&nbsp;&nbsp;&nbsp;</td><td>stock</td></tr>
   								<?php
   								if (!$color_id){
 									$query = "SELECT color_id FROM color WHERE producto_id=$prid limit 1";
 									list( $color_id ) = $database->get_row( $query );
 								}
 
-								$query = "SELECT color_id,color,codigo_color,enabled FROM color WHERE producto_id=$prid ORDER BY color ";
+								$query = "SELECT color_id,color,codigo_color,enabled,(SELECT sum(cantidad) from inventariodet where color_id=c.color_id) as inventario  
+									FROM color as c WHERE producto_id=$prid ORDER BY color ";
 								//list( $colonia_casa ) = $database->get_row( $query );	
 								$results = $database->get_results( $query );
 								foreach( $results as $row )
@@ -113,11 +114,11 @@
 											  <td>&nbsp;&nbsp;</td><td><a href='/index.php?data=productos&op=inventario&prid=$prid&coid=".$row['color_id']."'>".$row['color']."</a></td>";
 										echo "<td>&nbsp;&nbsp;&nbsp;</td>";
 									if ($row['enabled'])
-										echo "<td><a href='functions/crud_productos.php?func=cenabled&data=productos&prid=".$prid."&coid=".$row['color_id']."&enabled=0'><i class=\"halflings-icon check \"></a></i></td>"; 
+										echo "<td align=center><a href='functions/crud_productos.php?func=cenabled&data=productos&prid=".$prid."&coid=".$row['color_id']."&enabled=0'><i class=\"halflings-icon check \"></a></i></td>"; 
 									else 
-										echo "<td><a href='functions/crud_productos.php?func=cenabled&data=productos&prid=".$prid."&coid=".$row['color_id']."&enabled=1'><i class=\"halflings-icon unchecked \"></i></a></td>";
+										echo "<td align=center><a href='functions/crud_productos.php?func=cenabled&data=productos&prid=".$prid."&coid=".$row['color_id']."&enabled=1'><i class=\"halflings-icon unchecked \"></i></a></td>";
 										
-									echo "<td>".$row['color_id']."</td></tr>";
+									echo "<td></td><td align=right>".$row['inventario']."</td></tr>";
 									
 								 	// else
 								 	// 	echo "<tr><td><label class=\"control-label\" >".$row['codigo_color']."</label></td>
