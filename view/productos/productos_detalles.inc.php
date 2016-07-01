@@ -34,21 +34,22 @@ if ($_GET['eed']==2)
 									$query = "SELECT color_id FROM color WHERE producto_id=$prid limit 1";
 									list( $color_id ) = $database->get_row( $query );
 						}
-                                  	$query = "SELECT producto,subcategoria,color from producto,subcategoria,color
+                                  	$query = "SELECT producto,subcategoria,color,color.color_id from producto,subcategoria,color
                     where producto.subcategoria_id=subcategoria.subcategoria_id
                     AND $color_id=color.color_id
                     AND producto.producto_id=".$prid;
-				list( $producto,$subcategoria,$color) = $database->get_row( $query );
+				list( $producto,$subcategoria,$color,$color_id) = $database->get_row( $query );
                 $nombre_producto=ucwords(strtolower($producto));
             $nombre_producto = str_replace(" ", "-", $nombre_producto);
             $nombre_subcategoria = ucwords(str_replace(" ", "-", $subcategoria));
             $nombre_color=ucwords(strtolower($color));
 
-            $nombre_archivo=$nombre_subcategoria."-".$nombre_producto."-".$nombre_color."-".$prid."_p.jpg"
+            $nombre_archivo=$prid."-".$color_id."p.jpg";
+
 
                                 ?>
 
-											<img class=grayscale src='productos/<?php echo $nombre_archivo?>' width=200 align=right></img>
+											<img class=grayscale src='productos/<?php echo $nombre_archivo?>' width=150 align=right></img>
 
 											<b><?php echo $producto?> </b> &nbsp;&nbsp;
 											<br>Marca: <?php echo $marca?>
@@ -74,6 +75,7 @@ if ($_GET['eed']==2)
 							</div>
 							<div class="tab-pane" id="custom">
 							   <img class=grayscale src='productos/<?php echo $nombre_archivo?>' width=200 align=right></img>
+							   	<?php echo "no: ".$nombre_archivo ?>
 									<p><b><?php echo $nombre.' '.$apellidop.' '.$apellidom?></b> &nbsp;&nbsp;</p>
 									<table><tr><td valign=top align=right>
 											<?php printf('<p>Precio Compra: <strong>%0.2f</strong><p>', $precio_compra);

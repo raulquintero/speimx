@@ -79,6 +79,7 @@ $prid=$_GET['q'];
 								<input type="hidden" name="f" value="u">
                                 <input type="hidden" name="subcat" value="<?php echo $_GET['subcat']?>">
 								<input type="hidden" name="prid" value=<?php echo $prid?> >
+								<input type="hidden" name="op" value='online' >
 
 
 
@@ -160,7 +161,7 @@ $prid=$_GET['q'];
             $nombre_subcategoria = ucwords(str_replace(" ", "-", $subcategoria));
             $nombre_color=ucwords(str_replace(" ", "-", strtolower($color)));
 
-            $nombre_archivo=$nombre_subcategoria."-".$nombre_producto."-".$nombre_color."-".$prid."_p.jpg";
+            $nombre_archivo=$prid."-".$color_id."p.jpg";
                                 ?>
 
 						  	<table class="table table-condensed">
@@ -168,7 +169,7 @@ $prid=$_GET['q'];
 							  <tbody>
 							  	<tr><td align=center>
 
-							  		<img src='/productos/<?php echo $nombre_archivo?>' width=150>
+							  		<img src='/productos/<?php echo $nombre_archivo?>' width=150> 
 							  	</td>
 							  	</tr>
  							 </tbody>

@@ -25,7 +25,7 @@ function catalogo()
 $database = new DB();
 
 	$query = "SELECT categoria_id,categoria,online  FROM categoria
-		where 1 ";
+		where online=1 ORDER BY position";
 
 
 	$results = $database->get_results( $query );
@@ -38,11 +38,12 @@ $database = new DB();
 		if ($row['online'])
 				$activo="*"; else $activo="";
 		echo "<tr >
-			<td colspan=3>$activo<a href=/index.php?data=catalogo&cat=".$row['categoria_id'].">".$row['categoria']."</a> </td>
+			<td colspan=3>$activo<a href=/index.php?data=catalogo&cat=".$row['categoria_id'].">".strtoupper($row['categoria'])."</a> </td>
 			</tr>";
 
 
-	$query = "SELECT subcategoria_id,subcategoria,online  FROM subcategoria where categoria_id=".$row['categoria_id']." AND subcategoria<>'div' ORDER  BY position";
+	$query = "SELECT subcategoria_id,subcategoria,online  FROM subcategoria where categoria_id=".$row['categoria_id']." 
+				AND subcategoria<>'div' AND subcategoria.online=TRUE ORDER  BY position ";
 	$subs = $database->get_results( $query );
 
 				foreach( $subs as $sub )
@@ -55,7 +56,7 @@ $database = new DB();
 					if ($sub['online'])	
 						$activo="*"; else $activo="";
 					echo "<tr><td>&nbsp;&nbsp;&nbsp;$activo</td><td align=right>
-						<a href=/index.php?data=catalogo&subcat=".$sub['subcategoria_id'].">".$sub['subcategoria']."</a>&nbsp;&nbsp; </td>
+						<a href=/index.php?data=catalogo&op=online&&subcat=".$sub['subcategoria_id'].">".ucwords($sub['subcategoria'])."</a>&nbsp;&nbsp; </td>
 						<td>$productos</td></tr>";
 					}
 
@@ -90,25 +91,29 @@ echo "<div class=\"box-header\">
 								  </tr>
 							  </thead>
 							  <tbody>";
-					$query = "SELECT producto_id,codigo,producto,precio_compra,precio_contado,stock,producto.descuento,temporada,up
-                        FROM producto,temporada where producto.temporada_id=temporada.temporada_id AND subcategoria_id=$subcat AND up=1";
+					$query = "SELECT producto.producto_id,codigo,producto,precio_compra,precio_contado,stock,producto.descuento
+							,temporada,up,color, color.color_id, marca,marca.marca_id
+                        FROM producto,temporada,color ,marca
+                        where producto.temporada_id=temporada.temporada_id AND subcategoria_id=$subcat AND up=1 AND producto.producto_id=color.producto_id 
+                        	AND producto.marca_id=marca.marca_id AND color.enabled=TRUE";
                         if($tid>=0)
                         $query.=" AND producto.temporada_id=$tid";
 					$subs = $database->get_results( $query );
 
 					foreach( $subs as $sub )
 						{
-                            if ($_GET['prid']==$sub['producto_id'])
-                            echo "<tr bgcolor=green'>";
-                            else
-                            echo "<tr>";
+							$nombre_archivo=   $sub['producto_id']."-".$sub['color_id']."p.jpg";
+                            // if ($_GET['prid']==$sub['producto_id'])
+                            // echo "<tr bgcolor=green'>";
+                            // else
+                            // echo "<tr>";
 
                         	if ($sub['up'])
                         		$activo="*"; else $activo="";
-							echo "<td>".$sub['codigo']."</td>";
+							echo "<td>".$sub['codigo']."<br><img src='/productos/$nombre_archivo' width=40></td>";
 							echo "<td>".$activo."</td>";
 							echo  "<td><a href=\"#\" onclick='showProduct(". $sub['producto_id'].")'
-                            class=\"btn-setting\">".$sub['producto']."</a>&nbsp;&nbsp;";
+                            class=\"btn-setting\">".$sub['producto']."</a>&nbsp;&nbsp;<br>".$sub['marca']."<br>".$sub['color'];
                             if ($_GET['prid']==$sub['producto_id']) echo "<i class=\"halflings-icon ok \"></i>";
                             echo "</td>
 							<td style='text-align:right'>".dinero($sub['precio_compra']*1.16)."</td>
