@@ -59,6 +59,7 @@
 class Login
 
 {
+    private $database;
 
     private $databaseUsersTable;
 
@@ -71,6 +72,8 @@ class Login
     function Login()
 
     {
+        ini_set("session.cookie_lifetime","7200");
+        ini_set("session.gc_maxlifetime","7200");
 
             session_start();
 
@@ -92,11 +95,11 @@ class Login
 
      */
 
-    public function setDatabaseUsersTable($database_user_table)
+    public function setDatabase($database)
 
     {
 
-        $this->databaseUsersTable=$database_user_table;
+        $this->database=$database;
 
     }
 
@@ -170,7 +173,7 @@ class Login
 
     {
 
-        if(!get_magic_quotes_gpc()) $text_to_escape=mysql_real_escape_string($text_to_escape);
+        if(!get_magic_quotes_gpc()) $text_to_escape=$this->database->filter($text_to_escape);
 
         return $text_to_escape;
 
@@ -193,6 +196,14 @@ class Login
     {
 
         if(is_bool($login_show_message)) $this->showMessage=$login_show_message;
+
+    }
+
+    public function setDatabaseUsersTable($table)
+
+    {
+
+         $this->database_user_table=$table;
 
     }
 
@@ -250,20 +261,21 @@ class Login
 
         if(!$this->databaseUsersTable) $this->getMessage('Users table in the database is not specified. Please specify it before any other operation using the method setDatabaseUsersTable();', '', '', 'true');
 
-        if(!$this->getLoginSession())
+        if(!$this->getUserActive())
 
         {
 
-            $user_name=$this->setEscape($_POST['user_name']);
+            // $user_name=$this->setEscape($_POST['user_name']);
+            $user_name=$_POST['user_name'];
 
             $user_pass=$this->setCrypt($_POST['user_pass']);
 
             //echo  "SELECT * FROM"." ".$this->databaseUsersTable." "."WHERE username='$user_name' AND pass='$user_pass'";
+            $query="SELECT admin_id,username,activo,nombre,apellidop FROM admin "."WHERE username='$user_name' AND pass='$user_pass'";
+            list($admin_id,$username,$activo,$nombre,$apellidop)=$this->database->get_row($query);
 
-            $result=mysql_query("SELECT * FROM"." ".$this->databaseUsersTable." "."WHERE username='$user_name' AND pass='$user_pass'");
-
-            if($fetch=mysql_fetch_assoc($result))
-
+            //if($fetch=mysql_fetch_assoc($result))
+            if ($admin_id)
             {
 
 
@@ -316,19 +328,19 @@ class Login
 
                 $item='';
 
-                $_SESSION['user_id']=$fetch['admin_id'];
+                $_SESSION['user_id']=$admin_id;
 
                 $_SESSION['store_id']=1;
 
                 $_SESSION['sucursal']="Carranza";
 
-                $_SESSION['user_name']=$fetch['username'];
+                $_SESSION['user_name']=$username;
 
-                $_SESSION['user_active']=$fetch['activo'];
+                $_SESSION['user_active']=$activo;
 
                 $_SESSION['user_login_session']=TRUE;
 
-                $_SESSION['administrador']=$fetch['nombre'].' '.$fetch['apellidop'];
+                $_SESSION['administrador']=$nombre.' '.$apellidop;
 
                 $_SESSION['cart']=$item;
 
@@ -370,6 +382,29 @@ class Login
 
     }
 
+
+public function loadPrivilegios($user_name){
+ if ($user_name=='admin')
+                {   
+                    $query="SELECT privilegio_id from privilegio";
+                    $results=$this->database->get_results($query);
+                    foreach ($results as $sub) 
+                    {
+                        $privilegios[]=$sub['privilegio_id'];
+                    }
+
+
+                }
+
+                else
+                    $privilegios = array(2,16,17,19,20,18,21);
+
+                $_SESSION['privilegios'] = $privilegios;
+}
+
+public function limpiar  ($str){
+    return preg_replace("@([^a-zA-Z0-9\+\-\_\*\@\$\!\;\.\?\#\:\=\%\/\ ]+)@Ui", "", $str);
+}
     
 
     /**
@@ -381,8 +416,8 @@ class Login
     public function getLoginSession()
 
     {
-
-        if($_SESSION['user_login_session']) return true;
+        //$userloginsession = $_SESSION['user_login_session'];
+        if(isset($_SESSION['user_active'])) return true;
 
         else return false;
 
@@ -410,7 +445,7 @@ class Login
 
             unset($_SESSION['user_id']);
 
-            unset($_SESSION['user_name']);
+            unset($_SESSION['username']);
 
             unset($_SESSION['user_active']);
 
@@ -420,7 +455,55 @@ class Login
 
             unset($_SESSION['cupon']);
 
+            unset($_SESSION['serial']);
+            unset($_SESSION['register']);
+
         }
+
+
+        return 1;
+
+    }
+
+
+
+    /**
+
+     * Get person_id if login session is true.
+     */
+
+    public function getPersonId()
+
+    {
+        $person_id = isset($_SESSION['person_id']) ? $_SESSION['person_id'] : NULL;
+        if($_SESSION['user_login_session']) return $person_id;      
+
+    }
+
+/**
+
+     * Get person_id if login session is true.
+     */
+
+    public function getName()
+
+    {
+        $role = isset($_SESSION['name']) ? $_SESSION['name'] : NULL;
+        if($_SESSION['user_login_session']) return $role;      
+
+    }
+
+    /**
+
+     * Get person_id if login session is true.
+     */
+
+    public function getHomePage()
+
+    {
+        $homepage = isset($_SESSION['homepage']) ? $_SESSION['homepage'] : NULL;
+        $isLogged = isset($_SESSION['user_login_session']) ? $_SESSION['user_login_session'] : NULL;
+        if($isLogged) return $homepage;      
 
     }
 
@@ -430,31 +513,43 @@ class Login
 
     /**
 
-     * Gets logged user id if login session is true.
-
+     * Get person_id if login session is true.
      */
 
-    public function getUserId()
+    public function getRole()
 
     {
-
-        if($_SESSION['user_login_session']) return $_SESSION['user_id'];      
+        $role = isset($_SESSION['role']) ? $_SESSION['role'] : NULL;
+        if($_SESSION['user_login_session']) return $role;      
 
     }
+
+    public function getRegister()
+
+    {
+        $register = isset($_SESSION['register']) ? $_SESSION['register'] : NULL;
+        if(isset($_SESSION['user_login_session'])) return $register;      
+
+    }
+
+
+
+
+
+ 
 
 
 
     /**
 
      * Gets logged user name if login session is true.
-
      */
 
     public function getUserName()
 
     {
-
-        if($_SESSION['user_login_session']) return $_SESSION['user_name'];      
+        $user_name = isset($_SESSION['username']) ? $_SESSION['username'] : NULL;
+        if($_SESSION['user_login_session']) return $user_name;      
 
     }
 
@@ -463,14 +558,13 @@ class Login
     /**
 
      * Sets logged user active if login session is true.
-
      */
 
     public function setUserActive()
 
     {
 
-        if($this->getLoginSession())
+        // if($this->getLoginSession())
 
         {
 
@@ -496,11 +590,11 @@ class Login
 
     {
 
-        if($this->getLoginSession())
+        // if($this->getLoginSession())
 
         {
 
-            if($_SESSION['user_active']) return true;
+            if(isset($_SESSION['user_active'])) return true;
 
             else return false;
 
@@ -508,7 +602,20 @@ class Login
 
     }
 
-    
+    public function getTerminal(){
+      $key = $_SERVER['HTTP_USER_AGENT'];
+        $array=explode("/", $key);
+        $total=count($array);
+        $array1['sucursal']=$array[$total-2];
+        $array1['terminal']=$array[$total-1];
+        return $array1;
+    }
+
+    public function setRegister(){
+
+            $_SESSION['register']=TRUE;
+            $_SESSION['homepage']="/configuracion/terminales";
+    }
 
 }
 

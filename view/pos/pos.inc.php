@@ -709,7 +709,7 @@ if ($_SESSION['cupon_sku']){
 			echo "</div>
 				<div class=\"modal-footer\">
 					<a href=\"#\" class=\"btn\" data-dismiss=\"modal\">Cancelar</a>
-					<!-- <a href=\"/functions/cerrarventa.php\" class=\"btn btn-primary\">Continuar</a> -->
+					 <a href=\"/functions/cerrarventa.php\" class=\"btn btn-primary\">Continuar.php</a> 
 					<button type=\"submit\" class=\"btn btn-primary\">Continue</button>
 				</div>
 			</form>

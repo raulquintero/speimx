@@ -1,11 +1,16 @@
 <?php
 // Including the class
-require_once("./classes/class_login.php");
+require_once( __DIR__.'/../database.php' );
+require_once( __DIR__.'/classes/class.db.php' );
+require_once(__DIR__ . '/classes/class_login.php');
 
+
+//DB_HOST, DB_USER, DB_PASS, DB_NAME
 // You must establish a connection to the mysql database before using this class
-$database_connection=mysql_connect("localhost", "root", "despachado16");
-$database_selection=mysql_select_db("speimx", $database_connection);
+// $database_connection=mysql_connect(DB_HOST, DB_USER, DB_PASS);
+// $database_selection=mysql_select_db( DB_NAME, $database_connection);
 
+$database = new DB();
 
 
 if(isset($_GET['module']) && ($_GET['module']=="login"))
@@ -16,10 +21,7 @@ if(isset($_GET['module']) && ($_GET['module']=="login"))
     $login = new Login();
     
     # Class configuration methods:
-    
-    // Setting the user table of mysql database
-    $login->setDatabaseUsersTable('admin');
-    
+    $login->setDatabase($database);
     // Setting the crypting method for passwords, can be set as 'sha1' or 'md5'
     $login->setCryptMethod('sha1');
     
@@ -29,6 +31,9 @@ if(isset($_GET['module']) && ($_GET['module']=="login"))
     # Setting login session:
 
     $login->setLoginSession();
+
+    if (isset($_POST['register']))
+        echo $login->setRegister();
     
     # Showing login informations if login is done:
     
@@ -45,14 +50,15 @@ if(isset($_GET['module']) && ($_GET['module']=="login"))
 		// Logout
 		$login->unsetLoginSession();
 		
-		header("Location: /index.html");
-	}
+    }
+    // print_r($_SESSION);
+		header("Location: /index.php");
 
 	
-    if ($login->getUserActive())
-   		header("Location: /index.php");
-    else
-       header("Location: /index.html");
+    // if ($login->getUserActive())
+   	// 	header("Location: /index.php");
+    // else
+    //    header("Location: /index.html");
 
 }
 
