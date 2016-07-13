@@ -1,6 +1,9 @@
 <?php
+ini_set('display_errors', 'On');
+
 setlocale(LC_MONETARY, 'es_MX');
 $relative_path=isset($relative_path) ? $relative_path : "";
+
 
 $realpath=getcwd();
 $pos = strpos($realpath, "/functions");

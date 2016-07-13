@@ -1,7 +1,12 @@
 <?php
 $eed = isset($_GET['eed']) ? $_GET['eed'] : '';
 $eed = isset($eed) ? $eed : '';
+$color_id = isset($color_id) ? $color_id : '';
+$cliente_id = isset($cliente_id) ? $cliente_id : '';
 $_GET['subcat'] = isset($_GET['subcat']) ? $_GET['subcat'] : '';
+$_GET['filtro'] = isset($_GET['filtro']) ? $_GET['filtro'] : '';
+$_GET['coid'] = isset($_GET['coid']) ? $_GET['coid'] : '';
+$_GET['color_id'] = isset($_GET['color_id']) ? $_GET['color_id'] : '';
 $_GET['cat'] = isset($_GET['cat']) ? $_GET['cat'] : '';
 
 $_GET['f']=isset($_GET['f']) ? $_GET['f'] : "";

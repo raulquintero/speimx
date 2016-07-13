@@ -1,5 +1,8 @@
 <?php
-require $realpath.'./config/config.php';
+$op=isset($_GET['op']) ? $_GET['op'] : 0;
+
+require './config/config.php';
+
 $database = new DB();
 
 foreach( $_POST as $key => $value )
@@ -75,7 +78,7 @@ $prid=$_GET['q'];
 							<fieldset>
 
 								<input type="hidden" name="data" value="<?php echo $_GET['data']?>" >
-								<input type="hidden" name="op" value="<?php echo $_GET['op']?>">
+								<input type="hidden" name="op" value="<?php echo $op?>">
 								<input type="hidden" name="f" value="u">
                                 <input type="hidden" name="subcat" value="<?php echo $_GET['subcat']?>">
 								<input type="hidden" name="prid" value=<?php echo $prid?> >
