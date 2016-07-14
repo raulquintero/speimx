@@ -190,7 +190,7 @@
 								 		<td>
 								<div class=\"controls\">
 								  <input class=\"input-small\" id=\"".$row['inventariodet_id']."\" name=\"".$row['inventariodet_id']."\" type=\"text\" value=\"".$row['cantidad']."\"> ".$row['codigo']." 
-								<img width=130 src=\"barcode.php?text=".$row['codigo']."\" alt=\"barcode\" /></div></td></tr> ";
+								<a href='/index.php?data=productos&op=barcode&upc=".$row['codigo']."&prid=$prid'><img width=130 src=\"barcode.php?text=".$row['codigo']."\" alt=\"barcode\" /></a></div></td></tr> ";
 							  	else
 							  		echo "<tr><td><br>Es necesario asginar las tallas en la descripcion del producto.<br><br><br><br></td></tr>";
 							  	$enable_submit=true;

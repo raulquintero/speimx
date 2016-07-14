@@ -1,6 +1,6 @@
 
 <style>
-body { text-align:center; }
+/*body { text-align:center; }*/
 td { text-align: center; }
 h4 { margin:5px; padding:0; }
 
@@ -12,24 +12,16 @@ h4 { margin:5px; padding:0; }
    .labels { text-align:center;font-size:10pt;page-break-after:always;padding:1px; }
   }
 </style>
+<?php
+$query="SELECT producto from producto where producto_id='".$_GET['prid']."'";
+list( $producto) = $database->get_row( $query );
+?>    
 
 
 <div class="container">
-  <input class=\"input-small\" id=\"".$row['inventariodet_id']."\" name=\"".$row['inventariodet_id']."\" type=\"text\" value="6">
 	<div class="labels">
-	<h3>Tomtto</h3>
-		<img width=130 src="barcode.php?text=<?php echo $_GET['sku']?>" alt="<?php echo $_GET['sku']?>" />
+	<h5><?php echo $producto ?></h5>
+		<img width=130 src="./barcode128.php?upc=<?php echo $_GET['upc']?>" alt="<?php echo $_GET['upc']?>" />
 	</div>
-	<div class="labels">
-	<h3>Tomtto</h3>
-		<img width=130 src="barcode.php?text=<?php echo $_GET['sku']?>" alt="<?php echo $_GET['sku']?>" />
-	</div>
-	<div class="labels">
-	<h3>Tomtto</h3>
-		<img width=130 src="barcode.php?text=<?php echo $_GET['sku']?>" alt="<?php echo $_GET['sku']?>" />
-	</div>
-	<div class="labels">
-	<h3>Tomtto</h3>
-		<img width=130 src="barcode.php?text=<?php echo $_GET['sku']?>" alt="<?php echo $_GET['sku']?>" />
-	</div>
+	
 </div>
