@@ -1,4 +1,5 @@
-
+<html>
+<head>
 <style>
 /*body { text-align:center; }*/
 td { text-align: center; }
@@ -12,16 +13,19 @@ h4 { margin:5px; padding:0; }
    .labels { text-align:center;font-size:10pt;page-break-after:always;padding:1px; }
   }
 </style>
+</head>
 <?php
 $query="SELECT producto from producto where producto_id='".$_GET['prid']."'";
 list( $producto) = $database->get_row( $query );
 ?>    
 
-
+<body>
 <div class="container">
 	<div class="labels">
-	<h5><?php echo $producto ?></h5>
-		<img width=130 src="./barcode128.php?upc=<?php echo $_GET['upc']?>" alt="<?php echo $_GET['upc']?>" />
+	<!-- <h5><?php echo $producto ?></h5> -->
+		<img widthe=260 src="./barcode128.php?upc=<?php echo $_GET['upc']?>" alt="<?php echo $_GET['upc']?>" />
 	</div>
 	
 </div>
+</body>
+</html

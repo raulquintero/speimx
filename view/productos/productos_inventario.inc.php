@@ -107,8 +107,10 @@
 								$results = $database->get_results( $query );
 								foreach( $results as $row )
 								{
-									if ($color_id==$row['color_id']) 
-										$bgcolor=" bgcolor='#dddddd' "; else $bgcolor="";
+									if ($color_id==$row['color_id']) {
+										$bgcolor=" bgcolor='#dddddd' "; 
+										$color=$row['color'];
+									}else $bgcolor="";
 									
 										echo "<tr $bgcolor><td><label class=\"control-label\" >".$row['codigo_color']."</label></td>
 											  <td>&nbsp;&nbsp;</td><td><a href='/index.php?data=productos&op=inventario&prid=$prid&coid=".$row['color_id']."'>".$row['color']."</a></td>";
@@ -190,7 +192,7 @@
 								 		<td>
 								<div class=\"controls\">
 								  <input class=\"input-small\" id=\"".$row['inventariodet_id']."\" name=\"".$row['inventariodet_id']."\" type=\"text\" value=\"".$row['cantidad']."\"> ".$row['codigo']." 
-								<a href='/index.php?data=productos&op=barcode&upc=".$row['codigo']."&prid=$prid'><img width=130 src=\"barcode.php?text=".$row['codigo']."\" alt=\"barcode\" /></a></div></td></tr> ";
+								<a href='/print_barcode.php?upc=".$row['codigo']."&producto=".strtoupper($producto)."&talla=".$row['talladet']."&color=$color'><img width=130 src=\"barcode.php?text=".$row['codigo']."\" alt=\"barcode\" /></a></div></td></tr> ";
 							  	else
 							  		echo "<tr><td><br>Es necesario asginar las tallas en la descripcion del producto.<br><br><br><br></td></tr>";
 							  	$enable_submit=true;

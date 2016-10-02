@@ -94,7 +94,7 @@ if($cliente_id)
 	</table>
 </div>
 <div class="header">
-			<img width=250 src="barcode.php?text=<?php echo $codigo_cliente?>" alt="barcode" />
+			<img width=250 src="barcode.php?text=<?php echo $codigo_cliente?>" alt="<?php echo $codigo_cliente ?>" />
 
 <!-- <div class="fecha">Mexicali a <?php echo date("d-m-Y")?></div> -->
 </div>

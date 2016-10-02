@@ -40,7 +40,7 @@ if ($_GET['eed']==2)
                                             //$cliente_id=sprintf('C%06d', $cliente_id);
                                             echo "<a class='hidden-print hidden-phone' href=\"/functions/cart.php?func=sel_cliente&cid=". $cliente_id."&tipocredito_id=$tipocredito_id\" classa=\"btn btn-primary\" data-dismiss=\"modal\">".  
                                             "<b>".strtoupper($nombre.' '.$apellidop.' '.$apellidom)."</b></a> ";
-                                            echo "<span class='hidden-desktop '>".strtoupper($nombre.' '.$apellidop.' '.$apellidom)."</span>";
+                                            echo "<a  href=\"/functions/cart.php?func=sel_cliente&cid=". $cliente_id."&tipocredito_id=$tipocredito_id\" classa=\"btn btn-primary\" data-dismiss=\"modal\"><span class='hidden-desktop '>".strtoupper($nombre.' '.$apellidop.' '.$apellidom)."</span></a>";
 
 											if (!$_GET['h'])
 											{
